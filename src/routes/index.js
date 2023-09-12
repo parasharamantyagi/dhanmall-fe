@@ -7,7 +7,7 @@ import SignIn from "../pages/login";
 import SignUp from "../pages/signup";
 import Home from "../pages/home";
 import store from "store2";
-import MyMenu from "../pages/my-menu";
+import Profile from "../pages/profile";
 
 const routes = (isLoggedIn) => {
   return [
@@ -17,7 +17,7 @@ const routes = (isLoggedIn) => {
     },
     {
       path: "/mine", // protected routes
-      element: isLoggedIn ? <MyMenu /> : <Navigate to="/login" />,
+      element: isLoggedIn ? <Profile /> : <Navigate to="/login" />,
     },
     {
       // public routes

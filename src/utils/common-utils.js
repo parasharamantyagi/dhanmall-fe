@@ -14,7 +14,6 @@ import {
   VALID_EMAIL,
   MINIMUM_LENGTH,
 } from './regexs';
-import history from '../redux/lib/history';
 import momentTime from 'moment';
 import {
   DateTime,
@@ -23,10 +22,6 @@ import {
   DefaultDOBDate,
   DefaultTime,
 } from './constant';
-import moment from 'moment-timezone';
-import CryptoJS from 'crypto-js';
-import axios from 'axios';
-const secretKey = process.env.REACT_APP_SECRET_KEY;
 /**
  * Checks if a valid string;
  * @param val: number/string/object/array != (undefined or null)
@@ -333,13 +328,6 @@ export const importImagesFromImageDirectory = (importedObj) => {
  * @param dispatch: function
  * @param route: string
  */
-export const loadRoute = (route) => {
-  if (route) {
-    history.push(route);
-    return;
-  }
-  history.push('/');
-};
 
 export const goBack = () => {
   window.history.back();
@@ -779,13 +767,7 @@ export const getPhoenixDateTimeAddOneHour = () => {
   return Date.parse(there);
 };
 
-export const defaultFormatDateTime = (time, format = DateTime) => {
-  // const getTimezone = moment.tz.guess();
-  const getTimezone = 'America/Phoenix';
-  const getAbbr = moment.tz(getTimezone).format('z');
-  const timeFormat = momentTime(time).utcOffset('-0700').format(format);
-  return `${timeFormat} ${getAbbr}`;
-};
+
 
 export const defaultPhoenixDateTime = (time, format = DateTime) => {
   const timeFormat = momentTime(time).utcOffset('-0700').format(format);
@@ -886,31 +868,7 @@ export const checkArrayObjectOfKeys = (keys, rowData, checkEmail = false) => {
   }
   return formIsValid;
 };
-export const sampleDecrypt = () => {
-  const data =
-    'U2FsdGVkX18JkgQRuEEFDj/7eawdbsDevCOFt7YfTZMXa1KR08IqB/FpNck64fRhTZnSu8e5DdD92y59wvWk9bGyv0LcH0SDlrCyOVJiVlFoLWlQSy4C7gWe3X/j9V/S6fSIxjXIwQM1CrFsppRsdilV0GghFcpZcWMcEevGyV+mXIjMFpdB/hnwq0xpPW/N/J1bfDfpArxfGrGwn/R6ilcxpK4NmruzUvjXJa6yRZQZocGBfEOa5UmV3LVjsTHhac6QAlcIi4i9540oz0MadSwJ4R/9aStuAwzLYmO+sfKHPQsEfgzBmj3Y/iG3qKVa+z7DstjSnJ9fr1MMjL8j/DpdVGFlRmfE49Kwm9v+ZCAFGvXk6jpMqR5qNs4ghoUJopfToTji+b6BYgVkd3ECldh5xsb6S/b6SPra66QjPeG6Q/DGx+WSaS2VOCIOyZWULaUjVSnX6zGpPOJWQV18MqfzZrvL2OHx02GcdqhaTdoJatJtEfDTt33wOW3hRcNw1n1t77cnT20p4VsfTEMJREqfbWqHBa0fL7u5WfTr4GCjgEjgUuAleB9pZqi6HyrFJ8Gywnt1CPbTJrOntiEGKBA1r7XNvzl1lQ2jkUOc628=';
 
-  var bytes = CryptoJS.AES.decrypt(data, secretKey);
-  var originalText = bytes.toString(CryptoJS.enc.Utf8);
-  const parsed = JSON.parse(originalText);
-  return parsed;
-};
-
-export const decrypted = (data) => {
-  var bytes = CryptoJS.AES.decrypt(data, secretKey);
-  var originalText = bytes.toString(CryptoJS.enc.Utf8);
-  const parsed = JSON.parse(originalText);
-  return parsed;
-};
-
-export const encrypted = (data) => {
-  var ciphertext = CryptoJS.AES.encrypt(
-    JSON.stringify(data),
-    secretKey,
-  ).toString();
-  const jsonData = { encrypt: ciphertext };
-  return jsonData;
-};
 // data: ""
 export function useBlocker(blocker, when = true) {
   const { navigator } = useContext(NavigationContext);
@@ -1019,22 +977,6 @@ export const defaultCurrencyFormat = (string) => {
   const num = Number(string);
   return num.toLocaleString('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'INR',
   });
-};
-
-export const getDistanceFromLatLonInKm = async (lat, long) => {
-  try {
-    const response = await axios.get(
-      `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${lat}&destinations=${long}&departure_time=now&key=${'key'}`,
-    );
-    return strictValidObjectWithKeys(response.data.rows[0].elements[0].distance)
-      ? response.data.rows[0].elements[0]?.distance.text
-      : '0.0 miles';
-  } catch (error) {}
-};
-
-export const getBuildDate = (epoch) => {
-  const buildDate = moment(epoch).format('DD-MM-YYY HH:MM');
-  return buildDate;
 };
