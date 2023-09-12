@@ -12,7 +12,7 @@ import MyMenu from "../pages/my-menu";
 const routes = (isLoggedIn) => {
   return [
     {
-      path: "/home", // protected routes
+      path: "/", // protected routes
       element: isLoggedIn ? <Home /> : <Navigate to="/login" />,
     },
     {
@@ -39,7 +39,7 @@ const routes = (isLoggedIn) => {
 
 const Routes = () => {
   const authToken = store("authToken");
-  const routing = useRoutes(routes(authToken));
+  const routing = useRoutes(routes("authToken"));
   return <React.Fragment>{routing}</React.Fragment>;
 };
 export default Routes;
