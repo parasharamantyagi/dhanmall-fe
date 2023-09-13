@@ -9,12 +9,39 @@ import { Link, useLocation } from 'react-router-dom';
 export default function Footer() {
   const location = useLocation();
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper
+      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+      elevation={3}
+    >
       <BottomNavigation showLabels value={location.pathname}>
-        <BottomNavigationAction label="Home" value="/" icon={<HomeIcon />} component={Link} to="/" />
-        <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-        <BottomNavigationAction label="Win" component={Link} to="/win" icon={<EmojiEventsIcon />} />
-        <BottomNavigationAction value="/mine" component={Link} to="/mine" label="My" icon={<PersonIcon />} />
+        <BottomNavigationAction
+          label="Home"
+          value="/"
+          icon={<HomeIcon />}
+          component={Link}
+          to="/"
+        />
+        <BottomNavigationAction
+          label="Search"
+          icon={<SearchIcon />}
+          component={Link}
+          to="/search"
+          value="/search"
+        />
+        <BottomNavigationAction
+          label="Win"
+          component={Link}
+          to="/win"
+          icon={<EmojiEventsIcon />}
+          value="/win"
+        />
+        <BottomNavigationAction
+          value="/mine"
+          component={Link}
+          to="/mine"
+          label="My"
+          icon={<PersonIcon />}
+        />
       </BottomNavigation>
     </Paper>
   );

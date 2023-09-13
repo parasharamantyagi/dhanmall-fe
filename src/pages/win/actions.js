@@ -24,7 +24,6 @@ export const dashboardService = async () => {
       };
     }
   } catch (error) {
-    console.log(error, "error");
     return {
       data: error.response,
       message: messages.DEFAULT_ERROR_MESSAGE,
