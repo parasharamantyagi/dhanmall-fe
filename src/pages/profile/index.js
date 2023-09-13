@@ -13,6 +13,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import WalletIcon from "@mui/icons-material/Wallet";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import { withStyles, createStyles } from "@mui/styles";
+import store from "store2";
 
 const styles = (theme) =>
   createStyles({
@@ -114,6 +115,9 @@ const Profile = (props) => {
         <IconWithText
           icon={<LogoutIcon fontSize="large" />}
           text="Logout"
+          onClick={() => {
+            store.clear();
+          }}
           to="/"
         />
       </Box>
