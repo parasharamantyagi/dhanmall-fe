@@ -13,7 +13,7 @@ export default function Footer() {
       <BottomNavigation showLabels value={location.pathname}>
         <BottomNavigationAction label="Home" value="/" icon={<HomeIcon />} component={Link} to="/" />
         <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-        <BottomNavigationAction label="Win" icon={<EmojiEventsIcon />} />
+        <BottomNavigationAction label="Win" component={Link} to="/win" icon={<EmojiEventsIcon />} />
         <BottomNavigationAction value="/mine" component={Link} to="/mine" label="My" icon={<PersonIcon />} />
       </BottomNavigation>
     </Paper>

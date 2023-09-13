@@ -8,6 +8,7 @@ import SignUp from "../pages/signup";
 import Home from "../pages/home";
 import store from "store2";
 import Profile from "../pages/profile";
+import Win from "../pages/win";
 
 const routes = (isLoggedIn) => {
   return [
@@ -18,6 +19,10 @@ const routes = (isLoggedIn) => {
     {
       path: "/mine", // protected routes
       element: isLoggedIn ? <Profile /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/win", // protected routes
+      element: isLoggedIn ? <Win /> : <Navigate to="/login" />,
     },
     {
       // public routes
@@ -39,7 +44,7 @@ const routes = (isLoggedIn) => {
 
 const Routes = () => {
   const authToken = store("authToken");
-  const routing = useRoutes(routes("authToken"));
+  const routing = useRoutes(routes(authToken));
   return <React.Fragment>{routing}</React.Fragment>;
 };
 export default Routes;

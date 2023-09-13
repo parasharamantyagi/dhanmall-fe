@@ -34,20 +34,7 @@ const getResult = (number) => {
 
 export default function GamesTable() {
   const [page, setPage] = React.useState(0);
-  const [gameDatas, setGameDatas] = React.useState([
-    {
-      _id: "64fc18933b97d789a477ae67",
-      project_id: 1,
-      period: 100000006,
-      price: 1145,
-      invest_price: "0",
-      date: 20230909123200,
-      status: 1,
-      __v: 0,
-      color: "green",
-      unit: 7,
-    },
-  ]);
+  const [gameDatas, setGameDatas] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   React.useEffect(() => {
