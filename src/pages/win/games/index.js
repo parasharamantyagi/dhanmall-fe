@@ -38,7 +38,8 @@ export default function GamesTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const callapi = async () => {
     let response = await dashboardService();
-    setGameDatas(response.data.game_history);
+    console.log('response: ', response);
+    // setGameDatas(response.data.game_history);
   };
 
   React.useEffect(() => {
@@ -67,15 +68,23 @@ export default function GamesTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {gameDatas
+            {gameDatas && gameDatas
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, i) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    <TableCell variant='body2' align="left">{row.period}</TableCell>
-                    <TableCell variant='body2' align="left">{row.price}</TableCell>
-                    <TableCell variant='body2' align="left">{row.unit}</TableCell>
-                    <TableCell variant='body2' align="left">{getResult(row.unit)}</TableCell>
+                    <TableCell variant="body2" align="left">
+                      {row.period}
+                    </TableCell>
+                    <TableCell variant="body2" align="left">
+                      {row.price}
+                    </TableCell>
+                    <TableCell variant="body2" align="left">
+                      {row.unit}
+                    </TableCell>
+                    <TableCell variant="body2" align="left">
+                      {getResult(row.unit)}
+                    </TableCell>
                   </TableRow>
                 );
               })}

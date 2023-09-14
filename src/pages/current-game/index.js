@@ -1,23 +1,24 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import { createStyles, withStyles } from "@mui/styles";
+import { Box, Button, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { createStyles, withStyles } from '@mui/styles';
+import AlertDialog from '../../components/dialog';
 
 const styles = (theme) =>
   createStyles({
     root: {
-      justifyContent: "space-around",
-      [theme.breakpoints.down("sm")]: {
-        justifyContent: "space-between",
-        flexDirection: "row", // For example, change the flex direction
+      justifyContent: 'space-around',
+      [theme.breakpoints.down('sm')]: {
+        justifyContent: 'space-between',
+        flexDirection: 'row', // For example, change the flex direction
         // Add any other styles you want for smaller screens
       },
       // Add more breakpoints and styles as needed
     },
     numbers: {
       width: 200,
-      [theme.breakpoints.down("sm")]: {
-        width: "auto",
+      [theme.breakpoints.down('sm')]: {
+        width: 'auto',
       },
       // Add more breakpoints and styles as needed
     },
@@ -26,14 +27,16 @@ const styles = (theme) =>
 const CurrentGame = (props) => {
   const { classes } = props;
   const [timeLeft, setTimeLeft] = useState(180); // 3 minutes in seconds
+  const [open, setOpen] = useState(false);
+  const [label, setLabel] = useState('');
 
   // Function to format the time as mm:ss
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
       2,
-      "0"
+      '0',
     )}`;
   };
 
@@ -50,13 +53,15 @@ const CurrentGame = (props) => {
   }, [timeLeft]);
 
   const renderCount = (number) => {
-    console.log(number, "number");
     const isEven = number % 2 === 0;
-    // const buttonColor = isEven ? "primary" : "primary";
-    const buttonColor = isEven ? "error" : "success";
+    const buttonColor = isEven ? 'error' : 'success';
     return (
       <Grid item xs={2.4}>
         <Button
+          onClick={() => {
+            setLabel(`Select ${number}`);
+            setOpen(true);
+          }}
           className={classes.numbers}
           variant="contained"
           color={buttonColor}
@@ -64,12 +69,12 @@ const CurrentGame = (props) => {
             number === 5
               ? {
                   background:
-                    "linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)",
+                    'linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)',
                 }
               : number === 0
               ? {
                   background:
-                    "linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)",
+                    'linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)',
                 }
               : undefined
           }
@@ -115,13 +120,37 @@ const CurrentGame = (props) => {
       </Box>
 
       <Box display="flex" mt={2} className={classes.root}>
-        <Button variant="contained" color="success" size="medium">
-          Join green
+        <Button
+          onClick={() => {
+            setLabel('Join Green');
+            setOpen(true);
+          }}
+          variant="contained"
+          color="success"
+          size="medium"
+        >
+          Join Green
         </Button>
-        <Button variant="contained" color="purple" size="medium">
+        <Button
+          onClick={() => {
+            setLabel('Join Purple');
+            setOpen(true);
+          }}
+          variant="contained"
+          color="purple"
+          size="medium"
+        >
           Join Purple
         </Button>
-        <Button variant="contained" color="error" size="medium">
+        <Button
+          onClick={() => {
+            setLabel('Join Red');
+            setOpen(true);
+          }}
+          variant="contained"
+          color="error"
+          size="medium"
+        >
           Join Red
         </Button>
       </Box>
@@ -137,6 +166,7 @@ const CurrentGame = (props) => {
         {renderCount(8)}
         {renderCount(9)}
       </Grid>
+      <AlertDialog label={label} open={open} setOpen={setOpen} />
     </Box>
   );
 };
