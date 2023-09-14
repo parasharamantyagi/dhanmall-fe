@@ -14,6 +14,13 @@ const styles = (theme) =>
       },
       // Add more breakpoints and styles as needed
     },
+    numbers: {
+      width: 200,
+      [theme.breakpoints.down("sm")]: {
+        width: "auto",
+      },
+      // Add more breakpoints and styles as needed
+    },
   });
 
 const CurrentGame = (props) => {
@@ -44,14 +51,14 @@ const CurrentGame = (props) => {
   }, [timeLeft]);
 
   const renderCount = (number) => {
-    console.log(number,"number")
+    console.log(number, "number");
     const isEven = number % 2 === 0;
     // const buttonColor = isEven ? "primary" : "primary";
     const buttonColor = isEven ? "error" : "success";
     return (
       <Grid item xs={2.4}>
         <Button
-          // style={{ width: 250 }}
+          className={classes.numbers}
           variant="contained"
           color={buttonColor}
           sx={
