@@ -1,10 +1,10 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-useless-escape */
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useContext, useEffect, useCallback } from "react";
 import {
   UNSAFE_NavigationContext as NavigationContext,
   Link,
-} from 'react-router-dom';
+} from "react-router-dom";
 import {
   VALID_URL,
   VALID_US_ZIP,
@@ -13,21 +13,21 @@ import {
   NUMBER_UPTO_ONE_DECIMAL,
   VALID_EMAIL,
   MINIMUM_LENGTH,
-} from './regexs';
-import momentTime from 'moment';
+} from "./regexs";
+import momentTime from "moment";
 import {
   DateTime,
   DefaultDate,
   DefaultDateTime,
   DefaultDOBDate,
   DefaultTime,
-} from './constant';
+} from "./constant";
 /**
  * Checks if a valid string;
  * @param val: number/string/object/array != (undefined or null)
  */
 export const validValue = (val) =>
-  typeof val !== 'undefined' && val !== undefined && val !== null;
+  typeof val !== "undefined" && val !== undefined && val !== null;
 
 /**
  * Get window width and height
@@ -36,7 +36,7 @@ export const getWindowDimensions = () => {
   var w = window,
     d = document,
     e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
+    g = d.getElementsByTagName("body")[0],
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight || e.clientHeight || g.clientHeight;
   return {
@@ -68,20 +68,20 @@ export const jsonToQueryString = (obj) =>
   strictValidObject(obj) &&
   Object.keys(obj)
     .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`)
-    .join('&');
+    .join("&");
 
 /**
  * Checks if a valid string
  * @param str: string
  */
-export const strictValidString = (str) => !!str && typeof str === 'string';
+export const strictValidString = (str) => !!str && typeof str === "string";
 
 /**
  * Checks if a valid string and validate with min length.
  * @param str: string
  */
 export const strictValidStringWithMinLength = (str, length = 1) =>
-  !!str && typeof str === 'string' && str.length >= length;
+  !!str && typeof str === "string" && str.length >= length;
 
 /**
  * Checks if a valid string which when split with a delimeter will give an array with specified minimum length
@@ -92,7 +92,7 @@ export const strictValidStringWithMinLength = (str, length = 1) =>
 export const strictValidSplittableStringWithMinLength = (
   str,
   delimeter,
-  minLength,
+  minLength
 ) =>
   strictValidString(str) &&
   strictValidArrayWithMinLength(str.split(delimeter), minLength);
@@ -106,7 +106,7 @@ export const typeCastToString = (str) =>
     ((strictValidString(str) && str) ||
       str.toString() ||
       JSON.stringify(str))) ||
-  '';
+  "";
 
 /**
  * Capitalizes the first letter of every word in string
@@ -121,13 +121,13 @@ export const capitalizeFirstLetter = (str) =>
  * Capitalizes the first letter of every word in string but not word after apostrophe
  * @param str: string
  */
-export const titleCase = (str = '') => {
+export const titleCase = (str = "") => {
   if (!strictValidString(str)) return null;
-  const strArr = str.toLowerCase().split(' ');
+  const strArr = str.toLowerCase().split(" ");
   for (let i = 0; i < strArr.length; i++) {
     strArr[i] = strArr[i].charAt(0).toUpperCase() + strArr[i].slice(1);
   }
-  return strArr.join(' ');
+  return strArr.join(" ");
 };
 
 /**
@@ -136,14 +136,14 @@ export const titleCase = (str = '') => {
  */
 export const getFileNameAndExtension = (fileName) =>
   (strictValidString(fileName) &&
-    strictValidSplittableStringWithMinLength(fileName, '.', 2) && {
-      name: fileName.split('.')[0],
-      ext: fileName.split('.')[1],
+    strictValidSplittableStringWithMinLength(fileName, ".", 2) && {
+      name: fileName.split(".")[0],
+      ext: fileName.split(".")[1],
     }) ||
   {};
 
 export const validAlert = (alert) =>
-  validObjectWithParameterKeys(alert, ['message', 'type']) &&
+  validObjectWithParameterKeys(alert, ["message", "type"]) &&
   validValue(alert.message) &&
   validValue(alert.type);
 
@@ -152,11 +152,19 @@ export const validAlert = (alert) =>
  * @param num: number
  */
 export const strictValidNumber = (num) =>
-  validValue(num) && typeof num === 'number';
+  validValue(num) && typeof num === "number";
 
 export const strictIsPositiveValidNumber = (num) => {
   num = parseInt(num);
-  return validValue(num) && typeof num === 'number' && num > 0;
+  return validValue(num) && typeof num === "number" && num > 0;
+};
+
+export const getLastEightWords = (inputString) => {
+  if (inputString.length >= 8) {
+    return inputString.slice(-8);
+  } else {
+    return inputString;
+  }
 };
 
 /**
@@ -193,12 +201,12 @@ export const strictValidObjWithKeysAndArrayWithLength = (obj) =>
 
 export const zoneFormat = (zone) => {
   switch (zone) {
-    case 'Zone1':
-      return '(Z1)';
-    case 'Zone2':
-      return '(Z2)';
-    case 'Zone3':
-      return '(Z3)';
+    case "Zone1":
+      return "(Z1)";
+    case "Zone2":
+      return "(Z2)";
+    case "Zone3":
+      return "(Z3)";
     default:
       return zone;
   }
@@ -206,7 +214,7 @@ export const zoneFormat = (zone) => {
 export const strictValidObject = (obj) =>
   obj &&
   obj === Object(obj) &&
-  Object.prototype.toString.call(obj) !== '[object Array]';
+  Object.prototype.toString.call(obj) !== "[object Array]";
 
 /**
  * Checks if a valid object with keys
@@ -233,7 +241,7 @@ export const validObjectWithParameterKeys = (obj, parameterKeys = []) =>
 
 export const validStringinArray = (array) => {
   const hasBlankString = array.some(
-    (value) => value === '' || value === undefined,
+    (value) => value === "" || value === undefined
   );
   if (hasBlankString) {
     return true;
@@ -243,7 +251,7 @@ export const concatenateRegularExpressions = (regExpList = []) => {
   let regExp = new RegExp();
   if (strictValidArrayWithLength(regExpList)) {
     try {
-      regExp = new RegExp(regExpList.join(''));
+      regExp = new RegExp(regExpList.join(""));
     } catch (error) {
       // Do nothing
     }
@@ -257,8 +265,8 @@ export const concatenateRegularExpressions = (regExpList = []) => {
  */
 export const getFileExtension = (fileName) =>
   (strictValidString(fileName) &&
-    fileName.substring(fileName.lastIndexOf('.'), fileName.length)) ||
-  '';
+    fileName.substring(fileName.lastIndexOf("."), fileName.length)) ||
+  "";
 
 /**
  * Typecasts a key value pair (k, v) to string and appends it to or appends a specified string value to it
@@ -271,18 +279,18 @@ export const getFileExtension = (fileName) =>
 export const addKeyValuePairAsString = (
   k,
   v,
-  appendString = '',
-  appendAfter = true,
+  appendString = "",
+  appendAfter = true
 ) => {
-  let str = '';
+  let str = "";
   if (!appendAfter) {
     str += typeCastToString(appendString);
   }
   if (validValue(v)) {
-    if (['string', 'number', 'boolean'].indexOf(typeof v) > -1) {
+    if (["string", "number", "boolean"].indexOf(typeof v) > -1) {
       str = `${k}: ${typeCastToString(v)}`;
     } else if (strictValidArrayWithLength(v)) {
-      str = `${k}: [${v.join(', ')}]`;
+      str = `${k}: [${v.join(", ")}]`;
     } else {
       str = `${k}: [${JSON.stringify(v)}]`;
     }
@@ -304,7 +312,7 @@ export const typeCastToKeyValueObject = (immutableObject) =>
     immutableObject instanceof Map &&
     immutableObject.toJSON()) ||
   (strictValidObject(immutableObject) &&
-    validObjectWithParameterKeys(immutableObject, ['size', '_root']) &&
+    validObjectWithParameterKeys(immutableObject, ["size", "_root"]) &&
     immutableObject.toJSON()) ||
   (strictValidObject(immutableObject) && immutableObject) ||
   (!strictValidObject(immutableObject) &&
@@ -318,7 +326,7 @@ export const typeCastToKeyValueObject = (immutableObject) =>
 export const importImagesFromImageDirectory = (importedObj) => {
   let filesObj = {};
   importedObj.keys().forEach((file) => {
-    filesObj[file.replace('./', '')] = importedObj(file);
+    filesObj[file.replace("./", "")] = importedObj(file);
   });
   return filesObj;
 };
@@ -354,7 +362,7 @@ export const strictFindObjectWithKey = (mulArray, key, val) => {
 export const isAuthenticated = (user) => {
   return (
     strictValidObjectWithKeys(user) &&
-    validObjectWithParameterKeys(user, ['role_id', 'email_id', 'role_name'])
+    validObjectWithParameterKeys(user, ["role_id", "email_id", "role_name"])
   );
 };
 /**
@@ -402,19 +410,19 @@ export const isZipValid = (zip) =>
 //we may need to change the below process of getting random colors so thats why i have commented the code for future use
 export const randomBGColor = () => {
   var colors = [
-    'RED',
-    'GREEN',
-    'BLUE',
-    'DARKSLATEGRAY',
-    'MAROON',
-    'GRAY',
-    'TEAL',
-    'PURPLE',
-    'MEDIUMVIOLETRED',
-    'INDIGO',
-    'DARKSLATEBLUE',
-    'BROWN',
-    'PURPLE',
+    "RED",
+    "GREEN",
+    "BLUE",
+    "DARKSLATEGRAY",
+    "MAROON",
+    "GRAY",
+    "TEAL",
+    "PURPLE",
+    "MEDIUMVIOLETRED",
+    "INDIGO",
+    "DARKSLATEBLUE",
+    "BROWN",
+    "PURPLE",
   ];
   var bgColor = colors[Math.floor(Math.random() * colors.length)];
   // strictValidString(opacity) ?
@@ -427,15 +435,15 @@ export const randomBGColor = () => {
  * Formatting number for thousand seperator
  */
 export const formatNumber = (num) =>
-  strictValidNumber(num) && num.toString().replace(VALID_LARGE_NUMBER, '$1,');
+  strictValidNumber(num) && num.toString().replace(VALID_LARGE_NUMBER, "$1,");
 
 /**
  * Formatting number for thousand seperator
  *
  */
-export const formatNumberWithCurrency = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+export const formatNumberWithCurrency = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
   minimumFractionDigits: 2,
 });
 
@@ -444,7 +452,7 @@ export const formatNumberWithCurrency = new Intl.NumberFormat('en-US', {
  * @param integer: string
  */
 export const integerToDoubleDigit = (integer) =>
-  (strictValidNumber(integer) && ('0' + integer).slice(-2)) || '00';
+  (strictValidNumber(integer) && ("0" + integer).slice(-2)) || "00";
 
 /**
  * Add http to the url;
@@ -452,7 +460,7 @@ export const integerToDoubleDigit = (integer) =>
  */
 export const addhttp = (url) => {
   if (strictValidString(url) && !/^(?:f|ht)tps?\:\/\//.test(url)) {
-    url = 'http://' + url;
+    url = "http://" + url;
   }
   return url;
 };
@@ -466,8 +474,8 @@ export const isBlank = (str) => {
  * @param url: string
  */
 export const extractFileName = (url) => {
-  const delimeter = '_';
-  let response = (strictValidString(url) && url.split('/').pop()) || '';
+  const delimeter = "_";
+  let response = (strictValidString(url) && url.split("/").pop()) || "";
   let fileNameArr = [];
   if (strictValidSplittableStringWithMinLength(response, delimeter, 1)) {
     fileNameArr = response.split(delimeter);
@@ -497,23 +505,23 @@ export const roundOffTo2Decimals = (value) => {
  */
 export const normalizePhone = (value) => {
   if (!value) return value;
-  const onlyNums = value.replace(/[^\d]/g, '');
+  const onlyNums = value.replace(/[^\d]/g, "");
   if (onlyNums.length <= 3) return onlyNums;
   if (onlyNums.length <= 7)
     return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 7)}`;
   return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)}-${onlyNums.slice(
     6,
-    10,
+    10
   )}`;
 };
 
 export const deNormalizePhone = (value) =>
-  value ? value.replace(/[^\d]/g, '').slice(0, 10) : value;
+  value ? value.replace(/[^\d]/g, "").slice(0, 10) : value;
 
 export const createNavigationLink = (
   link,
   value,
-  willOpenInBlankPage = false,
+  willOpenInBlankPage = false
 ) => {
   return willOpenInBlankPage ? (
     <Link target="_blank" to={link}>
@@ -532,9 +540,9 @@ export const createNavigationLink = (
  * @param {value}: Number or(string) eg 8 or '8'
  */
 
-export const uptoOneDecimal = (value = '') => {
+export const uptoOneDecimal = (value = "") => {
   if (!NUMBER_UPTO_ONE_DECIMAL.test(value) && strictValidString(value)) {
-    const index = value.indexOf('.');
+    const index = value.indexOf(".");
     return value.substring(0, index + 2);
   }
   return value ? parseFloat(value) : value;
@@ -544,7 +552,7 @@ export const uptoOneDecimal = (value = '') => {
  * Scroll modal to top
  */
 export const scrollModalToTop = () => {
-  const modal = document.getElementsByClassName('modal');
+  const modal = document.getElementsByClassName("modal");
   if (modal.length) {
     modal[0].scrollTop = 0;
   }
@@ -560,27 +568,27 @@ export const scrollModalToTop = () => {
 export const typeCastResponse = (
   object,
   key,
-  type = 'string',
-  defaultValue = null,
+  type = "string",
+  defaultValue = null
 ) => {
   let response = null;
   switch (type) {
     default:
       break;
-    case 'number':
+    case "number":
       response =
         (validObjectWithParameterKeys(object, [key]) && Number(object[key])) ||
         defaultValue ||
         0;
       break;
-    case 'string':
+    case "string":
       response =
         (validObjectWithParameterKeys(object, [key]) &&
           typeCastToString(object[key])) ||
         defaultValue ||
         null;
       break;
-    case 'object':
+    case "object":
       response =
         (validObjectWithParameterKeys(object, [key]) &&
           strictValidObject(object[key]) &&
@@ -588,7 +596,7 @@ export const typeCastResponse = (
         defaultValue ||
         {};
       break;
-    case 'array':
+    case "array":
       response =
         (validObjectWithParameterKeys(object, [key]) &&
           strictValidArray(object[key]) &&
@@ -616,12 +624,12 @@ export const convertMinsToHrsMins = (min) => {
   let hrs = Math.floor(min / 60);
   hrs += hrs < 0 ? 1 : 0;
   let min2 = Math.round(Math.abs(min % 60));
-  min2 = min2 < 10 ? '0' + min2 : min2;
-  return hrs + ':' + min2;
+  min2 = min2 < 10 ? "0" + min2 : min2;
+  return hrs + ":" + min2;
 };
 
 export const decimalNoToHours = (value) => {
-  if (!value) return '0:00';
+  if (!value) return "0:00";
   return convertMinsToHrsMins(value * 60);
 };
 
@@ -633,7 +641,7 @@ export const decimalNoToHours = (value) => {
 
 export const deepCopy = (srcObj) => {
   let outObj = Array.isArray(srcObj) ? [] : {};
-  if (typeof srcObj !== 'object' || srcObj === null) {
+  if (typeof srcObj !== "object" || srcObj === null) {
     return srcObj;
   }
   for (let key in srcObj) {
@@ -646,7 +654,7 @@ export const deepCopy = (srcObj) => {
  * Convert minutes to hours and minutes
  */
 export function toHoursAndMinutes(mins) {
-  if (isNaN(mins) || mins === 0) return '-';
+  if (isNaN(mins) || mins === 0) return "-";
 
   const hours = Math.floor(mins / 60);
   const minutes = Math.floor(mins % 60);
@@ -655,7 +663,7 @@ export function toHoursAndMinutes(mins) {
   let minutesText;
 
   if (hours === 0) {
-    hoursText = '';
+    hoursText = "";
   } else if (hours === 1) {
     hoursText = `${hours} hour`;
   } else {
@@ -663,7 +671,7 @@ export function toHoursAndMinutes(mins) {
   }
 
   if (minutes === 0) {
-    minutesText = '';
+    minutesText = "";
   } else if (minutes === 1) {
     minutesText = `${minutes} minute`;
   } else {
@@ -688,9 +696,9 @@ export const formatDuration = (d) => {
   var h = Math.floor(d / 3600);
   var m = Math.floor((d % 3600) / 60);
   var s = Math.floor((d % 3600) % 60);
-  var hDisplay = h > 0 ? h + (h === 1 ? 'h ' : 'h ') : '';
-  var mDisplay = m > 0 ? m + (h > 0 ? '' : 'm ') : '';
-  var sDisplay = s > 0 ? s + (s === 1 ? 's' : 's') : '';
+  var hDisplay = h > 0 ? h + (h === 1 ? "h " : "h ") : "";
+  var mDisplay = m > 0 ? m + (h > 0 ? "" : "m ") : "";
+  var sDisplay = s > 0 ? s + (s === 1 ? "s" : "s") : "";
   return hDisplay + mDisplay + sDisplay;
 };
 
@@ -720,7 +728,7 @@ export const popupCenter = (url, title, w, h) => {
       height=${h / systemZoom}, 
       top=${top}, 
       left=${left}
-      `,
+      `
   );
 
   if (window.focus) newWindow.focus();
@@ -728,20 +736,20 @@ export const popupCenter = (url, title, w, h) => {
 };
 
 export const getParameterByName = (name, url = window.location.href) => {
-  name = name.replace(/[\[\]]/g, '\\$&');
-  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
     results = regex.exec(url);
   if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  if (!results[2]) return "";
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
 function changeTimezone(date, ianatz) {
   // suppose the date is 12:00 UTC
   var invdate = new Date(
-    date.toLocaleString('en-US', {
+    date.toLocaleString("en-US", {
       timeZone: ianatz,
-    }),
+    })
   );
 
   // then invdate will be 07:00 in Toronto
@@ -756,39 +764,37 @@ function changeTimezone(date, ianatz) {
 
 export const getPhoenixDateTime = () => {
   var here = new Date();
-  var there = changeTimezone(here, 'America/Phoenix');
+  var there = changeTimezone(here, "America/Phoenix");
   return Date.parse(there);
 };
 // Add 1 Hour
 export const getPhoenixDateTimeAddOneHour = () => {
   var here = new Date();
   here.setHours(here.getHours() + 1);
-  var there = changeTimezone(here, 'America/Phoenix');
+  var there = changeTimezone(here, "America/Phoenix");
   return Date.parse(there);
 };
 
-
-
 export const defaultPhoenixDateTime = (time, format = DateTime) => {
-  const timeFormat = momentTime(time).utcOffset('-0700').format(format);
+  const timeFormat = momentTime(time).utcOffset("-0700").format(format);
   return `${timeFormat}`;
 };
 
 export const formatDateTime = (time, format = DefaultDateTime) => {
   const timeFormat = momentTime(time).format(format);
-  const checkname = timeFormat === 'Invalid date' ? 'N/A' : timeFormat;
+  const checkname = timeFormat === "Invalid date" ? "N/A" : timeFormat;
   return checkname;
 };
 
 export const formatNewDateTime = (time, format = DefaultDateTime) => {
   const timeFormat = momentTime(time).format(format);
-  const checkname = timeFormat === 'Invalid date' ? null : timeFormat;
+  const checkname = timeFormat === "Invalid date" ? null : timeFormat;
   return checkname;
 };
 
 export const formatDate = (time, format = DefaultDate) => {
   const timeFormat = momentTime(time).format(format);
-  const checkname = timeFormat === 'Invalid date' ? 'N/A' : timeFormat;
+  const checkname = timeFormat === "Invalid date" ? "N/A" : timeFormat;
   return checkname;
 };
 export const formatTime = (time, format = DefaultTime) => {
@@ -799,6 +805,11 @@ export const dobFormatTime = (time, format = DefaultDOBDate) => {
   const timeFormat = momentTime(time).format(format);
   return timeFormat;
 };
+
+export const changeDateFormet = (time, newFormet, old = "YYYYMMDDHHmm00") => {
+  return momentTime(time, old).format(newFormet);
+};
+
 export const removeObjectById = (list, id) => {
   if (strictValidNumber(id)) {
     var lists = list.filter((x) => {
@@ -825,7 +836,7 @@ export const composeValidators =
   (value) =>
     validators.reduce(
       (error, validator) => error || validator(value),
-      undefined,
+      undefined
     );
 
 export const checkArrayObjectOfKeys = (keys, rowData, checkEmail = false) => {
@@ -840,16 +851,16 @@ export const checkArrayObjectOfKeys = (keys, rowData, checkEmail = false) => {
         if (checkEmail) {
           if (a.email_id && !VALID_EMAIL.test(a.email_id)) {
             formIsValid = true;
-            errors[w] = 'Please Enter valid Email Id';
+            errors[w] = "Please Enter valid Email Id";
           }
           const membersArrayErrors = [];
           if (strictValidArrayWithLength(a.phone_number)) {
             a.phone_number.forEach((member, memberIndex) => {
               if (member && !MINIMUM_LENGTH.test(member)) {
                 formIsValid = true;
-                errors[w] = 'Please Enter valid Phone Number';
+                errors[w] = "Please Enter valid Phone Number";
                 membersArrayErrors[memberIndex] =
-                  'Please Enter Valid Phone Number';
+                  "Please Enter Valid Phone Number";
               }
             });
           }
@@ -857,14 +868,14 @@ export const checkArrayObjectOfKeys = (keys, rowData, checkEmail = false) => {
 
         if (!a[w]) {
           formIsValid = true;
-          errors[w] = 'Please fill the required fields';
+          errors[w] = "Please fill the required fields";
         }
       });
   });
 
   if (!strictValidArrayWithLength(rowData)) {
     formIsValid = false;
-    errors['roles'] = 'Please select at least one role';
+    errors["roles"] = "Please select at least one role";
   }
   return formIsValid;
 };
@@ -904,23 +915,23 @@ export function usePrompt(message, when = true) {
   const blocker = useCallback(
     (tx) => {
       let response;
-      if (typeof message === 'function') {
+      if (typeof message === "function") {
         response = message(tx?.location, tx?.action);
-        if (typeof response === 'string') {
+        if (typeof response === "string") {
           response = window.confirm(response);
         }
-      } else if (typeof message === 'string') {
+      } else if (typeof message === "string") {
         response = window.confirm(message);
       }
       if (response) {
         tx.retry();
       }
     },
-    [message],
+    [message]
   );
   return useBlocker(blocker, when);
 }
-export const getFirstCharcterFromString = (text = '') => {
+export const getFirstCharcterFromString = (text = "") => {
   if (!strictValidString(text)) {
     return null;
   } else {
@@ -944,18 +955,18 @@ const findComponent = (addressComponenets, componentId) => {
 
 export const parseGoogleAddress = (place) => {
   const addressComponenets = place.address_components;
-  const zipComponent = findComponent(addressComponenets, 'postal_code');
-  const countryComponent = findComponent(addressComponenets, 'country');
+  const zipComponent = findComponent(addressComponenets, "postal_code");
+  const countryComponent = findComponent(addressComponenets, "country");
   const cityComponent = findComponent(
     addressComponenets,
-    'administrative_area_level_2',
+    "administrative_area_level_2"
   );
   const stateComponent = findComponent(
     addressComponenets,
-    'administrative_area_level_1',
+    "administrative_area_level_1"
   );
-  const localityComponent = findComponent(addressComponenets, 'locality');
-  const subLocalityComponent = findComponent(addressComponenets, 'sublocality');
+  const localityComponent = findComponent(addressComponenets, "locality");
+  const subLocalityComponent = findComponent(addressComponenets, "sublocality");
   const address = {
     fullAddress: place.formatted_address,
     latitude: place.geometry.location.lat,
@@ -975,8 +986,8 @@ export const defaultPropGetter = () => ({});
 
 export const defaultCurrencyFormat = (string) => {
   const num = Number(string);
-  return num.toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'INR',
+  return num.toLocaleString("en-US", {
+    style: "currency",
+    currency: "INR",
   });
 };

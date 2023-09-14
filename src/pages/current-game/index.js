@@ -26,7 +26,6 @@ const styles = (theme) =>
 const CurrentGame = (props) => {
   const { classes } = props;
   const [timeLeft, setTimeLeft] = useState(180); // 3 minutes in seconds
-  console.log("timeLeft: ", timeLeft);
 
   // Function to format the time as mm:ss
   const formatTime = (time) => {

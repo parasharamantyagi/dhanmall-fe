@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-  Navigate,
-  useRoutes,
-} from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import SignIn from "../pages/login";
 import SignUp from "../pages/signup";
 import Home from "../pages/home";
@@ -10,6 +7,7 @@ import store from "store2";
 import Profile from "../pages/profile";
 import Win from "../pages/win";
 import Orders from "../pages/orders";
+import Promotion from "../pages/promotion";
 
 const routes = (isLoggedIn) => {
   return [
@@ -28,6 +26,10 @@ const routes = (isLoggedIn) => {
     {
       path: "/orders", // protected routes
       element: isLoggedIn ? <Orders /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/promotion", // protected routes
+      element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
     },
     {
       // public routes

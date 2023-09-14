@@ -7,13 +7,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { orderService } from "./actions";
 import useApi from "../../hooks/useApi";
 import { Skeleton } from "@mui/material";
+import { changeDateFormet, getLastEightWords } from "../../utils/common-utils";
 
 export default function Orders() {
   const { data, loading, error } = useApi("/order", "GET");
-
+  console.log(error);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -51,10 +51,10 @@ export default function Orders() {
                 id="panel1bh-header"
               >
                 <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  {order._id}
+                  {getLastEightWords(order._id)}
                 </Typography>
                 <Typography sx={{ color: "text.secondary" }}>
-                  {order.date}
+                  {changeDateFormet(order.date,'DD-MM-YYYY, HH:mm')}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
