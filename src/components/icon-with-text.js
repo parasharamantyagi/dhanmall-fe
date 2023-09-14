@@ -15,10 +15,10 @@ const IconWithText = ({ icon, text, to, onClick }) => {
         alignItems: "center",
       }}
     >
-      <IconButton size="large" color="primary">
+      <IconButton size="medium" color="primary">
         {icon}
       </IconButton>
-      <Typography variant="h1">{text}</Typography>
+      <Typography variant="p4">{text}</Typography>
     </Link>
   );
 };

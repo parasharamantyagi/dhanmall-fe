@@ -71,21 +71,21 @@ export default function GamesTable() {
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer>
         <Table size="small" stickyHeader aria-label="sticky table">
-          <TableHead>
+          <TableBody>
             <TableRow>
               <TableCell>Period</TableCell>
               <TableCell>Price</TableCell>
               <TableCell>Number</TableCell>
               <TableCell>Result</TableCell>
             </TableRow>
-          </TableHead>
+          </TableBody>
           <TableBody>
             {gameDatas
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, i) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    <TableCell align="left">{row.period}</TableCell>
+                    <TableCell  align="left">{row.period}</TableCell>
                     <TableCell align="left">{row.price}</TableCell>
                     <TableCell align="left">{row.unit}</TableCell>
                     <TableCell align="left">{getResult(row.unit)}</TableCell>

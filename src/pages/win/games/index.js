@@ -72,10 +72,10 @@ export default function GamesTable() {
               .map((row, i) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    <TableCell align="left">{row.period}</TableCell>
-                    <TableCell align="left">{row.price}</TableCell>
-                    <TableCell align="left">{row.unit}</TableCell>
-                    <TableCell align="left">{getResult(row.unit)}</TableCell>
+                    <TableCell variant='body2' align="left">{row.period}</TableCell>
+                    <TableCell variant='body2' align="left">{row.price}</TableCell>
+                    <TableCell variant='body2' align="left">{row.unit}</TableCell>
+                    <TableCell variant='body2' align="left">{getResult(row.unit)}</TableCell>
                   </TableRow>
                 );
               })}
