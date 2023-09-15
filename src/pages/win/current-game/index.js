@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { createStyles, withStyles } from "@mui/styles";
 import AlertDialog from "../../../components/dialog";
-import { strictValidObjectWithKeys } from "../../../utils/common-utils";
 
 const styles = (theme) =>
   createStyles({
@@ -25,15 +24,26 @@ const styles = (theme) =>
     },
   });
 
-const CurrentGame = (props) => {
-  const { classes } = props;
-  const [timeLeft, setTimeLeft] = useState(props.gameNow.time); // 3 minutes in seconds
+const CurrentGame = ({ classes, apiCall, gameNow }) => {
+  const [timeLeft, setTimeLeft] = useState(gameNow.time); // 3 minutes in seconds
   const [open, setOpen] = useState(false);
   const [label, setLabel] = useState("");
 
+  const gameNowTime = () => {
+    const currentTimestamp = Date.now();
+    // Convert it to seconds
+    const currentSeconds = Math.floor(currentTimestamp / 1000);
+    console.log(currentSeconds, "currentSeconds");
+    // Calculate the current second within the 180-second cycle
+    const secondInCycle = currentSeconds % 180;
+    console.log(secondInCycle, "secondInCycle", 180 - secondInCycle);
+
+    return 180 - secondInCycle;
+  };
+
   useEffect(() => {
-    setTimeLeft(props.gameNow.time)
-  }, [props.gameNow.time]);
+    setTimeLeft(gameNowTime());
+  }, [gameNow.time]);
 
   // Function to format the time as mm:ss
   const formatTime = (time) => {
@@ -50,6 +60,8 @@ const CurrentGame = (props) => {
     const timer = setInterval(() => {
       if (timeLeft > 0) {
         setTimeLeft(timeLeft - 1);
+      } else {
+        setTimeLeft(gameNowTime());
       }
     }, 1000);
 

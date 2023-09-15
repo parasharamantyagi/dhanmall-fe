@@ -31,7 +31,7 @@ export default function Win() {
     >
       <Header />
       <Divider />
-      <CurrentGame gameNow={gameNow} />
+      <CurrentGame gameNow={gameNow} apiCall={callapi} />
       <Divider />
       <GamesTable />
       <Footer />
