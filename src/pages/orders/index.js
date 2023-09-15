@@ -12,8 +12,7 @@ import { Skeleton } from "@mui/material";
 import { changeDateFormet, getLastEightWords } from "../../utils/common-utils";
 
 export default function Orders() {
-  const { data, loading, error } = useApi("/order", "GET");
-  console.log(error);
+  const { data, loading } = useApi("/order", "GET");
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);

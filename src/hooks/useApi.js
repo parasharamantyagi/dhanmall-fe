@@ -9,30 +9,15 @@ function useApi(url, method, obj) {
 
   useEffect(() => {
     async function fetchData() {
-      //   try {
-      //     const response = await fetch(url);
-      //     if (!response.ok) {
-      //       throw new Error(`HTTP error! Status: ${response.status}`);
-      //     }
-      //     const json = await response.json();
-      //     setData(json);
-      //   } catch (error) {
-      //     setError(error);
-      //   } finally {
-      //     setLoading(false);
-      //   }
-
       try {
         const res = await apiCall(method, url, obj);
         if (res.status === 1) {
-          //   console.log("Login Sucessfully =>", res);
           setData({
             data: res.data,
             message: "success",
             success: true,
           });
         } else {
-          //   console.log("Invalid Email Password");
           setData({
             data: res.data,
             message: "success",

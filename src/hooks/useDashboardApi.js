@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { apiCall } from "../config/api/client";
 import { messages } from "../language/en";
 
-function usePromotionApi(url, method, obj) {
-  const [promotionData, setDataPromotion] = useState(null);
+function useDashboardApi(url, method, obj) {
+  const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -12,21 +12,21 @@ function usePromotionApi(url, method, obj) {
       try {
         const res = await apiCall(method, url, obj);
         if (res.status === 1) {
-          setDataPromotion({
-            data: res.data,
+          setDashboardData({
+            dashboardData: res.data,
             message: "success",
             success: true,
           });
         } else {
-          setDataPromotion({
-            data: res.data,
+          setDashboardData({
+            dashboardData: res.data,
             message: "success",
             success: true,
           });
         }
       } catch (error) {
         setError({
-          data: error.response,
+          dashboardData: error.response,
           message: messages.DEFAULT_ERROR_MESSAGE,
           success: false,
         });
@@ -38,7 +38,7 @@ function usePromotionApi(url, method, obj) {
     fetchData();
   }, [url, method, obj]);
 
-  return { promotionData, loading, error };
+  return { dashboardData, loading, error };
 }
 
-export default usePromotionApi;
+export default useDashboardApi;

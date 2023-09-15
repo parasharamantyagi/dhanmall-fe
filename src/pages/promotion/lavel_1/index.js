@@ -12,7 +12,6 @@ import usePromotionApi from "../../../hooks/usePromotionApi";
 export default function PromotionLavel1() {
   const [page, setPage] = React.useState(0);
   const { promotionData, loading, error } = usePromotionApi("/children", "GET");
-  console.log(promotionData);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {

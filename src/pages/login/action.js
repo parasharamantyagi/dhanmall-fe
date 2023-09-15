@@ -6,7 +6,6 @@ export const loginService = async (data) => {
   try {
     const res = await apiCall("POST", "/login", data);
     if (res.status === 1) {
-      console.log("Login Sucessfully =>", res);
       store({
         authToken: res.token,
       });
@@ -16,7 +15,6 @@ export const loginService = async (data) => {
         success: true,
       };
     } else {
-      console.log("Invalid Email Password");
       return {
         data: res,
         message: "Invalid Email Password",
@@ -24,7 +22,6 @@ export const loginService = async (data) => {
       };
     }
   } catch (error) {
-    console.log(error, "error");
     return {
       data: error.response,
       message: messages.DEFAULT_ERROR_MESSAGE,

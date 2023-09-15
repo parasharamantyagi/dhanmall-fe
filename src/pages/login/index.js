@@ -30,11 +30,6 @@ export default function SignIn() {
     } else {
       setError(response.message);
     }
-
-    // let userData = console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
   };
 
   return (
