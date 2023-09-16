@@ -53,20 +53,18 @@ const StyledTabs = styled((props) => (
   },
 });
 
-const StyledTab = styled((props) => <Tab {...props} />)(
-  ({ theme }) => ({
-    textTransform: "none",
-    fontWeight: theme.typography.fontWeightRegular,
-    fontSize: theme.typography.pxToRem(16),
-    color: "rgba(255, 255, 255)",
-    "&.Mui-selected": {
-      color: "#fff",
-    },
-    "&.Mui-focusVisible": {
-      backgroundColor: "rgba(100, 95, 228, 0.32)",
-    },
-  })
-);
+const StyledTab = styled((props) => <Tab {...props} />)(({ theme }) => ({
+  textTransform: "none",
+  fontWeight: theme.typography.fontWeightRegular,
+  fontSize: theme.typography.pxToRem(16),
+  color: "rgba(255, 255, 255)",
+  "&.Mui-selected": {
+    color: "#fff",
+  },
+  "&.Mui-focusVisible": {
+    backgroundColor: "rgba(100, 95, 228, 0.32)",
+  },
+}));
 
 function a11yProps(index) {
   return {
@@ -85,6 +83,9 @@ export default function FullWidthTabs() {
 
   return (
     <Box sx={{ bgcolor: "background.paper", width: "auto" }}>
+      <Typography variant="h2" align="center" margin={3} gutterBottom>
+        Bonus: ₹ 34.2
+      </Typography>
       <AppBar sx={{ background: "#000" }} position="static">
         <StyledTabs
           value={value}
@@ -101,13 +102,13 @@ export default function FullWidthTabs() {
       </AppBar>
 
       <TabPanel value={value} index={0} dir={theme.direction}>
-        <PromotionLavel1 />
+        <PromotionLavel1 pageType="lavel_1" />
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>
-      <PromotionLavel1 />
+        <PromotionLavel1 pageType="lavel_2" />
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
-      <PromotionLavel1 />
+        <PromotionLavel1 pageType="lavel_3" />
       </TabPanel>
     </Box>
   );

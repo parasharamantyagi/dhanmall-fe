@@ -8,10 +8,14 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import usePromotionApi from "../../../hooks/usePromotionApi";
+import { getLastEightWords } from "../../../utils/common-utils";
 
-export default function PromotionLavel1() {
+export default function PromotionLavel1({ pageType }) {
   const [page, setPage] = React.useState(0);
-  const { promotionData, loading, error } = usePromotionApi("/children", "GET");
+  const { promotionData } = usePromotionApi(
+    `/children?type=${pageType}`,
+    "GET"
+  );
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
@@ -30,9 +34,9 @@ export default function PromotionLavel1() {
           <TableHead>
             <TableRow>
               <TableCell>Id</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Result</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell>Water reward</TableCell>
+              <TableCell>First reward</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -49,16 +53,16 @@ export default function PromotionLavel1() {
                       key={row.code}
                     >
                       <TableCell variant="body2" align="left">
-                        {row.user_id}
+                        {getLastEightWords(row._id)}
                       </TableCell>
                       <TableCell variant="body2" align="left">
-                        {row.email}
+                        N/A
                       </TableCell>
                       <TableCell variant="body2" align="left">
-                        {row.user_id}
+                        {row.water_reward}
                       </TableCell>
                       <TableCell variant="body2" align="left">
-                        {row.user_id}
+                        {row.first_reward}
                       </TableCell>
                     </TableRow>
                   );
