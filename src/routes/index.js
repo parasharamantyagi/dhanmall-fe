@@ -8,6 +8,8 @@ import Profile from "../pages/profile";
 import Win from "../pages/win";
 import Orders from "../pages/orders";
 import Promotion from "../pages/promotion";
+import BankCard from "../pages/bank-card";
+import Addbankcard from "../pages/bank-card/add-bankcard";
 
 const routes = (isLoggedIn) => {
   return [
@@ -26,6 +28,14 @@ const routes = (isLoggedIn) => {
     {
       path: "/orders", // protected routes
       element: isLoggedIn ? <Orders /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/bank-card", // protected routes
+      element: isLoggedIn ? <BankCard /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/addbankcard", // protected routes
+      element: isLoggedIn ? <Addbankcard /> : <Navigate to="/login" />,
     },
     {
       path: "/promotion", // protected routes
