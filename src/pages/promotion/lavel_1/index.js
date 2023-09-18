@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import usePromotionApi from "../../../hooks/usePromotionApi";
-import { getLastEightWords } from "../../../utils/common-utils";
+import { getLastEightWords, strictValidObjectWithKeys } from "../../../utils/common-utils";
 
 export default function PromotionLavel1({ pageType }) {
   const [page, setPage] = React.useState(0);
@@ -56,7 +56,7 @@ export default function PromotionLavel1({ pageType }) {
                         {getLastEightWords(row._id)}
                       </TableCell>
                       <TableCell variant="body2" align="left">
-                        N/A
+                        {strictValidObjectWithKeys(row.childrens_id) ? row.childrens_id.mobile : 'N/A'}
                       </TableCell>
                       <TableCell variant="body2" align="left">
                         {row.water_reward}
