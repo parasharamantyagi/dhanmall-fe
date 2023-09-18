@@ -3,9 +3,13 @@ import Box from "@mui/material/Box";
 import Footer from "../footer";
 import { Button, Paper, Typography } from "@mui/material";
 import AvatarWithName from "../../components/avatarname";
-import { defaultCurrencyFormat } from "../../utils/common-utils";
+import {
+  defaultCurrencyFormat,
+} from "../../utils/common-utils";
 import { withStyles, createStyles } from "@mui/styles";
 import Sidebar from "./sidebar";
+import useMyProfileApi from "../../hooks/useMyProfileApi";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
 
 const styles = (theme) =>
   createStyles({
@@ -21,6 +25,7 @@ const styles = (theme) =>
   });
 
 const Profile = (props) => {
+  const { myProfileData } = useMyProfileApi("/profile", "GET");
   const { classes } = props;
   return (
     <Box
@@ -41,15 +46,20 @@ const Profile = (props) => {
         <Box sx={{ backgroundColor: "#000", p: 2, py: 3 }}>
           <AvatarWithName name="Bharat Chhabra" />
           <Typography gutterBottom color="secondary">
-            Mobile Number : +91-9896677443
+            Mobile Number :{" "}
+            {strictValidObjectWithKeys(myProfileData)
+              ? myProfileData.myProfile.nickname
+              : "N/A"}
           </Typography>
           <Typography gutterBottom color="secondary">
-            ID : LKY001
+            ID : {strictValidObjectWithKeys(myProfileData)
+              ? myProfileData.myProfile.promotion_code
+              : "N/A"}
           </Typography>
           <Box display="flex" mt={2} className={classes.root}>
             <Box display="flex" flexDirection="column" alignItems="center">
               <Typography gutterBottom color="secondary">
-                {defaultCurrencyFormat(2000)}
+                {defaultCurrencyFormat(strictValidObjectWithKeys(myProfileData) ? myProfileData.myProfile.money : 0)}
               </Typography>
               <Button variant="contained" color="primary" size="small">
                 Recharge
@@ -57,7 +67,7 @@ const Profile = (props) => {
             </Box>
             <Box display="flex" flexDirection="column" alignItems="center">
               <Typography gutterBottom color="secondary">
-                {defaultCurrencyFormat(2000)}
+                {defaultCurrencyFormat(strictValidObjectWithKeys(myProfileData) ? myProfileData.myProfile.commission : 0)}
               </Typography>
               <Button variant="contained" color="primary" size="small">
                 Commission
@@ -65,7 +75,7 @@ const Profile = (props) => {
             </Box>
             <Box display="flex" flexDirection="column" alignItems="center">
               <Typography gutterBottom color="secondary">
-                {defaultCurrencyFormat(2000)}
+                {defaultCurrencyFormat(strictValidObjectWithKeys(myProfileData) ? myProfileData.myProfile.interest : 0)}
               </Typography>
               <Button variant="contained" color="primary" size="small">
                 Interest

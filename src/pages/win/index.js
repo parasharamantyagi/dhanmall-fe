@@ -7,6 +7,9 @@ import { Divider, Typography } from "@mui/material";
 import CurrentGame from "./current-game";
 import { gameNowService } from "./actions";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import OrderList from "../orders/OrderList";
+
 
 export default function Win() {
   const [gameNow, setGameNow] = React.useState({ period: 0, time: 180 });
@@ -48,7 +51,19 @@ export default function Win() {
         </Box>
         <Divider />
         <GamesTable />
-        <GamesTable />
+        <Divider />
+        <Box
+          py={1.5}
+          display="flex"
+          justifyContent="center"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <ReceiptLongIcon />
+          <Typography>My Record</Typography>
+        </Box>
+        <Divider />
+        <OrderList />
       </Box>
       <Footer />
     </>
