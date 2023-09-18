@@ -1,42 +1,51 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import { createStyles, withStyles } from "@mui/styles";
-import AlertDialog from "../../../components/dialog";
+import { Box, Button, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { createStyles, withStyles } from '@mui/styles';
+import AlertDialog from '../../../components/dialog';
 
 const styles = (theme) =>
   createStyles({
     root: {
-      justifyContent: "space-around",
-      [theme.breakpoints.down("sm")]: {
-        justifyContent: "space-between",
-        flexDirection: "row", // For example, change the flex direction
+      justifyContent: 'space-around',
+      [theme.breakpoints.down('lg')]: {
+        justifyContent: 'space-between',
+        flexDirection: 'row', // For example, change the flex direction
         // Add any other styles you want for smaller screens
       },
       // Add more breakpoints and styles as needed
     },
     numbers: {
       width: 200,
-      [theme.breakpoints.down("sm")]: {
-        width: "auto",
+      [theme.breakpoints.down('lg')]: {
+        width: 'auto',
       },
       // Add more breakpoints and styles as needed
+    },
+    button: {
+      width: 150,
+      [theme.breakpoints.down('lg')]: {
+        width: 120,
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: 110,
+      },
     },
   });
 
 const CurrentGame = ({ classes, apiCall, gameNow }) => {
   const [timeLeft, setTimeLeft] = useState(gameNow.time); // 3 minutes in seconds
   const [open, setOpen] = useState(false);
-  const [label, setLabel] = useState("");
+  const [label, setLabel] = useState('');
 
   const gameNowTime = () => {
     const currentTimestamp = Date.now();
     // Convert it to seconds
     const currentSeconds = Math.floor(currentTimestamp / 1000);
-    console.log(currentSeconds, "currentSeconds");
+    console.log(currentSeconds, 'currentSeconds');
     // Calculate the current second within the 180-second cycle
     const secondInCycle = currentSeconds % 180;
-    console.log(secondInCycle, "secondInCycle", 180 - secondInCycle);
+    console.log(secondInCycle, 'secondInCycle', 180 - secondInCycle);
 
     return 180 - secondInCycle;
   };
@@ -49,9 +58,9 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
       2,
-      "0"
+      '0',
     )}`;
   };
 
@@ -71,7 +80,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
 
   const renderCount = (number) => {
     const isEven = number % 2 === 0;
-    const buttonColor = isEven ? "error" : "success";
+    const buttonColor = isEven ? 'error' : 'success';
     return (
       <Grid item xs={2.4}>
         <Button
@@ -86,12 +95,12 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
             number === 5
               ? {
                   background:
-                    "linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)",
+                    'linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)',
                 }
               : number === 0
               ? {
                   background:
-                    "linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)",
+                    'linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)',
                 }
               : undefined
           }
@@ -138,8 +147,9 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
 
       <Box display="flex" mt={2} className={classes.root}>
         <Button
+          className={classes.button}
           onClick={() => {
-            setLabel("Join Green");
+            setLabel('Join Green');
             setOpen(true);
           }}
           variant="contained"
@@ -149,8 +159,9 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           Join Green
         </Button>
         <Button
+          className={classes.button}
           onClick={() => {
-            setLabel("Join Purple");
+            setLabel('Join Purple');
             setOpen(true);
           }}
           variant="contained"
@@ -160,8 +171,9 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           Join Purple
         </Button>
         <Button
+          className={classes.button}
           onClick={() => {
-            setLabel("Join Red");
+            setLabel('Join Red');
             setOpen(true);
           }}
           variant="contained"
