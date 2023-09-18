@@ -44,7 +44,7 @@ const routes = (isLoggedIn) => {
     },
     {
       path: "/privacy-policy", // protected routes
-      element: isLoggedIn ? <PrivacyPolicy /> : <Navigate to="/login" />,
+      element: <PrivacyPolicy />,
     },
     {
       // public routes
