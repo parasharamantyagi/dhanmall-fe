@@ -10,6 +10,7 @@ import Orders from "../pages/orders";
 import Promotion from "../pages/promotion";
 import BankCard from "../pages/bank-card";
 import Addbankcard from "../pages/bank-card/add-bankcard";
+import PrivacyPolicy from "../pages/privacy";
 
 const routes = (isLoggedIn) => {
   return [
@@ -40,6 +41,10 @@ const routes = (isLoggedIn) => {
     {
       path: "/promotion", // protected routes
       element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/privacy-policy", // protected routes
+      element: isLoggedIn ? <PrivacyPolicy /> : <Navigate to="/login" />,
     },
     {
       // public routes

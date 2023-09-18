@@ -1,8 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Footer from "../footer";
-import BankCardHeader from "../header/bank-card";
 import BankCardList from "./list";
+import CardHeader from "../header/header-card";
 
 export default function BankCard() {
   return (
@@ -13,7 +13,7 @@ export default function BankCard() {
         flexDirection: "column",
       }}
     >
-      <BankCardHeader title="Bank Card" />
+      <CardHeader title="Bank Card" />
       <BankCardList />
       <Footer />
     </Box>

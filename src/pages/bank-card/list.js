@@ -18,10 +18,10 @@ export default function BankCardList() {
             <Grid item xs>
               <CreditCardIcon />
               <Typography variant="body2" gutterBottom>
-                Full resolution 1920x1080 • JPEG
+                Aman Tyagi
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                ID: 1030114
+                ID: 100054396305
               </Typography>
             </Grid>
             {/* <Grid item>

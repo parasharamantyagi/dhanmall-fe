@@ -22,7 +22,7 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
 
     let response = await loginService({
-      email: data.get("email"),
+      mobile: data.get("mobile"),
       password: data.get("password"),
     });
     if (response.success) {
@@ -54,10 +54,9 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="mobile_number"
+            label="Mobile Number"
+            name="mobile"
             autoFocus
           />
           <TextField

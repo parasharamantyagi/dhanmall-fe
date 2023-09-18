@@ -34,46 +34,48 @@ const Profile = (props) => {
         sx={{
           justifyContent: "flex-start",
           alignItems: "flex-start",
-          background: "#000",
-          p: 2,
-          py: 3,
+          // mb:8
+          height: "110vh",
         }}
       >
-        <AvatarWithName name="Bharat Chhabra" />
-        <Typography gutterBottom color="secondary">
-          Mobile Number : +91-9896677443
-        </Typography>
-        <Typography gutterBottom color="secondary">
-          ID : LKY001
-        </Typography>
-        <Box display="flex" mt={2} className={classes.root}>
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <Typography gutterBottom color="secondary">
-              {defaultCurrencyFormat(2000)}
-            </Typography>
-            <Button variant="contained" color="primary" size="small">
-              Recharge
-            </Button>
-          </Box>
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <Typography gutterBottom color="secondary">
-              {defaultCurrencyFormat(2000)}
-            </Typography>
-            <Button variant="contained" color="primary" size="small">
-              Commission
-            </Button>
-          </Box>
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <Typography gutterBottom color="secondary">
-              {defaultCurrencyFormat(2000)}
-            </Typography>
-            <Button variant="contained" color="primary" size="small">
-              Interest
-            </Button>
+        <Box sx={{ backgroundColor: "#000", p: 2, py: 3 }}>
+          <AvatarWithName name="Bharat Chhabra" />
+          <Typography gutterBottom color="secondary">
+            Mobile Number : +91-9896677443
+          </Typography>
+          <Typography gutterBottom color="secondary">
+            ID : LKY001
+          </Typography>
+          <Box display="flex" mt={2} className={classes.root}>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <Typography gutterBottom color="secondary">
+                {defaultCurrencyFormat(2000)}
+              </Typography>
+              <Button variant="contained" color="primary" size="small">
+                Recharge
+              </Button>
+            </Box>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <Typography gutterBottom color="secondary">
+                {defaultCurrencyFormat(2000)}
+              </Typography>
+              <Button variant="contained" color="primary" size="small">
+                Commission
+              </Button>
+            </Box>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <Typography gutterBottom color="secondary">
+                {defaultCurrencyFormat(2000)}
+              </Typography>
+              <Button variant="contained" color="primary" size="small">
+                Interest
+              </Button>
+            </Box>
           </Box>
         </Box>
+        <Sidebar />
       </Paper>
-      <Sidebar />
+
       <Footer />
     </Box>
   );

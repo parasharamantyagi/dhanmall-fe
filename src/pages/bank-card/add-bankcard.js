@@ -1,7 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Footer from "../footer";
-import BankCardHeader from "../header/bank-card";
+import BankCardHeader from "../header/header-card";
 import TextField from "@mui/material/TextField";
 import { Button, Card, CardContent, Grid } from "@mui/material";
 
@@ -132,7 +132,7 @@ export default function Addbankcard() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 7 }}
             >
               Sign In
             </Button>

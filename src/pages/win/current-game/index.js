@@ -28,7 +28,7 @@ const styles = (theme) =>
         width: 120,
       },
       [theme.breakpoints.down('sm')]: {
-        width: 110,
+        width: 105,
       },
     },
   });

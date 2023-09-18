@@ -128,7 +128,7 @@ export default function FullWidthTabs() {
             value="https://luckydhanmall.com/#/register?r_code=EFFEECFC"
             sx={{ mt: 2 }}
             multiline
-            rows={4}
+            rows={3}
             InputProps={{
               readOnly: true,
             }}
