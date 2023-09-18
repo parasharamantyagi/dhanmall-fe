@@ -25,6 +25,10 @@ const AlertDialog = ({ open, setOpen = () => {}, label }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const onSubmit = () => {
+    console.log("submitted action", state);
+    setOpen(false);
+  };
 
   return (
     <Dialog
@@ -147,7 +151,7 @@ const AlertDialog = ({ open, setOpen = () => {}, label }) => {
 
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose} autoFocus>
+        <Button onClick={onSubmit} autoFocus>
           Submit
         </Button>
       </DialogActions>
