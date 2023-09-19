@@ -9,7 +9,6 @@ import {
 import React from "react";
 import CardHeader from "../header/header-card";
 import Footer from "../footer";
-import Addbankcard from "../bank-card/add-bankcard";
 
 const ContectUs = () => {
   const renderSubtitle = (text) => {
