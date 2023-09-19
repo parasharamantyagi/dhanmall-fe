@@ -4,23 +4,9 @@ import CardHeader from "../header/header-card";
 import Footer from "../footer";
 
 const Riskagreement = () => {
-  const renderHeader = (text) => {
-    return (
-      <Typography mt={1} variant="h4">
-        {text}
-      </Typography>
-    );
-  };
   const renderSubtitle = (text) => {
     return (
       <Typography mt={2} variant="p4">
-        {text}
-      </Typography>
-    );
-  };
-  const renderSubtitleBold = (text) => {
-    return (
-      <Typography mt={2} variant="h4">
         {text}
       </Typography>
     );
@@ -30,25 +16,6 @@ const Riskagreement = () => {
       <Typography mt={1} variant="h2">
         {text}
       </Typography>
-    );
-  };
-  const renderSubtitleWithBullets = (text) => {
-    return (
-      <Box sx={{ alignItems: "center", display: "flex", flexDirection: "row" }}>
-        <Box
-          style={{
-            height: 5,
-            width: 5,
-            background: "#000",
-            borderRadius: 5,
-          }}
-          mt={1.5}
-          mr={1}
-        />
-        <Typography mt={2} variant="p4">
-          {text}
-        </Typography>
-      </Box>
     );
   };
   return (
