@@ -102,6 +102,15 @@ const Sidebar = (props) => {
           >
             Risk Disclosure Agreement
           </Typography>
+          <Divider />
+          <Typography
+            my={2}
+            onClick={() => navigate("/contect-us")}
+            variant="p4"
+            pl={6}
+          >
+            Contect Us
+          </Typography>
         </Box>
         <Divider />
       </Collapse>
