@@ -11,6 +11,7 @@ import Promotion from "../pages/promotion";
 import BankCard from "../pages/bank-card";
 import Addbankcard from "../pages/bank-card/add-bankcard";
 import PrivacyPolicy from "../pages/privacy";
+import Riskagreement from "../pages/riskagreement";
 
 const routes = (isLoggedIn) => {
   return [
@@ -45,6 +46,10 @@ const routes = (isLoggedIn) => {
     {
       path: "/privacy-policy", // protected routes
       element: <PrivacyPolicy />,
+    },
+    {
+      path: "/riskagreement", // protected routes
+      element: <Riskagreement />,
     },
     {
       // public routes

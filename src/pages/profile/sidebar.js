@@ -96,7 +96,7 @@ const Sidebar = (props) => {
           <Divider />
           <Typography
             my={2}
-            onClick={() => navigate("/privacy-policy")}
+            onClick={() => navigate("/riskagreement")}
             variant="p4"
             pl={6}
           >
