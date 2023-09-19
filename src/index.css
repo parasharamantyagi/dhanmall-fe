@@ -19,3 +19,16 @@ code {
 .css-19kzrtu {
   padding: 0 !important;
 }
+
+/* YourGridStyles.css */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Example grid with 3 columns */
+  gap: 10px; /* Gap between grid items */
+}
+
+.grid-item {
+  margin: 10px; /* Add margins to grid items */
+  padding: 10px; /* Optional padding for grid items */
+  border: 1px solid #000; /* Optional border for grid items */
+}

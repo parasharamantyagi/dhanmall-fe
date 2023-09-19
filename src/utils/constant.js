@@ -1,258 +1,254 @@
 export const resultByUnit = {
-  0: ['red', 'violet'],
-  1: ['green'],
-  2: ['red'],
-  3: ['green'],
-  4: ['red'],
-  5: ['green', 'violet'],
-  6: ['red'],
-  7: ['green'],
-  8: ['red'],
-  9: ['green'],
-}
+  0: ["red", "violet"],
+  1: ["green"],
+  2: ["red"],
+  3: ["green"],
+  4: ["red"],
+  5: ["green", "violet"],
+  6: ["red"],
+  7: ["green"],
+  8: ["red"],
+  9: ["green"],
+};
 
-const user_roles = [
+const homeContentDummyData = [
   {
-    title: 'Driver Manager',
-    value: 1,
+    imageUrl: "https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png",
+    title: "Rolls Royce Cullinan",
+    description: "Deposit: 5000 AED",
+    id: "2022",
   },
   {
-    title: 'Dispatcher',
-    value: 2,
+    imageUrl: "https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png",
+    title: "Lamborghini Urus",
+    description: "Deposit: 5000 AED",
+    id: "2021",
   },
   {
-    title: 'Driver',
-    value: 3,
+    imageUrl: "https://xcarrental.com/wp-content/uploads/2023/01/Range-Rover-Vogue-2023-Rental-Dubai.png",
+    title: "Range Rover Vogue 2023",
+    description: "Deposit: 2000 AED",
+    id: "2023",
   },
   {
-    title: 'Reservationist',
-    value: 4,
-  },
-  {
-    title: 'Manager',
-    value: 6,
-  },
-  {
-    title: 'Account User',
-    value: 7,
-  },
-  {
-    title: 'Billing Clerk',
-    value: 10,
+    imageUrl: "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
+    title: "Mercedes G63",
+    description: "Deposit: 2000 AED",
+    id: "2022",
   },
 ];
 
 const capability_roles = [
   {
-    title: 'Trainee',
+    title: "Trainee",
     value: 1,
   },
   {
-    title: 'Weights over 350 lbs',
+    title: "Weights over 350 lbs",
     value: 2,
   },
   {
-    title: 'Can do out of town',
+    title: "Can do out of town",
     value: 3,
   },
   {
-    title: 'Can do AMB',
+    title: "Can do AMB",
     value: 4,
   },
   {
-    title: 'Can STR',
+    title: "Can STR",
     value: 5,
   },
   {
-    title: 'WC',
+    title: "WC",
     value: 6,
   },
 ];
 
 export const transportStatus = (name) => {
   switch (name) {
-    case 'dispatch_requested':
-      return 'Dispatch Requested';
-    case 'noshow':
-      return 'No Show';
-    case 'en_route':
-      return 'En Route';
-    case 'arrived_at_pick_up':
-      return 'Arrived at PU';
-    case 'confirm_dob':
-      return 'Confirmed DOB';
-    case 'patient_loaded':
-      return 'Patient loaded';
-    case 'arrived_at_drop_off':
-      return 'Arrived at DO';
-    case 'rejected':
-      return 'Rejected';
-    case 'completed':
-      return 'Completed';
-    case 'planned':
-      return 'Planned';
-    case 'accepted':
-      return 'Accepted';
-    case 'cancelled':
-      return 'Canceled';
-    case 'aborted':
-      return 'Aborted';
-    case 'requested':
-      return 'Requested';
-    case 'unassigned':
-      return 'Unassigned';
-    case 'expired':
-      return 'Expired';
-    case 'allocated':
-      return 'Allocated';
-    case 'dispatched':
-      return 'Dispatched';
+    case "dispatch_requested":
+      return "Dispatch Requested";
+    case "noshow":
+      return "No Show";
+    case "en_route":
+      return "En Route";
+    case "arrived_at_pick_up":
+      return "Arrived at PU";
+    case "confirm_dob":
+      return "Confirmed DOB";
+    case "patient_loaded":
+      return "Patient loaded";
+    case "arrived_at_drop_off":
+      return "Arrived at DO";
+    case "rejected":
+      return "Rejected";
+    case "completed":
+      return "Completed";
+    case "planned":
+      return "Planned";
+    case "accepted":
+      return "Accepted";
+    case "cancelled":
+      return "Canceled";
+    case "aborted":
+      return "Aborted";
+    case "requested":
+      return "Requested";
+    case "unassigned":
+      return "Unassigned";
+    case "expired":
+      return "Expired";
+    case "allocated":
+      return "Allocated";
+    case "dispatched":
+      return "Dispatched";
     // Invoice Status
-    case 'validated':
-      return 'Validated';
-    case 'locked':
-      return 'Locked';
-    case 'uninvoiced':
-      return 'Uninvoiced';
-    case 'part_paid':
-      return 'Partially Paid';
-    case 'disputed':
-      return 'Disputed';
-    case 'fully_paid':
-      return 'Fully Paid';
-    case 'refunded':
-      return 'Refunded';
-    case 'send_invoiced':
-      return 'Invoice Sent';
-    case 'sent':
-      return 'Sent';
-    case 'dispute_accepted':
-      return 'Dispute Accepted';
-    case 'invoiced':
-      return 'Invoiced';
-    case 'on_hold':
-      return 'On Hold';
-    case 'none':
-      return 'N/A';
-    case 'in_progress':
-      return 'In Progress';
-    case 'cancelled_no_billable':
-      return 'Canceled No Billable';
+    case "validated":
+      return "Validated";
+    case "locked":
+      return "Locked";
+    case "uninvoiced":
+      return "Uninvoiced";
+    case "part_paid":
+      return "Partially Paid";
+    case "disputed":
+      return "Disputed";
+    case "fully_paid":
+      return "Fully Paid";
+    case "refunded":
+      return "Refunded";
+    case "send_invoiced":
+      return "Invoice Sent";
+    case "sent":
+      return "Sent";
+    case "dispute_accepted":
+      return "Dispute Accepted";
+    case "invoiced":
+      return "Invoiced";
+    case "on_hold":
+      return "On Hold";
+    case "none":
+      return "N/A";
+    case "in_progress":
+      return "In Progress";
+    case "cancelled_no_billable":
+      return "Canceled No Billable";
     default:
       return name;
   }
 };
-export { user_roles, capability_roles };
+export { homeContentDummyData, capability_roles };
 
-export const DefaultDateTime = 'MM/DD/YY HHmm';
-export const DateTime = 'ddd, MM/DD/YY - HHmm';
-export const DefaultDate = 'MM/DD/YY';
-export const DefaultDOBDate = 'MM/DD/YYYY';
-export const DefaultTime = 'HHmm';
+export const DefaultDateTime = "MM/DD/YY HHmm";
+export const DateTime = "ddd, MM/DD/YY - HHmm";
+export const DefaultDate = "MM/DD/YY";
+export const DefaultDOBDate = "MM/DD/YYYY";
+export const DefaultTime = "HHmm";
 
 export const TransportStatusPreDefined = [
   {
-    title: 'Accepted',
-    value: 'accepted',
+    title: "Accepted",
+    value: "accepted",
   },
   {
-    title: 'Rejected',
-    value: 'rejected',
+    title: "Rejected",
+    value: "rejected",
   },
   {
-    title: 'En Route',
-    value: 'en_route',
+    title: "En Route",
+    value: "en_route",
   },
   {
-    title: 'Arrived at pick-up',
-    value: 'arrived_at_pick_up',
+    title: "Arrived at pick-up",
+    value: "arrived_at_pick_up",
   },
   {
-    title: 'Patient loaded',
-    value: 'patient_loaded',
+    title: "Patient loaded",
+    value: "patient_loaded",
   },
   // {
   //   title: 'On Hold',
   //   value: 'on_hold',
   // },
   {
-    title: 'Arrived at drop-off',
-    value: 'arrived_at_drop_off',
+    title: "Arrived at drop-off",
+    value: "arrived_at_drop_off",
   },
   {
-    title: 'Completed',
-    value: 'completed',
+    title: "Completed",
+    value: "completed",
   },
   {
-    title: 'Aborted',
-    value: 'aborted',
+    title: "Aborted",
+    value: "aborted",
   },
   {
-    title: 'No Show',
-    value: 'noshow',
+    title: "No Show",
+    value: "noshow",
   },
 ];
 
 export const BillingStatus = {
-  VALIDATED_STATUS: 'validated',
-  LOCKED_STATUS: 'locked',
-  UNINVOICED_STATUS: 'uninvoiced',
-  PARTIALLY_PAID_STATUS: 'part_paid',
-  FULLY_PAID_STATUS: 'fully_paid',
-  DISPUTED_STATUS: 'disputed',
-  DISPUTE_ACCEPTED_STATUS: 'dispute_accepted',
-  CANCELLED_STATUS: 'cancelled',
-  REFUNDED_STATUS: 'refunded',
-  SEND_INVOICE_STATUS: 'send_invoiced',
-  ARCHIVE_STATUS: 'archive',
+  VALIDATED_STATUS: "validated",
+  LOCKED_STATUS: "locked",
+  UNINVOICED_STATUS: "uninvoiced",
+  PARTIALLY_PAID_STATUS: "part_paid",
+  FULLY_PAID_STATUS: "fully_paid",
+  DISPUTED_STATUS: "disputed",
+  DISPUTE_ACCEPTED_STATUS: "dispute_accepted",
+  CANCELLED_STATUS: "cancelled",
+  REFUNDED_STATUS: "refunded",
+  SEND_INVOICE_STATUS: "send_invoiced",
+  ARCHIVE_STATUS: "archive",
 };
 
 export const renderBillingStatus = (type) => {
   switch (type) {
-    case 'validated':
-      return 'Validated';
-    case 'locked':
-      return 'Locked';
-    case 'uninvoiced':
-      return 'Uninvoiced';
-    case 'part_paid':
-      return 'Partially Paid';
-    case 'fully_paid':
-      return 'Fully Paid';
-    case 'disputed':
-      return 'Disputed';
-    case 'dispute_accepted':
-      return 'Dispute Accepted';
-    case 'cancelled':
-      return 'Canceled';
-    case 'refunded':
-      return 'Refunded';
-    case 'send_invoiced':
-      return 'Send Invoice';
+    case "validated":
+      return "Validated";
+    case "locked":
+      return "Locked";
+    case "uninvoiced":
+      return "Uninvoiced";
+    case "part_paid":
+      return "Partially Paid";
+    case "fully_paid":
+      return "Fully Paid";
+    case "disputed":
+      return "Disputed";
+    case "dispute_accepted":
+      return "Dispute Accepted";
+    case "cancelled":
+      return "Canceled";
+    case "refunded":
+      return "Refunded";
+    case "send_invoiced":
+      return "Send Invoice";
     default:
       return type;
   }
 };
 export const renderPaymentType = (type) => {
   switch (type) {
-    case 'partially':
-      return 'Partially Paid';
-    case 'fully':
-      return 'Fully Paid';
-    case 'cc':
-      return 'CC';
-    case 'check':
-      return 'Check';
-    case 'ach':
-      return 'ACH';
-    case 'cash':
-      return 'Cash';
-    case 'credit_memo':
-      return 'Credit Memo';
-    case 'debit_memo':
-      return 'Debit Memo';
-    case 'other':
-      return 'Other';
+    case "partially":
+      return "Partially Paid";
+    case "fully":
+      return "Fully Paid";
+    case "cc":
+      return "CC";
+    case "check":
+      return "Check";
+    case "ach":
+      return "ACH";
+    case "cash":
+      return "Cash";
+    case "credit_memo":
+      return "Credit Memo";
+    case "debit_memo":
+      return "Debit Memo";
+    case "other":
+      return "Other";
     default:
       return type;
   }
@@ -260,99 +256,99 @@ export const renderPaymentType = (type) => {
 
 export const renderPaymentStatus = (type) => {
   switch (type) {
-    case 'created':
-      return 'Created';
-    case 'applied':
-      return 'Applied';
-    case 'applied_partially':
-      return 'Applied Partially';
+    case "created":
+      return "Created";
+    case "applied":
+      return "Applied";
+    case "applied_partially":
+      return "Applied Partially";
     default:
       return type;
   }
 };
 export const BillingStatusAdminPreDefined = [
   {
-    title: 'Initialized',
-    value: 'initialized',
+    title: "Initialized",
+    value: "initialized",
   },
   {
-    title: 'Validated',
-    value: 'validated',
+    title: "Validated",
+    value: "validated",
   },
   {
-    title: 'Send Invoice',
-    value: 'send_invoiced',
+    title: "Send Invoice",
+    value: "send_invoiced",
   },
   {
-    title: 'Locked',
-    value: 'locked',
+    title: "Locked",
+    value: "locked",
   },
   {
-    title: 'Uninvoiced',
-    value: 'uninvoiced',
+    title: "Uninvoiced",
+    value: "uninvoiced",
   },
   {
-    title: 'Partially Paid',
-    value: 'part_paid',
+    title: "Partially Paid",
+    value: "part_paid",
   },
   {
-    title: 'Fully Paid',
-    value: 'fully_paid',
+    title: "Fully Paid",
+    value: "fully_paid",
   },
 
   {
-    title: 'Disputed',
-    value: 'disputed',
+    title: "Disputed",
+    value: "disputed",
   },
   {
-    title: 'Dispute Accepted',
-    value: 'dispute_accepted',
+    title: "Dispute Accepted",
+    value: "dispute_accepted",
   },
   {
-    title: 'Canceled',
-    value: 'cancelled',
+    title: "Canceled",
+    value: "cancelled",
   },
   {
-    title: 'Refunded',
-    value: 'refunded',
+    title: "Refunded",
+    value: "refunded",
   },
 ];
 export const BillingStatusPreDefined = [
   {
-    title: 'Initialized',
-    value: 'initialized',
+    title: "Initialized",
+    value: "initialized",
   },
   {
-    title: 'Validated',
-    value: 'validated',
+    title: "Validated",
+    value: "validated",
   },
   {
-    title: 'Send Invoice',
-    value: 'send_invoiced',
+    title: "Send Invoice",
+    value: "send_invoiced",
   },
   {
-    title: 'Locked',
-    value: 'locked',
+    title: "Locked",
+    value: "locked",
   },
   {
-    title: 'Uninvoiced',
-    value: 'uninvoiced',
+    title: "Uninvoiced",
+    value: "uninvoiced",
   },
   {
-    title: 'Disputed',
-    value: 'disputed',
+    title: "Disputed",
+    value: "disputed",
   },
   {
-    title: 'Dispute Accepted',
-    value: 'dispute_accepted',
+    title: "Dispute Accepted",
+    value: "dispute_accepted",
   },
   {
-    title: 'Canceled',
-    value: 'cancelled',
+    title: "Canceled",
+    value: "cancelled",
   },
 ];
-export const invalidChars = ['-', '+', 'e', 'E'];
-export const invalidSymbol = ['e', 'E'];
+export const invalidChars = ["-", "+", "e", "E"];
+export const invalidSymbol = ["e", "E"];
 // export const GanttData = [
 //   {
 //     taskID: 1,
@@ -482,15 +478,15 @@ export const invalidSymbol = ['e', 'E'];
 export const GanttData = [
   {
     TaskID: 1,
-    TaskName: 'Project initiation',
-    StartDate: new Date('02/02/2022 02:00'),
-    EndDate: new Date('02/03/2022 22:00'),
+    TaskName: "Project initiation",
+    StartDate: new Date("02/02/2022 02:00"),
+    EndDate: new Date("02/03/2022 22:00"),
     subtasks: [
       {
         TaskID: 2,
-        TaskName: 'Identify site location',
-        StartDate: new Date('02/02/2022 10:00'),
-        EndDate: new Date('02/02/2022 12:00'),
+        TaskName: "Identify site location",
+        StartDate: new Date("02/02/2022 10:00"),
+        EndDate: new Date("02/02/2022 12:00"),
         Duration: 6,
         Progress: 90,
         work: 10,
@@ -520,15 +516,15 @@ export const GanttData = [
   },
   {
     TaskID: 2,
-    TaskName: 'Project initiation',
-    StartDate: new Date('02/02/2022 08:00'),
-    EndDate: new Date('02/02/2022 22:00'),
+    TaskName: "Project initiation",
+    StartDate: new Date("02/02/2022 08:00"),
+    EndDate: new Date("02/02/2022 22:00"),
     subtasks: [
       {
         TaskID: 3,
-        TaskName: 'Identify site location',
-        StartDate: new Date('02/02/2022 09:00'),
-        EndDate: new Date('02/02/2022 12:00'),
+        TaskName: "Identify site location",
+        StartDate: new Date("02/02/2022 09:00"),
+        EndDate: new Date("02/02/2022 12:00"),
         Duration: 6,
         Progress: 90,
         work: 10,
