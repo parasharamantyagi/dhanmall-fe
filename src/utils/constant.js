@@ -13,28 +13,116 @@ export const resultByUnit = {
 
 const homeContentDummyData = [
   {
-    imageUrl: "https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png",
-    title: "Rolls Royce Cullinan",
-    description: "Deposit: 5000 AED",
-    id: "2022",
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png',
+    title: 'Rolls Royce Cullinan',
+    description: 'Deposit: 5000 AED',
+    id: '2022',
   },
   {
-    imageUrl: "https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png",
-    title: "Lamborghini Urus",
-    description: "Deposit: 5000 AED",
-    id: "2021",
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png',
+    title: 'Lamborghini Urus',
+    description: 'Deposit: 5000 AED',
+    id: '2021',
   },
   {
-    imageUrl: "https://xcarrental.com/wp-content/uploads/2023/01/Range-Rover-Vogue-2023-Rental-Dubai.png",
-    title: "Range Rover Vogue 2023",
-    description: "Deposit: 2000 AED",
-    id: "2023",
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2023/01/Range-Rover-Vogue-2023-Rental-Dubai.png',
+    title: 'Range Rover Vogue 2023',
+    description: 'Deposit: 2000 AED',
+    id: '2023',
   },
   {
-    imageUrl: "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Mercedes G63",
-    description: "Deposit: 2000 AED",
-    id: "2022",
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png',
+    title: 'Mercedes G63',
+    description: 'Deposit: 2000 AED',
+    id: '2022',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png',
+    title: 'Rolls Royce Cullinan',
+    description: 'Deposit: 5000 AED',
+    id: '2022',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png',
+    title: 'Lamborghini Urus',
+    description: 'Deposit: 5000 AED',
+    id: '2021',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2023/01/Range-Rover-Vogue-2023-Rental-Dubai.png',
+    title: 'Range Rover Vogue 2023',
+    description: 'Deposit: 2000 AED',
+    id: '2023',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png',
+    title: 'Mercedes G63',
+    description: 'Deposit: 2000 AED',
+    id: '2022',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png',
+    title: 'Rolls Royce Cullinan',
+    description: 'Deposit: 5000 AED',
+    id: '2022',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png',
+    title: 'Lamborghini Urus',
+    description: 'Deposit: 5000 AED',
+    id: '2021',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2023/01/Range-Rover-Vogue-2023-Rental-Dubai.png',
+    title: 'Range Rover Vogue 2023',
+    description: 'Deposit: 2000 AED',
+    id: '2023',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png',
+    title: 'Mercedes G63',
+    description: 'Deposit: 2000 AED',
+    id: '2022',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png',
+    title: 'Rolls Royce Cullinan',
+    description: 'Deposit: 5000 AED',
+    id: '2022',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png',
+    title: 'Lamborghini Urus',
+    description: 'Deposit: 5000 AED',
+    id: '2021',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2023/01/Range-Rover-Vogue-2023-Rental-Dubai.png',
+    title: 'Range Rover Vogue 2023',
+    description: 'Deposit: 2000 AED',
+    id: '2023',
+  },
+  {
+    imageUrl:
+      'https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png',
+    title: 'Mercedes G63',
+    description: 'Deposit: 2000 AED',
+    id: '2022',
   },
 ];
 
