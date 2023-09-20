@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Box,
   Button,
@@ -7,32 +7,29 @@ import {
   CardContent,
   CardMedia,
   Grid,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Footer from '../footer';
-import Header from '../header';
-import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-import './../../index.css';
-import { homeContentDummyData } from '../../utils/constant';
+} from "@mui/material";
+import Footer from "../footer";
+import Header from "../header";
+import Typography from "@mui/material/Typography";
+import "./../../index.css";
+import { homeContentDummyData } from "../../utils/constant";
 
 export default function Home() {
   return (
     <Box
       sx={{
-        display: 'flex',
-        minHeight: '100vh',
-        flexDirection: 'column',
+        display: "flex",
+        minHeight: "100vh",
+        flexDirection: "column",
       }}
     >
       <Header />
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: "100%" }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {homeContentDummyData.map((object) => (
-            <Grid mt={3} item xs={2}>
-              <Card sx={{ maxWidth: 400, borderRadius: 1 }}>
-                <Box display={'flex'} justifyContent="center" py={1.5}>
+            <Grid mt={3} item sm={6} xs={12} md={3} lg={2}>
+              <Card sx={{ maxWidth: 400, borderRadius: 1, minWidth: 100 }}>
+                <Box display={"flex"} justifyContent="center" py={1.5}>
                   <CardMedia
                     sx={{
                       height: 80,
@@ -42,7 +39,6 @@ export default function Home() {
                     title="green iguana"
                   />
                 </Box>
-
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {object.title}
