@@ -13,6 +13,9 @@ import Addbankcard from "../pages/bank-card/add-bankcard";
 import PrivacyPolicy from "../pages/privacy";
 import Riskagreement from "../pages/riskagreement";
 import ContectUs from "../pages/contect-us";
+import WalletRecharge from "../pages/wallet/walletRecharge";
+import WalletTransactions from "../pages/wallet/walletTransactions";
+import WalletWithdrawal from "../pages/wallet/walletWithdrawal";
 
 const routes = (isLoggedIn) => {
   return [
@@ -55,6 +58,18 @@ const routes = (isLoggedIn) => {
     {
       path: "/contect-us", // protected routes
       element: <ContectUs />,
+    },
+    {
+      path: "/wallet-recharge", // protected routes
+      element: <WalletRecharge />,
+    },
+    {
+      path: "/wallet-withdrawal", // protected routes
+      element: <WalletWithdrawal />,
+    },
+    {
+      path: "/wallet-transactions", // protected routes
+      element: <WalletTransactions />,
     },
     {
       // public routes

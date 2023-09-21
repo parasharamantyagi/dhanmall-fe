@@ -47,20 +47,29 @@ const Sidebar = (props) => {
         <Box flexDirection="column" display="flex">
           <Typography
             my={2}
-            onClick={() => navigate("/privacy-policy")}
+            onClick={() => navigate("/wallet-recharge")}
             variant="p4"
             pl={6}
           >
-            Add Recharge
+            Recharge
           </Typography>
           <Divider />
           <Typography
             my={2}
-            onClick={() => navigate("/privacy-policy")}
+            onClick={() => navigate("/wallet-withdrawal")}
             variant="p4"
             pl={6}
           >
-            Withdraw
+            Withdrawal
+          </Typography>
+          <Divider />
+          <Typography
+            my={2}
+            onClick={() => navigate("/wallet-transactions")}
+            variant="p4"
+            pl={6}
+          >
+            Transactions
           </Typography>
         </Box>
         <Divider />
