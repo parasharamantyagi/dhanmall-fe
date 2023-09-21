@@ -20,6 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
+
 export default function WalletWithdrawal() {
   const renderSubtitle = (text) => {
     return (
@@ -84,17 +85,16 @@ export default function WalletWithdrawal() {
                         Payout with Bankcard{" "}
                       </Typography>
                     </CardActions>
-
                     <Grid item xs={12}>
                       <TextField
                         margin="normal"
                         select
                         required
                         fullWidth
-                        id="recharge_amount"
+                        id="bank_card"
                         label="Select bank card"
-                        name="recharge_amount"
-                        autoComplete="recharge_amount"
+                        name="bank_card"
+                        autoComplete="bank_card"
                         autoFocus
                       >
                         {[{ value: 1, label: "Axis" }].map((option) => (

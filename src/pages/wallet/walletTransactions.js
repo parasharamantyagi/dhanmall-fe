@@ -38,15 +38,29 @@ export default function WalletTransactions() {
           >
             <Grid item xs={12}>
               <Item>
-                <Typography sx={{ textAlign: "left" }} mt={1} variant="h4">
-                  ₹ 10.00
-                </Typography>
-                <Typography sx={{ textAlign: "left" }} mt={1} variant="h6">
-                  Place Order
-                </Typography>
-                <Typography sx={{ textAlign: "left" }} variant="h6">
-                  2023-09-11 16:42
-                </Typography>
+                <Grid container justifyContent="space-between">
+                  <Grid item xs={0}>
+                    <Typography variant="p4" style={{ flex: 12 }}>₹ 10.00</Typography>
+                    <br />
+                    <Typography variant="p4">Place Order</Typography>
+                    <br />
+                    <Typography variant="p4">2023-09-11 16:42</Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    xs={7}
+                    alignItems="flex-end"
+                    direction="column"
+                  >
+                    <Grid item>
+                      <Typography variant="p4">₹ 16.49</Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="p4">₹ 6.49</Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Item>
             </Grid>
           </Grid>
