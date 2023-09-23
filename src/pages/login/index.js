@@ -14,6 +14,17 @@ import Container from "@mui/material/Container";
 import { loginService } from "./action";
 import { useNavigate } from "react-router-dom";
 
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Version © '}
+      0.0.1
+      ({new Date().getFullYear()})
+      {'.'}
+    </Typography>
+  );
+}
+
 export default function SignIn() {
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
@@ -100,6 +111,7 @@ export default function SignIn() {
           </Grid>
         </Box>
       </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
 }
