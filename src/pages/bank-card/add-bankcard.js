@@ -24,8 +24,8 @@ export default function Addbankcard() {
               fullWidth
               id="email"
               label="Actual Name"
-              name="full_name"
-              autoComplete="email"
+              name="actual_name"
+              autoComplete="Name"
               autoFocus
             />
             <TextField
@@ -34,7 +34,7 @@ export default function Addbankcard() {
               fullWidth
               id="email"
               label="IFSC Code"
-              name="email"
+              name="ifsc_code"
               autoComplete="email"
               autoFocus
             />
@@ -44,7 +44,7 @@ export default function Addbankcard() {
               fullWidth
               id="email"
               label="Bank name"
-              name="email"
+              name="bank_name"
               autoComplete="email"
               autoFocus
             />
@@ -54,7 +54,7 @@ export default function Addbankcard() {
               fullWidth
               id="email"
               label="Bank account"
-              name="email"
+              name="bank_account"
               autoComplete="email"
               autoFocus
             />
@@ -64,7 +64,7 @@ export default function Addbankcard() {
               fullWidth
               id="email"
               label="State"
-              name="email"
+              name="state"
               autoComplete="email"
               autoFocus
             />
@@ -74,7 +74,7 @@ export default function Addbankcard() {
               fullWidth
               id="email"
               label="City"
-              name="email"
+              name="city"
               autoComplete="email"
               autoFocus
             />
@@ -84,7 +84,7 @@ export default function Addbankcard() {
               fullWidth
               id="email"
               label="Address"
-              name="email"
+              name="address"
               autoComplete="email"
               autoFocus
             />
@@ -94,7 +94,7 @@ export default function Addbankcard() {
               fullWidth
               id="email"
               label="Mobile number"
-              name="email"
+              name="mobile_number"
               autoComplete="email"
               autoFocus
             />
@@ -113,18 +113,8 @@ export default function Addbankcard() {
               required
               fullWidth
               id="email"
-              label="Account phone number"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
               label="Code"
-              name="email"
+              name="verification_code"
               autoComplete="email"
               autoFocus
             />
@@ -134,7 +124,7 @@ export default function Addbankcard() {
               variant="contained"
               sx={{ mt: 3, mb: 7 }}
             >
-              Sign In
+              Continue
             </Button>
           </Grid>
         </CardContent>
