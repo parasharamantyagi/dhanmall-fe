@@ -12,6 +12,7 @@ import CardHeader from "../header/header-card";
 import Paper from "@mui/material/Paper";
 import DoneIcon from "@mui/icons-material/Done";
 import Footer from "../footer";
+import { validObjectWithParameterKeys } from "../../utils/common-utils";
 
 const buttonAmmount = [
   { id: 1, ammount: 100 },
@@ -30,6 +31,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 export default function WalletRecharge() {
+  const [objVal, setObjVal] = React.useState({});
   const renderSubtitle = (text) => {
     return (
       <Typography mt={2} variant="p4">
@@ -37,6 +39,13 @@ export default function WalletRecharge() {
       </Typography>
     );
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log(data.get("recharge_amount"));
+  };
+
   return (
     <Box
       sx={{
@@ -47,7 +56,7 @@ export default function WalletRecharge() {
     >
       <CardHeader title="Recharge" />
       <Box p={1} flexDirection="column" display="flex">
-        <Box sx={{ width: "100%" }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
           <Grid
             container
             rowSpacing={1}
@@ -68,6 +77,11 @@ export default function WalletRecharge() {
                     label="Select recharge amount"
                     name="recharge_amount"
                     autoComplete="recharge_amount"
+                    value={
+                      validObjectWithParameterKeys(objVal, ["recharge_amount"])
+                        ? objVal.recharge_amount
+                        : ""
+                    }
                     autoFocus
                   />
                 </Grid>
@@ -82,6 +96,9 @@ export default function WalletRecharge() {
                       <Button
                         variant="contained"
                         sx={{ width: "50%", py: 1, mt: 1, mb: 4 }}
+                        onClick={() => {
+                          setObjVal({ recharge_amount: object.ammount });
+                        }}
                       >
                         ₹ {object.ammount}
                       </Button>
@@ -132,6 +149,7 @@ export default function WalletRecharge() {
                   </Grid>
                   <Grid item xs={12}>
                     <Button
+                      type="submit"
                       variant="contained"
                       sx={{ width: "50%", py: 1, mt: 1, mb: 4 }}
                     >
