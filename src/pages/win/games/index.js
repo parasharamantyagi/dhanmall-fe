@@ -79,7 +79,7 @@ export default function GamesTable() {
                       key={row.code}
                     >
                       <TableCell variant="body2" align="left">
-                        {row.period}
+                        {row.date+row.period}
                       </TableCell>
                       <TableCell variant="body2" align="left">
                         {row.price}
