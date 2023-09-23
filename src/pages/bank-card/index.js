@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Footer from "../footer";
 import BankCardList from "./list";
 import CardHeader from "../header/header-card";
-import useBankCardApi from "../../hooks/useBankCardApi";
+import { useBankCardApi } from "./hooke";
 import { Skeleton } from "@mui/material";
 
 export default function BankCard() {

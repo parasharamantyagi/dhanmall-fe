@@ -43,7 +43,7 @@ export default function WalletRecharge() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data.get("recharge_amount"));
+    console.log(data);
   };
 
   return (

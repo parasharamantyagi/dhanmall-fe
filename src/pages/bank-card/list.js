@@ -11,11 +11,7 @@ import IconWithText from "../../components/icon-with-text";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
 
 export default function BankCardList({ bankCardData }) {
-  // console.log("bankCardData 1222222222222");
 
-  // if (strictValidObjectWithKeys(bankCardData)) {
-  //   console.log(bankCardData.bankCardList);
-  // }
 
   return (
     <Card sx={{ minWidth: 275 }}>

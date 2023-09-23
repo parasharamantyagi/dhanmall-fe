@@ -42,10 +42,8 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
     const currentTimestamp = Date.now();
     // Convert it to seconds
     const currentSeconds = Math.floor(currentTimestamp / 1000);
-    console.log(currentSeconds, "currentSeconds");
     // Calculate the current second within the 180-second cycle
     const secondInCycle = currentSeconds % 180;
-    console.log(secondInCycle, "secondInCycle", 180 - secondInCycle);
 
     return 180 - secondInCycle;
   };

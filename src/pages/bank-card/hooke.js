@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { apiCall } from "../config/api/client";
-import { messages } from "../language/en";
+import { apiCall } from "./../../config/api/client";
+import { messages } from "./../../language/en";
 
-function useBankCardApi(url, method, obj) {
+export function useBankCardApi(url, method, obj) {
   const [bankCardList, setBankCard] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,4 +41,25 @@ function useBankCardApi(url, method, obj) {
   return { bankCardList, loading, error };
 }
 
-export default useBankCardApi;
+export const saveBankCardApi = async (Object) => {
+  try {
+    const res = await apiCall("POST", "/bank-card", Object);
+    if (res.status === 1) {
+      return {
+        message: "success",
+        success: true,
+      };
+    } else {
+      return {
+        message: res.message,
+        success: false,
+      };
+    }
+  } catch (error) {
+    return {
+      data: error.response,
+      message: messages.DEFAULT_ERROR_MESSAGE,
+      success: false,
+    };
+  }
+};

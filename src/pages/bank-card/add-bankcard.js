@@ -4,10 +4,32 @@ import Footer from "../footer";
 import BankCardHeader from "../header/header-card";
 import TextField from "@mui/material/TextField";
 import { Button, Card, CardContent, Grid } from "@mui/material";
+import { saveBankCardApi } from "./hooke";
 
 export default function Addbankcard() {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let obj = {
+      actual_name: data.get("actual_name"),
+      ifsc_code: data.get("ifsc_code"),
+      bank_name: data.get("bank_name"),
+      bank_account: data.get("bank_account"),
+      state: data.get("state"),
+      city: data.get("city"),
+      address: data.get("address"),
+      mobile_number: data.get("mobile_number"),
+      email: data.get("email"),
+      verification_code: data.get("verification_code"),
+    };
+    let result = await saveBankCardApi(obj);
+    console.log(result);
+  };
+
   return (
     <Box
+      component="form"
+      onSubmit={handleSubmit}
       sx={{
         display: "flex",
         minHeight: "100vh",
