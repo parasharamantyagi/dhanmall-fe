@@ -126,6 +126,7 @@ const homeContentDummyData = [
   },
 ];
 
+
 const capability_roles = [
   {
     title: "Trainee",
