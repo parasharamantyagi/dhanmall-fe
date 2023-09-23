@@ -8,28 +8,37 @@ import Typography from "@mui/material/Typography";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import AddIcon from "@mui/icons-material/Add";
 import IconWithText from "../../components/icon-with-text";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
 
-export default function BankCardList() {
+export default function BankCardList({ bankCardData }) {
+  // console.log("bankCardData 1222222222222");
+
+  // if (strictValidObjectWithKeys(bankCardData)) {
+  //   console.log(bankCardData.bankCardList);
+  // }
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <CreditCardIcon />
-              <Typography variant="body2" gutterBottom>
-                Aman Tyagi
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                ID: 100054396305
-              </Typography>
-            </Grid>
-            {/* <Grid item>
+          {strictValidObjectWithKeys(bankCardData) && bankCardData.bankCardList.map((object) => (
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                <CreditCardIcon />
+                <Typography variant="body2" gutterBottom>
+                  {object.actual_name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  ID: {object.bank_account}
+                </Typography>
+              </Grid>
+              {/* <Grid item>
               <Typography sx={{ cursor: 'pointer' }} variant="body2">
                 Remove
               </Typography>
             </Grid> */}
-          </Grid>
+            </Grid>
+          ))}
           <Grid item>
             <Typography variant="subtitle1" component="div">
               <IconWithText
