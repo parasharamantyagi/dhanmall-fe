@@ -3,8 +3,10 @@ import Box from "@mui/material/Box";
 import Footer from "../footer";
 import Header from "../header";
 import FullWidthTabs from "../../components/promotion-tabs";
+import useMyProfileApi from "../../hooks/useMyProfileApi";
 
 export default function Promotion() {
+  const { myProfileData } = useMyProfileApi("/profile", "GET");
   return (
     <Box
       sx={{
@@ -14,7 +16,7 @@ export default function Promotion() {
       }}
     >
       <Header />
-      <FullWidthTabs />
+      <FullWidthTabs myProfile={myProfileData} />
       <Footer />
     </Box>
   );

@@ -1,15 +1,18 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import PromotionLavel1 from '../pages/promotion/lavel_1';
-import { defaultCurrencyFormat } from '../utils/common-utils';
-import { Button, TextField } from '@mui/material';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import PromotionLavel1 from "../pages/promotion/lavel_1";
+import {
+  defaultCurrencyFormat,
+  strictValidObjectWithKeys,
+} from "../utils/common-utils";
+import { Button, TextField } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,41 +46,40 @@ const StyledTabs = styled((props) => (
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
   />
 ))({
-  '& .MuiTabs-indicator': {
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+  "& .MuiTabs-indicator": {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "transparent",
   },
-  '& .MuiTabs-indicatorSpan': {
+  "& .MuiTabs-indicatorSpan": {
     maxWidth: 40,
-    width: '100%',
-    backgroundColor: '#fff',
+    width: "100%",
+    backgroundColor: "#fff",
   },
 });
 
 const StyledTab = styled((props) => <Tab {...props} />)(({ theme }) => ({
-  textTransform: 'none',
+  textTransform: "none",
   fontWeight: theme.typography.fontWeightRegular,
   fontSize: theme.typography.pxToRem(16),
-  color: 'rgba(255, 255, 255)',
-  '&.Mui-selected': {
-    color: '#fff',
+  color: "rgba(255, 255, 255)",
+  "&.Mui-selected": {
+    color: "#fff",
   },
-  '&.Mui-focusVisible': {
-    backgroundColor: 'rgba(100, 95, 228, 0.32)',
+  "&.Mui-focusVisible": {
+    backgroundColor: "rgba(100, 95, 228, 0.32)",
   },
 }));
 
 function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
 
-export default function FullWidthTabs() {
+export default function FullWidthTabs({ myProfile }) {
   const theme = useTheme();
-
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -85,16 +87,19 @@ export default function FullWidthTabs() {
   };
 
   const copyToClipboard = () => {
-    const copyText = 'https://luckydhanmall.com/#/register?r_code=EFFEECFC';
+    const copyText = "https://luckydhanmall.com/#/register?r_code=EFFEECFC";
     navigator.clipboard.writeText(copyText).then(() => {
-      alert('copied to clipboard');
+      alert("copied to clipboard");
     });
   };
 
   return (
-    <Box sx={{ bgcolor: 'background.paper', width: 'auto' }}>
+    <Box sx={{ bgcolor: "background.paper", width: "auto" }}>
       <Typography variant="h2" align="center" margin={3} gutterBottom>
-        Bonus: ₹ 34.2
+        Bonus: ₹{" "}
+        {strictValidObjectWithKeys(myProfile)
+          ? myProfile.myProfile.commission
+          : 0}
       </Typography>
       <Box py={3} display="flex" justifyContent="space-evenly">
         <Box display="flex" flexDirection="column" alignItems="center">
@@ -107,7 +112,11 @@ export default function FullWidthTabs() {
           <Typography gutterBottom variant="h3">
             Contribution
           </Typography>
-          <Typography variant="p4">{defaultCurrencyFormat(30)}</Typography>
+          <Typography variant="p4">
+            {strictValidObjectWithKeys(myProfile)
+              ? defaultCurrencyFormat(myProfile.myProfile.contribution)
+              : defaultCurrencyFormat(0)}
+          </Typography>
         </Box>
       </Box>
       <Box py={3}>
@@ -116,7 +125,11 @@ export default function FullWidthTabs() {
             placeholder="My Promotion Code"
             label="My Promotion Code"
             variant="outlined"
-            value="EFFEECFC"
+            value={
+              strictValidObjectWithKeys(myProfile)
+                ? myProfile.myProfile.promotion_code
+                : ""
+            }
             InputProps={{
               readOnly: true,
             }}
@@ -125,7 +138,11 @@ export default function FullWidthTabs() {
             placeholder="My Promotion Link"
             label="My Promotion Link"
             variant="outlined"
-            value="https://luckydhanmall.com/#/register?r_code=EFFEECFC"
+            value={
+              strictValidObjectWithKeys(myProfile)
+                ? myProfile.myProfile.promotion_url
+                : ""
+            }
             sx={{ mt: 2 }}
             multiline
             rows={3}
@@ -144,7 +161,7 @@ export default function FullWidthTabs() {
           Copy Link
         </Button>
       </Box>
-      <AppBar sx={{ background: '#000' }} position="static">
+      <AppBar sx={{ background: "#000" }} position="static">
         <StyledTabs
           value={value}
           onChange={handleChange}
