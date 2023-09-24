@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { registerService, verifyOtpService } from "./action";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [error, setError] = React.useState("");
@@ -25,7 +26,6 @@ export default function SignUp() {
         mobile: objectForm.mobile,
         type: "registration",
       });
-      console.log(response);
       if (!response.success) {
         setError(response.message);
       } else {
@@ -46,6 +46,7 @@ export default function SignUp() {
     };
     let response = await registerService(object);
     if (response.success) {
+      toast.success(response.message);
       navigate("/");
     } else {
       setError(response.message);

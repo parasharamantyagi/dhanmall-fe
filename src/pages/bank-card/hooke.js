@@ -46,7 +46,7 @@ export const saveBankCardApi = async (Object) => {
     const res = await apiCall("POST", "/bank-card", Object);
     if (res.status === 1) {
       return {
-        message: "success",
+        message: res.message,
         success: true,
       };
     } else {

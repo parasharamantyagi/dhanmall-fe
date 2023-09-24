@@ -5,8 +5,11 @@ import BankCardHeader from "../header/header-card";
 import TextField from "@mui/material/TextField";
 import { Button, Card, CardContent, Grid } from "@mui/material";
 import { saveBankCardApi } from "./hooke";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function Addbankcard() {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -23,7 +26,10 @@ export default function Addbankcard() {
       verification_code: data.get("verification_code"),
     };
     let result = await saveBankCardApi(obj);
-    console.log(result);
+    if (result.success) {
+      toast.success(result.message);
+      navigate("/bank-card");
+    }
   };
 
   return (

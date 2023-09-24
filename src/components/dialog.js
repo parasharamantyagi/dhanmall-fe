@@ -26,7 +26,6 @@ const AlertDialog = ({ open, setOpen = () => {}, label }) => {
     setOpen(false);
   };
   const onSubmit = () => {
-    console.log("submitted action", state);
     setOpen(false);
   };
 
