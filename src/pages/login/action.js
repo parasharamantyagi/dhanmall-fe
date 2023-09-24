@@ -11,7 +11,7 @@ export const loginService = async (data) => {
       });
       return {
         data: res,
-        message: "",
+        message: res.message,
         success: true,
       };
     } else {

@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { loginService } from "./action";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -40,6 +41,7 @@ export default function SignIn() {
       password: data.get("password"),
     });
     if (response.success) {
+      toast.success(response.message);
       navigate("/");
     } else {
       setError(response.message);

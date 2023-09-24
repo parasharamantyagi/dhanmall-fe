@@ -13,6 +13,8 @@ import Paper from "@mui/material/Paper";
 import DoneIcon from "@mui/icons-material/Done";
 import Footer from "../footer";
 import { validObjectWithParameterKeys } from "../../utils/common-utils";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const buttonAmmount = [
   { id: 1, ammount: 100 },
@@ -43,6 +45,7 @@ export default function WalletRecharge() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    toast.success("Recharge add successfully");
     console.log(data);
   };
 

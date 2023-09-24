@@ -1,32 +1,33 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Routes from './routes';
-import { BrowserRouter } from 'react-router-dom';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Routes from "./routes";
+import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0884c7',
+      main: "#0884c7",
     },
     secondary: {
-      light: '#0066ff',
-      main: '#F3F3F3',
-      contrastText: '#ffcc00',
-      dark:'#000'
+      light: "#0066ff",
+      main: "#F3F3F3",
+      contrastText: "#ffcc00",
+      dark: "#000",
     },
     error: {
-      main: '#C8220E',
-      contrastText: '#fff',
+      main: "#C8220E",
+      contrastText: "#fff",
     },
     success: {
-      main: '#4caf50',
-      contrastText: '#fff',
+      main: "#4caf50",
+      contrastText: "#fff",
     },
     info: {
-      main: '#ffcc00',
-      contrastText: '#fff',
+      main: "#ffcc00",
+      contrastText: "#fff",
     },
     purple: {
-      main: '#9c27b0',
-      contrastText: '#fff',
+      main: "#9c27b0",
+      contrastText: "#fff",
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
@@ -37,144 +38,144 @@ const theme = createTheme({
     body1: {
       fontSize: 14,
       fontFamily: '"Helvetica Neue"',
-      color: '#000',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      color: "#000",
+      fontStyle: "normal",
+      fontWeight: "normal",
     },
     body2: {
       fontSize: 16,
       fontFamily: '"Helvetica Neue"',
-      color: '#000',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      color: "#000",
+      fontStyle: "normal",
+      fontWeight: "normal",
     },
     body3: {
       fontSize: 14,
       fontFamily: '"Helvetica Neue"',
-      color: '#000',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      color: "#000",
+      fontStyle: "normal",
+      fontWeight: "bold",
     },
     body4: {
       fontSize: 16,
       fontFamily: '"Helvetica Neue"',
-      color: '#000',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      color: "#000",
+      fontStyle: "normal",
+      fontWeight: "normal",
     },
     subtitle1: {
       fontSize: 16,
       fontFamily: '"Helvetica Neue"',
-      color: '#1C2A39',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      color: "#1C2A39",
+      fontStyle: "normal",
+      fontWeight: "normal",
     },
     h1: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontStyle: "normal",
+      fontWeight: "bold",
       fontSize: 24,
     },
     h2: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontStyle: "normal",
+      fontWeight: "bold",
       fontSize: 20,
     },
     h3: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontStyle: "normal",
+      fontWeight: "bold",
       fontSize: 18,
     },
     h4: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontStyle: "normal",
+      fontWeight: "bold",
       fontSize: 16,
-      lineHeight: '20px',
+      lineHeight: "20px",
     },
     h5: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontStyle: "normal",
+      fontWeight: "bold",
       fontSize: 14,
     },
     h6: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontStyle: "normal",
+      fontWeight: "bold",
       fontSize: 12,
     },
 
     p1: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      fontStyle: "normal",
+      fontWeight: "normal",
       fontSize: 24,
     },
     p2: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      fontStyle: "normal",
+      fontWeight: "normal",
       fontSize: 20,
     },
     p3: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      fontStyle: "normal",
+      fontWeight: "normal",
       fontSize: 18,
     },
     p4: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      fontStyle: "normal",
+      fontWeight: "normal",
       fontSize: 16,
-      lineHeight: '20px',
+      lineHeight: "20px",
     },
     p5: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      fontStyle: "normal",
+      fontWeight: "normal",
       fontSize: 14,
     },
     p6: {
-      color: '#1C2A39',
+      color: "#1C2A39",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'normal',
+      fontStyle: "normal",
+      fontWeight: "normal",
       fontSize: 12,
     },
     headerTitle: {
-      color: '#5C6878',
+      color: "#5C6878",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontStyle: "normal",
+      fontWeight: "bold",
       fontSize: 18,
     },
     headerMainTitle: {
-      color: '#5C6878',
+      color: "#5C6878",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
+      fontStyle: "normal",
+      fontWeight: "bold",
       fontSize: 20,
     },
     button: {
-      textTransform: 'capitalize',
+      textTransform: "capitalize",
       fontFamily: '"Helvetica Neue"',
-      fontStyle: 'normal',
-      fontWeight: '500',
+      fontStyle: "normal",
+      fontWeight: "500",
     },
   },
 });
@@ -184,6 +185,18 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <Routes />
+          <ToastContainer
+            position="top-right"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </ThemeProvider>
       </BrowserRouter>
     </div>
