@@ -4,7 +4,7 @@ import IconWithText from "../../components/icon-with-text";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 
-export default function CardHeader({ title }) {
+export default function CardHeader({ pageNo, title }) {
   const navigate = useNavigate();
   return (
     <Paper
@@ -17,12 +17,15 @@ export default function CardHeader({ title }) {
       }}
     >
       <Box display="flex" alignItems="center">
-        <IconWithText
-          icon={<ArrowBackIcon sx={{ color: "#fff" }} fontSize="small" />}
-          onClick={() => {
-            navigate(-1);
-          }}
-        />
+        {!pageNo && (
+          <IconWithText
+            icon={<ArrowBackIcon sx={{ color: "#fff" }} fontSize="small" />}
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
+        )}
+
         <Typography color="white" variant="h5">
           {title}
         </Typography>

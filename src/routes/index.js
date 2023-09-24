@@ -16,12 +16,17 @@ import ContectUs from "../pages/contect-us";
 import WalletRecharge from "../pages/wallet/walletRecharge";
 import WalletTransactions from "../pages/wallet/walletTransactions";
 import WalletWithdrawal from "../pages/wallet/walletWithdrawal";
+import ProductDetail from "../pages/home/details";
 
 const routes = (isLoggedIn) => {
   return [
     {
       path: "/", // protected routes
       element: isLoggedIn ? <Home /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/detail/:productId", // protected routes
+      element: isLoggedIn ? <ProductDetail /> : <Navigate to="/login" />,
     },
     {
       path: "/mine", // protected routes

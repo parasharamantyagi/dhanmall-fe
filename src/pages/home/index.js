@@ -9,12 +9,14 @@ import {
   Grid,
 } from "@mui/material";
 import Footer from "../footer";
-import Header from "../header";
 import Typography from "@mui/material/Typography";
 import "./../../index.css";
 import { homeContentDummyData } from "../../utils/constant";
+import CardHeader from "../header/header-card";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -23,7 +25,7 @@ export default function Home() {
         flexDirection: "column",
       }}
     >
-      <Header />
+      <CardHeader pageNo={true} title="Welcome" />
       <Box sx={{ width: "100%" }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {homeContentDummyData.map((object) => (
@@ -49,9 +51,15 @@ export default function Home() {
                 </CardContent>
                 <CardActions>
                   <Button variant="contained" size="small">
-                    Share
+                    Order
                   </Button>
-                  <Button variant="contained" size="small">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => {
+                      navigate('/detail/'+object.link);
+                    }}
+                  >
                     Learn More
                   </Button>
                 </CardActions>
