@@ -44,11 +44,13 @@ const Profile = (props) => {
         }}
       >
         <Box sx={{ backgroundColor: "#000", p: 2, py: 3 }}>
-          <AvatarWithName name="Bharat Chhabra" />
+          <AvatarWithName name={strictValidObjectWithKeys(myProfileData)
+              ? myProfileData.myProfile.nickname
+              : "N/A"} />
           <Typography gutterBottom color="secondary">
             Mobile Number :{" "}
             {strictValidObjectWithKeys(myProfileData)
-              ? myProfileData.myProfile.nickname
+              ? myProfileData.myProfile.mobile
               : "N/A"}
           </Typography>
           <Typography gutterBottom color="secondary">
