@@ -11,11 +11,45 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { registerService, verifyOtpService } from "./action";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const [error, setError] = React.useState("");
+  const [objectForm, setObjectForm] = React.useState({});
+  const navigate = useNavigate();
+
+  const handleOtp = async () => {
+    if (objectForm.mobile) {
+      let response = await verifyOtpService({
+        mobile: objectForm.mobile,
+        type: "registration",
+      });
+      console.log(response);
+      if (!response.success) {
+        setError(response.message);
+      } else {
+        setError("");
+      }
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
+    const data = new FormData(event.currentTarget);
+    let object = {
+      nickname: data.get("nickname"),
+      mobile: data.get("mobile"),
+      password: data.get("password"),
+      verification_code: data.get("verification_code"),
+      recommendation_code: data.get("recommendation_code"),
+    };
+    let response = await registerService(object);
+    if (response.success) {
+      navigate("/");
+    } else {
+      setError(response.message);
+    }
   };
 
   return (
@@ -37,36 +71,41 @@ export default function SignUp() {
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete="given-name"
-                name="firstName"
-                required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="family-name"
+                id="nickname"
+                label="Nickname"
+                name="nickname"
+                autoComplete="name"
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ nickname: event.target.value },
+                  })
+                }
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="mobile"
+                label="Mobile number"
+                name="mobile"
+                autoComplete="mobile"
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ mobile: event.target.value },
+                  })
+                }
               />
+              {error && (
+                <Typography paragraph sx={{ color: "red" }}>
+                  {error}
+                </Typography>
+              )}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -77,6 +116,52 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ password: event.target.value },
+                  })
+                }
+              />
+            </Grid>
+            <Grid item xs={8}>
+              <TextField
+                required
+                fullWidth
+                name="verification_code"
+                label="Verification code"
+                id="verification_code"
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ verification_code: event.target.value },
+                  })
+                }
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Button
+                fullWidth
+                size="large"
+                variant="contained"
+                sx={{ mt: 0, mb: 0, height: "99%" }}
+                onClick={() => handleOtp()}
+              >
+                Verify Otp
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="recommendation_code"
+                label="Recommendation code"
+                id="recommendation_code"
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ recommendation_code: event.target.value },
+                  })
+                }
               />
             </Grid>
             <Grid item xs={12}>

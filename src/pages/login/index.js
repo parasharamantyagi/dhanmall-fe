@@ -16,11 +16,14 @@ import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Version © '}
-      0.0.1
-      ({new Date().getFullYear()})
-      {'.'}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Version © "}
+      0.0.1 ({new Date().getFullYear()}){"."}
     </Typography>
   );
 }
@@ -37,7 +40,7 @@ export default function SignIn() {
       password: data.get("password"),
     });
     if (response.success) {
-      navigate('/')
+      navigate("/");
     } else {
       setError(response.message);
     }
@@ -105,7 +108,7 @@ export default function SignIn() {
             </Grid>
             <Grid item>
               <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+                Sign Up
               </Link>
             </Grid>
           </Grid>
