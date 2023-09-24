@@ -125,7 +125,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
             </Typography>
           </Box>
           <Typography pt={2} variant="h1">
-            {gameNow.period}
+            {gameNow.date+gameNow.period}
           </Typography>
         </Box>
         <Box
