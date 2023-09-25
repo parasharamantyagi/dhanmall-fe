@@ -12,10 +12,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { registerService, verifyOtpService } from "./action";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function SignUp() {
+  const [searchParams] = useSearchParams();
   const [error, setError] = React.useState("");
   const [objectForm, setObjectForm] = React.useState({});
   const navigate = useNavigate();
@@ -157,6 +158,7 @@ export default function SignUp() {
                 name="recommendation_code"
                 label="Recommendation code"
                 id="recommendation_code"
+                value={searchParams.get("r_code")}
                 onChange={(event) =>
                   setObjectForm({
                     ...objectForm,
