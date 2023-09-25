@@ -24,7 +24,7 @@ const Sidebar = (props) => {
     }
   };
   return (
-    <Box display={"flex"} flexDirection="column">
+    <Box display={'flex'} flexDirection="column">
       <IconWithText
         icon={<ReceiptLongOutlinedIcon fontSize="large" />}
         text="Orders"
@@ -39,15 +39,15 @@ const Sidebar = (props) => {
         icon={<WalletIcon fontSize="large" />}
         text="Wallet"
         onClick={() => {
-          openCollapse("wallet");
+          openCollapse('wallet');
         }}
         collapse={true}
       />
-      <Collapse in={open === "wallet"} timeout="auto" unmountOnExit>
+      <Collapse in={open === 'wallet'} timeout="auto" unmountOnExit>
         <Box flexDirection="column" display="flex">
           <Typography
             my={2}
-            onClick={() => navigate("/wallet-recharge")}
+            onClick={() => navigate('/wallet-recharge')}
             variant="p4"
             pl={6}
           >
@@ -56,7 +56,7 @@ const Sidebar = (props) => {
           <Divider />
           <Typography
             my={2}
-            onClick={() => navigate("/wallet-withdrawal")}
+            onClick={() => navigate('/wallet-withdrawal')}
             variant="p4"
             pl={6}
           >
@@ -65,7 +65,7 @@ const Sidebar = (props) => {
           <Divider />
           <Typography
             my={2}
-            onClick={() => navigate("/wallet-transactions")}
+            onClick={() => navigate('/wallet-transactions')}
             variant="p4"
             pl={6}
           >
@@ -88,15 +88,16 @@ const Sidebar = (props) => {
         icon={<InfoIcon fontSize="large" />}
         text="About"
         onClick={() => {
-          openCollapse("about");
+          openCollapse('about');
         }}
         collapse={true}
       />
-      <Collapse in={open === "about"} timeout="auto" unmountOnExit>
+      <Collapse in={open === 'about'} timeout="auto" unmountOnExit>
         <Box flexDirection="column" display="flex">
           <Typography
             my={2}
-            onClick={() => navigate("/privacy-policy")}
+            onClick={() => navigate('/privacy-policy')}
+            sx={{ cursor: 'pointer' }}
             variant="p4"
             pl={6}
           >
@@ -105,18 +106,20 @@ const Sidebar = (props) => {
           <Divider />
           <Typography
             my={2}
-            onClick={() => navigate("/riskagreement")}
+            onClick={() => navigate('/riskagreement')}
             variant="p4"
             pl={6}
+            sx={{ cursor: 'pointer' }}
           >
             Risk Disclosure Agreement
           </Typography>
           <Divider />
           <Typography
             my={2}
-            onClick={() => navigate("/contect-us")}
+            onClick={() => navigate('/contect-us')}
             variant="p4"
             pl={6}
+            sx={{ cursor: 'pointer' }}
           >
             Contect Us
           </Typography>
