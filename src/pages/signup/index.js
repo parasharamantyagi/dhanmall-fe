@@ -14,6 +14,22 @@ import Container from "@mui/material/Container";
 import { registerService, verifyOtpService } from "./action";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Footer from "../footer";
+
+
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Version © "}
+      0.0.1 ({new Date().getFullYear()}){"."}
+    </Typography>
+  );
+}
 
 export default function SignUp() {
   const [searchParams] = useSearchParams();
@@ -191,6 +207,8 @@ export default function SignUp() {
           </Grid>
         </Box>
       </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+      <Footer />
     </Container>
   );
 }

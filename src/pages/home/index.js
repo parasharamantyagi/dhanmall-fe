@@ -26,16 +26,16 @@ export default function Home() {
       }}
     >
       <CardHeader pageNo={true} title="Welcome" />
-      <Box sx={{ width: "100%" }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <CardContent>
+        <Grid container spacing={2}>
           {homeContentDummyData.map((object) => (
-            <Grid mt={3} item sm={6} xs={12} md={3} lg={2}>
-              <Card sx={{ maxWidth: 400, borderRadius: 1, minWidth: 100 }}>
-                <Box display={"flex"} justifyContent="center" py={1.5}>
+            <Grid item xs={6}>
+              <Card sx={{ width: "100%", borderRadius: 1 }}>
+                <Box display={" flex"} justifyContent="center" py={1.5}>
                   <CardMedia
                     sx={{
-                      height: 80,
-                      width: 150,
+                      height: 170,
+                      width: 300,
                     }}
                     image={object.imageUrl}
                     title="green iguana"
@@ -51,13 +51,13 @@ export default function Home() {
                 </CardContent>
                 <CardActions>
                   <Button variant="contained" size="small">
-                    Order
+                    Make Bidd
                   </Button>
                   <Button
                     variant="contained"
                     size="small"
                     onClick={() => {
-                      navigate('/detail/'+object.link);
+                      navigate("/detail/" + object.link);
                     }}
                   >
                     Learn More
@@ -67,7 +67,7 @@ export default function Home() {
             </Grid>
           ))}
         </Grid>
-      </Box>
+      </CardContent>
       <Footer />
     </Box>
   );

@@ -21,36 +21,14 @@ import ProductDetail from "../pages/home/details";
 const routes = (isLoggedIn) => {
   return [
     {
-      path: "/", // protected routes
-      element: isLoggedIn ? <Home /> : <Navigate to="/login" />,
+      // public routes
+      path: "/login",
+      element: !isLoggedIn ? <SignIn /> : <Navigate to="/" />,
     },
     {
-      path: "/detail/:productId", // protected routes
-      element: isLoggedIn ? <ProductDetail /> : <Navigate to="/login" />,
-    },
-    {
-      path: "/mine", // protected routes
-      element: isLoggedIn ? <Profile /> : <Navigate to="/login" />,
-    },
-    {
-      path: "/win", // protected routes
-      element: isLoggedIn ? <Win /> : <Navigate to="/login" />,
-    },
-    {
-      path: "/orders", // protected routes
-      element: isLoggedIn ? <Orders /> : <Navigate to="/login" />,
-    },
-    {
-      path: "/bank-card", // protected routes
-      element: isLoggedIn ? <BankCard /> : <Navigate to="/login" />,
-    },
-    {
-      path: "/addbankcard", // protected routes
-      element: isLoggedIn ? <Addbankcard /> : <Navigate to="/login" />,
-    },
-    {
-      path: "/promotion", // protected routes
-      element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
+      // public routes
+      path: "/register",
+      element: !isLoggedIn ? <SignUp /> : <Navigate to="/" />,
     },
     {
       path: "/privacy-policy", // protected routes
@@ -77,14 +55,36 @@ const routes = (isLoggedIn) => {
       element: <WalletTransactions />,
     },
     {
-      // public routes
-      path: "/login",
-      element: !isLoggedIn ? <SignIn /> : <Navigate to="/" />,
+      path: "/", // protected routes
+      element: <Home />,
     },
     {
-      // public routes
-      path: "/register",
-      element: !isLoggedIn ? <SignUp /> : <Navigate to="/" />,
+      path: "/detail/:productId", // protected routes
+      element: <ProductDetail />,
+    },
+    {
+      path: "/mine", // protected routes
+      element: isLoggedIn ? <Profile /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/win", // protected routes
+      element: isLoggedIn ? <Win /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/orders", // protected routes
+      element: isLoggedIn ? <Orders /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/bank-card", // protected routes
+      element: isLoggedIn ? <BankCard /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/addbankcard", // protected routes
+      element: isLoggedIn ? <Addbankcard /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/promotion", // protected routes
+      element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
     },
     {
       // public routes

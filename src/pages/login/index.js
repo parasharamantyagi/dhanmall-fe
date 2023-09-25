@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { loginService } from "./action";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Footer from "../footer";
 
 function Copyright(props) {
   return (
@@ -117,6 +118,7 @@ export default function SignIn() {
         </Box>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
+      <Footer />
     </Container>
   );
 }
