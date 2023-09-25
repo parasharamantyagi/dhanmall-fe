@@ -34,8 +34,8 @@ export default function Home() {
                 <Box display={" flex"} justifyContent="center" py={1.5}>
                   <CardMedia
                     sx={{
-                      height: 170,
-                      width: 300,
+                      height: 80,
+                      width: 150,
                     }}
                     image={object.imageUrl}
                     title="green iguana"

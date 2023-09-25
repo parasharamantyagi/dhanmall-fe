@@ -15,7 +15,7 @@ import { registerService, verifyOtpService } from "./action";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../footer";
-
+import { strictValidObjectWithKeys, validValue } from "../../utils/common-utils";
 
 function Copyright(props) {
   return (
@@ -33,7 +33,11 @@ function Copyright(props) {
 
 export default function SignUp() {
   const [searchParams] = useSearchParams();
-  const [error, setError] = React.useState("");
+  const [error, setError] = React.useState({
+    mobile: "",
+    password: "",
+    verification_code: "",
+  });
   const [objectForm, setObjectForm] = React.useState({});
   const navigate = useNavigate();
 
@@ -44,8 +48,9 @@ export default function SignUp() {
         type: "registration",
       });
       if (!response.success) {
-        setError(response.message);
+        setError({ mobile: response.message });
       } else {
+        toast.success("Use 123456 now for Verification code");
         setError("");
       }
     }
@@ -54,6 +59,7 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    let errorValidation = {};
     let object = {
       nickname: data.get("nickname"),
       mobile: data.get("mobile"),
@@ -61,12 +67,29 @@ export default function SignUp() {
       verification_code: data.get("verification_code"),
       recommendation_code: data.get("recommendation_code"),
     };
+    if(!data.get("mobile")){
+      errorValidation.mobile = 'Please enter a valid mobile';
+    }
+    if(!data.get("verification_code")){
+      errorValidation.verification_code = 'Please enter verification code';
+    }
+    if(!data.get("password")){
+      errorValidation.password = 'Please enter password';
+    }
+    setError(errorValidation);
+    if(strictValidObjectWithKeys(errorValidation)){
+      return false;
+    }
     let response = await registerService(object);
     if (response.success) {
       toast.success(response.message);
       navigate("/");
     } else {
-      setError(response.message);
+      if (response.type === "verification_code") {
+        setError({ verification_code: response.message });
+      } else {
+        setError({ mobile: response.message });
+      }
     }
   };
 
@@ -87,7 +110,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -119,9 +142,9 @@ export default function SignUp() {
                   })
                 }
               />
-              {error && (
+              {error && error.mobile && (
                 <Typography paragraph sx={{ color: "red" }}>
-                  {error}
+                  {error.mobile}
                 </Typography>
               )}
             </Grid>
@@ -141,6 +164,11 @@ export default function SignUp() {
                   })
                 }
               />
+              {error && error.password && (
+                <Typography paragraph sx={{ color: "red" }}>
+                  {error.password}
+                </Typography>
+              )}
             </Grid>
             <Grid item xs={8}>
               <TextField
@@ -169,12 +197,21 @@ export default function SignUp() {
               </Button>
             </Grid>
             <Grid item xs={12}>
+              {error && error.verification_code && (
+                <Typography paragraph sx={{ color: "red" }}>
+                  {error.verification_code}
+                </Typography>
+              )}
               <TextField
                 fullWidth
                 name="recommendation_code"
                 label="Recommendation code"
                 id="recommendation_code"
-                value={searchParams.get("r_code")}
+                value={
+                  validValue(searchParams.get("r_code"))
+                    ? searchParams.get("r_code")
+                    : ""
+                }
                 onChange={(event) =>
                   setObjectForm({
                     ...objectForm,

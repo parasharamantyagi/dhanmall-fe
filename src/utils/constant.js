@@ -23,7 +23,7 @@ const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png",
-    title: "Lamborghini Urus",
+    title: "Super Lamborghini Urus",
     link: "10001",
     description: "Deposit: 5000 AED",
     id: "2021",
@@ -39,7 +39,7 @@ const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Mercedes G63",
+    title: "Super Mercedes G63",
     link: "10003",
     description: "Deposit: 2000 AED",
     id: "2022",
@@ -55,7 +55,7 @@ const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png",
-    title: "Lamborghini Urus",
+    title: "Super Lamborghini Urus",
     link: "10005",
     description: "Deposit: 5000 AED",
     id: "2021",
@@ -71,7 +71,7 @@ const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Mercedes G63",
+    title: "Super Mercedes G63",
     link: "10007",
     description: "Deposit: 2000 AED",
     id: "2022",
@@ -87,7 +87,7 @@ const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png",
-    title: "Lamborghini Urus",
+    title: "Super Lamborghini Urus",
     link: "10009",
     description: "Deposit: 5000 AED",
     id: "2021",
@@ -103,7 +103,7 @@ const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Mercedes G63",
+    title: "Super Mercedes G63",
     link: "10011",
     description: "Deposit: 2000 AED",
     id: "2022",
@@ -119,7 +119,7 @@ const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2021/05/Lamborghini-URUS-Rental-Dubai.png",
-    title: "Lamborghini Urus",
+    title: "Super Lamborghini Urus",
     link: "10013",
     description: "Deposit: 5000 AED",
     id: "2021",
@@ -135,7 +135,7 @@ const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Mercedes G63",
+    title: "Super Mercedes G63",
     link: "10015",
     description: "Deposit: 2000 AED",
     id: "2022",

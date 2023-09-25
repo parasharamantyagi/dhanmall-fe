@@ -4,7 +4,7 @@ import Footer from "../footer";
 import { Button, Paper, Typography } from "@mui/material";
 import AvatarWithName from "../../components/avatarname";
 import {
-  defaultCurrencyFormat,
+  defaultCurrencyFormat, validValue,
 } from "../../utils/common-utils";
 import { withStyles, createStyles } from "@mui/styles";
 import Sidebar from "./sidebar";
@@ -44,7 +44,7 @@ const Profile = (props) => {
         }}
       >
         <Box sx={{ backgroundColor: "#000", p: 2, py: 3 }}>
-          <AvatarWithName name={strictValidObjectWithKeys(myProfileData)
+          <AvatarWithName name={strictValidObjectWithKeys(myProfileData) && validValue(myProfileData.myProfile.nickname)
               ? myProfileData.myProfile.nickname
               : "N/A"} />
           <Typography gutterBottom color="secondary">
