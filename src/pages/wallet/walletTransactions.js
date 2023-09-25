@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import React from "react";
 import { styled } from "@mui/material/styles";
 import CardHeader from "../header/header-card";
@@ -23,49 +23,39 @@ export default function WalletTransactions() {
   return (
     <Box
       sx={{
-        display: "flex",
-        minHeight: "100vh",
-        flexDirection: "column",
+        display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column',
       }}
     >
       <CardHeader title="Transactions" />
       <Box p={1} flexDirection="column" display="flex">
-        <Box sx={{ width: "100%" }}>
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
-            <Grid item xs={12}>
-              <Item>
-                <Grid container justifyContent="space-between">
-                  <Grid item xs={0}>
-                    <Typography variant="p4" style={{ flex: 12 }}>₹ 10.00</Typography>
-                    <br />
-                    <Typography variant="p4">Place Order</Typography>
-                    <br />
-                    <Typography variant="p4">2023-09-11 16:42</Typography>
-                  </Grid>
-                  <Grid
-                    item
-                    container
-                    xs={7}
-                    alignItems="flex-end"
-                    direction="column"
-                  >
-                    <Grid item>
-                      <Typography variant="p4">₹ 16.49</Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="p4">₹ 6.49</Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Item>
-            </Grid>
-          </Grid>
-        </Box>
-
+        {[1, 2, 4].map((object) => (
+          <>
+            <ListItem
+              key={object.bank_account}
+              disableGutters
+              secondaryAction={
+                <>
+                  <ListItemText primary={'₹ 25.41'} secondary={'₹ 5.41'} />
+                </>
+              }
+            >
+              <ListItem>
+                <ListItemText
+                  primary={'₹ 10.00'}
+                  secondary={
+                    <>
+                      <Typography>Place Order</Typography>
+                      <Typography>2023-09-01 12:19</Typography>
+                    </>
+                  }
+                />
+              </ListItem>
+            </ListItem>
+            <Divider  />
+          </>
+        ))}
         {renderSubtitle()}
         {renderSubtitle()}
         {renderSubtitle()}
