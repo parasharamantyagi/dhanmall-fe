@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { createStyles, withStyles } from "@mui/styles";
 import AlertDialog from "../../../components/dialog";
+import { makeGameOrderApi } from "../actions";
+import { arrayOfObject, mergeObject } from "../../../utils/common-utils";
+import { contractAmmount } from "../../../utils/constant";
+import { toast } from "react-toastify";
 
 const styles = (theme) =>
   createStyles({
@@ -42,7 +46,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
     pick: "",
     contract_type: 1,
     type: 1,
-    background: '#000'
+    background: "#000",
   });
 
   const gameNowTime = () => {
@@ -96,7 +100,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
               pick: number,
               contract_type: 1,
               type: 2,
-              background: '#000'
+              background: "#000",
             });
             setOpen(true);
           }}
@@ -122,6 +126,33 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         </Button>
       </Grid>
     );
+  };
+
+  const onSubmit = async (state) => {
+    // contract_type=1&contract_number=8&type=2&pick=2&game_id=451444
+    let response = await makeGameOrderApi(
+      mergeObject(
+        {
+          game_id: object.game_id,
+          pick: object.pick,
+          type: object.type,
+        },
+        {
+          contract_type: arrayOfObject(
+            contractAmmount,
+            { ammount: state.selected },
+            "id"
+          ),
+          contract_number: state.value,
+        }
+      )
+    );
+    if (response.success) {
+      toast.success(response.message);
+      setOpen(false);
+    } else {
+      toast.error(response.message);
+    }
   };
   return (
     <Box py={2} px={2}>
@@ -167,7 +198,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
               pick: "green",
               contract_type: 1,
               type: 1,
-              background: '#4caf50'
+              background: "#4caf50",
             });
             setOpen(true);
           }}
@@ -186,7 +217,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
               pick: "purple",
               contract_type: 1,
               type: 1,
-              background: '#9c27b0'
+              background: "#9c27b0",
             });
             setOpen(true);
           }}
@@ -205,7 +236,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
               pick: "red",
               contract_type: 1,
               type: 1,
-              background: '#C8220E'
+              background: "#C8220E",
             });
             setOpen(true);
           }}
@@ -228,7 +259,12 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         {renderCount(8)}
         {renderCount(9)}
       </Grid>
-      <AlertDialog object={object} open={open} setOpen={setOpen} />
+      <AlertDialog
+        object={object}
+        open={open}
+        setOpen={setOpen}
+        onSubmit={(e) => onSubmit(e)}
+      />
     </Box>
   );
 };

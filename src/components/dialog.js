@@ -17,38 +17,19 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { arrayOfObject, mergeObject } from "../utils/common-utils";
-import { contractAmmount } from "../utils/constant";
-import { makeGameOrderApi } from "../pages/win/actions";
-import { toast } from "react-toastify";
 
-
-const AlertDialog = ({ open, setOpen = () => {}, object }) => {
+const AlertDialog = ({
+  open,
+  setOpen = () => {},
+  object,
+  onSubmit = () => {},
+}) => {
   const [state, setState] = React.useState({
     value: 1,
     selected: 10,
   });
   const handleClose = () => {
     setOpen(false);
-  };
-  const onSubmit = async () => {
-    // contract_type=1&contract_number=8&type=2&pick=2&game_id=451444
-    let response = await makeGameOrderApi(mergeObject(
-        {
-          game_id: object.game_id,
-          pick: object.pick,
-          type: object.type,
-        },
-        {
-          contract_type: arrayOfObject(contractAmmount, { ammount: state.selected }, "id" ),
-          contract_number: state.value,
-        }));
-    if(response.success){
-      toast.success(response.message);
-      setOpen(false);
-    }else{
-      toast.error(response.message);
-    }
   };
 
   return (
@@ -172,7 +153,7 @@ const AlertDialog = ({ open, setOpen = () => {}, object }) => {
 
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={onSubmit} autoFocus>
+        <Button onClick={() => onSubmit(state)} autoFocus>
           Submit
         </Button>
       </DialogActions>
