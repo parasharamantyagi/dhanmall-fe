@@ -17,6 +17,7 @@ import WalletRecharge from "../pages/wallet/walletRecharge";
 import WalletTransactions from "../pages/wallet/walletTransactions";
 import WalletWithdrawal from "../pages/wallet/walletWithdrawal";
 import ProductDetail from "../pages/home/details";
+import NotFound from "../pages/notfound";
 
 const routes = (isLoggedIn) => {
   return [
@@ -89,7 +90,7 @@ const routes = (isLoggedIn) => {
     {
       // public routes
       path: "*",
-      element: <div>NOT FOUND</div>,
+      element: <NotFound/>,
     },
   ];
 };

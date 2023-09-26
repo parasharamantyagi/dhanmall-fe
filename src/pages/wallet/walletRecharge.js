@@ -111,7 +111,7 @@ export default function WalletRecharge() {
                     <Grid item xs={4}>
                       <Button
                         variant="contained"
-                        sx={{ width: '50%', py: 1, mt: 1, mb: 1 }}
+                        sx={{ width: '80%', py: 1, mt: 1, mb: 1 }}
                         onClick={() => {
                           setObjVal({ recharge_amount: object.ammount });
                         }}
