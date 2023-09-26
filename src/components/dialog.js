@@ -17,7 +17,13 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-const AlertDialog = ({ open, setOpen = () => {}, label }) => {
+import { arrayOfObject, mergeObject } from "../utils/common-utils";
+import { contractAmmount } from "../utils/constant";
+import { makeGameOrderApi } from "../pages/win/actions";
+import { toast } from "react-toastify";
+
+
+const AlertDialog = ({ open, setOpen = () => {}, object }) => {
   const [state, setState] = React.useState({
     value: 1,
     selected: 10,
@@ -25,8 +31,24 @@ const AlertDialog = ({ open, setOpen = () => {}, label }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const onSubmit = () => {
-    setOpen(false);
+  const onSubmit = async () => {
+    // contract_type=1&contract_number=8&type=2&pick=2&game_id=451444
+    let response = await makeGameOrderApi(mergeObject(
+        {
+          game_id: object.game_id,
+          pick: object.pick,
+          type: object.type,
+        },
+        {
+          contract_type: arrayOfObject(contractAmmount, { ammount: state.selected }, "id" ),
+          contract_number: state.value,
+        }));
+    if(response.success){
+      toast.success(response.message);
+      setOpen(false);
+    }else{
+      toast.success(response.message);
+    }
   };
 
   return (
@@ -37,10 +59,10 @@ const AlertDialog = ({ open, setOpen = () => {}, label }) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <AppBar sx={{ background: "#000", position: "relative" }}>
+      <AppBar sx={{ background: object.background, position: "relative" }}>
         <Toolbar>
           <Typography variant="p2" color="#fff">
-            {label}
+            {object.label}
           </Typography>
         </Toolbar>
       </AppBar>

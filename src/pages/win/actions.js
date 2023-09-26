@@ -54,3 +54,28 @@ export const gameNowService = async () => {
     };
   }
 };
+
+export const makeGameOrderApi = async (object) => {
+  try {
+    const res = await apiCall("POST", "/order", object);
+    if (res.status === 1) {
+      return {
+        data: res.data,
+        message: res.message,
+        success: true,
+      };
+    } else {
+      return {
+        data: {},
+        message: res.message,
+        success: false,
+      };
+    }
+  } catch (error) {
+    return {
+      data: error.response,
+      message: messages.DEFAULT_ERROR_MESSAGE,
+      success: false,
+    };
+  }
+};

@@ -1,10 +1,5 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-useless-escape */
-import React, { useContext, useEffect, useCallback } from "react";
-import {
-  UNSAFE_NavigationContext as NavigationContext,
-  Link,
-} from "react-router-dom";
 import {
   VALID_URL,
   VALID_US_ZIP,
@@ -304,22 +299,6 @@ export const addKeyValuePairAsString = (
 };
 
 /**
- * Typecasts an immutable reducer object to its actual values
- * @param immutableObject: object
- */
-export const typeCastToKeyValueObject = (immutableObject) =>
-  (strictValidObject(immutableObject) &&
-    immutableObject instanceof Map &&
-    immutableObject.toJSON()) ||
-  (strictValidObject(immutableObject) &&
-    validObjectWithParameterKeys(immutableObject, ["size", "_root"]) &&
-    immutableObject.toJSON()) ||
-  (strictValidObject(immutableObject) && immutableObject) ||
-  (!strictValidObject(immutableObject) &&
-    validValue(immutableObject) &&
-    immutableObject);
-
-/**
  * Imports all files in a directory
  * @param importedObj: object
  */
@@ -365,6 +344,47 @@ export const isAuthenticated = (user) => {
     validObjectWithParameterKeys(user, ["role_id", "email_id", "role_name"])
   );
 };
+
+export const arrayOfObject = (array, Obj, getVal) => {
+  if (strictValidArrayWithLength(array) && strictValidObjectWithKeys(Obj)) {
+    let res = array.filter(function (item) {
+      for (let key in Obj) {
+        if (Array.isArray(Obj[key]) && Obj[key].length) {
+          return Obj[key].includes(item[key]) ? true : false;
+        } else {
+          if (item[key] === undefined || item[key] != Obj[key]) return false;
+        }
+      }
+      return true;
+    });
+    if (validValue(getVal) && getVal === Array) {
+      return res;
+    } else {
+      if (validValue(getVal) && getVal === true) {
+        return strictValidArrayWithLength(res);
+      } else {
+        if (
+          strictValidArrayWithLength(res) &&
+          strictValidObjectWithKeys(res[0]) &&
+          validValue(getVal)
+        ) {
+          return res[0][getVal];
+        } else {
+          return strictValidObjectWithKeys(res[0]) ? res[0] : {};
+        }
+      }
+    }
+  } else {
+    return array;
+  }
+};
+
+export const mergeObject = (...args) => {
+  return args.reduce(function (result, current) {
+    return Object.assign(result, current);
+  }, {});
+};
+
 /**
  * Remove null or undefined key value pairs from an object
  * @param obj: object
@@ -402,34 +422,6 @@ export const isURLValid = (url) =>
  */
 export const isZipValid = (zip) =>
   strictValidString(zip) && VALID_US_ZIP.test(zip);
-
-/**
- * Get random color
- * @param opacity: string
- */
-//we may need to change the below process of getting random colors so thats why i have commented the code for future use
-export const randomBGColor = () => {
-  var colors = [
-    "RED",
-    "GREEN",
-    "BLUE",
-    "DARKSLATEGRAY",
-    "MAROON",
-    "GRAY",
-    "TEAL",
-    "PURPLE",
-    "MEDIUMVIOLETRED",
-    "INDIGO",
-    "DARKSLATEBLUE",
-    "BROWN",
-    "PURPLE",
-  ];
-  var bgColor = colors[Math.floor(Math.random() * colors.length)];
-  // strictValidString(opacity) ?
-  // 	"rgb(" + x + "," + y + "," + z + ", " + opacity + ")" :
-  // 	"rgb(" + x + "," + y + "," + z + ")"
-  return bgColor;
-};
 
 /**
  * Formatting number for thousand seperator
@@ -518,20 +510,6 @@ export const normalizePhone = (value) => {
 export const deNormalizePhone = (value) =>
   value ? value.replace(/[^\d]/g, "").slice(0, 10) : value;
 
-export const createNavigationLink = (
-  link,
-  value,
-  willOpenInBlankPage = false
-) => {
-  return willOpenInBlankPage ? (
-    <Link target="_blank" to={link}>
-      {value}
-    </Link>
-  ) : (
-    <Link to={link}>{value}</Link>
-  );
-};
-
 /**
  * Note - This will return number with upto one decimal without round Off
  *
@@ -546,16 +524,6 @@ export const uptoOneDecimal = (value = "") => {
     return value.substring(0, index + 2);
   }
   return value ? parseFloat(value) : value;
-};
-
-/**
- * Scroll modal to top
- */
-export const scrollModalToTop = () => {
-  const modal = document.getElementsByClassName("modal");
-  if (modal.length) {
-    modal[0].scrollTop = 0;
-  }
 };
 
 /**
@@ -628,28 +596,6 @@ export const convertMinsToHrsMins = (min) => {
   return hrs + ":" + min2;
 };
 
-export const decimalNoToHours = (value) => {
-  if (!value) return "0:00";
-  return convertMinsToHrsMins(value * 60);
-};
-
-/**
- * print address
- * @param {*} str
- * @param {*} length
- */
-
-export const deepCopy = (srcObj) => {
-  let outObj = Array.isArray(srcObj) ? [] : {};
-  if (typeof srcObj !== "object" || srcObj === null) {
-    return srcObj;
-  }
-  for (let key in srcObj) {
-    outObj[key] = deepCopy(srcObj[key]);
-  }
-  return outObj;
-};
-
 /**
  * Convert minutes to hours and minutes
  */
@@ -700,48 +646,6 @@ export const formatDuration = (d) => {
   var mDisplay = m > 0 ? m + (h > 0 ? "" : "m ") : "";
   var sDisplay = s > 0 ? s + (s === 1 ? "s" : "s") : "";
   return hDisplay + mDisplay + sDisplay;
-};
-
-export const popupCenter = (url, title, w, h) => {
-  // Fixes dual-screen position                             Most browsers      Firefox
-  const dualScreenLeft =
-    window.screenLeft !== undefined ? window.screenLeft : window.screenX;
-  const dualScreenTop =
-    window.screenTop !== undefined ? window.screenTop : window.screenY;
-
-  const width = window.innerWidth
-    ? window.innerWidth
-    : document.documentElement.clientWidth;
-  const height = window.innerHeight
-    ? window.innerHeight
-    : document.documentElement.clientHeight;
-
-  const systemZoom = width / window.screen.availWidth;
-  const left = (width - w) / 2 / systemZoom + dualScreenLeft;
-  const top = (height - h) / 2 / systemZoom + dualScreenTop;
-  const newWindow = window.open(
-    url,
-    title,
-    `
-      scrollbars=yes,
-      width=${w / systemZoom}, 
-      height=${h / systemZoom}, 
-      top=${top}, 
-      left=${left}
-      `
-  );
-
-  if (window.focus) newWindow.focus();
-  return newWindow;
-};
-
-export const getParameterByName = (name, url = window.location.href) => {
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return "";
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
 function changeTimezone(date, ianatz) {
@@ -880,57 +784,13 @@ export const checkArrayObjectOfKeys = (keys, rowData, checkEmail = false) => {
   return formIsValid;
 };
 
-// data: ""
-export function useBlocker(blocker, when = true) {
-  const { navigator } = useContext(NavigationContext);
-
-  useEffect(() => {
-    if (!when) return;
-
-    const unblock = navigator.block((tx) => {
-      const autoUnblockingTx = {
-        ...tx,
-        retry() {
-          // Automatically unblock the transition so it can play all the way
-          // through before retrying it. TODO: Figure out how to re-enable
-          // this block if the transition is cancelled for some reason.
-          unblock();
-          tx.retry();
-        },
-      };
-
-      blocker(autoUnblockingTx);
-    });
-
-    return unblock;
-  }, [navigator, blocker, when]);
-}
 /**
  * Prompts the user with an Alert before they leave the current screen.
  *
  * @param  message
  * @param  when
  */
-export function usePrompt(message, when = true) {
-  const blocker = useCallback(
-    (tx) => {
-      let response;
-      if (typeof message === "function") {
-        response = message(tx?.location, tx?.action);
-        if (typeof response === "string") {
-          response = window.confirm(response);
-        }
-      } else if (typeof message === "string") {
-        response = window.confirm(message);
-      }
-      if (response) {
-        tx.retry();
-      }
-    },
-    [message]
-  );
-  return useBlocker(blocker, when);
-}
+
 export const getFirstCharcterFromString = (text = "") => {
   if (!strictValidString(text)) {
     return null;
@@ -939,50 +799,6 @@ export const getFirstCharcterFromString = (text = "") => {
     return titleCase(val);
   }
 };
-export function limitWords(element, length = 10) {
-  return element;
-}
-
-const findComponent = (addressComponenets, componentId) => {
-  let result;
-  addressComponenets.forEach((addressComponenet) => {
-    if (addressComponenet.types.indexOf(componentId) >= 0) {
-      result = addressComponenet;
-    }
-  });
-  return result;
-};
-
-export const parseGoogleAddress = (place) => {
-  const addressComponenets = place.address_components;
-  const zipComponent = findComponent(addressComponenets, "postal_code");
-  const countryComponent = findComponent(addressComponenets, "country");
-  const cityComponent = findComponent(
-    addressComponenets,
-    "administrative_area_level_2"
-  );
-  const stateComponent = findComponent(
-    addressComponenets,
-    "administrative_area_level_1"
-  );
-  const localityComponent = findComponent(addressComponenets, "locality");
-  const subLocalityComponent = findComponent(addressComponenets, "sublocality");
-  const address = {
-    fullAddress: place.formatted_address,
-    latitude: place.geometry.location.lat,
-    longitude: place.geometry.location.lng,
-    zip: zipComponent ? zipComponent.long_name : undefined,
-    country: countryComponent ? countryComponent.long_name : undefined,
-    city: cityComponent ? cityComponent.long_name : undefined,
-    state: stateComponent ? stateComponent.long_name : undefined,
-    subLocality: subLocalityComponent
-      ? subLocalityComponent.long_name
-      : undefined,
-    locality: localityComponent ? localityComponent.long_name : undefined,
-  };
-  return address;
-};
-export const defaultPropGetter = () => ({});
 
 export const defaultCurrencyFormat = (string) => {
   const num = Number(string);

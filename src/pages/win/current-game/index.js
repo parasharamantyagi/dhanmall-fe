@@ -36,7 +36,14 @@ const styles = (theme) =>
 const CurrentGame = ({ classes, apiCall, gameNow }) => {
   const [timeLeft, setTimeLeft] = useState(gameNow.time); // 3 minutes in seconds
   const [open, setOpen] = useState(false);
-  const [label, setLabel] = useState("");
+  const [object, setObject] = useState({
+    game_id: gameNow._id,
+    label: "",
+    pick: "",
+    contract_type: 1,
+    type: 1,
+    background: '#000'
+  });
 
   const gameNowTime = () => {
     const currentTimestamp = Date.now();
@@ -83,7 +90,14 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
       <Grid item xs={2.4}>
         <Button
           onClick={() => {
-            setLabel(`Select ${number}`);
+            setObject({
+              game_id: gameNow._id,
+              label: `Select ${number}`,
+              pick: number,
+              contract_type: 1,
+              type: 2,
+              background: '#000'
+            });
             setOpen(true);
           }}
           className={classes.numbers}
@@ -125,7 +139,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
             </Typography>
           </Box>
           <Typography pt={2} variant="h1">
-            {gameNow.date+gameNow.period}
+            {gameNow.date + gameNow.period}
           </Typography>
         </Box>
         <Box
@@ -147,7 +161,14 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         <Button
           className={classes.button}
           onClick={() => {
-            setLabel("Join Green");
+            setObject({
+              game_id: gameNow._id,
+              label: "Join Green",
+              pick: "green",
+              contract_type: 1,
+              type: 1,
+              background: '#4caf50'
+            });
             setOpen(true);
           }}
           variant="contained"
@@ -159,7 +180,14 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         <Button
           className={classes.button}
           onClick={() => {
-            setLabel("Join Purple");
+            setObject({
+              game_id: gameNow._id,
+              label: "Join Purple",
+              pick: "purple",
+              contract_type: 1,
+              type: 1,
+              background: '#9c27b0'
+            });
             setOpen(true);
           }}
           variant="contained"
@@ -171,7 +199,14 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         <Button
           className={classes.button}
           onClick={() => {
-            setLabel("Join Red");
+            setObject({
+              game_id: gameNow._id,
+              label: "Join Red",
+              pick: "red",
+              contract_type: 1,
+              type: 1,
+              background: '#C8220E'
+            });
             setOpen(true);
           }}
           variant="contained"
@@ -193,7 +228,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         {renderCount(8)}
         {renderCount(9)}
       </Grid>
-      <AlertDialog label={label} open={open} setOpen={setOpen} />
+      <AlertDialog object={object} open={open} setOpen={setOpen} />
     </Box>
   );
 };
