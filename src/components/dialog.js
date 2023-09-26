@@ -47,7 +47,7 @@ const AlertDialog = ({ open, setOpen = () => {}, object }) => {
       toast.success(response.message);
       setOpen(false);
     }else{
-      toast.success(response.message);
+      toast.error(response.message);
     }
   };
 

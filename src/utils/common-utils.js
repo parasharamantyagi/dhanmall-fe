@@ -352,7 +352,7 @@ export const arrayOfObject = (array, Obj, getVal) => {
         if (Array.isArray(Obj[key]) && Obj[key].length) {
           return Obj[key].includes(item[key]) ? true : false;
         } else {
-          if (item[key] === undefined || item[key] != Obj[key]) return false;
+          if (item[key] === undefined || item[key] !== Obj[key]) return false;
         }
       }
       return true;

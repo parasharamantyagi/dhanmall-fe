@@ -4,6 +4,7 @@ import Footer from "../footer";
 import Header from "../header";
 import FullWidthTabs from "../../components/promotion-tabs";
 import useMyProfileApi from "../../hooks/useMyProfileApi";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
 
 export default function Promotion() {
   const { myProfileData } = useMyProfileApi("/profile", "GET");
@@ -15,7 +16,7 @@ export default function Promotion() {
         flexDirection: "column",
       }}
     >
-      <Header />
+      <Header ammount={ strictValidObjectWithKeys(myProfileData) && strictValidObjectWithKeys(myProfileData.myProfile) ? myProfileData.myProfile.money : 0 }/>
       <FullWidthTabs myProfile={myProfileData} />
       <Footer />
     </Box>

@@ -10,6 +10,7 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import OrderList from "../orders/OrderList";
 import { useNavigate } from "react-router-dom";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
 
 export default function Win() {
   const [gameNow, setGameNow] = React.useState({ period: 0, time: 180 });
@@ -36,7 +37,9 @@ export default function Win() {
           zIndex: 0,
         }}
       >
-        <Header />
+        <Header
+          ammount={strictValidObjectWithKeys(gameNow) ? gameNow.ammount : 0}
+        />
         <Divider />
         <CurrentGame gameNow={gameNow} apiCall={callapi} />
         <Divider />

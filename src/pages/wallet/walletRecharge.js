@@ -51,9 +51,8 @@ export default function WalletRecharge() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    // const data = new FormData(event.currentTarget);
     toast.success('Recharge add successfully');
-    console.log(data);
   };
   const handleChange = (e) => {
     setType(e.target.name);

@@ -1,17 +1,8 @@
-import { Box, Divider, Grid, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { Box, Divider, ListItem, ListItemText, Typography } from "@mui/material";
 import React from "react";
-import { styled } from "@mui/material/styles";
 import CardHeader from "../header/header-card";
-import Paper from "@mui/material/Paper";
 import Footer from "../footer";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 export default function WalletTransactions() {
   const renderSubtitle = (text) => {
     return (
