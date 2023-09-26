@@ -2,7 +2,7 @@ import * as React from "react";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
-// import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PersonIcon from "@mui/icons-material/Person";
 import { Link, useLocation } from "react-router-dom";
 
@@ -28,13 +28,13 @@ export default function Footer() {
           to="/search"
           value="/search"
         />
-        {/* <BottomNavigationAction
+        <BottomNavigationAction
           label="Win"
           component={Link}
           to="/win"
           icon={<EmojiEventsIcon />}
           value="/win"
-        /> */}
+        />
         <BottomNavigationAction
           value="/mine"
           component={Link}

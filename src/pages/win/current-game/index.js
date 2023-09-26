@@ -213,8 +213,8 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           onClick={() => {
             setObject({
               game_id: gameNow._id,
-              label: "Join Purple",
-              pick: "purple",
+              label: "Join Violet",
+              pick: "violet",
               contract_type: 1,
               type: 1,
               background: "#9c27b0",
@@ -222,10 +222,10 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
             setOpen(true);
           }}
           variant="contained"
-          color="purple"
+          color="violet"
           size="medium"
         >
-          Join Purple
+          Join Violet
         </Button>
         <Button
           className={classes.button}
