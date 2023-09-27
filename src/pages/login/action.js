@@ -8,7 +8,7 @@ export const loginService = async (data) => {
     console.log('res: ', res);
     if (res.status === 1) {
       store({
-        authToken: res.token,
+        authToken: res.data.token,
       });
       return {
         data: res,
