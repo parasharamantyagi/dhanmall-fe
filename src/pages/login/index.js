@@ -1,20 +1,20 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { loginService } from "./action";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import Footer from "../footer";
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { loginService } from './action';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Footer from '../footer';
 
 function Copyright(props) {
   return (
@@ -24,28 +24,28 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Version © "}
-      0.0.1 ({new Date().getFullYear()}){"."}
+      {'Version © '}
+      0.0.1 ({new Date().getFullYear()}){'.'}
     </Typography>
   );
 }
 
 export default function SignIn() {
-  const [error, setError] = React.useState("");
+  const [error] = React.useState('');
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     let response = await loginService({
-      mobile: data.get("mobile"),
-      password: data.get("password"),
+      mobile: data.get('mobile'),
+      password: data.get('password'),
     });
     if (response.success) {
       toast.success(response.message);
-      navigate("/");
+      navigate('/');
     } else {
-      setError(response.message);
+      toast.error(response.message);
     }
   };
 
@@ -55,12 +55,12 @@ export default function SignIn() {
       <Box
         sx={{
           marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -91,7 +91,7 @@ export default function SignIn() {
             label="Remember me"
           />
           {error && (
-            <Typography paragraph sx={{ color: "red" }}>
+            <Typography paragraph sx={{ color: 'red' }}>
               {error}
             </Typography>
           )}

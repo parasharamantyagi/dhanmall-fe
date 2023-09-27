@@ -18,79 +18,84 @@ import WalletTransactions from "../pages/wallet/walletTransactions";
 import WalletWithdrawal from "../pages/wallet/walletWithdrawal";
 import ProductDetail from "../pages/home/details";
 import NotFound from "../pages/notfound";
+import BillingDashboard from "../pages/billing";
 
 const routes = (isLoggedIn) => {
   return [
     {
       // public routes
-      path: "/login",
+      path: '/login',
       element: !isLoggedIn ? <SignIn /> : <Navigate to="/" />,
     },
     {
       // public routes
-      path: "/register",
+      path: '/register',
       element: !isLoggedIn ? <SignUp /> : <Navigate to="/" />,
     },
     {
-      path: "/privacy-policy", // protected routes
+      path: '/privacy-policy', // protected routes
       element: <PrivacyPolicy />,
     },
     {
-      path: "/riskagreement", // protected routes
+      path: '/riskagreement', // protected routes
       element: <Riskagreement />,
     },
     {
-      path: "/contect-us", // protected routes
+      path: '/contect-us', // protected routes
       element: <ContectUs />,
     },
     {
-      path: "/wallet-recharge", // protected routes
+      path: '/wallet-recharge', // protected routes
       element: <WalletRecharge />,
     },
     {
-      path: "/wallet-withdrawal", // protected routes
+      path: '/wallet-withdrawal', // protected routes
       element: <WalletWithdrawal />,
     },
     {
-      path: "/wallet-transactions", // protected routes
+      path: '/wallet-transactions', // protected routes
       element: <WalletTransactions />,
     },
     {
-      path: "/", // protected routes
+      path: '/', // protected routes
       element: <Home />,
     },
     {
-      path: "/detail/:productId", // protected routes
+      path: '/detail/:productId', // protected routes
       element: <ProductDetail />,
     },
     {
-      path: "/mine", // protected routes
+      path: '/mine', // protected routes
       element: isLoggedIn ? <Profile /> : <Navigate to="/login" />,
     },
     {
-      path: "/win", // protected routes
+      path: '/win', // protected routes
       element: isLoggedIn ? <Win /> : <Navigate to="/login" />,
     },
     {
-      path: "/orders", // protected routes
+      path: '/orders', // protected routes
       element: isLoggedIn ? <Orders /> : <Navigate to="/login" />,
     },
     {
-      path: "/bank-card", // protected routes
+      path: '/bank-card', // protected routes
       element: isLoggedIn ? <BankCard /> : <Navigate to="/login" />,
     },
     {
-      path: "/addbankcard", // protected routes
+      path: '/addbankcard', // protected routes
       element: isLoggedIn ? <Addbankcard /> : <Navigate to="/login" />,
     },
     {
-      path: "/promotion", // protected routes
+      path: '/promotion', // protected routes
       element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
     },
     {
+      path: '/billing/luck67', // protected routes
+      element: isLoggedIn ? <BillingDashboard /> : <Navigate to="/login" />,
+    },
+    {
       // public routes
-      path: "*",
-      element: <NotFound/>,
+      path: '*',
+      element: <NotFound />,
     },
   ];
 };
