@@ -19,7 +19,7 @@ import {
   strictValidString,
   validObjectWithParameterKeys,
 } from "../../utils/common-utils";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const buttonAmmount = [
@@ -40,7 +40,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 export default function WalletRecharge() {
   const [objVal, setObjVal] = React.useState({});
-  const [is_show, setIsShow] = React.useState(false);
+  const [is_show, setIsShow] = React.useState(0);
   const [type, setType] = React.useState("");
 
   const renderSubtitle = (text) => {
@@ -53,11 +53,19 @@ export default function WalletRecharge() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    toast.success("Recharge add successfully");
+    const data = new FormData(event.currentTarget);
+    // window.location.href = `https://securegw-stage.paytm.in/theia/processTransaction?orderid=${paymentData.ORDER_ID}`;
+    // console.log({ recharge_amount: data.get("recharge_amount") });
+    // console.log("type", type);
+    if (type === "upipay") {
+      window.location.href = `https://pay.upilink.in/pay/parasharamantyagi-2@oksbi?am=${data.get(
+        "recharge_amount"
+      )}`;
+    }
+    // toast.success("Recharge add successfully");
   };
   const handleChange = (e) => {
-    console.log("target.name", e.target.name);
+    setIsShow(e.target.name === "qrcode" ? 1 : 0);
     setType(e.target.name);
   };
   return (
@@ -146,42 +154,36 @@ export default function WalletRecharge() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={type === "ek_pay"}
+                              checked={type === "qrcode"}
                               onChange={handleChange}
-                              name="ek_pay"
+                              name="qrcode"
                             />
                           }
-                          label="Ek Pay"
+                          label="Qr Code"
                         />
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={type === "win_pay"}
+                              checked={type === "upipay"}
                               onChange={handleChange}
-                              name="win_pay"
+                              name="upipay"
                             />
                           }
-                          label="Win Pay"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={type === "wow_pay"}
-                              onChange={handleChange}
-                              name="wow_pay"
-                            />
-                          }
-                          label="Wow Pay"
+                          label="Upi Pay"
                         />
                       </FormGroup>
                     </FormControl>
                   </Grid>
                   <Grid item xs={8}>
-                    {is_show && (
+                    {is_show === 1 && (
                       <Box
                         component="span"
                         // sx={{ p: 2, border: "1px dashed grey" }}
                       >
+                        <Typography mt={1} variant="h2" align="center">
+                          Please make a recharge on this qr code with selected
+                          ammount and submitted page with correct tranzection id
+                        </Typography>
                         <CardMedia
                           component="img"
                           sx={{ width: 151 }}
