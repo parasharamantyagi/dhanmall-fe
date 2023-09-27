@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CardMedia,
   Checkbox,
   FormControl,
   FormControlLabel,
@@ -8,38 +9,39 @@ import {
   Grid,
   TextField,
   Typography,
-} from '@mui/material';
-import React from 'react';
-import { styled } from '@mui/material/styles';
-import CardHeader from '../header/header-card';
-import Paper from '@mui/material/Paper';
-import Footer from '../footer';
+} from "@mui/material";
+import React from "react";
+import { styled } from "@mui/material/styles";
+import CardHeader from "../header/header-card";
+import Paper from "@mui/material/Paper";
+import Footer from "../footer";
 import {
   strictValidString,
   validObjectWithParameterKeys,
-} from '../../utils/common-utils';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+} from "../../utils/common-utils";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const buttonAmmount = [
-  { id: 1, ammount: '100' },
-  { id: 1, ammount: '500' },
-  { id: 1, ammount: '750' },
-  { id: 1, ammount: '1000' },
-  { id: 1, ammount: '1500' },
-  { id: 1, ammount: '2000' },
+  { id: 1, ammount: "100" },
+  { id: 1, ammount: "500" },
+  { id: 1, ammount: "750" },
+  { id: 1, ammount: "1000" },
+  { id: 1, ammount: "1500" },
+  { id: 1, ammount: "2000" },
 ];
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: 'center',
+  textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 export default function WalletRecharge() {
   const [objVal, setObjVal] = React.useState({});
-  const [type, setType] = React.useState('');
+  const [is_show, setIsShow] = React.useState(false);
+  const [type, setType] = React.useState("");
 
   const renderSubtitle = (text) => {
     return (
@@ -52,22 +54,23 @@ export default function WalletRecharge() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // const data = new FormData(event.currentTarget);
-    toast.success('Recharge add successfully');
+    toast.success("Recharge add successfully");
   };
   const handleChange = (e) => {
+    console.log("target.name", e.target.name);
     setType(e.target.name);
   };
   return (
     <Box
       sx={{
-        display: 'flex',
-        minHeight: '100vh',
-        flexDirection: 'column',
+        display: "flex",
+        minHeight: "100vh",
+        flexDirection: "column",
       }}
     >
       <CardHeader title="Recharge" />
       <Box p={1} flexDirection="column" display="flex">
-        <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
           <Grid
             container
             rowSpacing={1}
@@ -89,9 +92,9 @@ export default function WalletRecharge() {
                     name="recharge_amount"
                     autoComplete="recharge_amount"
                     value={
-                      validObjectWithParameterKeys(objVal, ['recharge_amount'])
+                      validObjectWithParameterKeys(objVal, ["recharge_amount"])
                         ? objVal.recharge_amount
-                        : ''
+                        : ""
                     }
                     autoFocus
                     onChange={(e) => {
@@ -111,7 +114,7 @@ export default function WalletRecharge() {
                     <Grid item xs={4}>
                       <Button
                         variant="contained"
-                        sx={{ width: '80%', py: 1, mt: 1, mb: 1 }}
+                        sx={{ width: "80%", py: 1, mt: 1, mb: 1 }}
                         onClick={() => {
                           setObjVal({ recharge_amount: object.ammount });
                         }}
@@ -122,14 +125,14 @@ export default function WalletRecharge() {
                   ))}
                 </Grid>
                 {/*  */}
-                <Grid container rowSpacing={1} mt={2}>
+                <Grid container rowSpacing={1} mt={2} spacing={2}>
                   <Grid
                     item
-                    xs={12}
+                    xs={4}
                     sx={{
-                      BackgroundPositionX: 'left',
-                      textAlign: 'left',
-                      m: 1,
+                      BackgroundPositionX: "left",
+                      textAlign: "left",
+                      // m: 1,
                     }}
                   >
                     <Typography>Payment Mode</Typography>
@@ -143,7 +146,7 @@ export default function WalletRecharge() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={type === 'ek_pay'}
+                              checked={type === "ek_pay"}
                               onChange={handleChange}
                               name="ek_pay"
                             />
@@ -153,7 +156,7 @@ export default function WalletRecharge() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={type === 'win_pay'}
+                              checked={type === "win_pay"}
                               onChange={handleChange}
                               name="win_pay"
                             />
@@ -163,7 +166,7 @@ export default function WalletRecharge() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={type === 'wow_pay'}
+                              checked={type === "wow_pay"}
                               onChange={handleChange}
                               name="wow_pay"
                             />
@@ -173,16 +176,29 @@ export default function WalletRecharge() {
                       </FormGroup>
                     </FormControl>
                   </Grid>
-
+                  <Grid item xs={8}>
+                    {is_show && (
+                      <Box
+                        component="span"
+                        // sx={{ p: 2, border: "1px dashed grey" }}
+                      >
+                        <CardMedia
+                          component="img"
+                          sx={{ width: 151 }}
+                          image="/Untitled design.png"
+                          alt="Live from space album cover"
+                        />
+                      </Box>
+                    )}
+                  </Grid>
                   <Grid item xs={12}>
                     <Button
                       type="submit"
                       variant="contained"
                       disabled={
-                        !type ||
-                        !strictValidString(objVal.recharge_amount)
+                        !type || !strictValidString(objVal.recharge_amount)
                       }
-                      sx={{ width: '50%', py: 1, mt: 1, mb: 4 }}
+                      sx={{ width: "50%", py: 1, mt: 1, mb: 4 }}
                     >
                       Recharge
                     </Button>
