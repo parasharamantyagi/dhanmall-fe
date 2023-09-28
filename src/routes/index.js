@@ -93,6 +93,10 @@ const routes = (isLoggedIn) => {
       element: isLoggedIn ? <BillingDashboard /> : <Navigate to="/login" />,
     },
     {
+      path: '/billing/game-now', // protected routes
+      element: isLoggedIn ? <BillingDashboard /> : <Navigate to="/login" />,
+    },
+    {
       // public routes
       path: '*',
       element: <NotFound />,

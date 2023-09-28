@@ -1,65 +1,31 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { TablePagination, Typography } from '@mui/material';
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { TablePagination, Typography } from "@mui/material";
+import useRechargeList from "../../hooks/useBillingApi";
+import {
+  strictValidObjectWithKeys,
+  validValue,
+} from "../../utils/common-utils";
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
   return { id, date, name, shipTo, paymentMethod, amount };
 }
 
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44,
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99,
-  ),
-  createData(
-    2,
-    '16 Mar, 2019',
-    'Tom Scholz',
-    'Boston, MA',
-    'MC ⠀•••• 1253',
-    100.81,
-  ),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-];
-
 export default function Orders() {
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(4);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const { rechargeList } = useRechargeList(
+    "/billing/recharge?limit=10&page=2",
+    "GET"
+  );
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -68,32 +34,43 @@ export default function Orders() {
   return (
     <React.Fragment>
       <Typography>Recent Orders</Typography>
-      <Table size="small">
+      <Table size="large">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Mobile</TableCell>
+            <TableCell>Ammount</TableCell>
+            <TableCell>Transaction id</TableCell>
+            <TableCell>Remarks</TableCell>
+            <TableCell>Status</TableCell>
+            {/* <TableCell align="right">Sale Amount</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
-            </TableRow>
-          ))}
+          {strictValidObjectWithKeys(rechargeList) &&
+            validValue(rechargeList.success) &&
+            rechargeList.rechargeList.recharge.map((row) => (
+              <TableRow key={row._id}>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.user_id.mobile}</TableCell>
+                <TableCell>{row.ammount}</TableCell>
+                <TableCell>{row.transaction_id}</TableCell>
+                <TableCell>{row.remarks}</TableCell>
+                <TableCell>{row.status}</TableCell>
+                {/* <TableCell align="right">{`$${row.ammount}`}</TableCell> */}
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
       <TablePagination
         rowsPerPageOptions={false}
         component="div"
-        count={rows.length}
+        count={
+          strictValidObjectWithKeys(rechargeList) &&
+          validValue(rechargeList.success)
+            ? rechargeList.rechargeList.recharge_page
+            : 0
+        }
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -6,20 +6,20 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 
 const MainList = () => {
   const location = useLocation();
 
   return (
     <React.Fragment>
-      <ListItemButton selected={location.pathname === '/billing/luck67'}>
+      <ListItemButton component={Link} to="/billing/luck67" selected={location.pathname === '/billing/luck67'}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItemButton>
-      <ListItemButton selected={location.pathname === '/billing/orderluck67'}>
+      <ListItemButton component={Link} to="/billing/game-now" selected={location.pathname === '/billing/game-now'}>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
