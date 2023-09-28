@@ -10,6 +10,9 @@ import {
   strictValidObjectWithKeys,
   validValue,
 } from "../../utils/common-utils";
+import CanvasJSReact from "@canvasjs/react-charts";
+var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -31,8 +34,36 @@ export default function Orders() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const options = {
+    title: {
+      text: "Basic Column Chart",
+    },
+    data: [
+      {
+        // Change type to "doughnut", "line", "splineArea", etc.
+        type: "column",
+        dataPoints: [
+          { label: "0", y: 100, color: "red" },
+          { label: "1", y: 15, color: "green" },
+          { label: "2", y: 25, color: "red" },
+          { label: "3", y: 30, color: "green" },
+          { label: "4", y: 28, color: "red" },
+          { label: "5", y: 28, color: "green" },
+          { label: "6", y: 28, color: "red" },
+          { label: "7", y: 28, color: "green" },
+          { label: "8", y: 28, color: "red" },
+          { label: "9", y: 28, color: "green" },
+        ],
+      },
+    ],
+  };
   return (
     <React.Fragment>
+      <CanvasJSChart
+        options={options}
+        /* onRef={ref => this.chart = ref} */
+      />
       <Typography>Recent Orders</Typography>
       <Table size="large">
         <TableHead>
