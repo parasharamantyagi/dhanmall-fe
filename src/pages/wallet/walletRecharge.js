@@ -2,46 +2,44 @@ import {
   Box,
   Button,
   CardMedia,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
   Grid,
+  IconButton,
   TextField,
   Typography,
-} from "@mui/material";
-import React from "react";
-import { styled } from "@mui/material/styles";
-import CardHeader from "../header/header-card";
-import Paper from "@mui/material/Paper";
-import Footer from "../footer";
+} from '@mui/material';
+import React, { useState } from 'react';
+import { styled } from '@mui/material/styles';
+import CardHeader from '../header/header-card';
+import Paper from '@mui/material/Paper';
+import Footer from '../footer';
 import {
   strictValidString,
   validObjectWithParameterKeys,
-} from "../../utils/common-utils";
+} from '../../utils/common-utils';
 // import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import 'react-toastify/dist/ReactToastify.css';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const buttonAmmount = [
-  { id: 1, ammount: "100" },
-  { id: 1, ammount: "500" },
-  { id: 1, ammount: "750" },
-  { id: 1, ammount: "1000" },
-  { id: 1, ammount: "1500" },
-  { id: 1, ammount: "2000" },
+  { id: 1, ammount: '100' },
+  { id: 1, ammount: '500' },
+  { id: 1, ammount: '750' },
+  { id: 1, ammount: '1000' },
+  { id: 1, ammount: '1500' },
+  { id: 1, ammount: '2000' },
 ];
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: "center",
+  textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
 export default function WalletRecharge() {
   const [objVal, setObjVal] = React.useState({});
   const [is_show, setIsShow] = React.useState(0);
-  const [type, setType] = React.useState("");
+  const [transactionId, setTransactionId] = useState();
+  const [type, setType] = React.useState('');
 
   const renderSubtitle = (text) => {
     return (
@@ -57,28 +55,28 @@ export default function WalletRecharge() {
     // window.location.href = `https://securegw-stage.paytm.in/theia/processTransaction?orderid=${paymentData.ORDER_ID}`;
     // console.log({ recharge_amount: data.get("recharge_amount") });
     // console.log("type", type);
-    if (type === "upipay") {
+    if (type === 'upipay') {
       window.location.href = `https://pay.upilink.in/pay/parasharamantyagi-2@oksbi?am=${data.get(
-        "recharge_amount"
+        'recharge_amount',
       )}`;
     }
     // toast.success("Recharge add successfully");
   };
   const handleChange = (e) => {
-    setIsShow(e.target.name === "qrcode" ? 1 : 0);
+    setIsShow(e.target.name === 'qrcode' ? 1 : 0);
     setType(e.target.name);
   };
   return (
     <Box
       sx={{
-        display: "flex",
-        minHeight: "100vh",
-        flexDirection: "column",
+        display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column',
       }}
     >
       <CardHeader title="Recharge" />
       <Box p={1} flexDirection="column" display="flex">
-        <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
           <Grid
             container
             rowSpacing={1}
@@ -100,9 +98,9 @@ export default function WalletRecharge() {
                     name="recharge_amount"
                     autoComplete="recharge_amount"
                     value={
-                      validObjectWithParameterKeys(objVal, ["recharge_amount"])
+                      validObjectWithParameterKeys(objVal, ['recharge_amount'])
                         ? objVal.recharge_amount
-                        : ""
+                        : ''
                     }
                     autoFocus
                     onChange={(e) => {
@@ -122,7 +120,7 @@ export default function WalletRecharge() {
                     <Grid item xs={4}>
                       <Button
                         variant="contained"
-                        sx={{ width: "80%", py: 1, mt: 1, mb: 1 }}
+                        sx={{ width: '80%', py: 1, mt: 1, mb: 1 }}
                         onClick={() => {
                           setObjVal({ recharge_amount: object.ammount });
                         }}
@@ -135,63 +133,64 @@ export default function WalletRecharge() {
                 {/*  */}
                 <Grid container rowSpacing={1} mt={2} spacing={2}>
                   <Grid
+                    display="flex"
+                    flex={1}
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
                     item
-                    xs={4}
-                    sx={{
-                      BackgroundPositionX: "left",
-                      textAlign: "left",
-                      // m: 1,
-                    }}
+                    xs={12}
                   >
-                    <Typography>Payment Mode</Typography>
-                    <FormControl
-                      required
-                      error={!type}
-                      component="fieldset"
-                      variant="standard"
+                    <Typography mt={1} variant="h2" align="center">
+                      By using this QR code or UPI ID, you can recharge the
+                      amount and submit the page with the correct transaction
+                      ID.
+                    </Typography>
+
+                    <Box>
+                      <CardMedia
+                        component="img"
+                        sx={{ width: 300, height: 350 }}
+                        image="/Untitled design.png"
+                      />
+                    </Box>
+                    <Typography sx={{my:3}} variant='p1'>OR</Typography>
+                    <TextField
+                      placeholder="UPI ID"
+                      label="UPI ID"
+                      variant="outlined"
+                      value={'bharat.chhabra339@okaxis'}
+                      sx={{ mt: 2, width: '30%' }}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+
+                    <Button
+                      sx={{ mt: 2 }}
+                      variant="contained"
+                      onClick={() => {
+                        navigator.clipboard
+                          .writeText('bharat.chhabra339@okaxis')
+                          .then(() => {
+                            alert('copied to clipboard');
+                          });
+                      }}
+                      startIcon={<ContentCopyIcon />}
                     >
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={type === "qrcode"}
-                              onChange={handleChange}
-                              name="qrcode"
-                            />
-                          }
-                          label="Qr Code"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={type === "upipay"}
-                              onChange={handleChange}
-                              name="upipay"
-                            />
-                          }
-                          label="Upi Pay"
-                        />
-                      </FormGroup>
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={8}>
-                    {is_show === 1 && (
-                      <Box
-                        component="span"
-                        // sx={{ p: 2, border: "1px dashed grey" }}
-                      >
-                        <Typography mt={1} variant="h2" align="center">
-                          Please make a recharge on this qr code with selected
-                          ammount and submitted page with correct tranzection id
-                        </Typography>
-                        <CardMedia
-                          component="img"
-                          sx={{ width: 151 }}
-                          image="/Untitled design.png"
-                          alt="Live from space album cover"
-                        />
-                      </Box>
-                    )}
+                      Copy UPI ID
+                    </Button>
+                    <TextField
+                      placeholder="Transaction ID"
+                      label="Transaction ID"
+                      variant="outlined"
+                      onChange={(e) => setTransactionId(e.target.value)}
+                      value={transactionId}
+                      sx={{ mt: 2, width: '30%' }}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
                   </Grid>
                   <Grid item xs={12}>
                     <Button
@@ -200,9 +199,9 @@ export default function WalletRecharge() {
                       disabled={
                         !type || !strictValidString(objVal.recharge_amount)
                       }
-                      sx={{ width: "50%", py: 1, mt: 1, mb: 4 }}
+                      sx={{ width: '30%', py: 1, mt: 1, mb: 4 }}
                     >
-                      Recharge
+                      Recharge and Submit
                     </Button>
                   </Grid>
                 </Grid>
