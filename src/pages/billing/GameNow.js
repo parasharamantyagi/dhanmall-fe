@@ -5,9 +5,15 @@ import { strictValidObjectWithKeys } from "../../utils/common-utils";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function GameNow() {
-  const { billingGame } = useBillingGameNowList("billing/current-game", "GET");
+  const { billingGame } = useBillingGameNowList(
+    "billing/current-game?game_id=6516ee2e6959c4d4fb22ae0f",
+    "GET"
+  );
   const [object, setObject] = React.useState({
     total_price: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_red: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_green: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_violet: { total_amount: 0, total_delivery: 0, pick_count: 0 },
     pick_0: { total_amount: 0, total_delivery: 0, pick_count: 0 },
     pick_1: { total_amount: 0, total_delivery: 0, pick_count: 0 },
     pick_2: { total_amount: 0, total_delivery: 0, pick_count: 0 },
@@ -29,7 +35,7 @@ export default function GameNow() {
 
   const options = {
     title: {
-      text: "Basic Column Chart",
+      text: "Game prediction Chart",
     },
     data: [
       {
@@ -55,10 +61,35 @@ export default function GameNow() {
       },
     ],
   };
+
+  const options1 = {
+    animationEnabled: true,
+    exportEnabled: true,
+    theme: "dark2", // "light1", "dark1", "dark2"
+    title: {
+      text: "Trip Expenses",
+    },
+    data: [
+      {
+        type: "pie",
+        indexLabel: "{label}: {y}%",
+        startAngle: -90,
+        dataPoints: [
+          { y: object.pick_red.total_amount, label: "Red", color: "red" },
+          { y: object.pick_green.total_amount, label: "Violet", color: "violet" },
+          { y: object.pick_violet.total_amount, label: "Green", color: "green" },
+        ],
+      },
+    ],
+  };
   return (
     <React.Fragment>
       <CanvasJSChart
         options={options}
+        /* onRef={ref => this.chart = ref} */
+      />
+      <CanvasJSChart
+        options={options1}
         /* onRef={ref => this.chart = ref} */
       />
     </React.Fragment>
