@@ -23,7 +23,7 @@ const MainList = () => {
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Orders" />
+        <ListItemText primary="Game now" />
       </ListItemButton>
       <ListItemButton>
         <ListItemIcon>

@@ -3,7 +3,6 @@ import {
   Button,
   CardMedia,
   Grid,
-  IconButton,
   TextField,
   Typography,
 } from '@mui/material';

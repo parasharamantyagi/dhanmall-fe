@@ -90,11 +90,11 @@ const routes = (isLoggedIn) => {
     },
     {
       path: '/billing/luck67', // protected routes
-      element: isLoggedIn ? <BillingDashboard /> : <Navigate to="/login" />,
+      element: isLoggedIn ? <BillingDashboard routeName="luck67" /> : <Navigate to="/login" />,
     },
     {
       path: '/billing/game-now', // protected routes
-      element: isLoggedIn ? <BillingDashboard /> : <Navigate to="/login" />,
+      element: isLoggedIn ? <BillingDashboard routeName="game-now" /> : <Navigate to="/login" />,
     },
     {
       // public routes
