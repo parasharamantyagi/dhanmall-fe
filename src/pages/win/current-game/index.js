@@ -63,6 +63,14 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
     setTimeLeft(gameNowTime());
   }, [gameNow.time]);
 
+  useEffect(() => {
+    if (timeLeft === 0) {
+      setTimeout(() => {
+        apiCall();
+      }, 3000);
+    }
+  }, [timeLeft]);
+
   // Function to format the time as mm:ss
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
@@ -93,6 +101,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
     return (
       <Grid item xs={2.4}>
         <Button
+          disabled={timeLeft <= 30}
           onClick={() => {
             setObject({
               game_id: gameNow._id,
@@ -108,12 +117,12 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           variant="contained"
           color={buttonColor}
           sx={
-            number === 5
+            number === 5 && timeLeft > 30
               ? {
                   background:
                     "linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)",
                 }
-              : number === 0
+              : number === 0 && timeLeft > 30
               ? {
                   background:
                     "linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)",
@@ -190,6 +199,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
 
       <Box display="flex" mt={2} className={classes.root}>
         <Button
+          disabled={timeLeft <= 30}
           className={classes.button}
           onClick={() => {
             setObject({
@@ -209,6 +219,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           Join Green
         </Button>
         <Button
+          disabled={timeLeft <= 30}
           className={classes.button}
           onClick={() => {
             setObject({
@@ -228,6 +239,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           Join Violet
         </Button>
         <Button
+          disabled={timeLeft <= 30}
           className={classes.button}
           onClick={() => {
             setObject({
