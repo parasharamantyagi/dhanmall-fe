@@ -8,8 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/material';
-import { dashboardService } from '../actions';
 import { resultByUnit } from '../../../utils/constant';
+import { strictValidArrayWithLength } from '../../../utils/common-utils';
 
 const getResult = (number) => {
   let values = resultByUnit[number];
@@ -32,18 +32,9 @@ const getResult = (number) => {
   );
 };
 
-export default function GamesTable() {
+export default function GamesTable({data}) {
   const [page, setPage] = React.useState(0);
-  const [dashboard, setDashboard] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const callapi = async () => {
-    let response = await dashboardService();
-    setDashboard(response.data?.game_history || []);
-  };
-
-  React.useEffect(() => {
-    callapi();
-  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -67,8 +58,8 @@ export default function GamesTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dashboard &&
-              dashboard
+            {strictValidArrayWithLength(data) &&
+              data
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, i) => {
                   return (
@@ -79,7 +70,7 @@ export default function GamesTable() {
                       key={row.code}
                     >
                       <TableCell variant="body2" align="left">
-                        {row.date+row.period}
+                        {row.date + row.period}
                       </TableCell>
                       <TableCell variant="body2" align="left">
                         {row.price}
@@ -99,7 +90,7 @@ export default function GamesTable() {
       <TablePagination
         rowsPerPageOptions={false}
         component="div"
-        count={dashboard.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

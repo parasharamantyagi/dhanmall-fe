@@ -11,12 +11,19 @@ export default function Promotion() {
   return (
     <Box
       sx={{
-        display: "flex",
-        minHeight: "100vh",
-        flexDirection: "column",
+        display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column',
       }}
     >
-      <Header ammount={ strictValidObjectWithKeys(myProfileData) && strictValidObjectWithKeys(myProfileData.myProfile) ? myProfileData.myProfile.money : 0 }/>
+      <Header
+        amount={
+          strictValidObjectWithKeys(myProfileData) &&
+          strictValidObjectWithKeys(myProfileData.myProfile)
+            ? myProfileData.myProfile.money
+            : 0
+        }
+      />
       <FullWidthTabs myProfile={myProfileData} />
       <Footer />
     </Box>

@@ -1,37 +1,37 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import { createStyles, withStyles } from "@mui/styles";
-import AlertDialog from "../../../components/dialog";
-import { makeGameOrderApi } from "../actions";
-import { arrayOfObject, mergeObject } from "../../../utils/common-utils";
-import { contractAmmount } from "../../../utils/constant";
-import { toast } from "react-toastify";
+import { Box, Button, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { createStyles, withStyles } from '@mui/styles';
+import AlertDialog from '../../../components/dialog';
+import { makeGameOrderApi } from '../actions';
+import { arrayOfObject, mergeObject } from '../../../utils/common-utils';
+import { contractAmmount } from '../../../utils/constant';
+import { toast } from 'react-toastify';
 
 const styles = (theme) =>
   createStyles({
     root: {
-      justifyContent: "space-around",
-      [theme.breakpoints.down("lg")]: {
-        justifyContent: "space-between",
-        flexDirection: "row", // For example, change the flex direction
+      justifyContent: 'space-around',
+      [theme.breakpoints.down('lg')]: {
+        justifyContent: 'space-between',
+        flexDirection: 'row', // For example, change the flex direction
         // Add any other styles you want for smaller screens
       },
       // Add more breakpoints and styles as needed
     },
     numbers: {
       width: 200,
-      [theme.breakpoints.down("lg")]: {
-        width: "auto",
+      [theme.breakpoints.down('lg')]: {
+        width: 'auto',
       },
       // Add more breakpoints and styles as needed
     },
     button: {
       width: 150,
-      [theme.breakpoints.down("lg")]: {
+      [theme.breakpoints.down('lg')]: {
         width: 120,
       },
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down('sm')]: {
         width: 105,
       },
     },
@@ -40,13 +40,14 @@ const styles = (theme) =>
 const CurrentGame = ({ classes, apiCall, gameNow }) => {
   const [timeLeft, setTimeLeft] = useState(gameNow.time); // 3 minutes in seconds
   const [open, setOpen] = useState(false);
+  const [loader, setloader] = useState(false);
   const [object, setObject] = useState({
     game_id: gameNow._id,
-    label: "",
-    pick: "",
+    label: '',
+    pick: '',
     contract_type: 1,
     type: 1,
-    background: "#000",
+    background: '#000',
   });
 
   const gameNowTime = () => {
@@ -75,9 +76,9 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(
       2,
-      "0"
+      '0',
     )}`;
   };
 
@@ -97,7 +98,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
 
   const renderCount = (number) => {
     const isEven = number % 2 === 0;
-    const buttonColor = isEven ? "error" : "success";
+    const buttonColor = isEven ? 'error' : 'success';
     return (
       <Grid item xs={2.4}>
         <Button
@@ -109,7 +110,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
               pick: number,
               contract_type: 1,
               type: 2,
-              background: "#000",
+              background: '#000',
             });
             setOpen(true);
           }}
@@ -120,12 +121,12 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
             number === 5 && timeLeft > 30
               ? {
                   background:
-                    "linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)",
+                    'linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)',
                 }
               : number === 0 && timeLeft > 30
               ? {
                   background:
-                    "linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)",
+                    'linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)',
                 }
               : undefined
           }
@@ -138,6 +139,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
   };
 
   const onSubmit = async (state) => {
+    setloader(true);
     // contract_type=1&contract_number=8&type=2&pick=2&game_id=451444
     let response = await makeGameOrderApi(
       mergeObject(
@@ -150,16 +152,19 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           contract_type: arrayOfObject(
             contractAmmount,
             { ammount: state.selected },
-            "id"
+            'id',
           ),
           contract_number: state.value,
-        }
-      )
+        },
+      ),
     );
     if (response.success) {
+      apiCall();
+      setloader(false);
       toast.success(response.message);
       setOpen(false);
     } else {
+      setloader(false);
       toast.error(response.message);
     }
   };
@@ -179,7 +184,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
             </Typography>
           </Box>
           <Typography pt={2} variant="h1">
-            {gameNow.date + gameNow.period}
+            {gameNow.date + gameNow.period || 'Loading...'}
           </Typography>
         </Box>
         <Box
@@ -204,11 +209,11 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           onClick={() => {
             setObject({
               game_id: gameNow._id,
-              label: "Join Green",
-              pick: "green",
+              label: 'Join Green',
+              pick: 'green',
               contract_type: 1,
               type: 1,
-              background: "#4caf50",
+              background: '#4caf50',
             });
             setOpen(true);
           }}
@@ -224,11 +229,11 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           onClick={() => {
             setObject({
               game_id: gameNow._id,
-              label: "Join Violet",
-              pick: "violet",
+              label: 'Join Violet',
+              pick: 'violet',
               contract_type: 1,
               type: 1,
-              background: "#9c27b0",
+              background: '#9c27b0',
             });
             setOpen(true);
           }}
@@ -244,11 +249,11 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           onClick={() => {
             setObject({
               game_id: gameNow._id,
-              label: "Join Red",
-              pick: "red",
+              label: 'Join Red',
+              pick: 'red',
               contract_type: 1,
               type: 1,
-              background: "#C8220E",
+              background: '#C8220E',
             });
             setOpen(true);
           }}
@@ -275,6 +280,8 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         object={object}
         open={open}
         setOpen={setOpen}
+        loader={loader}
+        disabled={timeLeft <= 30}
         onSubmit={(e) => onSubmit(e)}
       />
     </Box>

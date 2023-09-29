@@ -15,6 +15,7 @@ import { loginService } from './action';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Footer from '../footer';
+import { InputAdornment } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -38,7 +39,7 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
 
     let response = await loginService({
-      mobile: data.get('mobile'),
+      mobile: `+91${data.get('mobile')}`,
       password: data.get('password'),
     });
     if (response.success) {
@@ -75,6 +76,11 @@ export default function SignIn() {
             label="Mobile Number"
             name="mobile"
             autoFocus
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">+91</InputAdornment>
+              ),
+            }}
           />
           <TextField
             margin="normal"

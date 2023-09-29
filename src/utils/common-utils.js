@@ -801,7 +801,7 @@ export const getFirstCharcterFromString = (text = "") => {
 };
 
 export const defaultCurrencyFormat = (string) => {
-  const num = Number(string);
+  const num = Number(string) || 0;
   return num.toLocaleString("en-US", {
     style: "currency",
     currency: "INR",

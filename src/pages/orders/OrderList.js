@@ -4,21 +4,23 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import useApi from '../../hooks/useApi';
 import { List, ListItem, ListItemText, Skeleton } from '@mui/material';
 import {
   formatNewDateTime,
   strictValidObjectWithKeys,
 } from '../../utils/common-utils';
 
-export default function OrderList() {
-  const { data, loading } = useApi('/order', 'GET');
+export default function OrderList({ data, loading }) {
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const renderList = (title, subtitle) => {
+  const renderList = (title, subtitle, isColor) => {
+    const isEven = subtitle % 2 === 0;
+    const buttonColor = isEven ? 'red' : 'green';
+    const defaultColor = subtitle === 'green' || subtitle === 'red';
+    const color = defaultColor ? subtitle : buttonColor;
     return (
       <List
         sx={{ width: '100%', bgcolor: 'background.paper' }}
@@ -26,7 +28,17 @@ export default function OrderList() {
       >
         <ListItem disablePadding>
           <ListItemText sx={{ width: 500 }} primary={title} />
-          <ListItemText sx={{ width: 500 }} primary={subtitle} />
+          <ListItemText
+            primary={
+              <Typography
+                variant={isColor ? "h4" :"body2"}
+                style={{ color: isColor ? color : '#000' }}
+              >
+                {subtitle}
+              </Typography>
+            }
+            sx={{ width: 500 }}
+          />
         </ListItem>
       </List>
     );
@@ -112,8 +124,12 @@ export default function OrderList() {
                 {renderList('Delivery', order.delivery)}
                 {renderList('Fee', order.fee)}
                 {renderList('Open Price', order.price)}
-                {renderList('Result', order.color ? order.color : 'N/A')}
-                {renderList('Select', order.pick)}
+                {renderList(
+                  'Result',
+                  order.color ? order.color : 'N/A',
+                  order.color ? true : false,
+                )}
+                {renderList('Select', order.pick, true)}
                 {renderList('Status', 'Success')}
                 {renderList('Amount', order.amount ? order.amount : 'N/A')}
                 {renderList(
