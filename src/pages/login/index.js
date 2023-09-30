@@ -70,6 +70,7 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
+            type="number"
             id="mobile_number"
             label="Mobile Number"
             name="mobile"

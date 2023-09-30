@@ -131,6 +131,7 @@ export default function SignUp() {
               <TextField
                 required
                 fullWidth
+                type="number"
                 id="mobile"
                 label="Mobile number"
                 name="mobile"
