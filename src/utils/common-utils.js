@@ -690,6 +690,12 @@ export const formatDateTime = (time, format = DefaultDateTime) => {
   return checkname;
 };
 
+export const unixformatDateTime = (time, format = DefaultDateTime) => {
+  const timeFormat = momentTime.unix(time).format(format);
+  const checkname = timeFormat === "Invalid date" ? "N/A" : timeFormat;
+  return checkname;
+};
+
 export const formatNewDateTime = (time, format = DefaultDateTime) => {
   const timeFormat = momentTime(time).format(format);
   const checkname = timeFormat === "Invalid date" ? null : timeFormat;

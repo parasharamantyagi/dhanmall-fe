@@ -1,4 +1,4 @@
-export const DefaultDateTime = "MM/DD/YY HHmm";
+export const DefaultDateTime = "MM/DD/YY hh:mm A";
 export const DateTime = "ddd, MM/DD/YY - HHmm";
 export const DefaultDate = "MM/DD/YY";
 export const DefaultDOBDate = "MM/DD/YYYY";
