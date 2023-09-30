@@ -59,9 +59,7 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-        {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
           <img src="all-images/img-4.png" style={{ width: "100%",borderRadius:'10%',border: "33px", margin: "-30%" }} alt="title" />
-        {/* </Avatar> */}
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -110,7 +108,7 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="forgot-password" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

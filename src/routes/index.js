@@ -21,6 +21,7 @@ import NotFound from "../pages/notfound";
 import BillingDashboard from "../pages/billing";
 import ChangePassword from "../pages/ChangePassword";
 import MyProfile from "../pages/MyProfile";
+import ForgotPassword from "../pages/ForgotPassword";
 
 const routes = (isLoggedIn) => {
   return [
@@ -28,6 +29,11 @@ const routes = (isLoggedIn) => {
       // public routes
       path: '/login',
       element: !isLoggedIn ? <SignIn /> : <Navigate to="/" />,
+    },
+    {
+      // public routes
+      path: '/forgot-password',
+      element: !isLoggedIn ? <ForgotPassword /> : <Navigate to="/" />,
     },
     {
       // public routes
