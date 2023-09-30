@@ -22,7 +22,7 @@ import {
  * @param val: number/string/object/array != (undefined or null)
  */
 export const validValue = (val) =>
-  typeof val !== "undefined" && val !== undefined && val !== null;
+  typeof val !== "undefined" && val !== undefined && val !== null && val !== '';
 
 /**
  * Get window width and height

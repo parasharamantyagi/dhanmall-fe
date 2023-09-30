@@ -19,6 +19,8 @@ import WalletWithdrawal from "../pages/wallet/walletWithdrawal";
 import ProductDetail from "../pages/home/details";
 import NotFound from "../pages/notfound";
 import BillingDashboard from "../pages/billing";
+import ChangePassword from "../pages/ChangePassword";
+import MyProfile from "../pages/MyProfile";
 
 const routes = (isLoggedIn) => {
   return [
@@ -95,6 +97,18 @@ const routes = (isLoggedIn) => {
     {
       path: '/billing/game-now', // protected routes
       element: isLoggedIn ? <BillingDashboard routeName="game-now" /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/promotion', // protected routes
+      element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/my-profile', // protected routes
+      element: isLoggedIn ? <MyProfile /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/change-password', // protected routes
+      element: isLoggedIn ? <ChangePassword /> : <Navigate to="/login" />,
     },
     {
       // public routes
