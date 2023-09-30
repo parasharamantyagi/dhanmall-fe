@@ -12,8 +12,10 @@ import Footer from "../footer";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
 import { changePasswordService } from "./action";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function ChangePassword() {
+  const navigate = useNavigate();
   const [error, setError] = React.useState({
     old_password: "",
     new_password: "",
@@ -53,6 +55,7 @@ export default function ChangePassword() {
     let response = await changePasswordService(object);
     if (strictValidObjectWithKeys(response) && response.success) {
       toast.success(response.message);
+      navigate("/mine");
     } else {
       toast.error(response.message);
     }

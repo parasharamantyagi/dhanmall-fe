@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -6,11 +7,31 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
 import CardHeader from "../header/header-card";
 import Footer from "../footer";
+import { updateProfileService } from "./action";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
+import { toast } from "react-toastify";
+import useMyProfileApi from "../../hooks/useMyProfileApi";
+import { useNavigate } from "react-router-dom";
 
 export default function MyProfile() {
+  const navigate = useNavigate();
+  const [objectForm, setObjectForm] = React.useState({
+    nickname: "",
+    email: "",
+  });
+  const { myProfileData } = useMyProfileApi("/profile", "GET");
+
+  React.useEffect(() => {
+    if (strictValidObjectWithKeys(myProfileData)) {
+      setObjectForm({
+        nickname: myProfileData.myProfile.nickname,
+        email: myProfileData.myProfile.email,
+      });
+    }
+  }, [myProfileData]);
+
   const renderSubtitle = (text) => {
     return (
       <Typography mt={2} variant="p4">
@@ -18,13 +39,23 @@ export default function MyProfile() {
       </Typography>
     );
   };
-  const renderMainHeader = (text) => {
-    return (
-      <Typography mt={1} variant="h2">
-        {text}
-      </Typography>
-    );
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let object = {
+      nickname: data.get("nickname"),
+      email: data.get("email"),
+    };
+    let response = await updateProfileService(object);
+    if (strictValidObjectWithKeys(response) && response.success) {
+      toast.success(response.message);
+      navigate("/mine");
+    } else {
+      toast.error(response.message);
+    }
   };
+
   return (
     <Box
       sx={{
@@ -33,21 +64,12 @@ export default function MyProfile() {
         flexDirection: "column",
       }}
     >
-      <CardHeader title="Contact Us" />
+      <CardHeader title="Update profile" />
       <Box p={1} flexDirection="column" display="flex">
-        {renderMainHeader("Contact Us")}
-        {/* {renderHeader("Interpretation")} */}
-        {renderSubtitle(
-          "If you have any questions about this Privacy Policy, You can contact us: +916239463839"
-        )}
-        {renderSubtitle(
-          "For comunicate with us please join our telegram group https://t.me/luckydhanmall"
-        )}
-        {/* {renderSubtitle(
-          ""
-        )} */}
-
         <Box
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
           sx={{
             display: "flex",
             minHeight: "100vh",
@@ -60,30 +82,32 @@ export default function MyProfile() {
                 margin="normal"
                 required
                 fullWidth
-                id="type"
-                label="Type"
-                name="type"
-                autoComplete="type"
+                id="nickname"
+                label="Nickname"
+                name="nickname"
+                value={objectForm.nickname}
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ nickname: event.target.value },
+                  })
+                }
                 autoFocus
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="whatsApp"
-                label="WhatsApp"
-                name="whatsApp"
-                autoComplete="whatsApp"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="description"
-                label="description"
-                name="description"
-                autoComplete="Description"
+                id="email"
+                label="Email"
+                name="email"
+                value={objectForm.email}
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ email: event.target.value },
+                  })
+                }
                 autoFocus
               />
               <Button
@@ -92,7 +116,7 @@ export default function MyProfile() {
                 variant="contained"
                 sx={{ mt: 3, mb: 7 }}
               >
-                Sign In
+                Update password
               </Button>
             </CardContent>
           </Card>
