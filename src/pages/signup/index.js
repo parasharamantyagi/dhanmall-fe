@@ -1,5 +1,4 @@
 import * as React from "react";
-// import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -8,7 +7,6 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { registerService, verifyOtpService } from "./action";
@@ -16,6 +14,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../footer";
 import { strictValidObjectWithKeys, validValue } from "../../utils/common-utils";
+import { InputAdornment } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -44,13 +43,14 @@ export default function SignUp() {
   const handleOtp = async () => {
     if (objectForm.mobile) {
       let response = await verifyOtpService({
-        mobile: objectForm.mobile,
+        mobile: `+91${objectForm.mobile}`,
         type: "registration",
       });
+      console.log(response);
       if (!response.success) {
         setError({ mobile: response.message });
       } else {
-        toast.success("Use 123456 now for Verification code");
+        toast.success(response.message);
         setError("");
       }
     }
@@ -62,7 +62,7 @@ export default function SignUp() {
     let errorValidation = {};
     let object = {
       nickname: data.get("nickname"),
-      mobile: data.get("mobile"),
+      mobile: `+91${data.get("mobile")}`,
       password: data.get("password"),
       verification_code: data.get("verification_code"),
       recommendation_code: data.get("recommendation_code"),
@@ -141,6 +141,11 @@ export default function SignUp() {
                     ...{ mobile: event.target.value },
                   })
                 }
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">+91</InputAdornment>
+                  ),
+                }}
               />
               {error && error.mobile && (
                 <Typography paragraph sx={{ color: "red" }}>

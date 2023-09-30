@@ -85,10 +85,9 @@ export default function FullWidthTabs({ myProfile }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const copyToClipboard = () => {
-    const copyText = "https://luckydhanmall.com/#/register?r_code=EFFEECFC";
-    navigator.clipboard.writeText(copyText).then(() => {
+    navigator.clipboard.writeText(strictValidObjectWithKeys(myProfile)
+    ? myProfile.myProfile.promotion_url : '00000000').then(() => {
       alert("copied to clipboard");
     });
   };
@@ -138,11 +137,8 @@ export default function FullWidthTabs({ myProfile }) {
             placeholder="My Promotion Link"
             label="My Promotion Link"
             variant="outlined"
-            value={
-              strictValidObjectWithKeys(myProfile)
-                ? myProfile.myProfile.promotion_url
-                : ""
-            }
+            value={strictValidObjectWithKeys(myProfile)
+              ? myProfile.myProfile.promotion_url : '00000000' }
             sx={{ mt: 2 }}
             multiline
             rows={3}
