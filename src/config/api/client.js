@@ -29,7 +29,7 @@ client.interceptors.request.use(
 
 export const apiCall = function (method, route, body = null, token = null) {
   const onSuccess = function (response) {
-    console.log('Request Successful!', response);
+    // console.log('Request Successful!', response);
     return response.data;
   };
 

@@ -1,33 +1,39 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Footer from '../footer';
-import GamesTable from './games';
-import Header from '../header';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Footer from "../footer";
+import GamesTable from "./games";
+import Header from "../header";
 import {
   Backdrop,
   Button,
   CircularProgress,
   Divider,
   Typography,
-} from '@mui/material';
-import CurrentGame from './current-game';
-import { dashboardService, gameNowService } from './actions';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-import OrderList from '../orders/OrderList';
-import { useNavigate } from 'react-router-dom';
-import { strictValidObjectWithKeys } from '../../utils/common-utils';
-import useApi from '../../hooks/useApi';
+} from "@mui/material";
+import CurrentGame from "./current-game";
+import { dashboardService, gameNowService } from "./actions";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import OrderList from "../orders/OrderList";
+import { useNavigate } from "react-router-dom";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
+import useApi from "../../hooks/useApi";
 
 export default function Win() {
   const [gameNow, setGameNow] = React.useState({ period: 0, time: 180 });
   const navigate = useNavigate();
   const [loader, setloader] = React.useState(false);
   const [dashboard, setDashboard] = React.useState([]);
-  const { data, loading, recallApi} = useApi('/order', 'GET');
+  const [game_page, setGamePage] = React.useState(1);
+  const { data, loading, recallApi } = useApi("/order", "GET");
 
   const dashboardApi = async () => {
-    let response = await dashboardService();
+    let response = await dashboardService({
+      project_id: 1,
+      page: 1,
+      limit: 10,
+    });
+    setGamePage(response.data?.game_page || 1);
     setDashboard(response.data?.game_history || []);
   };
 
@@ -42,7 +48,6 @@ export default function Win() {
     }
   };
 
-
   React.useEffect(() => {
     callapi();
     dashboardApi();
@@ -51,16 +56,16 @@ export default function Win() {
   return (
     <>
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loader}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
       <Box
         sx={{
-          display: 'flex',
-          minHeight: '100vh',
-          flexDirection: 'column',
+          display: "flex",
+          minHeight: "100vh",
+          flexDirection: "column",
           zIndex: 0,
         }}
       >
@@ -88,7 +93,7 @@ export default function Win() {
           <Typography>Parity Record</Typography>
         </Box>
         <Divider />
-        <GamesTable data={dashboard} />
+        <GamesTable data={dashboard} game_page={game_page} />
         <Divider />
         <Box
           py={1.5}
@@ -115,7 +120,7 @@ export default function Win() {
             variant="contained"
             color="primary"
             size="small"
-            onClick={() => navigate('/orders')}
+            onClick={() => navigate("/orders")}
           >
             My Orders
           </Button>

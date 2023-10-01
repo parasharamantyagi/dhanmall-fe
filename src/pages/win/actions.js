@@ -1,13 +1,9 @@
 import { apiCall } from "../../config/api/client";
 import { messages } from "../../language/en";
 
-export const dashboardService = async () => {
+export const dashboardService = async (object) => {
   try {
-    const res = await apiCall("POST", "/dashboard", {
-      project_id: 1,
-      page: 1,
-      limit: 10,
-    });
+    const res = await apiCall("POST", "/dashboard", object);
     if (res.status === 1) {
       return {
         data: res.data,
