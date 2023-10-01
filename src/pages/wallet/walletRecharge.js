@@ -10,21 +10,23 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import CardHeader from "../header/header-card";
 import Paper from "@mui/material/Paper";
 import Footer from "../footer";
 import {
-  strictValidString,
+  defaultCurrencyFormat,
   validObjectWithParameterKeys,
 } from "../../utils/common-utils";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { Link } from "react-router-dom";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
+import { appUpiId } from "../../utils/constant";
+import useMyProfileApi from "../../hooks/useMyProfileApi";
+
 const buttonAmmount = [
-  { id: 1, ammount: "100" },
+  { id: 1, ammount: "200" },
   { id: 1, ammount: "500" },
   { id: 1, ammount: "750" },
   { id: 1, ammount: "1000" },
@@ -40,9 +42,10 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 export default function WalletRecharge() {
+  const { myProfileData } = useMyProfileApi("/profile", "GET");
   const [objVal, setObjVal] = React.useState({});
+  const [yourBalance, setYourBalance] = React.useState({ money: 0 });
   const [is_show, setIsShow] = React.useState(0);
-  const [transactionId, setTransactionId] = useState();
   const [type, setType] = React.useState("");
 
   const renderSubtitle = (text) => {
@@ -56,23 +59,39 @@ export default function WalletRecharge() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // window.location.href = `https://securegw-stage.paytm.in/theia/processTransaction?orderid=${paymentData.ORDER_ID}`;
-    // console.log({ recharge_amount: data.get("recharge_amount") });
-    // console.log("type", type);
-    if (type === "upipay") {
-      window.location.href = `https://pay.upilink.in/pay/parasharamantyagi-2@oksbi?am=${data.get(
-        "recharge_amount"
-      )}`;
-    }
-    // toast.success("Recharge add successfully");
+    console.log({
+      recharge_amount: data.get("recharge_amount"),
+      transaction_id: data.get("transaction_id"),
+      remarks: data.get("remarks"),
+      type: type,
+    });
   };
+
+  React.useEffect(() => {
+    if (strictValidObjectWithKeys(myProfileData)) {
+      setYourBalance({
+        money: myProfileData.myProfile.money,
+      });
+    }
+  }, [myProfileData]);
+
   const handleChange = (e) => {
-    // upipay
     setIsShow(
       e.target.name === "qrcode" ? 1 : e.target.name === "upipay" ? 2 : 0
     );
     setType(e.target.name);
   };
+
+  const payAmmountWithUpi = (e) => {
+    if (strictValidObjectWithKeys(objVal)) {
+      window.open(
+        `https://pay.upilink.in/pay/${appUpiId}?am=${objVal.recharge_amount}`
+      );
+    } else {
+      toast.error("Please select an ammount first");
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -92,7 +111,7 @@ export default function WalletRecharge() {
             <Grid item xs={12}>
               <Item>
                 <Typography mt={1} variant="h2">
-                  Your Balance: ₹ 6.49
+                  Your Balance: {defaultCurrencyFormat(yourBalance.money)}
                 </Typography>
 
                 <Grid item xs={12}>
@@ -110,10 +129,8 @@ export default function WalletRecharge() {
                         : ""
                     }
                     autoFocus
-                    onChange={(e) => {
-                      setObjVal({
-                        recharge_amount: e.target.value,
-                      });
+                    InputProps={{
+                      readOnly: true,
                     }}
                   />
                 </Grid>
@@ -143,13 +160,11 @@ export default function WalletRecharge() {
                     display="flex"
                     flex={1}
                     flexDirection="column"
-                    // justifyContent="center"
-                    // alignItems="center"
                     item
-                    xs={2}
+                    xs={12}
                   >
                     <Typography mt={1} variant="h2" align="left">
-                      Payment Mode
+                      Select Payment Mode
                     </Typography>
                     <FormControl
                       required
@@ -188,48 +203,48 @@ export default function WalletRecharge() {
                     // justifyContent="center"
                     // alignItems="center"
                     item
-                    xs={8}
+                    xs={12}
                   >
                     {is_show === 1 && (
                       <>
-                        <Typography mt={1} variant="h2" align="left">
-                          By using this Link, you can recharge the amount and
-                          submit the page with the correct transaction ID.
+                        <Typography
+                          mt={1}
+                          variant="h2"
+                          align="left"
+                          marginBottom={"5px"}
+                        >
+                          By using this QR code or UPI ID, you can recharge the
+                          amount and submit the page with the correct
+                          transaction ID.
                         </Typography>
                         <CardMedia
                           component="img"
-                          sx={{ width: 300, height: 350, margin: "-5px" }}
+                          sx={{
+                            width: 300,
+                            height: 300,
+                            margin: 1,
+                            align: "center",
+                          }}
                           image="/vani-paytm.jpeg"
                         />
                         <TextField
+                          name="transaction_id"
                           placeholder="Transaction ID"
                           label="Transaction ID"
                           variant="outlined"
-                          onChange={(e) => setTransactionId(e.target.value)}
-                          value={transactionId}
-                          sx={{ mt: 2, width: "30%" }}
-                          InputProps={{
-                            readOnly: true,
-                          }}
+                          sx={{ mt: 2, width: "100%" }}
                         />
                         <TextField
-                          placeholder="Transaction ID"
+                          name="remarks"
+                          placeholder="Enter Remarks if you mention in your upi"
                           label="Remarks"
                           variant="outlined"
-                          onChange={(e) => setTransactionId(e.target.value)}
-                          value={transactionId}
-                          sx={{ mt: 2, width: "30%" }}
-                          InputProps={{
-                            readOnly: true,
-                          }}
+                          sx={{ mt: 2, width: "100%" }}
                         />
                         <Button
                           type="submit"
                           variant="contained"
-                          // disabled={
-                          //   !type || !strictValidString(objVal.recharge_amount)
-                          // }
-                          sx={{ width: "30%", py: 1, mt: 1, mb: 4 }}
+                          sx={{ width: "100%", py: 1, mt: 1, mb: 4 }}
                         >
                           Recharge
                         </Button>
@@ -238,51 +253,37 @@ export default function WalletRecharge() {
                     {is_show === 2 && (
                       <>
                         <Typography mt={1} variant="h2" align="left">
-                          By using this QR code or UPI ID, you can recharge the
-                          amount and submit the page with the correct
-                          transaction ID.
+                          By using this Link, you can recharge the amount and
+                          submit the page with the correct transaction ID.
                         </Typography>
+                        <center>
+                          <Button
+                            type="button"
+                            variant="contained"
+                            sx={{ width: 200, py: 1, mt: 2 }}
+                            onClick={payAmmountWithUpi}
+                          >
+                            Pay with upi
+                          </Button>
+                        </center>
                         <TextField
+                          name="transaction_id"
                           placeholder="Transaction ID"
                           label="Transaction ID"
-                          type="button"
                           variant="outlined"
-                          onChange={(e) => setTransactionId(e.target.value)}
-                          value={transactionId}
-                          sx={{ mt: 2, width: "30%" }}
-                          InputProps={{
-                            readOnly: true,
-                          }}
+                          sx={{ mt: 2, width: "100%" }}
                         />
                         <TextField
-                          placeholder="Transaction ID"
-                          label="Transaction ID"
-                          variant="outlined"
-                          onChange={(e) => setTransactionId(e.target.value)}
-                          value={transactionId}
-                          sx={{ mt: 2, width: "30%" }}
-                          InputProps={{
-                            readOnly: true,
-                          }}
-                        />
-                        <TextField
-                          placeholder="Transaction ID"
+                          name="remarks"
+                          placeholder="Enter Remarks if you mention in your upi"
                           label="Remarks"
                           variant="outlined"
-                          onChange={(e) => setTransactionId(e.target.value)}
-                          value={transactionId}
-                          sx={{ mt: 2, width: "30%" }}
-                          InputProps={{
-                            readOnly: true,
-                          }}
+                          sx={{ mt: 2, width: "100%" }}
                         />
                         <Button
                           type="submit"
                           variant="contained"
-                          // disabled={
-                          //   !type || !strictValidString(objVal.recharge_amount)
-                          // }
-                          sx={{ width: "30%", py: 1, mt: 1, mb: 4 }}
+                          sx={{ width: "100%", py: 1, mt: 1, mb: 4 }}
                         >
                           Recharge
                         </Button>

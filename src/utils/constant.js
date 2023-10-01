@@ -17,6 +17,8 @@ export const resultByUnit = {
   9: ["green"],
 };
 
+export const appUpiId = '6398951359@paytm';
+
 export const homeContentDummyData = [
   {
     imageUrl:

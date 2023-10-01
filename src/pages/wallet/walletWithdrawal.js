@@ -12,6 +12,11 @@ import { styled } from "@mui/material/styles";
 import CardHeader from "../header/header-card";
 import Paper from "@mui/material/Paper";
 import Footer from "../footer";
+import useMyProfileApi from "../../hooks/useMyProfileApi";
+import {
+  defaultCurrencyFormat,
+  strictValidObjectWithKeys,
+} from "../../utils/common-utils";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -22,6 +27,17 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function WalletWithdrawal() {
+  const { myProfileData } = useMyProfileApi("/profile", "GET");
+  const [objVal, setObjVal] = React.useState({ money: 0 });
+
+  React.useEffect(() => {
+    if (strictValidObjectWithKeys(myProfileData)) {
+      setObjVal({
+        money: myProfileData.myProfile.money,
+      });
+    }
+  }, [myProfileData]);
+
   const renderSubtitle = (text) => {
     return (
       <Typography mt={2} variant="p4">
@@ -48,7 +64,7 @@ export default function WalletWithdrawal() {
             <Grid item xs={12}>
               <Item>
                 <Typography mt={1} variant="h2">
-                  Balance: ₹ 6.49
+                  Balance: {defaultCurrencyFormat(objVal.money)}
                 </Typography>
                 <Grid item xs={12}>
                   <TextField
