@@ -24,6 +24,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
 import { appUpiId } from "../../utils/constant";
 import useMyProfileApi from "../../hooks/useMyProfileApi";
+import { addRechargeService } from "./action";
+import { useNavigate } from "react-router-dom";
 
 const buttonAmmount = [
   { id: 1, ammount: "200" },
@@ -42,6 +44,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 export default function WalletRecharge() {
+  const navigate = useNavigate();
   const { myProfileData } = useMyProfileApi("/profile", "GET");
   const [objVal, setObjVal] = React.useState({});
   const [yourBalance, setYourBalance] = React.useState({ money: 0 });
@@ -59,12 +62,19 @@ export default function WalletRecharge() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    let newObj = {
       recharge_amount: data.get("recharge_amount"),
       transaction_id: data.get("transaction_id"),
       remarks: data.get("remarks"),
       type: type,
-    });
+    };
+    let result = await addRechargeService(newObj);
+    if(result.success){
+      toast.success(result.message);
+      navigate("/wallet-recharge");
+    }else{
+      toast.error(result.message);
+    }    
   };
 
   React.useEffect(() => {
@@ -260,7 +270,7 @@ export default function WalletRecharge() {
                           <Button
                             type="button"
                             variant="contained"
-                            sx={{ width: 200, py: 1, mt: 2 }}
+                            sx={{ width: 300, py: 1, mt: 2 }}
                             onClick={payAmmountWithUpi}
                           >
                             Pay with upi
