@@ -31,7 +31,7 @@ export default function CardHeader({ pageNo, title }) {
             sx={{
               width: 25,
               height: 25,
-              margin: 0.5,
+              margin: 1,
               // align: "center",
               borderRadius: 1
             }}
