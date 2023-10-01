@@ -9,7 +9,6 @@ import {
   Box,
   ButtonGroup,
   Checkbox,
-  CircularProgress,
   FormControl,
   FormControlLabel,
   IconButton,

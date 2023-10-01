@@ -105,7 +105,7 @@ export default function ForgotPassword() {
       >
         {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
         <img
-          src="all-images/img-4.png"
+          src="img-4.png"
           style={{
             width: "100%",
             borderRadius: "10%",

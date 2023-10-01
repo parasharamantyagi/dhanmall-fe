@@ -10,6 +10,7 @@ import { withStyles, createStyles } from "@mui/styles";
 import Sidebar from "./sidebar";
 import useMyProfileApi from "../../hooks/useMyProfileApi";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
+import { useNavigate } from "react-router-dom";
 
 const styles = (theme) =>
   createStyles({
@@ -25,6 +26,7 @@ const styles = (theme) =>
   });
 
 const Profile = (props) => {
+  const navigate = useNavigate();
   const { myProfileData } = useMyProfileApi("/profile", "GET");
   const { classes } = props;
   return (
@@ -63,7 +65,9 @@ const Profile = (props) => {
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(strictValidObjectWithKeys(myProfileData) ? myProfileData.myProfile.money : 0)}
               </Typography>
-              <Button variant="contained" color="primary" size="small">
+              <Button variant="contained" color="primary" size="small" onClick={() => {
+                navigate("/wallet-recharge");
+              }}>
                 Recharge
               </Button>
             </Box>
@@ -71,7 +75,9 @@ const Profile = (props) => {
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(strictValidObjectWithKeys(myProfileData) ? myProfileData.myProfile.commission : 0)}
               </Typography>
-              <Button variant="contained" color="primary" size="small">
+              <Button variant="contained" color="primary" size="small" onClick={() => {
+                navigate("/promotion");
+              }}>
                 Commission
               </Button>
             </Box>

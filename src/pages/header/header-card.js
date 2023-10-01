@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, CardMedia, Paper, Typography } from "@mui/material";
 import IconWithText from "../../components/icon-with-text";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
@@ -25,10 +25,22 @@ export default function CardHeader({ pageNo, title }) {
             }}
           />
         )}
-
-        <Typography color="white" variant="h5">
-          {title}
-        </Typography>
+        <>
+          <CardMedia
+            component="img"
+            sx={{
+              width: 25,
+              height: 25,
+              margin: 0.5,
+              // align: "center",
+              borderRadius: 1
+            }}
+            image="/small-logo.png"
+          />
+          <Typography color="white" variant="h5">
+            {title}
+          </Typography>
+        </>
       </Box>
     </Paper>
   );

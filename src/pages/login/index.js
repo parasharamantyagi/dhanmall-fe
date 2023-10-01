@@ -59,7 +59,7 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-          <img src="all-images/img-4.png" style={{ width: "100%",borderRadius:'10%',border: "33px", margin: "-30%" }} alt="title" />
+          <img src="img-4.png" style={{ width: "100%",borderRadius:'10%',border: "33px", margin: "-30%" }} alt="title" />
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>

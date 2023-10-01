@@ -105,7 +105,7 @@ export default function SignUp() {
         }}
       >
         {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
-        <img src="all-images/img-4.png" style={{ width: "100%",borderRadius:'10%',border: "33px", margin: "-30%" }} alt="title" />
+        <img src="img-4.png" style={{ width: "100%",borderRadius:'10%',border: "33px", margin: "-30%" }} alt="title" />
         {/* </Avatar> */}
         <Typography component="h1" variant="h5">
           Sign up
