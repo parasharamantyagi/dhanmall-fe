@@ -13,9 +13,7 @@ import { resetPasswordService, verifyOtpService } from "./action";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../footer";
-import {
-  strictValidObjectWithKeys,
-} from "../../utils/common-utils";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
 import { InputAdornment } from "@mui/material";
 
 function Copyright(props) {
@@ -81,7 +79,7 @@ export default function ForgotPassword() {
     let response = await resetPasswordService(object);
     if (response.success) {
       toast.success(response.message);
-      navigate("/");
+      navigate("/login");
     } else {
       if (response.type === "verification_code") {
         setError({ verification_code: response.message });
@@ -195,7 +193,7 @@ export default function ForgotPassword() {
               </Button>
             </Grid>
             <Grid item xs={12}>
-            {error && error.verification_code && (
+              {error && error.verification_code && (
                 <Typography paragraph sx={{ color: "red" }}>
                   {error.verification_code}
                 </Typography>

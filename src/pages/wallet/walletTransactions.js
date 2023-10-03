@@ -10,7 +10,9 @@ import CardHeader from "../header/header-card";
 import Footer from "../footer";
 import { useRechargeList } from "../../hooks/useBillingApi";
 import {
+  defaultCurrencyFormat,
   strictValidObjectWithKeys,
+  unixformatDateTime,
   validValue,
 } from "../../utils/common-utils";
 
@@ -34,32 +36,33 @@ export default function WalletTransactions() {
       <CardHeader title="Transactions" />
       <Box p={1} flexDirection="column" display="flex">
         {strictValidObjectWithKeys(rechargeList) &&
-            validValue(rechargeList.success) && rechargeList.rechargeList.recharge.map((object) => (
-          <>
-            <ListItem
-              key={object.bank_account}
-              disableGutters
-              secondaryAction={
-                <>
-                  <ListItemText primary={"₹ 25.41"} secondary={"₹ 5.41"} />
-                </>
-              }
-            >
-              <ListItem>
-                <ListItemText
-                  primary={"₹ 10.00"}
-                  secondary={
-                    <>
-                      <Typography>Place Order</Typography>
-                      <Typography>2023-09-01 12:19</Typography>
-                    </>
-                  }
-                />
+          validValue(rechargeList.success) &&
+          rechargeList.rechargeList.recharge.map((object) => (
+            <>
+              <ListItem
+                key={object.bank_account}
+                disableGutters
+                secondaryAction={
+                  <>
+                    <ListItemText primary={defaultCurrencyFormat(object.ammount)} secondary={defaultCurrencyFormat(0)} />
+                  </>
+                }
+              >
+                <ListItem>
+                  <ListItemText
+                    primary={defaultCurrencyFormat(object.ammount)}
+                    secondary={
+                      <>
+                        <Typography>Place Order</Typography>
+                        <Typography>{unixformatDateTime(object.date)}</Typography>
+                      </>
+                    }
+                  />
+                </ListItem>
               </ListItem>
-            </ListItem>
-            <Divider />
-          </>
-        ))}
+              <Divider />
+            </>
+          ))}
         {renderSubtitle()}
         {renderSubtitle()}
         {renderSubtitle()}

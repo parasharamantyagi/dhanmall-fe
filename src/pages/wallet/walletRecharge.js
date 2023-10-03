@@ -63,7 +63,7 @@ export default function WalletRecharge() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     let newObj = {
-      recharge_amount: data.get("recharge_amount"),
+      ammount: data.get("recharge_amount"),
       transaction_id: data.get("transaction_id"),
       remarks: data.get("remarks"),
       type: type,
@@ -71,7 +71,7 @@ export default function WalletRecharge() {
     let result = await addRechargeService(newObj);
     if (result.success) {
       toast.success(result.message);
-      navigate("/wallet-recharge");
+      navigate("/wallet-transactions");
     } else {
       toast.error(result.message);
     }
@@ -154,7 +154,7 @@ export default function WalletRecharge() {
                     <Grid item xs={4}>
                       <Button
                         variant="contained"
-                        sx={{ width: "80%", py: 1, mt: 1, mb: 1 }}
+                        sx={{ width: "80%", py: 1, mt: 1, mb: 1 , background:'#000000' }}
                         onClick={() => {
                           setObjVal({ recharge_amount: object.ammount });
                         }}
