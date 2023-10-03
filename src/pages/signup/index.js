@@ -13,8 +13,12 @@ import { registerService, verifyOtpService } from "./action";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../footer";
-import { strictValidObjectWithKeys, validValue } from "../../utils/common-utils";
-import { InputAdornment } from "@mui/material";
+import {
+  strictValidObjectWithKeys,
+  validValue,
+} from "../../utils/common-utils";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Copyright(props) {
   return (
@@ -31,6 +35,10 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
+  const [values, setValues] = React.useState({
+    password: "",
+    showPassword: false,
+  });
   const [searchParams] = useSearchParams();
   const [error, setError] = React.useState({
     mobile: "",
@@ -40,7 +48,16 @@ export default function SignUp() {
   const [objectForm, setObjectForm] = React.useState({});
   const navigate = useNavigate();
 
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   const handleOtp = async () => {
+    console.log(objectForm);
     if (objectForm.mobile) {
       let response = await verifyOtpService({
         mobile: `+91${objectForm.mobile}`,
@@ -53,6 +70,8 @@ export default function SignUp() {
         toast.success(response.message);
         setError("");
       }
+    } else {
+      toast.error("Please enter mobile number first");
     }
   };
 
@@ -67,17 +86,17 @@ export default function SignUp() {
       verification_code: data.get("verification_code"),
       recommendation_code: data.get("recommendation_code"),
     };
-    if(!data.get("mobile")){
-      errorValidation.mobile = 'Please enter a valid mobile';
+    if (!data.get("mobile")) {
+      errorValidation.mobile = "Please enter a valid mobile";
     }
-    if(!data.get("verification_code")){
-      errorValidation.verification_code = 'Please enter verification code';
+    if (!data.get("verification_code")) {
+      errorValidation.verification_code = "Please enter verification code";
     }
-    if(!data.get("password")){
-      errorValidation.password = 'Please enter password';
+    if (!data.get("password")) {
+      errorValidation.password = "Please enter password";
     }
     setError(errorValidation);
-    if(strictValidObjectWithKeys(errorValidation)){
+    if (strictValidObjectWithKeys(errorValidation)) {
       return false;
     }
     let response = await registerService(object);
@@ -105,7 +124,16 @@ export default function SignUp() {
         }}
       >
         {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
-        <img src="img-4.png" style={{ width: "100%",borderRadius:'10%',border: "33px", margin: "-30%" }} alt="title" />
+        <img
+          src="img-4.png"
+          style={{
+            width: "100%",
+            borderRadius: "10%",
+            border: "33px",
+            margin: "-30%",
+          }}
+          alt="title"
+        />
         {/* </Avatar> */}
         <Typography component="h1" variant="h5">
           Sign up
@@ -147,34 +175,15 @@ export default function SignUp() {
                     <InputAdornment position="start">+91</InputAdornment>
                   ),
                 }}
-              />
-              {error && error.mobile && (
-                <Typography paragraph sx={{ color: "red" }}>
-                  {error.mobile}
-                </Typography>
-              )}
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-                onChange={(event) =>
-                  setObjectForm({
-                    ...objectForm,
-                    ...{ password: event.target.value },
-                  })
+                helperText={
+                  error &&
+                  error.mobile && (
+                    <Typography paragraph sx={{ ml: -1.5, color: "red" }}>
+                      {error.mobile}
+                    </Typography>
+                  )
                 }
               />
-              {error && error.password && (
-                <Typography paragraph sx={{ color: "red" }}>
-                  {error.password}
-                </Typography>
-              )}
             </Grid>
             <Grid item xs={8}>
               <TextField
@@ -189,6 +198,14 @@ export default function SignUp() {
                     ...{ verification_code: event.target.value },
                   })
                 }
+                helperText={
+                  error &&
+                  error.verification_code && (
+                    <Typography paragraph sx={{ ml: -1.5, color: "red" }}>
+                      {error.verification_code}
+                    </Typography>
+                  )
+                }
               />
             </Grid>
             <Grid item xs={4}>
@@ -196,18 +213,58 @@ export default function SignUp() {
                 fullWidth
                 size="large"
                 variant="contained"
-                sx={{ mt: 0, mb: 0, height: "99%" }}
+                sx={{
+                  mt: 0,
+                  mb: 0,
+                  height: error && error.verification_code ? "60%" : "99%",
+                }}
                 onClick={() => handleOtp()}
               >
-                Verify Otp
+                Get Otp
               </Button>
             </Grid>
             <Grid item xs={12}>
-              {error && error.verification_code && (
-                <Typography paragraph sx={{ color: "red" }}>
-                  {error.verification_code}
-                </Typography>
-              )}
+              <TextField
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type={values.showPassword ? "text" : "password"}
+                id="password"
+                autoComplete="new-password"
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ password: event.target.value },
+                  })
+                }
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {values.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                helperText={
+                  error &&
+                  error.password && (
+                    <Typography paragraph sx={{ ml: -1.5, color: "red" }}>
+                      {error.password}
+                    </Typography>
+                  )
+                }
+              />
+            </Grid>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 name="recommendation_code"

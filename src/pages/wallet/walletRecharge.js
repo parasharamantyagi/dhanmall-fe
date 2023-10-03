@@ -69,12 +69,12 @@ export default function WalletRecharge() {
       type: type,
     };
     let result = await addRechargeService(newObj);
-    if(result.success){
+    if (result.success) {
       toast.success(result.message);
       navigate("/wallet-recharge");
-    }else{
+    } else {
       toast.error(result.message);
-    }    
+    }
   };
 
   React.useEffect(() => {
@@ -210,8 +210,6 @@ export default function WalletRecharge() {
                     display="flex"
                     flex={1}
                     flexDirection="column"
-                    // justifyContent="center"
-                    // alignItems="center"
                     item
                     xs={12}
                   >
@@ -237,6 +235,15 @@ export default function WalletRecharge() {
                           }}
                           image="/vani-paytm.jpeg"
                         />
+                        <Typography
+                          variant="body2"
+                          align="left"
+                          color="red"
+                          gutterBottom
+                        >
+                          Note : You must fill in the correct Ref No.,then click
+                          the button below to submit,and wait for it to arrive!
+                        </Typography>
                         <TextField
                           name="transaction_id"
                           placeholder="Transaction ID"
@@ -270,12 +277,21 @@ export default function WalletRecharge() {
                           <Button
                             type="button"
                             variant="contained"
-                            sx={{ width: 300, py: 1, mt: 2 }}
+                            sx={{ width: 350, py: 1, mt: 1, mb: 4 }}
                             onClick={payAmmountWithUpi}
                           >
                             Pay with upi
                           </Button>
                         </center>
+                        <Typography
+                          variant="body2"
+                          align="left"
+                          color="red"
+                          gutterBottom
+                        >
+                          Note : You must fill in the correct Ref No.,then click
+                          the button below to submit,and wait for it to arrive!
+                        </Typography>
                         <TextField
                           name="transaction_id"
                           placeholder="Transaction ID"
