@@ -192,6 +192,7 @@ export default function SignUp() {
                 name="verification_code"
                 label="Verification code"
                 id="verification_code"
+                type="number"
                 onChange={(event) =>
                   setObjectForm({
                     ...objectForm,

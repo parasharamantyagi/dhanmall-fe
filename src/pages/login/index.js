@@ -13,7 +13,8 @@ import { loginService } from "./action";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../footer";
-import { InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Copyright(props) {
   return (
@@ -30,8 +31,21 @@ function Copyright(props) {
 }
 
 export default function SignIn() {
+  const [values, setValues] = React.useState({
+    password: "",
+    showPassword: false,
+  });
   const [error] = React.useState("");
   const navigate = useNavigate();
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -59,7 +73,16 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-          <img src="img-4.png" style={{ width: "100%",borderRadius:'10%',border: "33px", margin: "-30%" }} alt="title" />
+        <img
+          src="img-4.png"
+          style={{
+            width: "100%",
+            borderRadius: "10%",
+            border: "33px",
+            margin: "-30%",
+          }}
+          alt="title"
+        />
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -85,9 +108,21 @@ export default function SignIn() {
             fullWidth
             name="password"
             label="Password"
-            type="password"
+            type={values.showPassword ? "text" : "password"}
             id="password"
             autoComplete="current-password"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment sx={{ ml: 0,width: '9%' }} position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
