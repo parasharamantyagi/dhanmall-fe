@@ -57,13 +57,11 @@ export default function SignUp() {
   };
 
   const handleOtp = async () => {
-    console.log(objectForm);
     if (objectForm.mobile) {
       let response = await verifyOtpService({
         mobile: `+91${objectForm.mobile}`,
         type: "registration",
       });
-      console.log(response);
       if (!response.success) {
         setError({ mobile: response.message });
       } else {

@@ -5,7 +5,6 @@ import { messages } from "../../language/en";
 export const loginService = async (data) => {
   try {
     const res = await apiCall("POST", "/login", data);
-    console.log('res: ', res);
     if (res.status === 1) {
       store({
         authToken: res.data.token,

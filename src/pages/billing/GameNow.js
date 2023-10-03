@@ -29,7 +29,6 @@ export default function GameNow() {
   React.useEffect(() => {
     if (strictValidObjectWithKeys(billingGame) && billingGame.success) {
       setObject(billingGame.billingGame);
-      console.log("Okkkkkkkk", billingGame.billingGame);
     }
   }, [billingGame]);
 

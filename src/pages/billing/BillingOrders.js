@@ -34,7 +34,6 @@ export default function BillingOrders() {
     setOpen(true);
   };
   const handleAgree = () => {
-    console.log('yyyyyyyyyyyyy');
     setOpen(false);
   };
   const handleDissAgree = () => {

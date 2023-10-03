@@ -47,7 +47,6 @@ export default function ForgotPassword() {
         mobile: `+91${objectForm.mobile}`,
         type: "forgot_password",
       });
-      console.log(response);
       if (!response.success) {
         setError({ mobile: response.message });
       } else {

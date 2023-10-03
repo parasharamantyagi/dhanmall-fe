@@ -20,17 +20,22 @@ import { strictValidObjectWithKeys } from "../../utils/common-utils";
 import useApi from "../../hooks/useApi";
 
 export default function Win() {
+  const [orderPage, setOrderPage] = React.useState(0);
   const [gameNow, setGameNow] = React.useState({ period: 0, time: 180 });
   const navigate = useNavigate();
   const [loader, setloader] = React.useState(false);
   const [dashboard, setDashboard] = React.useState([]);
   const [game_page, setGamePage] = React.useState(1);
-  const { data, loading, recallApi } = useApi("/order", "GET");
+  const [gameOrder, setSetGameOrder] = React.useState(0);
+  const { data, loading, recallApi } = useApi(
+    "/order?page=" + orderPage,
+    "GET"
+  );
 
   const dashboardApi = async () => {
     let response = await dashboardService({
       project_id: 1,
-      page: 1,
+      page: gameOrder,
       limit: 10,
     });
     setGamePage(response.data?.game_page || 1);
@@ -50,8 +55,11 @@ export default function Win() {
 
   React.useEffect(() => {
     callapi();
-    dashboardApi();
   }, []);
+
+  React.useEffect(() => {
+    dashboardApi();
+  }, [gameOrder]);
 
   return (
     <>
@@ -93,7 +101,11 @@ export default function Win() {
           <Typography>Parity Record</Typography>
         </Box>
         <Divider />
-        <GamesTable data={dashboard} game_page={game_page} />
+        <GamesTable
+          data={dashboard}
+          game_page={game_page}
+          gameOrder={setSetGameOrder}
+        />
         <Divider />
         <Box
           py={1.5}
@@ -106,7 +118,7 @@ export default function Win() {
           <Typography>My Record</Typography>
         </Box>
         <Divider />
-        <OrderList data={data} loading={loading} />
+        <OrderList data={data} loading={loading} setOder={setOrderPage} />
         <Box
           py={1.5}
           display="flex"

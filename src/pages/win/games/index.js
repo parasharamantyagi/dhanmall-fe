@@ -32,17 +32,12 @@ const getResult = (number) => {
   );
 };
 
-export default function GamesTable({ data, game_page }) {
+export default function GamesTable({ data, game_page, gameOrder }) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
+    gameOrder(newPage);
     setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
   };
 
   return (
@@ -60,7 +55,6 @@ export default function GamesTable({ data, game_page }) {
           <TableBody>
             {strictValidArrayWithLength(data) &&
               data
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, i) => {
                   return (
                     <TableRow
@@ -91,10 +85,9 @@ export default function GamesTable({ data, game_page }) {
         rowsPerPageOptions={false}
         component="div"
         count={game_page}
-        rowsPerPage={rowsPerPage}
+        rowsPerPage={10}
         page={page}
         onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
   );

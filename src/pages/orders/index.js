@@ -6,7 +6,8 @@ import CardHeader from "../header/header-card";
 import useApi from "../../hooks/useApi";
 
 export default function Orders() {
-  const { data, loading } = useApi("/order", "GET");
+  const [orderPage, setOrderPage] = React.useState(0);
+  const { data, loading } = useApi("/order?page=" + orderPage, "GET");
 
   return (
     <Box
@@ -17,7 +18,7 @@ export default function Orders() {
       }}
     >
       <CardHeader pageNo={false} title="My Orders" />
-      <OrderList data={data} loading={loading} />
+      <OrderList data={data} loading={loading} setOder={setOrderPage} />
       <Footer />
     </Box>
   );
