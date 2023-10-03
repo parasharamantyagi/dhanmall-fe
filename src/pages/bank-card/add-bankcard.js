@@ -29,6 +29,8 @@ export default function Addbankcard() {
     if (result.success) {
       toast.success(result.message);
       navigate("/bank-card");
+    }else{
+      toast.error(result.message);
     }
   };
 

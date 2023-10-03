@@ -21,7 +21,7 @@ const IconWithText = ({ icon, text, to, onClick, open, collapse = false }) => {
       }}
     >
       <Box>
-        <IconButton size="medium" color="primary">
+        <IconButton sx={{color:'#000'}} size="medium" color="primary">
           {icon}
         </IconButton>
         <Typography variant="p4">{text}</Typography>

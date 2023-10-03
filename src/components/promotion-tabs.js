@@ -86,10 +86,15 @@ export default function FullWidthTabs({ myProfile }) {
     setValue(newValue);
   };
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(strictValidObjectWithKeys(myProfile)
-    ? myProfile.myProfile.promotion_url : '00000000').then(() => {
-      alert("copied to clipboard");
-    });
+    navigator.clipboard
+      .writeText(
+        strictValidObjectWithKeys(myProfile)
+          ? myProfile.myProfile.promotion_url
+          : "00000000"
+      )
+      .then(() => {
+        alert("copied to clipboard");
+      });
   };
 
   return (
@@ -137,8 +142,11 @@ export default function FullWidthTabs({ myProfile }) {
             placeholder="My Promotion Link"
             label="My Promotion Link"
             variant="outlined"
-            value={strictValidObjectWithKeys(myProfile)
-              ? myProfile.myProfile.promotion_url : '00000000' }
+            value={
+              strictValidObjectWithKeys(myProfile)
+                ? `http://luckydhanmall.com/register?r_code=${myProfile.myProfile.promotion_code}`
+                : ""
+            }
             sx={{ mt: 2 }}
             multiline
             rows={3}

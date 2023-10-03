@@ -12,7 +12,6 @@ import {
   TablePagination,
 } from "@mui/material";
 import {
-  formatNewDateTime,
   strictValidObjectWithKeys,
   unixformatDateTime,
 } from "../../utils/common-utils";

@@ -97,14 +97,6 @@ const routes = (isLoggedIn) => {
       element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
     },
     {
-      path: '/billing/luck67', // protected routes
-      element: isLoggedIn ? <BillingDashboard routeName="luck67" /> : <Navigate to="/login" />,
-    },
-    {
-      path: '/billing/game-now', // protected routes
-      element: isLoggedIn ? <BillingDashboard routeName="game-now" /> : <Navigate to="/login" />,
-    },
-    {
       path: '/promotion', // protected routes
       element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
     },
@@ -115,6 +107,23 @@ const routes = (isLoggedIn) => {
     {
       path: '/change-password', // protected routes
       element: isLoggedIn ? <ChangePassword /> : <Navigate to="/login" />,
+    },
+    // admin url
+    {
+      path: '/billing/luck67', // protected routes
+      element: isLoggedIn ? <BillingDashboard routeName="luck67" /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/billing/game-now', // protected routes
+      element: isLoggedIn ? <BillingDashboard routeName="game-now" /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/billing/recharge-req', // protected routes
+      element: isLoggedIn ? <BillingDashboard routeName="recharge-req" /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/billing/withdrawal-req', // protected routes
+      element: isLoggedIn ? <BillingDashboard routeName="withdrawal-req" /> : <Navigate to="/login" />,
     },
     {
       // public routes

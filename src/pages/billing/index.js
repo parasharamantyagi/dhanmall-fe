@@ -13,6 +13,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MainList from "./listItems";
 import BillingOrders from "./BillingOrders";
 import GameNow from "./GameNow";
+import RechargeReq from "./RechargeReq";
+import WithdrawalReq from "./WithdrawalReq";
 
 const drawerWidth = 240;
 
@@ -92,6 +94,8 @@ export default function BillingDashboard({ routeName }) {
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                 {routeName === "luck67" && <BillingOrders />}
                 {routeName === "game-now" && <GameNow />}
+                {routeName === "recharge-req" && <RechargeReq />}
+                {routeName === "withdrawal-req" && <WithdrawalReq />}
               </Paper>
             </Grid>
           </Container>

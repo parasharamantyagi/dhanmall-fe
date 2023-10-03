@@ -1,11 +1,10 @@
-import * as React from 'react';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
+import * as React from "react";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useLocation } from "react-router-dom";
 
 const MainList = () => {
@@ -13,29 +12,48 @@ const MainList = () => {
 
   return (
     <React.Fragment>
-      <ListItemButton component={Link} to="/billing/luck67" selected={location.pathname === '/billing/luck67'}>
+      <ListItemButton
+        component={Link}
+        to="/billing/luck67"
+        selected={location.pathname === "/billing/luck67"}
+      >
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItemButton>
-      <ListItemButton component={Link} to="/billing/game-now" selected={location.pathname === '/billing/game-now'}>
+      {/*  */}
+      <ListItemButton
+        component={Link}
+        to="/billing/game-now"
+        selected={location.pathname === "/billing/game-now"}
+      >
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <EmojiEventsIcon />
         </ListItemIcon>
         <ListItemText primary="Game now" />
       </ListItemButton>
-      <ListItemButton>
+      {/*  */}
+      <ListItemButton
+        component={Link}
+        to="/billing/recharge-req"
+        selected={location.pathname === "/billing/recharge-req"}
+      >
         <ListItemIcon>
-          <PeopleIcon />
+          <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Customers" />
+        <ListItemText primary="Recharge Req" />
       </ListItemButton>
-      <ListItemButton>
+      {/*  */}
+      <ListItemButton
+        component={Link}
+        to="/billing/withdrawal-req"
+        selected={location.pathname === "/billing/withdrawal-req"}
+      >
         <ListItemIcon>
-          <BarChartIcon />
+          <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Reports" />
+        <ListItemText primary="Withdrawal Req" />
       </ListItemButton>
     </React.Fragment>
   );
