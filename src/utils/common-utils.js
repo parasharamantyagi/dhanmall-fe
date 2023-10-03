@@ -22,7 +22,7 @@ import {
  * @param val: number/string/object/array != (undefined or null)
  */
 export const validValue = (val) =>
-  typeof val !== "undefined" && val !== undefined && val !== null && val !== '';
+  typeof val !== "undefined" && val !== undefined && val !== null && val !== "";
 
 /**
  * Get window width and height
@@ -690,7 +690,7 @@ export const formatDateTime = (time, format = DefaultDateTime) => {
   return checkname;
 };
 
-export const unixformatDateTime = (time, format = DefaultDateTime) => {
+export const unixformatDateTime = (time, format = "DD-MMM-YYYY, hh:mm A") => {
   const timeFormat = momentTime.unix(time).format(format);
   const checkname = timeFormat === "Invalid date" ? "N/A" : timeFormat;
   return checkname;

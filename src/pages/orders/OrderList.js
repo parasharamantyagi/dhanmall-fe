@@ -14,6 +14,7 @@ import {
 import {
   formatNewDateTime,
   strictValidObjectWithKeys,
+  unixformatDateTime,
 } from "../../utils/common-utils";
 
 export default function OrderList({ data, loading, setOder }) {
@@ -24,7 +25,7 @@ export default function OrderList({ data, loading, setOder }) {
   };
 
   const handleChangePage = (event, newPage) => {
-    setOder(newPage)
+    setOder(newPage);
     setPage(newPage);
   };
 
@@ -146,7 +147,7 @@ export default function OrderList({ data, loading, setOder }) {
                 {renderList("Amount", order.amount ? order.amount : "N/A")}
                 {renderList(
                   "Create Time",
-                  formatNewDateTime(order.date, "DD-MM-YYYY, HH:mm")
+                  unixformatDateTime(order.date)
                 )}
                 {renderList("Type", "Parity")}
               </AccordionDetails>
