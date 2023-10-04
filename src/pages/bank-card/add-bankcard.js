@@ -23,7 +23,7 @@ export default function Addbankcard() {
       address: data.get("address"),
       mobile_number: data.get("mobile_number"),
       email: data.get("email"),
-      verification_code: data.get("verification_code"),
+      password: data.get("password"),
     };
     let result = await saveBankCardApi(obj);
     if (result.success) {
@@ -52,100 +52,91 @@ export default function Addbankcard() {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="Actual Name"
               name="actual_name"
-              autoComplete="Name"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="IFSC Code"
               name="ifsc_code"
-              autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="Bank name"
               name="bank_name"
-              autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="Bank account"
+              type="number"
               name="bank_account"
-              autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="State"
               name="state"
-              autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="City"
               name="city"
-              autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="Address"
               name="address"
-              autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="Mobile number"
               name="mobile_number"
-              autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="outlined-basic"
               label="Email"
               name="email"
-              autoComplete="email"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Code"
-              name="verification_code"
-              autoComplete="email"
+              id="outlined-basic"
+              label="Password"
+              name="password"
               autoFocus
             />
             <Button

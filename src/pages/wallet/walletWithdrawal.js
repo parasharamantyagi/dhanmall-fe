@@ -17,6 +17,10 @@ import {
   defaultCurrencyFormat,
   strictValidObjectWithKeys,
 } from "../../utils/common-utils";
+import { useBankCardApi } from "../bank-card/hooke";
+import { addWithdrawRequest } from "./action";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,8 +31,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function WalletWithdrawal() {
+  const navigate = useNavigate();
   const { myProfileData } = useMyProfileApi("/profile", "GET");
+  const { bankCardList } = useBankCardApi("/bank-card", "GET");
   const [objVal, setObjVal] = React.useState({ money: 0 });
+  const [allbankCardList, setAllbankCardList] = React.useState([]);
 
   React.useEffect(() => {
     if (strictValidObjectWithKeys(myProfileData)) {
@@ -38,6 +45,12 @@ export default function WalletWithdrawal() {
     }
   }, [myProfileData]);
 
+  React.useEffect(() => {
+    if (strictValidObjectWithKeys(bankCardList)) {
+      setAllbankCardList(bankCardList.bankCardList);
+    }
+  }, [bankCardList]);
+
   const renderSubtitle = (text) => {
     return (
       <Typography mt={2} variant="p4">
@@ -45,6 +58,22 @@ export default function WalletWithdrawal() {
       </Typography>
     );
   };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let newObj = {
+      ammount: data.get("recharge_amount"),
+      bank_card: data.get("bank_card"),
+    };
+    let result = await addWithdrawRequest(newObj);
+    if (result.success) {
+      toast.success(result.message);
+      navigate("/wallet-transactions");
+    } else {
+      toast.error(result.message);
+    }
+  };
+  
   return (
     <Box
       sx={{
@@ -55,7 +84,7 @@ export default function WalletWithdrawal() {
     >
       <CardHeader title="Withdrawal" />
       <Box p={1} flexDirection="column" display="flex">
-        <Box sx={{ width: "100%" }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
           <Grid
             container
             rowSpacing={1}
@@ -113,9 +142,9 @@ export default function WalletWithdrawal() {
                         autoComplete="bank_card"
                         autoFocus
                       >
-                        {[{ value: 1, label: "Axis" }].map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
+                        {allbankCardList.map((option) => (
+                          <MenuItem key={option._id} value={option._id}>
+                            {option.actual_name}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -123,6 +152,7 @@ export default function WalletWithdrawal() {
                   </Grid>
                   <Grid item xs={12}>
                     <Button
+                      type="submit"
                       variant="contained"
                       sx={{ width: "50%", py: 1, mt: 1, mb: 4 }}
                     >

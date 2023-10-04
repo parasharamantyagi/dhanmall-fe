@@ -16,19 +16,14 @@ import ConfirmDialog from "../../components/confirmDialog";
 export default function WithdrawalReq() {
   const [open, setOpen] = React.useState(false);
   const [confirmDialog, setConfirmDialog] = React.useState({});
-  const [page, setPage] = React.useState(4);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = React.useState(0);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
   const { rechargeList } = useRechargeList(
-    "/billing/recharge?limit=10&page=2",
+    "/billing/withdrawal-req?limit=10&page=" + page,
     "GET"
   );
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
   const handleClickOpen = (recharge_id) => {
     setConfirmDialog(recharge_id);
     setOpen(true);
@@ -66,7 +61,7 @@ export default function WithdrawalReq() {
         <TableBody>
           {strictValidObjectWithKeys(rechargeList) &&
             validValue(rechargeList.success) &&
-            rechargeList.rechargeList.recharge.map((row) => (
+            rechargeList.rechargeList.result.map((row) => (
               <TableRow key={row._id}>
                 <TableCell>{unixformatDateTime(row.date)}</TableCell>
                 <TableCell>{row.user_id.mobile}</TableCell>
@@ -93,13 +88,12 @@ export default function WithdrawalReq() {
         count={
           strictValidObjectWithKeys(rechargeList) &&
           validValue(rechargeList.success)
-            ? rechargeList.rechargeList.recharge_page
+            ? rechargeList.rechargeList.count
             : 0
         }
-        rowsPerPage={rowsPerPage}
+        rowsPerPage={10}
         page={page}
         onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </React.Fragment>
   );

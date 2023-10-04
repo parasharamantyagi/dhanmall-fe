@@ -3,6 +3,7 @@ import {
   Divider,
   ListItem,
   ListItemText,
+  TablePagination,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -15,9 +16,16 @@ import {
   unixformatDateTime,
   validValue,
 } from "../../utils/common-utils";
+import { capitalizeFirstLetter } from "../../utils/common-utils";
 
 export default function WalletTransactions() {
-  const { rechargeList } = useRechargeList("/recharge?page=0", "GET");
+  const [page, setPage] = React.useState(0);
+  const { rechargeList } = useRechargeList("/recharge?page=" + page, "GET");
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
   const renderSubtitle = (text) => {
     return (
       <Typography mt={2} variant="p4">
@@ -37,14 +45,52 @@ export default function WalletTransactions() {
       <Box p={1} flexDirection="column" display="flex">
         {strictValidObjectWithKeys(rechargeList) &&
           validValue(rechargeList.success) &&
-          rechargeList.rechargeList.recharge.map((object) => (
+          rechargeList.rechargeList.result.map((object) => (
             <>
               <ListItem
                 key={object.bank_account}
                 disableGutters
                 secondaryAction={
                   <>
-                    <ListItemText primary={defaultCurrencyFormat(object.ammount)} secondary={defaultCurrencyFormat(0)} />
+                    {object.type === "withdraw" ? (
+                      <ListItemText
+                        primary={
+                          <Typography
+                            sx={{
+                              color: object.status
+                                ? object.status === "processing"
+                                  ? "orange"
+                                  : object.status === "success"
+                                  ? "green"
+                                  : "red"
+                                : "",
+                            }}
+                          >
+                            {capitalizeFirstLetter(object.status)}
+                          </Typography>
+                        }
+                        secondary={defaultCurrencyFormat(0)}
+                      />
+                    ) : (
+                      <ListItemText
+                        primary={
+                          <Typography
+                            sx={{
+                              color: object.status
+                                ? object.status === "processing"
+                                  ? "orange"
+                                  : object.status === "success"
+                                  ? "green"
+                                  : "red"
+                                : "",
+                            }}
+                          >
+                            {capitalizeFirstLetter(object.status)}
+                          </Typography>
+                        }
+                        secondary={defaultCurrencyFormat(0)}
+                      />
+                    )}
                   </>
                 }
               >
@@ -54,7 +100,9 @@ export default function WalletTransactions() {
                     secondary={
                       <>
                         <Typography>Place Order</Typography>
-                        <Typography>{unixformatDateTime(object.date)}</Typography>
+                        <Typography>
+                          {unixformatDateTime(object.date)}
+                        </Typography>
                       </>
                     }
                   />
@@ -63,6 +111,19 @@ export default function WalletTransactions() {
               <Divider />
             </>
           ))}
+        <TablePagination
+          rowsPerPageOptions={false}
+          component="div"
+          count={
+            strictValidObjectWithKeys(rechargeList) &&
+            validValue(rechargeList.success)
+              ? rechargeList.rechargeList.count
+              : 0
+          }
+          rowsPerPage={10}
+          page={page}
+          onPageChange={handleChangePage}
+        />
         {renderSubtitle()}
         {renderSubtitle()}
         {renderSubtitle()}
