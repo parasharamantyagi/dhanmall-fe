@@ -13,8 +13,10 @@ import {
   validValue,
 } from "../../utils/common-utils";
 import ConfirmDialog from "../../components/confirmDialog";
+import { useRechargeDetail } from "./actions";
 
 export default function RechargeReq() {
+  const response = useRechargeDetail;
   const [open, setOpen] = React.useState(false);
   const [confirmDialog, setConfirmDialog] = React.useState({});
   const [page, setPage] = React.useState(0);
@@ -27,14 +29,24 @@ export default function RechargeReq() {
   );
   const handleClickOpen = (recharge_id) => {
     setConfirmDialog(recharge_id);
+    // response
     setOpen(true);
   };
   const handleAgree = () => {
+    console.log("Agree", confirmDialog);
+    response("/billing/recharge-status/" + confirmDialog, "PUT", {
+      status: "success",
+    });
     setOpen(false);
   };
   const handleDissAgree = () => {
+    console.log("DissAgree", confirmDialog);
+    response("/billing/recharge-status/" + confirmDialog, "PUT", {
+      status: "failure",
+    });
     setOpen(false);
   };
+
   return (
     <React.Fragment>
       <Typography>Recent Orders</Typography>
@@ -69,15 +81,21 @@ export default function RechargeReq() {
                 <TableCell>{row.ammount}</TableCell>
                 <TableCell>{row.details.transaction_id}</TableCell>
                 <TableCell>{row.details.remarks}</TableCell>
-                <TableCell><Typography sx={{
-                              color: row.status
-                                ? row.status === "processing"
-                                  ? "orange"
-                                  : row.status === "success"
-                                  ? "green"
-                                  : "red"
-                                : "",
-                            }}>{capitalizeFirstLetter(row.status)}</Typography></TableCell>
+                <TableCell>
+                  <Typography
+                    sx={{
+                      color: row.status
+                        ? row.status === "processing"
+                          ? "orange"
+                          : row.status === "success"
+                          ? "green"
+                          : "red"
+                        : "",
+                    }}
+                  >
+                    {capitalizeFirstLetter(row.status)}
+                  </Typography>
+                </TableCell>
                 <TableCell>
                   <Button
                     variant="contained"

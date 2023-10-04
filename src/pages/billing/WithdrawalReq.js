@@ -11,9 +11,11 @@ import {
   unixformatDateTime,
   validValue,
 } from "../../utils/common-utils";
-import ConfirmDialog from "../../components/confirmDialog";
+import BankDetailDialog from "../../components/BankDetailDialog";
+import { useRechargeDetail } from "./actions";
 
 export default function WithdrawalReq() {
+  const response = useRechargeDetail;
   const [open, setOpen] = React.useState(false);
   const [confirmDialog, setConfirmDialog] = React.useState({});
   const [page, setPage] = React.useState(0);
@@ -24,10 +26,17 @@ export default function WithdrawalReq() {
     "/billing/withdrawal-req?limit=10&page=" + page,
     "GET"
   );
-  const handleClickOpen = (recharge_id) => {
-    setConfirmDialog(recharge_id);
-    setOpen(true);
+  const handleClickOpen = async (recharge_id) => {
+    const rechargeDetail = await response(
+      "/billing/recharge-detail/" + recharge_id,
+      "GET"
+    );
+    if (strictValidObjectWithKeys(rechargeDetail) && rechargeDetail.success) {
+      setConfirmDialog(rechargeDetail.data);
+      setOpen(true);
+    }
   };
+
   const handleAgree = () => {
     setOpen(false);
   };
@@ -37,12 +46,10 @@ export default function WithdrawalReq() {
   return (
     <React.Fragment>
       <Typography>Recent Orders</Typography>
-      <ConfirmDialog
+      <BankDetailDialog
         open={open}
         handleAgree={handleAgree}
         handleDissAgree={handleDissAgree}
-        title=" Are you sure to approve this payment .?"
-        description="Please make sure before approve this payment becouse this payment will not be revert after approve .?"
         data={confirmDialog}
       />
       <Table size="large">
@@ -74,7 +81,7 @@ export default function WithdrawalReq() {
                     variant="contained"
                     onClick={() => handleClickOpen(row._id)}
                   >
-                    Approve
+                    Detail
                   </Button>
                 </TableCell>
                 {/* <TableCell align="right">{`$${row.ammount}`}</TableCell> */}

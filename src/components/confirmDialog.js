@@ -26,10 +26,7 @@ export default function ConfirmDialog({ open, handleAgree,handleDissAgree, title
       </DialogContent>
       <DialogActions>
         <Button onClick={handleDissAgree}>Disagree</Button>
-        <Button onClick={() => {
-            handleAgree();
-            handleDissAgree();
-        }} autoFocus>
+        <Button onClick={handleAgree} autoFocus>
           Agree
         </Button>
       </DialogActions>
