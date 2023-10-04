@@ -65,7 +65,7 @@ const Profile = (props) => {
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(strictValidObjectWithKeys(myProfileData) ? myProfileData.myProfile.money : 0)}
               </Typography>
-              <Button variant="contained" color="primary" size="small" onClick={() => {
+              <Button variant="contained" color="primary" size="medium" onClick={() => {
                 navigate("/wallet-recharge");
               }}>
                 Recharge
@@ -75,7 +75,7 @@ const Profile = (props) => {
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(strictValidObjectWithKeys(myProfileData) ? myProfileData.myProfile.commission : 0)}
               </Typography>
-              <Button variant="contained" color="primary" size="small" onClick={() => {
+              <Button variant="contained" color="primary" size="medium" onClick={() => {
                 navigate("/promotion");
               }}>
                 Commission
@@ -85,7 +85,7 @@ const Profile = (props) => {
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(strictValidObjectWithKeys(myProfileData) ? myProfileData.myProfile.interest : 0)}
               </Typography>
-              <Button variant="contained" color="primary" size="small">
+              <Button variant="contained" color="primary" size="medium">
                 Interest
               </Button>
             </Box>
