@@ -27,7 +27,7 @@ export default function BankCardList({ bankCardData }) {
           variant="contained"
           onClick={() => navigate('/addbankcard')}
         >
-          Add Card
+          Add Bank Detail
         </Button>
       </Grid>
       <CardContent>
@@ -40,7 +40,7 @@ export default function BankCardList({ bankCardData }) {
                 secondaryAction={
                   <>
                     <Tooltip title={'Edit Account'}>
-                      <IconButton aria-label="comment">
+                      <IconButton aria-label="comment" onClick={() => navigate('/addbankcard?id='+object._id)}>
                         <EditIcon />
                       </IconButton>
                     </Tooltip>

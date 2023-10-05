@@ -20,7 +20,7 @@ import {
 import { useBankCardApi } from "../bank-card/hooke";
 import { addWithdrawRequest } from "./action";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -73,7 +73,7 @@ export default function WalletWithdrawal() {
       toast.error(result.message);
     }
   };
-  
+
   return (
     <Box
       sx={{
@@ -137,7 +137,7 @@ export default function WalletWithdrawal() {
                         required
                         fullWidth
                         id="bank_card"
-                        label="Select bank card"
+                        label="Select bank"
                         name="bank_card"
                         autoComplete="bank_card"
                         autoFocus
@@ -148,6 +148,11 @@ export default function WalletWithdrawal() {
                           </MenuItem>
                         ))}
                       </TextField>
+                    </Grid>
+                    <Grid item>
+                      <Link to="/bank-card" variant="body2">
+                        Add bank account
+                      </Link>
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>

@@ -4,12 +4,20 @@ import Footer from "../footer";
 import BankCardHeader from "../header/header-card";
 import TextField from "@mui/material/TextField";
 import { Button, Card, CardContent, Grid } from "@mui/material";
-import { saveBankCardApi } from "./hooke";
+import { saveBankCardApi, useBankCardWithIdApi } from "./hooke";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
 
 export default function Addbankcard() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  let { bankCardDetail } = useBankCardWithIdApi(
+    "bank-card",
+    "GET",
+    searchParams.get("id")
+  );
+  console.log(bankCardDetail);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,12 +33,26 @@ export default function Addbankcard() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    let result = await saveBankCardApi(obj);
-    if (result.success) {
-      toast.success(result.message);
-      navigate("/bank-card");
-    }else{
-      toast.error(result.message);
+    if (strictValidObjectWithKeys(bankCardDetail) && bankCardDetail.success) {
+      let result = await saveBankCardApi(
+        "PUT",
+        "/bank-card/" + bankCardDetail.bankCardDetail._id,
+        obj
+      );
+      if (result.success) {
+        toast.success(result.message);
+        navigate("/bank-card");
+      } else {
+        toast.error(result.message);
+      }
+    } else {
+      let result = await saveBankCardApi("POST", "/bank-card", obj);
+      if (result.success) {
+        toast.success(result.message);
+        navigate("/bank-card");
+      } else {
+        toast.error(result.message);
+      }
     }
   };
 
@@ -44,7 +66,7 @@ export default function Addbankcard() {
         flexDirection: "column",
       }}
     >
-      <BankCardHeader title="Add Bank Card" />
+      <BankCardHeader title="Add Bank Detail" />
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Grid item xs={12} sm container>
@@ -53,17 +75,14 @@ export default function Addbankcard() {
               required
               fullWidth
               id="outlined-basic"
-              label="Actual Name"
+              label="Account holder name"
               name="actual_name"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="outlined-basic"
-              label="IFSC Code"
-              name="ifsc_code"
+              value={
+                strictValidObjectWithKeys(bankCardDetail) &&
+                bankCardDetail.success
+                  ? bankCardDetail.bankCardDetail.actual_name
+                  : ""
+              }
               autoFocus
             />
             <TextField
@@ -73,6 +92,12 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="Bank name"
               name="bank_name"
+              value={
+                strictValidObjectWithKeys(bankCardDetail) &&
+                bankCardDetail.success
+                  ? bankCardDetail.bankCardDetail.bank_name
+                  : ""
+              }
               autoFocus
             />
             <TextField
@@ -83,6 +108,27 @@ export default function Addbankcard() {
               label="Bank account"
               type="number"
               name="bank_account"
+              value={
+                strictValidObjectWithKeys(bankCardDetail) &&
+                bankCardDetail.success
+                  ? bankCardDetail.bankCardDetail.bank_account
+                  : ""
+              }
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="outlined-basic"
+              label="IFSC Code"
+              name="ifsc_code"
+              value={
+                strictValidObjectWithKeys(bankCardDetail) &&
+                bankCardDetail.success
+                  ? bankCardDetail.bankCardDetail.ifsc_code
+                  : ""
+              }
               autoFocus
             />
             <TextField
@@ -92,6 +138,12 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="State"
               name="state"
+              value={
+                strictValidObjectWithKeys(bankCardDetail) &&
+                bankCardDetail.success
+                  ? bankCardDetail.bankCardDetail.state
+                  : ""
+              }
               autoFocus
             />
             <TextField
@@ -101,6 +153,12 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="City"
               name="city"
+              value={
+                strictValidObjectWithKeys(bankCardDetail) &&
+                bankCardDetail.success
+                  ? bankCardDetail.bankCardDetail.city
+                  : ""
+              }
               autoFocus
             />
             <TextField
@@ -110,33 +168,26 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="Address"
               name="address"
+              value={
+                strictValidObjectWithKeys(bankCardDetail) &&
+                bankCardDetail.success
+                  ? bankCardDetail.bankCardDetail.state
+                  : ""
+              }
               autoFocus
             />
             <TextField
               margin="normal"
-              required
-              fullWidth
-              id="outlined-basic"
-              label="Mobile number"
-              name="mobile_number"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
               fullWidth
               id="outlined-basic"
               label="Email"
               name="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="outlined-basic"
-              label="Password"
-              name="password"
+              value={
+                strictValidObjectWithKeys(bankCardDetail) &&
+                bankCardDetail.success
+                  ? bankCardDetail.bankCardDetail.address
+                  : ""
+              }
               autoFocus
             />
             <Button

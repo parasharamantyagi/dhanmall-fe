@@ -17,7 +17,7 @@ export default function BankCard() {
           flexDirection: "column",
         }}
       >
-        <CardHeader title="Bank Card" />
+        <CardHeader title="Bank Detail" />
         {loading &&
           [1, 2, 3, 4, 5, 6].map((res) => {
             return (
