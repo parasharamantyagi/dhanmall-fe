@@ -6,7 +6,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function GameNow() {
   const { billingGame } = useBillingGameNowList(
-    "billing/current-game?game_id=6516ee2e6959c4d4fb22ae0f",
+    "billing/current-game",
     "GET"
   );
   const [object, setObject] = React.useState({

@@ -8,23 +8,27 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import usePromotionApi from "../../../hooks/usePromotionApi";
-import { getLastEightWords, strictValidObjectWithKeys } from "../../../utils/common-utils";
+import {
+  getLastEightWords,
+  strictValidObjectWithKeys,
+} from "../../../utils/common-utils";
 
-export default function PromotionLavel1({ pageType }) {
+export default function PromotionLavel1({ pageType, totalPeople }) {
   const [page, setPage] = React.useState(0);
   const { promotionData } = usePromotionApi(
-    `/children?type=${pageType}`,
+    `/children?type=${pageType}&page=${page}`,
     "GET"
   );
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  React.useEffect(() => {
+    if (strictValidObjectWithKeys(promotionData)) {
+      totalPeople(promotionData.data.total_people);
+    }
+  }, [promotionData,totalPeople]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
   };
 
   return (
@@ -43,7 +47,7 @@ export default function PromotionLavel1({ pageType }) {
             {promotionData &&
               promotionData.data &&
               promotionData.data.children
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, i) => {
                   return (
                     <TableRow
@@ -56,7 +60,9 @@ export default function PromotionLavel1({ pageType }) {
                         {getLastEightWords(row._id)}
                       </TableCell>
                       <TableCell variant="body2" align="left">
-                        {strictValidObjectWithKeys(row.childrens_id) ? row.childrens_id.mobile : 'N/A'}
+                        {strictValidObjectWithKeys(row.childrens_id)
+                          ? row.childrens_id.mobile
+                          : "N/A"}
                       </TableCell>
                       <TableCell variant="body2" align="left">
                         {row.water_reward}
@@ -73,11 +79,14 @@ export default function PromotionLavel1({ pageType }) {
       <TablePagination
         rowsPerPageOptions={false}
         component="div"
-        count={10}
-        rowsPerPage={rowsPerPage}
+        count={
+          strictValidObjectWithKeys(promotionData)
+            ? promotionData.data.totalPeopleWithType
+            : 0
+        }
+        rowsPerPage={10}
         page={page}
         onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
   );

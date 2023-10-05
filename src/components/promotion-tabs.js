@@ -81,6 +81,7 @@ function a11yProps(index) {
 export default function FullWidthTabs({ myProfile }) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const [totalPeople, setTotalPeople] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -98,7 +99,14 @@ export default function FullWidthTabs({ myProfile }) {
   };
 
   return (
-    <Box sx={{ bgcolor: "background.paper", width: "auto" }}>
+    <Box
+      sx={{
+        display: "flex",
+        minHeight: "100vh",
+        flexDirection: "column",
+        margin: 1,
+      }}
+    >
       <Typography variant="h2" align="center" margin={3} gutterBottom>
         Bonus: ₹{" "}
         {strictValidObjectWithKeys(myProfile)
@@ -110,7 +118,7 @@ export default function FullWidthTabs({ myProfile }) {
           <Typography gutterBottom variant="h3">
             Total People
           </Typography>
-          <Typography variant="p4">1</Typography>
+          <Typography variant="p4">{totalPeople}</Typography>
         </Box>
         <Box display="flex" flexDirection="column" alignItems="center">
           <Typography gutterBottom variant="h3">
@@ -160,7 +168,7 @@ export default function FullWidthTabs({ myProfile }) {
         <Button
           onClick={copyToClipboard}
           variant="contained"
-          sx={{ width: 400, mt: 2, mb: 4 }}
+          sx={{ width: "80%", py: 1, mt: 1, mb: 1, background: "#000000" }}
         >
           Copy Link
         </Button>
@@ -174,20 +182,28 @@ export default function FullWidthTabs({ myProfile }) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <StyledTab label="Level One" {...a11yProps(0)} />
-          <StyledTab label="Level Two" {...a11yProps(1)} />
-          <StyledTab label="Level Three" {...a11yProps(2)} />
+          <StyledTab label="Level 1" {...a11yProps(0)} />
+          <StyledTab label="Level 2" {...a11yProps(1)} />
+          <StyledTab label="Level 3" {...a11yProps(2)} />
+          <StyledTab label="Level 4" {...a11yProps(3)} />
+          <StyledTab label="Level 5" {...a11yProps(4)} />
         </StyledTabs>
       </AppBar>
 
       <TabPanel value={value} index={0} dir={theme.direction}>
-        <PromotionLavel1 pageType="lavel_1" />
+        <PromotionLavel1 pageType="lavel_1" totalPeople={setTotalPeople} />
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>
-        <PromotionLavel1 pageType="lavel_2" />
+        <PromotionLavel1 pageType="lavel_2" totalPeople={setTotalPeople} />
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
-        <PromotionLavel1 pageType="lavel_3" />
+        <PromotionLavel1 pageType="lavel_3" totalPeople={setTotalPeople} />
+      </TabPanel>
+      <TabPanel value={value} index={3} dir={theme.direction}>
+        <PromotionLavel1 pageType="lavel_4" totalPeople={setTotalPeople} />
+      </TabPanel>
+      <TabPanel value={value} index={4} dir={theme.direction}>
+        <PromotionLavel1 pageType="lavel_5" totalPeople={setTotalPeople} />
       </TabPanel>
     </Box>
   );
