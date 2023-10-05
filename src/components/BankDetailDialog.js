@@ -25,6 +25,7 @@ export default function BankDetailDialog({
   open,
   handleAgree,
   handleDissAgree,
+  handleCancelled,
   data,
 }) {
   return (
@@ -46,7 +47,9 @@ export default function BankDetailDialog({
                 <Typography align="left" sx={{ fontWeight: "bold" }}>
                   User name
                 </Typography>
-                <Typography align="left">{strictValidObjectWithKeys(data) ? data.user_id.nickname : ''}</Typography>
+                <Typography align="left">
+                  {strictValidObjectWithKeys(data) ? data.user_id.nickname : ""}
+                </Typography>
               </Item>
             </Grid>
             <Grid item xs={6}>
@@ -54,7 +57,9 @@ export default function BankDetailDialog({
                 <Typography align="left" sx={{ fontWeight: "bold" }}>
                   Mobile
                 </Typography>
-                <Typography align="left">{strictValidObjectWithKeys(data) ? data.user_id.mobile : ''}</Typography>
+                <Typography align="left">
+                  {strictValidObjectWithKeys(data) ? data.user_id.mobile : ""}
+                </Typography>
               </Item>
             </Grid>
             {/*  */}
@@ -63,7 +68,9 @@ export default function BankDetailDialog({
                 <Typography align="left" sx={{ fontWeight: "bold" }}>
                   Ammount
                 </Typography>
-                <Typography align="left">{strictValidObjectWithKeys(data) ? data.ammount : ''}</Typography>
+                <Typography align="left">
+                  {strictValidObjectWithKeys(data) ? data.ammount : ""}
+                </Typography>
               </Item>
             </Grid>
             <Grid item xs={6}>
@@ -71,7 +78,9 @@ export default function BankDetailDialog({
                 <Typography align="left" sx={{ fontWeight: "bold" }}>
                   Status
                 </Typography>
-                <Typography align="left">{strictValidObjectWithKeys(data) ? data.status : ''}</Typography>
+                <Typography align="left">
+                  {strictValidObjectWithKeys(data) ? data.status : ""}
+                </Typography>
               </Item>
             </Grid>
             {/*  */}
@@ -81,7 +90,9 @@ export default function BankDetailDialog({
                   Bank name
                 </Typography>
                 <Typography align="left">
-                  {strictValidObjectWithKeys(data) ? data.bank_details.bank_name : ''}
+                  {strictValidObjectWithKeys(data)
+                    ? data.bank_details.bank_name
+                    : ""}
                 </Typography>
               </Item>
             </Grid>
@@ -91,7 +102,9 @@ export default function BankDetailDialog({
                   Bank account
                 </Typography>
                 <Typography align="left">
-                  {strictValidObjectWithKeys(data) ? data.bank_details.bank_account : ''}
+                  {strictValidObjectWithKeys(data)
+                    ? data.bank_details.bank_account
+                    : ""}
                 </Typography>
               </Item>
             </Grid>
@@ -102,7 +115,9 @@ export default function BankDetailDialog({
                   Ifsc code
                 </Typography>
                 <Typography align="left">
-                  {strictValidObjectWithKeys(data) ? data.bank_details.ifsc_code : ''}
+                  {strictValidObjectWithKeys(data)
+                    ? data.bank_details.ifsc_code
+                    : ""}
                 </Typography>
               </Item>
             </Grid>
@@ -111,7 +126,11 @@ export default function BankDetailDialog({
                 <Typography align="left" sx={{ fontWeight: "bold" }}>
                   State
                 </Typography>
-                <Typography align="left">{strictValidObjectWithKeys(data) ? data.bank_details.state : ''}</Typography>
+                <Typography align="left">
+                  {strictValidObjectWithKeys(data)
+                    ? data.bank_details.state
+                    : ""}
+                </Typography>
               </Item>
             </Grid>
             <Grid item xs={12}>
@@ -120,7 +139,9 @@ export default function BankDetailDialog({
                   Address
                 </Typography>
                 <Typography align="left">
-                  {strictValidObjectWithKeys(data) ? data.bank_details.address : ''}
+                  {strictValidObjectWithKeys(data)
+                    ? data.bank_details.address
+                    : ""}
                 </Typography>
               </Item>
             </Grid>
@@ -128,12 +149,26 @@ export default function BankDetailDialog({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleDissAgree}>Disagree</Button>
+      <Button
+          variant="contained"
+          sx={{ background: "#000" }}
+          onClick={handleCancelled}
+        >
+          Cancelled
+        </Button>
         <Button
-          onClick={() => {
-            handleAgree();
-            handleDissAgree();
-          }}
+          disabled={strictValidObjectWithKeys(data) && data.status === "processing" ? false : true}
+          variant="contained"
+          sx={{ background: "red" }}
+          onClick={handleDissAgree}
+        >
+          Disagree
+        </Button>
+        <Button
+          disabled={strictValidObjectWithKeys(data) && data.status === "processing" ? false : true}
+          variant="contained"
+          sx={{ background: "green" }}
+          onClick={handleAgree}
           autoFocus
         >
           Agree

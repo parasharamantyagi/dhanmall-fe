@@ -33,14 +33,15 @@ export default function RechargeReq() {
     setOpen(true);
   };
   const handleAgree = () => {
-    console.log("Agree", confirmDialog);
     response("/billing/recharge-status/" + confirmDialog, "PUT", {
       status: "success",
     });
     setOpen(false);
   };
+  const handleCancelled = () => {
+    setOpen(false);
+  };
   const handleDissAgree = () => {
-    console.log("DissAgree", confirmDialog);
     response("/billing/recharge-status/" + confirmDialog, "PUT", {
       status: "failure",
     });
@@ -52,6 +53,7 @@ export default function RechargeReq() {
       <Typography>Recent Orders</Typography>
       <ConfirmDialog
         open={open}
+        handleCancelled={handleCancelled}
         handleAgree={handleAgree}
         handleDissAgree={handleDissAgree}
         title=" Are you sure to approve this payment .?"
@@ -98,7 +100,9 @@ export default function RechargeReq() {
                 </TableCell>
                 <TableCell>
                   <Button
+                    disabled={row.status === "processing" ? false : true}
                     variant="contained"
+                    sx={{ background: "#000" }}
                     onClick={() => handleClickOpen(row._id)}
                   >
                     Approve

@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import { Button, TablePagination, Typography } from "@mui/material";
 import { useRechargeList } from "../../hooks/useBillingApi";
 import {
+  capitalizeFirstLetter,
   strictValidObjectWithKeys,
   unixformatDateTime,
   validValue,
@@ -37,10 +38,21 @@ export default function WithdrawalReq() {
     }
   };
 
-  const handleAgree = () => {
+  const handleCancelled = async () => {
     setOpen(false);
   };
-  const handleDissAgree = () => {
+
+  const handleAgree = async () => {
+    response("/billing/withdrawal-status/" + confirmDialog._id, "PUT", {
+      status: "success",
+    });
+    setOpen(false);
+  };
+  
+  const handleDissAgree = async () => {
+    response("/billing/withdrawal-status/" + confirmDialog._id, "PUT", {
+      status: "failure",
+    });
     setOpen(false);
   };
   return (
@@ -50,6 +62,7 @@ export default function WithdrawalReq() {
         open={open}
         handleAgree={handleAgree}
         handleDissAgree={handleDissAgree}
+        handleCancelled={handleCancelled}
         data={confirmDialog}
       />
       <Table size="large">
@@ -75,7 +88,21 @@ export default function WithdrawalReq() {
                 <TableCell>{row.ammount}</TableCell>
                 <TableCell>{row.transaction_id}</TableCell>
                 <TableCell>{row.remarks}</TableCell>
-                <TableCell>{row.status}</TableCell>
+                <TableCell>
+                  <Typography
+                    sx={{
+                      color: row.status
+                        ? row.status === "processing"
+                          ? "orange"
+                          : row.status === "success"
+                          ? "green"
+                          : "red"
+                        : "",
+                    }}
+                  >
+                    {capitalizeFirstLetter(row.status)}
+                  </Typography>
+                </TableCell>
                 <TableCell>
                   <Button
                     variant="contained"
