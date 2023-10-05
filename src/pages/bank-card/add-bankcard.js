@@ -11,13 +11,30 @@ import { strictValidObjectWithKeys } from "../../utils/common-utils";
 
 export default function Addbankcard() {
   const navigate = useNavigate();
+  const [objectForm, setObjectForm] = React.useState({
+    actual_name: "",
+    bank_name: "",
+    ifsc_code: '',
+    bank_account: "",
+    state: "",
+    city: "",
+    address: "",
+    mobile_number: "",
+    email: "",
+  });
   const [searchParams] = useSearchParams();
   let { bankCardDetail } = useBankCardWithIdApi(
     "bank-card",
     "GET",
     searchParams.get("id")
   );
-  console.log(bankCardDetail);
+
+  React.useEffect(() => {
+    if (strictValidObjectWithKeys(bankCardDetail) && bankCardDetail.success) {
+      setObjectForm(bankCardDetail.bankCardDetail);
+    }
+  }, [bankCardDetail]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -77,11 +94,12 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="Account holder name"
               name="actual_name"
-              value={
-                strictValidObjectWithKeys(bankCardDetail) &&
-                bankCardDetail.success
-                  ? bankCardDetail.bankCardDetail.actual_name
-                  : ""
+              value={objectForm.actual_name}
+              onChange={(event) =>
+                setObjectForm({
+                  ...objectForm,
+                  ...{ actual_name: event.target.value },
+                })
               }
               autoFocus
             />
@@ -92,12 +110,7 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="Bank name"
               name="bank_name"
-              value={
-                strictValidObjectWithKeys(bankCardDetail) &&
-                bankCardDetail.success
-                  ? bankCardDetail.bankCardDetail.bank_name
-                  : ""
-              }
+              value={objectForm.bank_name}
               autoFocus
             />
             <TextField
@@ -108,12 +121,7 @@ export default function Addbankcard() {
               label="Bank account"
               type="number"
               name="bank_account"
-              value={
-                strictValidObjectWithKeys(bankCardDetail) &&
-                bankCardDetail.success
-                  ? bankCardDetail.bankCardDetail.bank_account
-                  : ""
-              }
+              value={objectForm.bank_account}
               autoFocus
             />
             <TextField
@@ -123,12 +131,7 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="IFSC Code"
               name="ifsc_code"
-              value={
-                strictValidObjectWithKeys(bankCardDetail) &&
-                bankCardDetail.success
-                  ? bankCardDetail.bankCardDetail.ifsc_code
-                  : ""
-              }
+              value={objectForm.ifsc_code}
               autoFocus
             />
             <TextField
@@ -138,12 +141,7 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="State"
               name="state"
-              value={
-                strictValidObjectWithKeys(bankCardDetail) &&
-                bankCardDetail.success
-                  ? bankCardDetail.bankCardDetail.state
-                  : ""
-              }
+              value={objectForm.state}
               autoFocus
             />
             <TextField
@@ -153,12 +151,7 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="City"
               name="city"
-              value={
-                strictValidObjectWithKeys(bankCardDetail) &&
-                bankCardDetail.success
-                  ? bankCardDetail.bankCardDetail.city
-                  : ""
-              }
+              value={objectForm.city}
               autoFocus
             />
             <TextField
@@ -168,12 +161,7 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="Address"
               name="address"
-              value={
-                strictValidObjectWithKeys(bankCardDetail) &&
-                bankCardDetail.success
-                  ? bankCardDetail.bankCardDetail.state
-                  : ""
-              }
+              value={objectForm.address}
               autoFocus
             />
             <TextField
@@ -182,12 +170,7 @@ export default function Addbankcard() {
               id="outlined-basic"
               label="Email"
               name="email"
-              value={
-                strictValidObjectWithKeys(bankCardDetail) &&
-                bankCardDetail.success
-                  ? bankCardDetail.bankCardDetail.address
-                  : ""
-              }
+              value={objectForm.email}
               autoFocus
             />
             <Button
