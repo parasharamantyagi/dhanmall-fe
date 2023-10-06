@@ -147,7 +147,7 @@ export default function ChangePassword() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 7 }}
+                sx={{ mt: 3, mb: 7,background:'#000000' }}
               >
                 Update password
               </Button>

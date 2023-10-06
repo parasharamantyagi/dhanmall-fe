@@ -50,7 +50,11 @@ export default function Home() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant="contained" size="small">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    sx={{ background: "#000000" }}
+                  >
                     Make Bidd
                   </Button>
                   <Button
@@ -59,6 +63,7 @@ export default function Home() {
                     onClick={() => {
                       navigate("/detail/" + object.link);
                     }}
+                    sx={{ background: "#000000" }}
                   >
                     Learn More
                   </Button>

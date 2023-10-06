@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import IconWithText from "../../components/icon-with-text";
 import AddCardIcon from "@mui/icons-material/AddCard";
-import SecurityIcon from "@mui/icons-material/Security";
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import InfoIcon from "@mui/icons-material/Info";
 import LogoutIcon from "@mui/icons-material/Logout";
 import WalletIcon from "@mui/icons-material/Wallet";
@@ -26,62 +26,8 @@ const Sidebar = (props) => {
   return (
     <Box display={"flex"} flexDirection="column">
       <IconWithText
-        icon={<ReceiptLongOutlinedIcon fontSize="large" />}
-        text="Orders"
-        to="/orders"
-      />
-      <IconWithText
-        icon={<CardGiftcardIcon fontSize="large" />}
-        text="Promotiion"
-        to="/promotion"
-      />
-      <IconWithText
-        icon={<WalletIcon fontSize="large" />}
-        text="Wallet"
-        onClick={() => {
-          openCollapse("wallet");
-        }}
-        collapse={true}
-      />
-      <Collapse in={open === "wallet"} timeout="auto" unmountOnExit>
-        <Box flexDirection="column" display="flex">
-          <Typography
-            my={2}
-            onClick={() => navigate("/wallet-recharge")}
-            variant="p4"
-            pl={6}
-          >
-            Recharge
-          </Typography>
-          <Divider />
-          <Typography
-            my={2}
-            onClick={() => navigate("/wallet-withdrawal")}
-            variant="p4"
-            pl={6}
-          >
-            Withdrawal
-          </Typography>
-          <Divider />
-          <Typography
-            my={2}
-            onClick={() => navigate("/wallet-transactions")}
-            variant="p4"
-            pl={6}
-          >
-            Transactions
-          </Typography>
-        </Box>
-        <Divider />
-      </Collapse>
-      <IconWithText
-        icon={<AddCardIcon fontSize="large" />}
-        text="Bank Card"
-        to="/bank-card"
-      />
-      <IconWithText
-        icon={<SecurityIcon fontSize="large" />}
-        text="Account Security"
+        icon={<PermIdentityIcon fontSize="large" />}
+        text="Profile"
         onClick={() => {
           openCollapse("account-security");
         }}
@@ -107,6 +53,60 @@ const Sidebar = (props) => {
             sx={{ cursor: "pointer" }}
           >
             Change password
+          </Typography>
+        </Box>
+        <Divider />
+      </Collapse>
+      <IconWithText
+        icon={<AddCardIcon fontSize="large" />}
+        text="Recharge"
+        to="/wallet-recharge"
+      />
+      <IconWithText
+        icon={<ReceiptLongOutlinedIcon fontSize="large" />}
+        text="Orders"
+        to="/orders"
+      />
+      <IconWithText
+        icon={<CardGiftcardIcon fontSize="large" />}
+        text="Promotiion"
+        to="/promotion"
+      />
+      <IconWithText
+        icon={<WalletIcon fontSize="large" />}
+        text="Wallet"
+        onClick={() => {
+          openCollapse("wallet");
+        }}
+        collapse={true}
+      />
+      <Collapse in={open === "wallet"} timeout="auto" unmountOnExit>
+        <Box flexDirection="column" display="flex">
+          <Typography
+            my={2}
+            onClick={() => navigate("/wallet-withdrawal")}
+            variant="p4"
+            pl={6}
+          >
+            Withdrawal
+          </Typography>
+          <Divider />
+          <Typography
+            my={2}
+            onClick={() => navigate("/wallet-transactions")}
+            variant="p4"
+            pl={6}
+          >
+            Transactions
+          </Typography>
+          <Divider />
+          <Typography
+            my={2}
+            onClick={() => navigate("/bank-card")}
+            variant="p4"
+            pl={6}
+          >
+            Bank Card
           </Typography>
         </Box>
         <Divider />
