@@ -261,7 +261,7 @@ export default function WalletRecharge() {
                         <Button
                           type="submit"
                           variant="contained"
-                          sx={{ width: "100%", py: 1, mt: 1, mb: 4 }}
+                          sx={{ width: "100%", py: 1, mt: 1, mb: 4,background:'#000000' }}
                         >
                           Recharge
                         </Button>
@@ -277,7 +277,7 @@ export default function WalletRecharge() {
                           <Button
                             type="button"
                             variant="contained"
-                            sx={{ width: 350, py: 1, mt: 1, mb: 4 }}
+                            sx={{ width: 350, py: 1, mt: 1, mb: 4,background:'#000000' }}
                             onClick={payAmmountWithUpi}
                           >
                             Pay with upi
@@ -309,7 +309,7 @@ export default function WalletRecharge() {
                         <Button
                           type="submit"
                           variant="contained"
-                          sx={{ width: "100%", py: 1, mt: 1, mb: 4 }}
+                          sx={{ width: "100%", py: 1, mt: 1, mb: 4,background:'#000000' }}
                         >
                           Recharge
                         </Button>

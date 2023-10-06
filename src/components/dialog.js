@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 import {
   AppBar,
   Box,
@@ -14,10 +14,10 @@ import {
   IconButton,
   Toolbar,
   Typography,
-} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import LoadingButton from '@mui/lab/LoadingButton';
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const AlertDialog = ({
   open,
@@ -33,6 +33,10 @@ const AlertDialog = ({
   });
 
   const handleClose = () => {
+    setState({
+      value: 1,
+      selected: 10,
+    });
     setOpen(false);
   };
 
@@ -44,7 +48,7 @@ const AlertDialog = ({
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <AppBar sx={{ background: object.background, position: 'relative' }}>
+      <AppBar sx={{ background: object.background, position: "relative" }}>
         <Toolbar>
           <Typography variant="p2" color="#fff">
             {object.label}
@@ -68,7 +72,7 @@ const AlertDialog = ({
                 selected: 10,
               }));
             }}
-            variant={state.selected === 10 ? 'contained' : 'outlined'}
+            variant={state.selected === 10 ? "contained" : "outlined"}
             color="primary"
           >
             10
@@ -80,7 +84,7 @@ const AlertDialog = ({
                 selected: 100,
               }));
             }}
-            variant={state.selected === 100 ? 'contained' : 'outlined'}
+            variant={state.selected === 100 ? "contained" : "outlined"}
           >
             100
           </Button>
@@ -91,7 +95,7 @@ const AlertDialog = ({
                 selected: 1000,
               }));
             }}
-            variant={state.selected === 1000 ? 'contained' : 'outlined'}
+            variant={state.selected === 1000 ? "contained" : "outlined"}
           >
             1000
           </Button>
@@ -102,7 +106,7 @@ const AlertDialog = ({
                 selected: 10000,
               }));
             }}
-            variant={state.selected === 10000 ? 'contained' : 'outlined'}
+            variant={state.selected === 10000 ? "contained" : "outlined"}
           >
             10000
           </Button>

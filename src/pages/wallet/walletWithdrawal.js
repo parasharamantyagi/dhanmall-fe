@@ -159,7 +159,7 @@ export default function WalletWithdrawal() {
                     <Button
                       type="submit"
                       variant="contained"
-                      sx={{ width: "50%", py: 1, mt: 1, mb: 4 }}
+                      sx={{ width: "50%", py: 1, mt: 1, mb: 4,background:'#000000' }}
                     >
                       Withdraw
                     </Button>

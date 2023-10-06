@@ -26,6 +26,7 @@ export default function BankCardList({ bankCardData }) {
           startIcon={<AddIcon />}
           variant="contained"
           onClick={() => navigate('/addbankcard')}
+          sx={{background:'#000000'}}
         >
           Add Bank Detail
         </Button>
