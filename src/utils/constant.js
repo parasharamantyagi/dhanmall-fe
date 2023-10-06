@@ -23,7 +23,7 @@ export const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png",
-    title: "Rolls Royce Cullinan",
+    title: "Super Rolls Royce Cullinan",
     link: "10000",
     description: "Deposit: 5000 AED",
     id: "2022",
@@ -47,7 +47,7 @@ export const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Super Mercedes G63",
+    title: "Super Mercedes G63 Fast",
     link: "10003",
     description: "Deposit: 2000 AED",
     id: "2022",
@@ -55,7 +55,7 @@ export const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png",
-    title: "Rolls Royce Cullinan",
+    title: "Super Rolls Royce Cullinan",
     link: "10004",
     description: "Deposit: 5000 AED",
     id: "2022",
@@ -79,7 +79,7 @@ export const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Super Mercedes G63",
+    title: "Super Mercedes G63 Fast",
     link: "10007",
     description: "Deposit: 2000 AED",
     id: "2022",
@@ -87,7 +87,7 @@ export const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png",
-    title: "Rolls Royce Cullinan",
+    title: "Super Rolls Royce Cullinan",
     link: "10008",
     description: "Deposit: 5000 AED",
     id: "2022",
@@ -111,7 +111,7 @@ export const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Super Mercedes G63",
+    title: "Super Mercedes G63 Fast",
     link: "10011",
     description: "Deposit: 2000 AED",
     id: "2022",
@@ -119,7 +119,7 @@ export const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2022/02/Rolls-Royce-Cullinan-Rental-Dubai.png",
-    title: "Rolls Royce Cullinan",
+    title: "Super Rolls Royce Cullinan",
     link: "10012",
     description: "Deposit: 5000 AED",
     id: "2022",
@@ -143,7 +143,7 @@ export const homeContentDummyData = [
   {
     imageUrl:
       "https://xcarrental.com/wp-content/uploads/2023/05/Mercedes-G-Class-Rental-Dubai.png",
-    title: "Super Mercedes G63",
+    title: "Super Mercedes G63 Fast",
     link: "10015",
     description: "Deposit: 2000 AED",
     id: "2022",

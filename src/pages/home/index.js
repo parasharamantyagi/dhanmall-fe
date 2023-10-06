@@ -3,11 +3,13 @@ import {
   Box,
   Button,
   Card,
+  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
   Grid,
 } from "@mui/material";
+import { makeStyles } from "@material-ui/core/styles";
 import Footer from "../footer";
 import Typography from "@mui/material/Typography";
 import "./../../index.css";
@@ -15,8 +17,25 @@ import { homeContentDummyData } from "../../utils/constant";
 import CardHeader from "../header/header-card";
 import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+const useStyles = makeStyles((theme) => ({
+  gameRoot: {
+    position: "relative",
+    height: "100%",
+    margin: 2,
+  },
+  gameCover: {
+    zIndex: 1,
+    height: "inherit",
+  },
+  MuiCardActionArea: {
+    height: "inherit",
+    zIndex: 1,
+  },
+}));
+
+export default function Home({ props }) {
   const navigate = useNavigate();
+  const classes = useStyles(props);
   return (
     <Box
       sx={{
@@ -26,23 +45,32 @@ export default function Home() {
       }}
     >
       <CardHeader pageNo={true} title="Welcome" />
-      <CardContent>
+      <CardContent sx={{ mb: 8 }}>
         <Grid container spacing={2}>
           {homeContentDummyData.map((object) => (
             <Grid item xs={6}>
               <Card sx={{ width: "100%", borderRadius: 1 }}>
                 <Box display={" flex"} justifyContent="center" py={1.5}>
-                  <CardMedia
-                    sx={{
-                      height: 80,
-                      width: 150,
-                    }}
-                    image={object.imageUrl}
-                    title="green iguana"
-                  />
+                  <Card className={classes.gameRoot}>
+                    <CardActionArea
+                      classes={{ root: classes.MuiCardActionArea }}
+                    >
+                      <CardMedia
+                        component="img"
+                        classes={{ root: classes.gameCover }}
+                        image={object.imageUrl}
+                        title={object.title}
+                      />
+                    </CardActionArea>
+                  </Card>
                 </Box>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    width={"100%"}
+                  >
                     {object.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -55,7 +83,7 @@ export default function Home() {
                     size="small"
                     sx={{ background: "#000000" }}
                   >
-                    Make Bidd
+                    Bidd
                   </Button>
                   <Button
                     variant="contained"
@@ -65,7 +93,7 @@ export default function Home() {
                     }}
                     sx={{ background: "#000000" }}
                   >
-                    Learn More
+                    Details
                   </Button>
                 </CardActions>
               </Card>
