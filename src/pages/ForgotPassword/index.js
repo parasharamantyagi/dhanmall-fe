@@ -14,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../footer";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
-import { InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Copyright(props) {
   return (
@@ -31,6 +32,10 @@ function Copyright(props) {
 }
 
 export default function ForgotPassword() {
+  const [values, setValues] = React.useState({
+    password: "",
+    showPassword: false,
+  });
   const [error, setError] = React.useState({
     mobile: "",
     password: "",
@@ -38,6 +43,14 @@ export default function ForgotPassword() {
   });
   const [objectForm, setObjectForm] = React.useState({});
   const navigate = useNavigate();
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const handleOtp = async () => {
     if (objectForm.mobile) {
@@ -51,6 +64,8 @@ export default function ForgotPassword() {
         toast.success(response.message);
         setError("");
       }
+    } else {
+      toast.error("Please enter mobile number first");
     }
   };
 
@@ -150,7 +165,7 @@ export default function ForgotPassword() {
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={values.showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="new-password"
                 onChange={(event) =>
@@ -159,6 +174,22 @@ export default function ForgotPassword() {
                     ...{ password: event.target.value },
                   })
                 }
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {values.showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               {error && error.password && (
                 <Typography paragraph sx={{ color: "red" }}>
@@ -189,7 +220,7 @@ export default function ForgotPassword() {
                 sx={{ mt: 0, mb: 0, height: "99%" }}
                 onClick={() => handleOtp()}
               >
-                Verify Otp
+                Get Otp
               </Button>
             </Grid>
             <Grid item xs={12}>

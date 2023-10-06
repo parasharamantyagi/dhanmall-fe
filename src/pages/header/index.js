@@ -1,8 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { Button, Paper, Typography } from "@mui/material";
+import { Button, Grid, Paper, Typography } from "@mui/material";
 import { defaultCurrencyFormat } from "../../utils/common-utils";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import LoopIcon from "@mui/icons-material/Loop";
 
 export default function Header({ amount }) {
   const navigate = useNavigate();
@@ -19,21 +20,36 @@ export default function Header({ amount }) {
       <Typography color="white" variant="h5">
         Available Balance : {defaultCurrencyFormat(amount)}
       </Typography>
-      <Box mt={2}>
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          onClick={() => {
-            navigate("/wallet-recharge");
-          }}
-        >
-          Recharge
-        </Button>
-        <Button sx={{ color: "#fff" }} size="small">
-          Trend
-        </Button>
-      </Box>
+
+      <Grid container>
+        <Grid item xs>
+          <Box mt={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => {
+                navigate("/wallet-recharge");
+              }}
+            >
+              Recharge
+            </Button>
+            <Button sx={{ color: "#fff" }} size="small">
+              Trend
+            </Button>
+          </Box>
+        </Grid>
+        <Grid item>
+          <Link
+            href="/win"
+            onClick={() => window.location.reload()}
+            style={{ color: "#fff" }}
+            variant="body2"
+          >
+            <LoopIcon />
+          </Link>
+        </Grid>
+      </Grid>
     </Paper>
   );
 }
