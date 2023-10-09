@@ -175,11 +175,13 @@ export default function FullWidthTabs({ myProfile }) {
       </Box>
       <AppBar sx={{ background: "#000" }} position="static">
         <StyledTabs
+          variant="scrollable"
           value={value}
           onChange={handleChange}
           indicatorColor="secondary"
           textColor="inherit"
-          variant="fullWidth"
+          scrollButtons
+          allowScrollButtonsMobile
           aria-label="full width tabs example"
         >
           <StyledTab label="Level 1" {...a11yProps(0)} />

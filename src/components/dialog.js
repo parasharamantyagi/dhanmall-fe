@@ -167,7 +167,10 @@ const AlertDialog = ({
           loading={loader}
           disabled={disabled}
           variant="contained"
-          onClick={() => onSubmit(state)}
+          onClick={() => {
+            onSubmit(state);
+            handleClose();
+          }}
         >
           Submit
         </LoadingButton>

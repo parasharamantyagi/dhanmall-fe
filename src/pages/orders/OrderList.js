@@ -118,8 +118,8 @@ export default function OrderList({ data, loading, setOder }) {
                   {/* {formatNewDateTime(order.date, "DD-MM-YYYY, HH:mm")} */}
                   {order.status
                     ? order.status === 1
-                      ? order.amount
-                      : order.delivery
+                      ? order.delivery
+                      : ""
                     : ""}
                 </Typography>
               </AccordionSummary>
