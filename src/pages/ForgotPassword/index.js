@@ -159,6 +159,40 @@ export default function ForgotPassword() {
                 </Typography>
               )}
             </Grid>
+            <Grid item xs={8}>
+              <TextField
+                required
+                fullWidth
+                name="verification_code"
+                label="Verification code"
+                id="verification_code"
+                onChange={(event) =>
+                  setObjectForm({
+                    ...objectForm,
+                    ...{ verification_code: event.target.value },
+                  })
+                }
+                helperText={
+                  error &&
+                  error.verification_code && (
+                    <Typography paragraph sx={{ ml: -1.5, color: "red" }}>
+                      {error.verification_code}
+                    </Typography>
+                  )
+                }
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Button
+                fullWidth
+                size="large"
+                variant="contained"
+                sx={{ mt: 0, mb: 0, height: error && error.verification_code ? "60%" : "90%" }}
+                onClick={() => handleOtp()}
+              >
+                Get Otp
+              </Button>
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 required
@@ -197,38 +231,7 @@ export default function ForgotPassword() {
                 </Typography>
               )}
             </Grid>
-            <Grid item xs={8}>
-              <TextField
-                required
-                fullWidth
-                name="verification_code"
-                label="Verification code"
-                id="verification_code"
-                onChange={(event) =>
-                  setObjectForm({
-                    ...objectForm,
-                    ...{ verification_code: event.target.value },
-                  })
-                }
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <Button
-                fullWidth
-                size="large"
-                variant="contained"
-                sx={{ mt: 0, mb: 0, height: "99%" }}
-                onClick={() => handleOtp()}
-              >
-                Get Otp
-              </Button>
-            </Grid>
             <Grid item xs={12}>
-              {error && error.verification_code && (
-                <Typography paragraph sx={{ color: "red" }}>
-                  {error.verification_code}
-                </Typography>
-              )}
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."

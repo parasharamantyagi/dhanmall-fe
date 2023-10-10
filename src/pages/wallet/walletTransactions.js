@@ -86,12 +86,13 @@ export default function WalletTransactions() {
                                 : "",
                             }}
                           >
-                            <p>{capitalizeFirstLetter(object.status)}</p>
-                            {object.status === "processing" ? <p><CountdownTimer
+                            {capitalizeFirstLetter(object.status)}
+                            <br />
+                            {object.status === "processing" ? <CountdownTimer
                                 targetDate={
                                   new Date(object.date * 1000).getTime() + 12 * 60 * 60 * 1000
                                 }
-                              /></p>: null}
+                              />: null}
                           </Typography>
                         }
                         secondary={defaultCurrencyFormat(0)}
