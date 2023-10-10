@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
-import CardHeader from '../header/header-card';
-import Footer from '../footer';
+import CardHeader from '../../header/header-card';
+import Footer from '../../footer';
 
 const Riskagreement = () => {
   const renderSubtitle = (text) => {

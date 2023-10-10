@@ -10,9 +10,9 @@ import Orders from "../pages/orders";
 import Promotion from "../pages/promotion";
 import BankCard from "../pages/bank-card";
 import Addbankcard from "../pages/bank-card/add-bankcard";
-import PrivacyPolicy from "../pages/privacy";
-import Riskagreement from "../pages/riskagreement";
-import ContectUs from "../pages/contect-us";
+import PrivacyPolicy from "../pages/about/privacy";
+import Riskagreement from "../pages/about/riskagreement";
+import ContectUs from "../pages/about/contect-us";
 import WalletRecharge from "../pages/wallet/walletRecharge";
 import WalletTransactions from "../pages/wallet/walletTransactions";
 import WalletWithdrawal from "../pages/wallet/walletWithdrawal";
@@ -53,24 +53,24 @@ const routes = (isLoggedIn) => {
       element: <ContectUs />,
     },
     {
-      path: '/wallet-recharge', // protected routes
-      element: <WalletRecharge />,
-    },
-    {
-      path: '/wallet-withdrawal', // protected routes
-      element: <WalletWithdrawal />,
-    },
-    {
-      path: '/wallet-transactions', // protected routes
-      element: <WalletTransactions />,
-    },
-    {
       path: '/', // protected routes
       element: <Home />,
     },
     {
       path: '/detail/:productId', // protected routes
       element: <ProductDetail />,
+    },
+    {
+      path: '/wallet-recharge', // protected routes
+      element: isLoggedIn ? <WalletRecharge /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/wallet-withdrawal', // protected routes
+      element: isLoggedIn ? <WalletWithdrawal /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/wallet-transactions', // protected routes
+      element: isLoggedIn ? <WalletTransactions /> : <Navigate to="/login" />,
     },
     {
       path: '/mine', // protected routes
