@@ -17,6 +17,7 @@ import {
   validValue,
 } from "../../utils/common-utils";
 import { capitalizeFirstLetter } from "../../utils/common-utils";
+import CountdownTimer from "./example";
 
 export default function WalletTransactions() {
   const [page, setPage] = React.useState(0);
@@ -85,7 +86,12 @@ export default function WalletTransactions() {
                                 : "",
                             }}
                           >
-                            {capitalizeFirstLetter(object.status)}
+                            <p>{capitalizeFirstLetter(object.status)}</p>
+                            {object.status === "processing" ? <p><CountdownTimer
+                                targetDate={
+                                  new Date(object.date * 1000).getTime() + 12 * 60 * 60 * 1000
+                                }
+                              /></p>: null}
                           </Typography>
                         }
                         secondary={defaultCurrencyFormat(0)}
@@ -99,7 +105,7 @@ export default function WalletTransactions() {
                     primary={defaultCurrencyFormat(object.ammount)}
                     secondary={
                       <>
-                        <Typography>Place Order</Typography>
+                        <Typography>{object.type === "recharge" ? "Withdrawal request":'Place Order'}</Typography>
                         <Typography>
                           {unixformatDateTime(object.date)}
                         </Typography>
