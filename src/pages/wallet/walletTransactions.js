@@ -53,7 +53,7 @@ export default function WalletTransactions() {
                 disableGutters
                 secondaryAction={
                   <>
-                    {object.type === "withdraw" ? (
+                    {["withdraw","recharge"].includes(object.type) ? (
                       <ListItemText
                         primary={
                           <Typography
@@ -68,6 +68,15 @@ export default function WalletTransactions() {
                             }}
                           >
                             {capitalizeFirstLetter(object.status)}
+                            <br />
+                            {object.status === "processing" ? (
+                              <CountdownTimer
+                                targetDate={
+                                  new Date(object.date * 1000).getTime() +
+                                  12 * 60 * 60 * 1000
+                                }
+                              />
+                            ) : null}
                           </Typography>
                         }
                         secondary={defaultCurrencyFormat(0)}
@@ -87,12 +96,6 @@ export default function WalletTransactions() {
                             }}
                           >
                             {capitalizeFirstLetter(object.status)}
-                            <br />
-                            {object.status === "processing" ? <CountdownTimer
-                                targetDate={
-                                  new Date(object.date * 1000).getTime() + 12 * 60 * 60 * 1000
-                                }
-                              />: null}
                           </Typography>
                         }
                         secondary={defaultCurrencyFormat(0)}
@@ -106,7 +109,13 @@ export default function WalletTransactions() {
                     primary={defaultCurrencyFormat(object.ammount)}
                     secondary={
                       <>
-                        <Typography>{object.type === "recharge" ? "Withdrawal request":'Place Order'}</Typography>
+                        <Typography>
+                          {object.type === "recharge"
+                            ? "Recharge request"
+                            : object.type === "withdraw"
+                            ? "Withdrawal request"
+                            : "Place Order"}
+                        </Typography>
                         <Typography>
                           {unixformatDateTime(object.date)}
                         </Typography>

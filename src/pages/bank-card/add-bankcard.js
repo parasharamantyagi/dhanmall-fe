@@ -8,6 +8,7 @@ import { saveBankCardApi, useBankCardWithIdApi } from "./hooke";
 import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
+import { validValue } from "../../utils/common-utils";
 
 export default function Addbankcard() {
   const navigate = useNavigate();
@@ -30,10 +31,10 @@ export default function Addbankcard() {
   );
 
   React.useEffect(() => {
-    if (strictValidObjectWithKeys(bankCardDetail) && bankCardDetail.success) {
+    if (validValue(searchParams.get("id")) && strictValidObjectWithKeys(bankCardDetail) && bankCardDetail.success) {
       setObjectForm(bankCardDetail.bankCardDetail);
     }
-  }, [bankCardDetail]);
+  }, [searchParams, bankCardDetail]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,7 +51,7 @@ export default function Addbankcard() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    if (strictValidObjectWithKeys(bankCardDetail) && bankCardDetail.success) {
+    if (validValue(searchParams.get("id")) && strictValidObjectWithKeys(bankCardDetail) && bankCardDetail.success) {
       let result = await saveBankCardApi(
         "PUT",
         "/bank-card/" + bankCardDetail.bankCardDetail._id,
@@ -111,7 +112,12 @@ export default function Addbankcard() {
               label="Bank name"
               name="bank_name"
               value={objectForm.bank_name}
-              autoFocus
+              onChange={(event) =>
+                setObjectForm({
+                  ...objectForm,
+                  ...{ bank_name: event.target.value },
+                })
+              }
             />
             <TextField
               margin="normal"
@@ -122,7 +128,12 @@ export default function Addbankcard() {
               type="number"
               name="bank_account"
               value={objectForm.bank_account}
-              autoFocus
+              onChange={(event) =>
+                setObjectForm({
+                  ...objectForm,
+                  ...{ bank_account: event.target.value },
+                })
+              }
             />
             <TextField
               margin="normal"
@@ -132,7 +143,12 @@ export default function Addbankcard() {
               label="IFSC Code"
               name="ifsc_code"
               value={objectForm.ifsc_code}
-              autoFocus
+              onChange={(event) =>
+                setObjectForm({
+                  ...objectForm,
+                  ...{ ifsc_code: event.target.value },
+                })
+              }
             />
             <TextField
               margin="normal"
@@ -142,7 +158,12 @@ export default function Addbankcard() {
               label="State"
               name="state"
               value={objectForm.state}
-              autoFocus
+              onChange={(event) =>
+                setObjectForm({
+                  ...objectForm,
+                  ...{ state: event.target.value },
+                })
+              }
             />
             <TextField
               margin="normal"
@@ -152,7 +173,12 @@ export default function Addbankcard() {
               label="City"
               name="city"
               value={objectForm.city}
-              autoFocus
+              onChange={(event) =>
+                setObjectForm({
+                  ...objectForm,
+                  ...{ city: event.target.value },
+                })
+              }
             />
             <TextField
               margin="normal"
@@ -162,7 +188,12 @@ export default function Addbankcard() {
               label="Address"
               name="address"
               value={objectForm.address}
-              autoFocus
+              onChange={(event) =>
+                setObjectForm({
+                  ...objectForm,
+                  ...{ address: event.target.value },
+                })
+              }
             />
             <TextField
               margin="normal"
@@ -171,7 +202,12 @@ export default function Addbankcard() {
               label="Email"
               name="email"
               value={objectForm.email}
-              autoFocus
+              onChange={(event) =>
+                setObjectForm({
+                  ...objectForm,
+                  ...{ email: event.target.value },
+                })
+              }
             />
             <Button
               type="submit"
