@@ -21,6 +21,7 @@ import GameNow from "./GameNow";
 import RechargeReq from "./RechargeReq";
 import WithdrawalReq from "./WithdrawalReq";
 import { Card } from "@mui/material";
+import UsersList from "./UsersList";
 
 const drawerWidth = 240;
 
@@ -150,6 +151,7 @@ export default function BillingDashboard({ routeName }) {
                   {routeName === "game-now" && <GameNow />}
                   {routeName === "recharge-req" && <RechargeReq />}
                   {routeName === "withdrawal-req" && <WithdrawalReq />}
+                  {routeName === "users" && <UsersList />}
                 </Paper>
               </Grid>
             </Card>

@@ -126,6 +126,10 @@ const routes = (isLoggedIn) => {
       element: isLoggedIn ? <BillingDashboard routeName="withdrawal-req" /> : <Navigate to="/login" />,
     },
     {
+      path: '/billing/users', // protected routes
+      element: isLoggedIn ? <BillingDashboard routeName="users" /> : <Navigate to="/login" />,
+    },
+    {
       // public routes
       path: '*',
       element: <NotFound />,
