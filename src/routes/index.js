@@ -22,6 +22,7 @@ import BillingDashboard from "../pages/billing";
 import ChangePassword from "../pages/ChangePassword";
 import MyProfile from "../pages/MyProfile";
 import ForgotPassword from "../pages/ForgotPassword";
+import Trend from "../pages/Trend";
 
 const routes = (isLoggedIn) => {
   return [
@@ -103,6 +104,10 @@ const routes = (isLoggedIn) => {
     {
       path: '/my-profile', // protected routes
       element: isLoggedIn ? <MyProfile /> : <Navigate to="/login" />,
+    },
+    {
+      path: '/trend', // protected routes
+      element: isLoggedIn ? <Trend /> : <Navigate to="/login" />,
     },
     {
       path: '/change-password', // protected routes

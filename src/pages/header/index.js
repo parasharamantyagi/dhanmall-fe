@@ -34,7 +34,15 @@ export default function Header({ amount }) {
             >
               Recharge
             </Button>
-            <Button sx={{ color: "#fff" }} size="small">
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ ml: 1 }}
+              size="small"
+              onClick={() => {
+                navigate("/trend");
+              }}
+            >
               Trend
             </Button>
           </Box>
