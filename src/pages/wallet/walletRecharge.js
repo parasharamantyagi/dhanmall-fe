@@ -26,14 +26,15 @@ import { appUpiId } from "../../utils/constant";
 import useMyProfileApi from "../../hooks/useMyProfileApi";
 import { addRechargeService } from "./action";
 import { useNavigate } from "react-router-dom";
+import { validValue } from "../../utils/common-utils";
 
 const buttonAmmount = [
-  { id: 1, ammount: "200" },
   { id: 1, ammount: "500" },
-  { id: 1, ammount: "750" },
-  { id: 1, ammount: "1000" },
-  { id: 1, ammount: "1500" },
-  { id: 1, ammount: "2000" },
+  { id: 2, ammount: "750" },
+  { id: 3, ammount: "1000" },
+  { id: 4, ammount: "1500" },
+  { id: 5, ammount: "2000" },
+  { id: 6, ammount: "5000" },
 ];
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -47,7 +48,7 @@ export default function WalletRecharge() {
   const navigate = useNavigate();
   const { myProfileData } = useMyProfileApi("/profile", "GET");
   const [objVal, setObjVal] = React.useState({});
-  const [yourBalance, setYourBalance] = React.useState({ money: 0 });
+  const [yourBalance, setYourBalance] = React.useState({ first_payment: 0, money: 0 });
   const [is_show, setIsShow] = React.useState(0);
   const [type, setType] = React.useState("");
 
@@ -80,16 +81,25 @@ export default function WalletRecharge() {
   React.useEffect(() => {
     if (strictValidObjectWithKeys(myProfileData)) {
       setYourBalance({
+        first_payment: myProfileData.myProfile.first_payment,
         money: myProfileData.myProfile.money,
       });
     }
   }, [myProfileData]);
 
   const handleChange = (e) => {
-    setIsShow(
-      e.target.name === "qrcode" ? 1 : e.target.name === "upipay" ? 2 : 0
-    );
-    setType(e.target.name);
+    if(strictValidObjectWithKeys(objVal) && validValue(objVal.recharge_amount)){
+      if(!yourBalance.first_payment && parseInt(objVal.recharge_amount) < 500){
+        toast.error("First payment should be minimum 500 rupees");
+        return false;
+      }
+      setIsShow(
+        e.target.name === "qrcode" ? 1 : e.target.name === "upipay" ? 2 : 0
+      );
+      setType(e.target.name);
+    }else{
+      toast.error("Please select an amount first.");
+    }
   };
 
   const payAmmountWithUpi = (e) => {
@@ -138,10 +148,16 @@ export default function WalletRecharge() {
                         ? objVal.recharge_amount
                         : ""
                     }
+                    onChange={(event) =>
+                      setObjVal({
+                        ...objVal,
+                        ...{ recharge_amount: event.target.value },
+                      })
+                    }
                     autoFocus
-                    InputProps={{
-                      readOnly: true,
-                    }}
+                    // InputProps={{
+                    //   readOnly: true,
+                    // }}
                   />
                 </Grid>
 

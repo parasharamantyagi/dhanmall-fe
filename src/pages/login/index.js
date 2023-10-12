@@ -56,7 +56,7 @@ export default function SignIn() {
     });
     if (response.success) {
       toast.success(response.message);
-      navigate("/");
+      navigate("/mine");
     } else {
       toast.error(response.message);
     }

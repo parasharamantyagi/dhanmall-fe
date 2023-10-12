@@ -79,7 +79,7 @@ export default function WalletTransactions() {
                             ) : null}
                           </Typography>
                         }
-                        secondary={defaultCurrencyFormat(0)}
+                        secondary={defaultCurrencyFormat(object.status === "success" ? object.ammount : 0)}
                       />
                     ) : (
                       <ListItemText
@@ -98,7 +98,7 @@ export default function WalletTransactions() {
                             {capitalizeFirstLetter(object.status)}
                           </Typography>
                         }
-                        secondary={defaultCurrencyFormat(0)}
+                        secondary={defaultCurrencyFormat(object.status === "success" ? object.ammount : 0)}
                       />
                     )}
                   </>

@@ -31,7 +31,6 @@ export default function UsersList() {
 
   const searchClick = () => {
     setMobile({mobile: searchVal});
-    console.log("okkkkkkkk", searchVal);
   };
 
   return (
@@ -73,6 +72,7 @@ export default function UsersList() {
             <TableCell>Commission</TableCell>
             <TableCell>First payment</TableCell>
             <TableCell>Date</TableCell>
+            <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -86,6 +86,14 @@ export default function UsersList() {
                 <TableCell>{defaultCurrencyFormat(row.commission)}</TableCell>
                 <TableCell>{row.first_payment}</TableCell>
                 <TableCell>{unixformatDateTime(row.createdAt)}</TableCell>
+                <TableCell><Button
+                    // disabled={row.status === "processing" ? false : true}
+                    variant="contained"
+                    sx={{ background: "#000" }}
+                    // onClick={() => handleClickOpen(row._id)}
+                  >
+                    Approve
+                  </Button></TableCell>
               </TableRow>
             ))}
         </TableBody>
