@@ -12,25 +12,17 @@ import Footer from "../footer";
 import { updateProfileService } from "./action";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
 import { toast } from "react-toastify";
-import useMyProfileApi from "../../hooks/useMyProfileApi";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function MyProfile() {
   const navigate = useNavigate();
+  const profile = useSelector((state) => state.profile.data);
   const [objectForm, setObjectForm] = React.useState({
-    nickname: "",
-    email: "",
+    nickname: profile.nickname,
+    email: profile.email,
   });
-  const { myProfileData } = useMyProfileApi("/profile", "GET");
-
-  React.useEffect(() => {
-    if (strictValidObjectWithKeys(myProfileData)) {
-      setObjectForm({
-        nickname: myProfileData.myProfile.nickname,
-        email: myProfileData.myProfile.email,
-      });
-    }
-  }, [myProfileData]);
+  
 
   const renderSubtitle = (text) => {
     return (

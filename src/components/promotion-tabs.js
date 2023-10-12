@@ -90,7 +90,7 @@ export default function FullWidthTabs({ myProfile }) {
     navigator.clipboard
       .writeText(
         strictValidObjectWithKeys(myProfile)
-          ? myProfile.myProfile.promotion_url
+          ? myProfile.promotion_url
           : "00000000"
       )
       .then(() => {
@@ -110,7 +110,7 @@ export default function FullWidthTabs({ myProfile }) {
       <Typography variant="h2" align="center" margin={3} gutterBottom>
         Bonus: ₹{" "}
         {strictValidObjectWithKeys(myProfile)
-          ? myProfile.myProfile.commission
+          ? myProfile.commission
           : 0}
       </Typography>
       <Box py={3} display="flex" justifyContent="space-evenly">
@@ -126,7 +126,7 @@ export default function FullWidthTabs({ myProfile }) {
           </Typography>
           <Typography variant="p4">
             {strictValidObjectWithKeys(myProfile)
-              ? defaultCurrencyFormat(myProfile.myProfile.contribution)
+              ? defaultCurrencyFormat(myProfile.contribution)
               : defaultCurrencyFormat(0)}
           </Typography>
         </Box>
@@ -139,7 +139,7 @@ export default function FullWidthTabs({ myProfile }) {
             variant="outlined"
             value={
               strictValidObjectWithKeys(myProfile)
-                ? myProfile.myProfile.promotion_code
+                ? myProfile.promotion_code
                 : ""
             }
             InputProps={{
@@ -152,7 +152,7 @@ export default function FullWidthTabs({ myProfile }) {
             variant="outlined"
             value={
               strictValidObjectWithKeys(myProfile)
-                ? `http://luckydhanmall.com/register?r_code=${myProfile.myProfile.promotion_code}`
+                ? `http://luckydhanmall.com/register?r_code=${myProfile.promotion_code}`
                 : ""
             }
             sx={{ mt: 2 }}

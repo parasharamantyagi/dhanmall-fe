@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { apiCall } from "../config/api/client";
 import { messages } from "../language/en";
+import { useDispatch } from "react-redux";
+import { saveProfile } from "../redux/reducer/profile.reducer";
 
-function useMyProfileApi(url, method, obj) {
-  // const [promotionData, setDataPromotion] = useState(null);
+function useMyProfileApi() {
+  const dispatch = useDispatch();
   const [myProfileData, setMyProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,13 +13,14 @@ function useMyProfileApi(url, method, obj) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await apiCall(method, url, obj);
+        const res = await apiCall('GET', '/profile', {});
         if (res.status === 1) {
           setMyProfileData({
             myProfile: res.data,
             message: "success",
             success: true,
           });
+          dispatch(saveProfile(res.data));
         } else {
           setMyProfileData({
             myProfile: res.data,
@@ -37,7 +40,7 @@ function useMyProfileApi(url, method, obj) {
     }
 
     fetchData();
-  }, [url, method, obj]);
+  }, [dispatch]);
 
   return { myProfileData, loading, error };
 }

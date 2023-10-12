@@ -12,7 +12,6 @@ import { styled } from "@mui/material/styles";
 import CardHeader from "../header/header-card";
 import Paper from "@mui/material/Paper";
 import Footer from "../footer";
-import useMyProfileApi from "../../hooks/useMyProfileApi";
 import {
   defaultCurrencyFormat,
   strictValidObjectWithKeys,
@@ -21,6 +20,7 @@ import { useBankCardApi } from "../bank-card/hooke";
 import { addWithdrawRequest } from "./action";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -32,18 +32,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function WalletWithdrawal() {
   const navigate = useNavigate();
-  const { myProfileData } = useMyProfileApi("/profile", "GET");
+  const profile = useSelector((state) => state.profile.data);
   const { bankCardList } = useBankCardApi("/bank-card", "GET");
-  const [objVal, setObjVal] = React.useState({ money: 0 });
   const [allbankCardList, setAllbankCardList] = React.useState([]);
 
-  React.useEffect(() => {
-    if (strictValidObjectWithKeys(myProfileData)) {
-      setObjVal({
-        money: myProfileData.myProfile.money,
-      });
-    }
-  }, [myProfileData]);
 
   React.useEffect(() => {
     if (strictValidObjectWithKeys(bankCardList)) {
@@ -93,7 +85,7 @@ export default function WalletWithdrawal() {
             <Grid item xs={12}>
               <Item>
                 <Typography mt={1} variant="h2">
-                  Balance: {defaultCurrencyFormat(objVal.money)}
+                  Balance: {defaultCurrencyFormat(profile.money)}
                 </Typography>
                 <Grid item xs={12}>
                   <TextField

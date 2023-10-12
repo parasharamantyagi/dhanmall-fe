@@ -3,11 +3,11 @@ import Box from "@mui/material/Box";
 import Footer from "../footer";
 import Header from "../header";
 import FullWidthTabs from "../../components/promotion-tabs";
-import useMyProfileApi from "../../hooks/useMyProfileApi";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
+import { useSelector } from "react-redux";
 
 export default function Promotion() {
-  const { myProfileData } = useMyProfileApi("/profile", "GET");
+  const profile = useSelector((state) => state.profile.data);
   return (
     <Box
       sx={{
@@ -18,13 +18,12 @@ export default function Promotion() {
     >
       <Header
         amount={
-          strictValidObjectWithKeys(myProfileData) &&
-          strictValidObjectWithKeys(myProfileData.myProfile)
-            ? myProfileData.myProfile.money
+          strictValidObjectWithKeys(profile)
+            ? profile.money
             : 0
         }
       />
-      <FullWidthTabs myProfile={myProfileData} />
+      <FullWidthTabs myProfile={profile} />
       <Footer />
     </Box>
   );

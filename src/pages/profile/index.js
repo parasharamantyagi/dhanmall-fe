@@ -9,8 +9,7 @@ import Sidebar from './sidebar';
 import useMyProfileApi from '../../hooks/useMyProfileApi';
 import { strictValidObjectWithKeys } from '../../utils/common-utils';
 import { useNavigate } from 'react-router-dom';
-import { saveProfile } from '../../redux/reducer/profile.reducer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const styles = (theme) =>
   createStyles({
@@ -27,18 +26,9 @@ const styles = (theme) =>
 
 const Profile = (props) => {
   const navigate = useNavigate();
-  const { myProfileData } = useMyProfileApi('/profile', 'GET');
+  useMyProfileApi();
   const { classes } = props;
-  const dispatch = useDispatch();
-
   const profile = useSelector((state) => state.profile.data);
-
-  React.useEffect(() => {
-    if (strictValidObjectWithKeys(myProfileData)) {
-      dispatch(saveProfile(myProfileData));
-    }
-  }, [myProfileData]);
-
   return (
     <Box
       sx={{
@@ -59,21 +49,21 @@ const Profile = (props) => {
           <AvatarWithName
             name={
               strictValidObjectWithKeys(profile) &&
-              validValue(profile.myProfile.nickname)
-                ? profile.myProfile.nickname
+              validValue(profile.nickname)
+                ? profile.nickname
                 : 'N/A'
             }
           />
           <Typography gutterBottom color="secondary">
             Mobile Number :{' '}
             {strictValidObjectWithKeys(profile)
-              ? profile.myProfile.mobile
+              ? profile.mobile
               : 'N/A'}
           </Typography>
           <Typography gutterBottom color="secondary">
             ID :{' '}
             {strictValidObjectWithKeys(profile)
-              ? profile.myProfile.promotion_code
+              ? profile.promotion_code
               : 'N/A'}
           </Typography>
           <Box display="flex" mt={2} className={classes.root}>
@@ -81,7 +71,7 @@ const Profile = (props) => {
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(
                   strictValidObjectWithKeys(profile)
-                    ? profile.myProfile.money
+                    ? profile.money
                     : 0,
                 )}
               </Typography>
@@ -100,7 +90,7 @@ const Profile = (props) => {
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(
                   strictValidObjectWithKeys(profile)
-                    ? profile.myProfile.commission
+                    ? profile.commission
                     : 0,
                 )}
               </Typography>
@@ -119,7 +109,7 @@ const Profile = (props) => {
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(
                   strictValidObjectWithKeys(profile)
-                    ? profile.myProfile.interest
+                    ? profile.interest
                     : 0,
                 )}
               </Typography>

@@ -23,10 +23,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { strictValidObjectWithKeys } from "../../utils/common-utils";
 import { appUpiId } from "../../utils/constant";
-import useMyProfileApi from "../../hooks/useMyProfileApi";
 import { addRechargeService } from "./action";
 import { useNavigate } from "react-router-dom";
 import { validValue } from "../../utils/common-utils";
+import { useSelector } from "react-redux";
 
 const buttonAmmount = [
   { id: 1, ammount: "500" },
@@ -46,9 +46,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 export default function WalletRecharge() {
   const navigate = useNavigate();
-  const { myProfileData } = useMyProfileApi("/profile", "GET");
+  const profile = useSelector((state) => state.profile.data);
   const [objVal, setObjVal] = React.useState({});
-  const [yourBalance, setYourBalance] = React.useState({ first_payment: 0, money: 0 });
   const [is_show, setIsShow] = React.useState(0);
   const [type, setType] = React.useState("");
 
@@ -78,18 +77,9 @@ export default function WalletRecharge() {
     }
   };
 
-  React.useEffect(() => {
-    if (strictValidObjectWithKeys(myProfileData)) {
-      setYourBalance({
-        first_payment: myProfileData.myProfile.first_payment,
-        money: myProfileData.myProfile.money,
-      });
-    }
-  }, [myProfileData]);
-
   const handleChange = (e) => {
     if(strictValidObjectWithKeys(objVal) && validValue(objVal.recharge_amount)){
-      if(!yourBalance.first_payment && parseInt(objVal.recharge_amount) < 500){
+      if(!profile.first_payment && parseInt(objVal.recharge_amount) < 500){
         toast.error("First payment should be minimum 500 rupees");
         return false;
       }
@@ -131,7 +121,7 @@ export default function WalletRecharge() {
             <Grid item xs={12}>
               <Item>
                 <Typography mt={1} variant="h2">
-                  Your Balance: {defaultCurrencyFormat(yourBalance.money)}
+                  Your Balance: {defaultCurrencyFormat(profile.money)}
                 </Typography>
 
                 <Grid item xs={12}>
