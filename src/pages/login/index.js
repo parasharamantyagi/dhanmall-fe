@@ -74,7 +74,7 @@ export default function SignIn() {
         }}
       >
         <img
-          src="img-4.png"
+          src="img/img-4.png"
           style={{
             width: "100%",
             borderRadius: "10%",

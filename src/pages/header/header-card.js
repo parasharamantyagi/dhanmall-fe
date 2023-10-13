@@ -35,7 +35,7 @@ export default function CardHeader({ pageNo, title }) {
               // align: "center",
               borderRadius: 1
             }}
-            image="/small-logo.png"
+            image="/img/small-logo.png"
           />
           <Typography color="white" variant="h5">
             {title}

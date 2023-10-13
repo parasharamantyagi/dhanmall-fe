@@ -16,25 +16,25 @@ import CardHeader from "../header/header-card";
 import Paper from "@mui/material/Paper";
 import Footer from "../footer";
 import {
+  validValue,
   defaultCurrencyFormat,
   validObjectWithParameterKeys,
+  strictValidObjectWithKeys
 } from "../../utils/common-utils";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { strictValidObjectWithKeys } from "../../utils/common-utils";
 import { appUpiId } from "../../utils/constant";
 import { addRechargeService } from "./action";
 import { useNavigate } from "react-router-dom";
-import { validValue } from "../../utils/common-utils";
 import { useSelector } from "react-redux";
 
 const buttonAmmount = [
-  { id: 1, ammount: "500" },
-  { id: 2, ammount: "750" },
-  { id: 3, ammount: "1000" },
-  { id: 4, ammount: "1500" },
-  { id: 5, ammount: "2000" },
-  { id: 6, ammount: "5000" },
+  { id: 1, ammount: 200 },
+  { id: 2, ammount: 750 },
+  { id: 3, ammount: 1000 },
+  { id: 4, ammount: 1500 },
+  { id: 5, ammount: 2000 },
+  { id: 6, ammount: 5000 },
 ];
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -79,8 +79,8 @@ export default function WalletRecharge() {
 
   const handleChange = (e) => {
     if(strictValidObjectWithKeys(objVal) && validValue(objVal.recharge_amount)){
-      if(!profile.first_payment && parseInt(objVal.recharge_amount) < 500){
-        toast.error("First payment should be minimum 500 rupees");
+      if(!profile.first_payment && parseInt(objVal.recharge_amount) < buttonAmmount[0].ammount){
+        toast.error(`First payment should be minimum ${buttonAmmount[0].ammount} rupees`);
         return false;
       }
       setIsShow(
@@ -165,7 +165,7 @@ export default function WalletRecharge() {
                           setObjVal({ recharge_amount: object.ammount });
                         }}
                       >
-                        ₹ {object.ammount}
+                        {defaultCurrencyFormat(object.ammount)}
                       </Button>
                     </Grid>
                   ))}
@@ -239,7 +239,7 @@ export default function WalletRecharge() {
                             margin: 1,
                             align: "center",
                           }}
-                          image="/vani-paytm.jpeg"
+                          image="/img/11.png"
                         />
                         <Typography
                           variant="body2"

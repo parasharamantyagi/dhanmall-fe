@@ -123,7 +123,7 @@ export default function SignUp() {
       >
         {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
         <img
-          src="img-4.png"
+          src="img/img-4.png"
           style={{
             width: "100%",
             borderRadius: "10%",
