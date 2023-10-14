@@ -61,7 +61,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
   };
 
   useEffect(() => {
-    setTimeLeft(gameNowTime());
+    setTimeLeft(gameNow.time);
   }, [gameNow.time]);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         apiCall();
       }, 3000);
     }
-  }, [timeLeft]);
+  }, [timeLeft,apiCall]);
 
   // Function to format the time as mm:ss
   const formatTime = (time) => {
