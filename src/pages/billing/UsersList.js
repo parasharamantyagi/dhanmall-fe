@@ -19,23 +19,63 @@ import {
 } from "../../utils/common-utils";
 import { useUsersList } from "./actions";
 import { defaultCurrencyFormat } from "../../utils/common-utils";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import AddAmountDialog from "../../components/addAmountDialog";
 
 export default function UsersList() {
   const [page, setPage] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+  const [confirmDialog, setConfirmDialog] = React.useState({});
+  const [userAmount, setUserAmount] = React.useState(0);
   const [mobile, setMobile] = React.useState({});
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
   const [searchVal, setSearchVal] = React.useState("");
-  const { usersList } = useUsersList("/billing/users?page=" + page, "POST", mobile);
+  const { usersList } = useUsersList(
+    "/billing/users?page=" + page,
+    "POST",
+    mobile
+  );
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open_menu = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const addAmount = () => {
+    setOpen(true);
+    setAnchorEl(null);
+  }
+  const handleCancelled = () => {
+    setOpen(false);
+  };
+  const handleAgree = () => {
+    console.log('Okkkkkkkkkkk',userAmount);
+    setOpen(false);
+  };
 
   const searchClick = () => {
-    setMobile({mobile: searchVal});
+    setMobile({ mobile: searchVal });
   };
 
   return (
     <React.Fragment>
       <Typography>Users list</Typography>
+      <AddAmountDialog
+        open={open}
+        handleCancelled={handleCancelled}
+        handleAgree={handleAgree}
+        setUserAmount={setUserAmount}
+        title="Select and add an ammount .?"
+        description="Please make sure before approve this payment becouse this payment will not be revert after approve .?"
+        data={confirmDialog}
+      />
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={6}></Grid>
@@ -86,14 +126,28 @@ export default function UsersList() {
                 <TableCell>{defaultCurrencyFormat(row.commission)}</TableCell>
                 <TableCell>{row.first_payment}</TableCell>
                 <TableCell>{unixformatDateTime(row.createdAt)}</TableCell>
-                <TableCell><Button
-                    // disabled={row.status === "processing" ? false : true}
-                    variant="contained"
-                    sx={{ background: "#000" }}
-                    // onClick={() => handleClickOpen(row._id)}
+                <TableCell>
+                  <Button
+                    id="basic-button"
+                    aria-controls={open_menu ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open_menu ? "true" : undefined}
+                    onClick={handleClick}
                   >
-                    Approve
-                  </Button></TableCell>
+                    action
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open_menu}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem onClick={addAmount}>ADD amount</MenuItem>
+                  </Menu>
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>

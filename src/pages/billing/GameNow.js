@@ -3,7 +3,6 @@ import CanvasJSReact from "@canvasjs/react-charts";
 import { useBillingGameNowList } from "../../hooks/useBillingApi";
 import {
   strictValidObjectWithKeys,
-  validValue,
 } from "../../utils/common-utils";
 import {
   Button,
@@ -21,50 +20,22 @@ export default function GameNow() {
   let apiCall = useRechargeDetail;
   const { billingGame } = useBillingGameNowList("billing/current-game", "GET");
   const [gameValue, setGameValue] = React.useState(10);
-  const [object, setObject] = React.useState({
-    game_id: {
-      _id: 0,
-      date: 0,
-      period: "000",
-      begintime: 0,
-      detail: { set_unit: 0, set_value: 0 },
-    },
-    total_price: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_red: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_green: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_violet: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_0: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_1: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_2: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_3: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_4: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_5: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_6: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_7: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_8: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-    pick_9: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-  });
-
   const handleSubmit = async () => {
     if (gameValue !== "no") {
-      apiCall("billing/set-game", "POST", {
-        game_id: object.game_id._id,
+      let res = await apiCall("billing/set-game", "POST", {
+        game_id: billingGame.billingGame.game_id._id,
         set_unit: 1,
         set_value: gameValue,
       });
+      if(strictValidObjectWithKeys(res)){
+        window.location.replace('');
+      }
     }
   };
-
-  React.useEffect(() => {
-    if (strictValidObjectWithKeys(billingGame) && billingGame.success) {
-      setObject(billingGame.billingGame);
-    }
-  }, [billingGame]);
-
   const options = {
     title: {
       text:
-        "Game prediction Chart " + object.game_id.date + object.game_id.period,
+        "Game prediction Chart " + billingGame.billingGame.game_id.date + billingGame.billingGame.game_id.period,
     },
     data: [
       {
@@ -72,19 +43,19 @@ export default function GameNow() {
         dataPoints: [
           {
             label: "Total",
-            y: object.total_price.total_amount,
+            y: billingGame.billingGame.total_price.total_amount,
             color: "black",
           },
-          { label: "0", y: object.pick_0.total_amount, color: "red" },
-          { label: "1", y: object.pick_1.total_amount, color: "green" },
-          { label: "2", y: object.pick_2.total_amount, color: "red" },
-          { label: "3", y: object.pick_3.total_amount, color: "green" },
-          { label: "4", y: object.pick_4.total_amount, color: "red" },
-          { label: "5", y: object.pick_5.total_amount, color: "green" },
-          { label: "6", y: object.pick_6.total_amount, color: "red" },
-          { label: "7", y: object.pick_7.total_amount, color: "green" },
-          { label: "8", y: object.pick_8.total_amount, color: "red" },
-          { label: "9", y: object.pick_9.total_amount, color: "green" },
+          { label: "0", y: billingGame.billingGame.pick_0.total_amount, color: "red" },
+          { label: "1", y: billingGame.billingGame.pick_1.total_amount, color: "green" },
+          { label: "2", y: billingGame.billingGame.pick_2.total_amount, color: "red" },
+          { label: "3", y: billingGame.billingGame.pick_3.total_amount, color: "green" },
+          { label: "4", y: billingGame.billingGame.pick_4.total_amount, color: "red" },
+          { label: "5", y: billingGame.billingGame.pick_5.total_amount, color: "green" },
+          { label: "6", y: billingGame.billingGame.pick_6.total_amount, color: "red" },
+          { label: "7", y: billingGame.billingGame.pick_7.total_amount, color: "green" },
+          { label: "8", y: billingGame.billingGame.pick_8.total_amount, color: "red" },
+          { label: "9", y: billingGame.billingGame.pick_9.total_amount, color: "green" },
         ],
       },
     ],
@@ -105,32 +76,32 @@ export default function GameNow() {
         dataPoints: [
           {
             y:
-              (object.pick_red.total_amount /
-                (object.pick_red.total_amount +
-                  object.pick_green.total_amount +
-                  object.pick_violet.total_amount)) *
+              (billingGame.billingGame.pick_red.total_amount /
+                (billingGame.billingGame.pick_red.total_amount +
+                  billingGame.billingGame.pick_green.total_amount +
+                  billingGame.billingGame.pick_violet.total_amount)) *
               100,
-            label: "Red(" + object.pick_red.total_amount + ")",
+            label: "Red(" + billingGame.billingGame.pick_red.total_amount + ")",
             color: "red",
           },
           {
             y:
-              (object.pick_violet.total_amount /
-                (object.pick_red.total_amount +
-                  object.pick_green.total_amount +
-                  object.pick_violet.total_amount)) *
+              (billingGame.billingGame.pick_violet.total_amount /
+                (billingGame.billingGame.pick_red.total_amount +
+                  billingGame.billingGame.pick_green.total_amount +
+                  billingGame.billingGame.pick_violet.total_amount)) *
               100,
-            label: "Violet(" + object.pick_violet.total_amount + ")",
+            label: "Violet(" + billingGame.billingGame.pick_violet.total_amount + ")",
             color: "violet",
           },
           {
             y:
-              (object.pick_green.total_amount /
-                (object.pick_red.total_amount +
-                  object.pick_green.total_amount +
-                  object.pick_violet.total_amount)) *
+              (billingGame.billingGame.pick_green.total_amount /
+                (billingGame.billingGame.pick_red.total_amount +
+                  billingGame.billingGame.pick_green.total_amount +
+                  billingGame.billingGame.pick_violet.total_amount)) *
               100,
-            label: "Green(" + object.pick_green.total_amount + ")",
+            label: "Green(" + billingGame.billingGame.pick_green.total_amount + ")",
             color: "green",
           },
         ],
@@ -158,11 +129,9 @@ export default function GameNow() {
         </Grid>
         <Grid item xs={12} sm={3} mt={4}>
           {"Set Value -> "}
-          {strictValidObjectWithKeys(object) &&
-          strictValidObjectWithKeys(object.game_id.detail) &&
-          validValue(object.game_id.detail.set_unit)
-            ? object.game_id.detail.set_value
-            : "No"}
+          {billingGame.billingGame.game_id.detail.set_unit === 0
+            ? "No"
+            : billingGame.billingGame.game_id.detail.set_value}
           <br />
           <FormControl>
             <RadioGroup name="set_number" defaultValue={10}>

@@ -43,7 +43,29 @@ export const useRechargeList = (url, method, obj) => {
 
 
 export const useBillingGameNowList = (url, method, obj) => {
-  const [billingGame, setBillingGame] = useState(null);
+  const [billingGame, setBillingGame] = useState({billingGame: {
+    game_id: {
+      _id: 0,
+      date: 0,
+      period: "000",
+      begintime: 0,
+      detail: { set_unit: 0, set_value: 0 },
+    },
+    total_price: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_red: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_green: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_violet: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_0: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_1: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_2: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_3: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_4: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_5: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_6: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_7: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_8: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+    pick_9: { total_amount: 0, total_delivery: 0, pick_count: 0 },
+  }});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

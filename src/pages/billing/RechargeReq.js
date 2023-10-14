@@ -32,20 +32,28 @@ export default function RechargeReq() {
     // response
     setOpen(true);
   };
-  const handleAgree = () => {
-    response("/billing/recharge-status/" + confirmDialog, "PUT", {
+  const handleAgree = async () => {
+    let res = await response("/billing/recharge-status/" + confirmDialog, "PUT", {
       status: "success",
     });
     setOpen(false);
+    if(strictValidObjectWithKeys(res)){
+      window.location.replace('');
+    }
   };
+
   const handleCancelled = () => {
     setOpen(false);
   };
-  const handleDissAgree = () => {
-    response("/billing/recharge-status/" + confirmDialog, "PUT", {
+
+  const handleDissAgree = async () => {
+    let res = await response("/billing/recharge-status/" + confirmDialog, "PUT", {
       status: "failure",
     });
     setOpen(false);
+    if(strictValidObjectWithKeys(res)){
+      window.location.replace('');
+    }
   };
 
   return (

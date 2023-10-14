@@ -23,19 +23,11 @@ import {
 } from "../../utils/common-utils";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { appUpiId } from "../../utils/constant";
+// import { appUpiId } from "../../utils/constant";
 import { addRechargeService } from "./action";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-const buttonAmmount = [
-  { id: 1, ammount: 200 },
-  { id: 2, ammount: 750 },
-  { id: 3, ammount: 1000 },
-  { id: 4, ammount: 1500 },
-  { id: 5, ammount: 2000 },
-  { id: 6, ammount: 5000 },
-];
+import { rechargeAmmount } from "../../utils/constant";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -79,8 +71,8 @@ export default function WalletRecharge() {
 
   const handleChange = (e) => {
     if(strictValidObjectWithKeys(objVal) && validValue(objVal.recharge_amount)){
-      if(!profile.first_payment && parseInt(objVal.recharge_amount) < buttonAmmount[0].ammount){
-        toast.error(`First payment should be minimum ${buttonAmmount[0].ammount} rupees`);
+      if(!profile.first_payment && parseInt(objVal.recharge_amount) < rechargeAmmount[0].ammount){
+        toast.error(`First payment should be minimum ${rechargeAmmount[0].ammount} rupees`);
         return false;
       }
       setIsShow(
@@ -94,9 +86,11 @@ export default function WalletRecharge() {
 
   const payAmmountWithUpi = (e) => {
     if (strictValidObjectWithKeys(objVal)) {
-      window.open(
-        `https://pay.upilink.in/pay/${appUpiId}?am=${objVal.recharge_amount}`
-      );
+      // let linkUpi = 'upi://pay?pa=parasharamantyagi-2@okhdfcbank&pn=6398951359&am=200cu=INR';
+      // let linkUpi = "upi://pay?pa=parasharamantyagi-2@okhdfcbank;pn=6398951359&amp=20;cu=INR"
+      let linkUpi = "upi://pay?pa=parasharamantyagi-2@okhdfcbank&pn=%6398951359&tr=%20&am=20&cu=INR";
+
+      window.open(linkUpi);
     } else {
       toast.error("Please select an ammount first");
     }
@@ -156,7 +150,7 @@ export default function WalletRecharge() {
                   rowSpacing={1}
                   columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 >
-                  {buttonAmmount.map((object) => (
+                  {rechargeAmmount.map((object) => (
                     <Grid item xs={4}>
                       <Button
                         variant="contained"
