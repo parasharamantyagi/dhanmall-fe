@@ -38,6 +38,7 @@ function useApi(url, method, obj) {
   // Initial API call when the hook is first used
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, method, obj]);
 
   // Function to recall the API call

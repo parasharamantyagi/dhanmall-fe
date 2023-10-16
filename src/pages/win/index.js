@@ -59,6 +59,7 @@ export default function Win() {
 
   React.useEffect(() => {
     dashboardApi();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOrder]);
 
   return (
