@@ -178,3 +178,5 @@ export const rechargeAmmount = [
   { id: 5, ammount: 2000 },
   { id: 6, ammount: 5000 },
 ];
+
+export const withdrawal_fees = 0.05;

@@ -21,6 +21,7 @@ import { addWithdrawRequest } from "./action";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { withdrawal_fees } from "../../utils/constant";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -33,6 +34,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function WalletWithdrawal() {
   const navigate = useNavigate();
   const profile = useSelector((state) => state.profile.data);
+  const [ammount, setAmmount] = React.useState(0);
   const { bankCardList } = useBankCardApi("/bank-card", "GET");
   const [allbankCardList, setAllbankCardList] = React.useState([]);
 
@@ -97,6 +99,7 @@ export default function WalletWithdrawal() {
                     name="recharge_amount"
                     autoComplete="recharge_amount"
                     autoFocus
+                    onChange={(event) => setAmmount(event.target.value) }
                   />
                 </Grid>
                 <Grid
@@ -109,7 +112,7 @@ export default function WalletWithdrawal() {
                     xs={12}
                     sx={{ BackgroundPositionX: "left", textAlign: "left" }}
                   >
-                    Fee: 0,to account 0
+                    Fee: {ammount*withdrawal_fees},to account {ammount - ammount*withdrawal_fees}
                   </Grid>
                   <Grid
                     item
