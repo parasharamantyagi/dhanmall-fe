@@ -83,7 +83,7 @@ export default function Home({ props }) {
                     size="small"
                     sx={{ background: "#000000" }}
                   >
-                    Bidd
+                    Bid
                   </Button>
                   <Button
                     variant="contained"
