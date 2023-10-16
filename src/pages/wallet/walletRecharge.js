@@ -227,22 +227,22 @@ export default function WalletRecharge() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={type === "qrcode"}
-                              onChange={handleChange}
-                              name="qrcode"
-                            />
-                          }
-                          label="Qr Code"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
                               checked={type === "upipay"}
                               onChange={handleChange}
                               name="upipay"
                             />
                           }
                           label="Upi Pay"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={type === "qrcode"}
+                              onChange={handleChange}
+                              name="qrcode"
+                            />
+                          }
+                          label="Qr Code"
                         />
                       </FormGroup>
                     </FormControl>
