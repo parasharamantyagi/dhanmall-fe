@@ -23,11 +23,10 @@ import {
 } from "../../utils/common-utils";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { appUpiId } from "../../utils/constant";
 import { addRechargeService } from "./action";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { rechargeAmmount } from "../../utils/constant";
+import { appUpiId, rechargeAmmount } from "../../utils/constant";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -94,7 +93,7 @@ export default function WalletRecharge() {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText("parasharamantyagi-2@okhdfcbank").then(() => {
+    navigator.clipboard.writeText(appUpiId).then(() => {
       toast.success("Copied to Clipboard");
     });
   };
@@ -302,7 +301,7 @@ export default function WalletRecharge() {
                             placeholder="UPI ID"
                             label="UPI ID"
                             variant="outlined"
-                            value={"parasharamantyagi-2@okhdfcbank"}
+                            value={appUpiId}
                             InputProps={{
                               readOnly: true,
                             }}
