@@ -287,7 +287,7 @@ export default function WalletRecharge() {
                           variant="h2"
                           align="left"
                         >
-                          By using this Link, you can recharge the amount and
+                          By using this UPI, Please make a recharge from paytm and other upi app and
                           submit the page with the correct transaction ID.
                         </Typography>
                         <Box
@@ -320,22 +320,6 @@ export default function WalletRecharge() {
                             Copy UPI ID
                           </Button>
                         </Box>
-                        {/* <center>
-                          <Button
-                            type="button"
-                            variant="contained"
-                            sx={{
-                              width: 350,
-                              py: 1,
-                              mt: 1,
-                              mb: 4,
-                              background: '#000000',
-                            }}
-                            onClick={payAmmountWithUpi}
-                          >
-                            Pay with upi
-                          </Button>
-                        </center> */}
                         <Typography
                           variant="body2"
                           align="left"

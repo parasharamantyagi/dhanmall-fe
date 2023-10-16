@@ -26,7 +26,6 @@ import AddAmountDialog from "../../components/addAmountDialog";
 export default function UsersList() {
   const [page, setPage] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  const [confirmDialog, setConfirmDialog] = React.useState({});
   const [userAmount, setUserAmount] = React.useState(0);
   const [mobile, setMobile] = React.useState({});
   const handleChangePage = (event, newPage) => {
@@ -74,7 +73,6 @@ export default function UsersList() {
         setUserAmount={setUserAmount}
         title="Select and add an ammount .?"
         description="Please make sure before approve this payment becouse this payment will not be revert after approve .?"
-        data={confirmDialog}
       />
       <CardContent>
         <Grid container spacing={2}>
