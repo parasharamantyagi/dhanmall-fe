@@ -69,7 +69,7 @@ export default function WalletRecharge() {
   };
 
   const handleChange = (e) => {
-    console.log(objVal,profile);
+    console.log(objVal, profile);
     if (
       strictValidObjectWithKeys(objVal) &&
       validValue(objVal.recharge_amount)
@@ -215,8 +215,6 @@ export default function WalletRecharge() {
                     </FormControl>
                   </Grid>
                   <Grid
-                    display="flex"
-                    flex={1}
                     flexDirection="column"
                     item
                     xs={12}
