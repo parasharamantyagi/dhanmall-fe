@@ -90,11 +90,11 @@ export default function FullWidthTabs({ myProfile }) {
     navigator.clipboard
       .writeText(
         strictValidObjectWithKeys(myProfile)
-          ? myProfile.promotion_url
-          : "00000000"
+          ? `http://luckydhanmall.com/register?r_code=${myProfile.promotion_code}`
+          : '',
       )
       .then(() => {
-        alert("copied to clipboard");
+        alert('copied to clipboard');
       });
   };
 
