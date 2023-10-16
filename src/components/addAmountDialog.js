@@ -6,7 +6,6 @@ import {
   DialogContentText,
   DialogTitle,
   Grid,
-  MenuItem,
   TextField,
 } from "@mui/material";
 import * as React from "react";
@@ -16,8 +15,7 @@ export default function AddAmountDialog({
   handleCancelled,
   handleAgree,
   title,
-  setUserAmount,
-  description,
+  setUserAmount
 }) {
   return (
     <Dialog
