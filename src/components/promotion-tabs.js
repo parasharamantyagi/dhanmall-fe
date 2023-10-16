@@ -152,7 +152,7 @@ export default function FullWidthTabs({ myProfile }) {
             variant="outlined"
             value={
               strictValidObjectWithKeys(myProfile)
-                ? `http://luckydhanmall.com/register?r_code=${myProfile.promotion_code}`
+                ? `https://luckydhanmall.com/register?r_code=${myProfile.promotion_code}`
                 : ""
             }
             sx={{ mt: 2 }}
