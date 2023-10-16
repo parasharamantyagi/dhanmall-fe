@@ -90,7 +90,7 @@ export default function FullWidthTabs({ myProfile }) {
     navigator.clipboard
       .writeText(
         strictValidObjectWithKeys(myProfile)
-          ? `http://luckydhanmall.com/register?r_code=${myProfile.promotion_code}`
+          ? `https://luckydhanmall.com/register?r_code=${myProfile.promotion_code}`
           : '',
       )
       .then(() => {
