@@ -171,7 +171,7 @@ export const contractAmmount = [
 ];
 
 export const rechargeAmmount = [
-  { id: 1, ammount: 200 },
+  { id: 1, ammount: 500 },
   { id: 2, ammount: 750 },
   { id: 3, ammount: 1000 },
   { id: 4, ammount: 1500 },

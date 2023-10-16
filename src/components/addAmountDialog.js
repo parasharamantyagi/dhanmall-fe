@@ -15,8 +15,7 @@ export default function AddAmountDialog({
   handleCancelled,
   handleAgree,
   title,
-  setUserAmount,
-  description,
+  setUserAmount
 }) {
   return (
     <Dialog
