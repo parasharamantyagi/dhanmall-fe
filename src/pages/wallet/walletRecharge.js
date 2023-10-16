@@ -135,7 +135,6 @@ export default function WalletRecharge() {
                       startIcon={<YouTubeIcon />}
                       sx={{
                         align: "center",
-                        width: "25%",
                         py: 1,
                         mt: 1,
                         mb: 1,
