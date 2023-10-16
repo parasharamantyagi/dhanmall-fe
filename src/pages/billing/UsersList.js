@@ -21,12 +21,12 @@ import { useUsersList } from "./actions";
 import { defaultCurrencyFormat } from "../../utils/common-utils";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import AddAmountDialog from "../../components/addAmountDialog";
+// import AddAmountDialog from "../../components/addAmountDialog";
 
 export default function UsersList() {
   const [page, setPage] = React.useState(0);
-  const [open, setOpen] = React.useState(false);
-  const [userAmount, setUserAmount] = React.useState(0);
+  // const [open, setOpen] = React.useState(false);
+  // const [userAmount, setUserAmount] = React.useState(0);
   const [mobile, setMobile] = React.useState({});
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -48,15 +48,15 @@ export default function UsersList() {
   };
 
   const addAmount = () => {
-    setOpen(true);
+    // setOpen(true);
     setAnchorEl(null);
   }
-  const handleCancelled = () => {
-    setOpen(false);
-  };
-  const handleAgree = () => {
-    setOpen(false);
-  };
+  // const handleCancelled = () => {
+  //   setOpen(false);
+  // };
+  // const handleAgree = () => {
+  //   setOpen(false);
+  // };
 
   const searchClick = () => {
     setMobile({ mobile: searchVal });
@@ -65,14 +65,14 @@ export default function UsersList() {
   return (
     <React.Fragment>
       <Typography>Users list</Typography>
-      <AddAmountDialog
+      {/* <AddAmountDialog
         open={open}
         handleCancelled={handleCancelled}
         handleAgree={handleAgree}
         setUserAmount={setUserAmount}
         title="Select and add an ammount .?"
         description="Please make sure before approve this payment becouse this payment will not be revert after approve .?"
-      />
+      /> */}
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={6}></Grid>
