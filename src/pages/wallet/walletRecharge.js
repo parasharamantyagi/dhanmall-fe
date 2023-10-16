@@ -69,7 +69,6 @@ export default function WalletRecharge() {
   };
 
   const handleChange = (e) => {
-    console.log(objVal, profile);
     if (
       strictValidObjectWithKeys(objVal) &&
       validValue(objVal.recharge_amount)

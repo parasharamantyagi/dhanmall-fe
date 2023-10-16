@@ -4,7 +4,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { createStyles, withStyles } from '@mui/styles';
 import AlertDialog from '../../../components/dialog';
 import { makeGameOrderApi } from '../actions';
-import { arrayOfObject, mergeObject } from '../../../utils/common-utils';
+import { arrayOfObject, gameNowTime, mergeObject } from '../../../utils/common-utils';
 import { contractAmmount } from '../../../utils/constant';
 import { toast } from 'react-toastify';
 
@@ -50,17 +50,8 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
     background: '#000',
   });
 
-  const gameNowTime = () => {
-    const currentTimestamp = Date.now();
-    // Convert it to seconds
-    const currentSeconds = Math.floor(currentTimestamp / 1000);
-    // Calculate the current second within the 180-second cycle
-    const secondInCycle = currentSeconds % 180;
-
-    return 180 - secondInCycle;
-  };
-
   useEffect(() => {
+    console.log(gameNow);
     setTimeLeft(gameNow.time);
   }, [gameNow.time]);
 

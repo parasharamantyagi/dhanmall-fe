@@ -55,7 +55,6 @@ export default function UsersList() {
     setOpen(false);
   };
   const handleAgree = () => {
-    console.log('Okkkkkkkkkkk',userAmount);
     setOpen(false);
   };
 

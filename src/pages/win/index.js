@@ -16,12 +16,12 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import OrderList from "../orders/OrderList";
 import { useNavigate } from "react-router-dom";
-import { strictValidObjectWithKeys } from "../../utils/common-utils";
+import { gameNowTime, strictValidObjectWithKeys } from "../../utils/common-utils";
 import useApi from "../../hooks/useApi";
 
 export default function Win() {
   const [orderPage, setOrderPage] = React.useState(0);
-  const [gameNow, setGameNow] = React.useState({ period: 0, time: 180 });
+  const [gameNow, setGameNow] = React.useState({ period: 0, time: gameNowTime() });
   const navigate = useNavigate();
   const [loader, setloader] = React.useState(false);
   const [dashboard, setDashboard] = React.useState([]);
@@ -46,8 +46,8 @@ export default function Win() {
     setloader(true);
     let game_now = await gameNowService();
     if (game_now.success) {
-      setloader(false);
       setGameNow(game_now.data);
+      setloader(false);
     } else {
       setloader(false);
     }

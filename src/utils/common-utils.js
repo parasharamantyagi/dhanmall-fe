@@ -345,6 +345,15 @@ export const isAuthenticated = (user) => {
   );
 };
 
+export const gameNowTime = () => {
+  const currentTimestamp = Date.now();
+  // Convert it to seconds
+  const currentSeconds = Math.floor(currentTimestamp / 1000);
+  // Calculate the current second within the 180-second cycle
+  const secondInCycle = currentSeconds % 180;
+  return 180 - secondInCycle;
+};
+
 export const arrayOfObject = (array, Obj, getVal) => {
   if (strictValidArrayWithLength(array) && strictValidObjectWithKeys(Obj)) {
     let res = array.filter(function (item) {

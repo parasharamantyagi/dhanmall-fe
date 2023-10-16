@@ -9,9 +9,6 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function Trend() {
   const { gameHistory } = useGameHistory("/game-history", "GET");
-
-  console.log(gameHistory);
-
   const addSymbols = (e) => {
     var suffixes = ["", "K", "M", "B"];
     var order = Math.max(
