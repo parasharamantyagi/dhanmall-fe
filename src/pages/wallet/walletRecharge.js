@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   FormGroup,
   Grid,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -27,6 +28,7 @@ import { addRechargeService } from "./action";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { appUpiId, rechargeAmmount } from "../../utils/constant";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -118,7 +120,39 @@ export default function WalletRecharge() {
                 <Typography mt={1} variant="h2">
                   Your Balance: {defaultCurrencyFormat(profile.money)}
                 </Typography>
-
+                <Grid item xs={12}>
+                  <Stack
+                    spacing={{ xs: 1, sm: 2 }}
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                    useFlexGap
+                    flexWrap="wrap"
+                  >
+                    <Button
+                      variant="contained"
+                      align="center"
+                      startIcon={<YouTubeIcon />}
+                      sx={{
+                        align: "center",
+                        width: "25%",
+                        py: 1,
+                        mt: 1,
+                        mb: 1,
+                        background: "#000000",
+                      }}
+                      onClick={() => {
+                        window.open(
+                          "https://www.youtube.com/shorts/mzP1Z1lBrVk",
+                          "_blank",
+                          "noreferrer"
+                        );
+                      }}
+                    >
+                      Recharge Tutorial
+                    </Button>
+                  </Stack>
+                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     margin="normal"
@@ -213,11 +247,7 @@ export default function WalletRecharge() {
                       </FormGroup>
                     </FormControl>
                   </Grid>
-                  <Grid
-                    flexDirection="column"
-                    item
-                    xs={12}
-                  >
+                  <Grid flexDirection="column" item xs={12}>
                     {is_show === 1 && (
                       <>
                         <Typography
@@ -286,8 +316,9 @@ export default function WalletRecharge() {
                           variant="h2"
                           align="left"
                         >
-                          By using this UPI, Please make a recharge from paytm and other upi app and
-                          submit the page with the correct transaction ID.
+                          By using this UPI, Please make a recharge from paytm
+                          and other upi app and submit the page with the correct
+                          transaction ID.
                         </Typography>
                         <Box
                           flexDirection="row"

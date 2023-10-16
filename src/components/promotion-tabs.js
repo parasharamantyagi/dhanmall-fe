@@ -13,6 +13,7 @@ import {
   strictValidObjectWithKeys,
 } from "../utils/common-utils";
 import { Button, TextField } from "@mui/material";
+import { toast } from "react-toastify";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,7 +95,7 @@ export default function FullWidthTabs({ myProfile }) {
           : '',
       )
       .then(() => {
-        alert('copied to clipboard');
+        toast.success('Promotion link copied');
       });
   };
 
