@@ -66,7 +66,7 @@ const Profile = (props) => {
               ? profile.promotion_code
               : 'N/A'}
           </Typography>
-          <Box display="flex" mt={2} className={classes.root}>
+          <Box display="flex" mt={0} className={classes.root}>
             <Box display="flex" flexDirection="column" alignItems="center">
               <Typography gutterBottom color="secondary">
                 {defaultCurrencyFormat(
@@ -113,7 +113,9 @@ const Profile = (props) => {
                     : 0,
                 )}
               </Typography>
-              <Button variant="contained" color="primary" size="medium">
+              <Button variant="contained" color="primary" size="medium" onClick={() => {
+                  navigate('/wallet-transactions');
+                }}>
                 Interest
               </Button>
             </Box>

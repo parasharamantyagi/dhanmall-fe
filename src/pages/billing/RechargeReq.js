@@ -82,6 +82,7 @@ export default function RechargeReq() {
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell>Mobile</TableCell>
+            <TableCell>Name</TableCell>
             <TableCell>Ammount</TableCell>
             <TableCell>Transaction id</TableCell>
             <TableCell>Remarks</TableCell>
@@ -97,6 +98,7 @@ export default function RechargeReq() {
               <TableRow key={row._id}>
                 <TableCell>{unixformatDateTime(row.date)}</TableCell>
                 <TableCell>{row.user_id.mobile}</TableCell>
+                <TableCell>{row.user_id.nickname}</TableCell>
                 <TableCell>
                   {strictValidNumber(row.ammount) ? row.ammount : "N/A"}
                 </TableCell>

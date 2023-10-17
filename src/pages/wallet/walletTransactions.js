@@ -114,7 +114,7 @@ export default function WalletTransactions() {
                             ? "Recharge request"
                             : object.type === "withdraw"
                             ? "Withdrawal request"
-                            : "Place Order"}
+                            : (object.type === "interest") ? "Interest" : "Place Order"}
                         </Typography>
                         <Typography>
                           {unixformatDateTime(object.date)}
