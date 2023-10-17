@@ -29,11 +29,13 @@ export default function UsersList() {
   // const [open, setOpen] = React.useState(false);
   // const [userAmount, setUserAmount] = React.useState(0);
   const [mobile, setMobile] = React.useState({});
+  const [pageloder, setPageloder] = React.useState(true);
   const handleChangePage = (event, newPage) => {
+    setPageloder(true);
     setPage(newPage);
   };
   const [searchVal, setSearchVal] = React.useState("");
-  const { usersList, loading } = useUsersList(
+  const { usersList } = useUsersList(
     "/billing/users?page=" + page,
     "POST",
     mobile
@@ -48,6 +50,12 @@ export default function UsersList() {
     setAnchorEl(null);
   };
 
+  React.useEffect(() => {
+    if(strictValidObjectWithKeys(usersList)){
+      setPageloder(false);
+    }
+  }, [usersList]);
+
   const addAmount = () => {
     // setOpen(true);
     setAnchorEl(null);
@@ -59,7 +67,10 @@ export default function UsersList() {
   //   setOpen(false);
   // };
 
+  
+
   const searchClick = () => {
+    setPageloder(true);
     setMobile({ mobile: searchVal });
   };
 
@@ -113,7 +124,7 @@ export default function UsersList() {
             <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
-        {loading &&
+        {pageloder ?
           [1, 2, 3, 4, 5, 6].map((res) => {
             return (
               <TableRow key={res}>
@@ -126,7 +137,7 @@ export default function UsersList() {
                 </TableCell>
               </TableRow>
             );
-          })}
+          }) : (
         <TableBody>
           {strictValidObjectWithKeys(usersList) &&
             validValue(usersList.success) &&
@@ -163,6 +174,7 @@ export default function UsersList() {
               </TableRow>
             ))}
         </TableBody>
+        )}
       </Table>
       <TablePagination
         rowsPerPageOptions={false}
