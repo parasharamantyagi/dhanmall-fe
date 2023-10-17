@@ -8,6 +8,7 @@ import { Button, TablePagination, Typography } from "@mui/material";
 import { useRechargeList } from "../../hooks/useBillingApi";
 import {
   capitalizeFirstLetter,
+  strictValidNumber,
   strictValidObjectWithKeys,
   unixformatDateTime,
   validValue,
@@ -33,12 +34,16 @@ export default function RechargeReq() {
     setOpen(true);
   };
   const handleAgree = async () => {
-    let res = await response("/billing/recharge-status/" + confirmDialog, "PUT", {
-      status: "success",
-    });
+    let res = await response(
+      "/billing/recharge-status/" + confirmDialog,
+      "PUT",
+      {
+        status: "success",
+      }
+    );
     setOpen(false);
-    if(strictValidObjectWithKeys(res)){
-      window.location.replace('');
+    if (strictValidObjectWithKeys(res)) {
+      window.location.replace("");
     }
   };
 
@@ -47,12 +52,16 @@ export default function RechargeReq() {
   };
 
   const handleDissAgree = async () => {
-    let res = await response("/billing/recharge-status/" + confirmDialog, "PUT", {
-      status: "failure",
-    });
+    let res = await response(
+      "/billing/recharge-status/" + confirmDialog,
+      "PUT",
+      {
+        status: "failure",
+      }
+    );
     setOpen(false);
-    if(strictValidObjectWithKeys(res)){
-      window.location.replace('');
+    if (strictValidObjectWithKeys(res)) {
+      window.location.replace("");
     }
   };
 
@@ -88,7 +97,9 @@ export default function RechargeReq() {
               <TableRow key={row._id}>
                 <TableCell>{unixformatDateTime(row.date)}</TableCell>
                 <TableCell>{row.user_id.mobile}</TableCell>
-                <TableCell>{row.ammount}</TableCell>
+                <TableCell>
+                  {strictValidNumber(row.ammount) ? row.ammount : "N/A"}
+                </TableCell>
                 <TableCell>{row.details.transaction_id}</TableCell>
                 <TableCell>{row.details.remarks}</TableCell>
                 <TableCell>

@@ -394,6 +394,10 @@ export const mergeObject = (...args) => {
   }, {});
 };
 
+export const sumOfArray = (array) => {
+  return array.reduce((a, b) => a + b, 0);
+};
+
 /**
  * Remove null or undefined key value pairs from an object
  * @param obj: object

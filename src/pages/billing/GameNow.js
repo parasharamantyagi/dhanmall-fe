@@ -2,7 +2,7 @@ import * as React from "react";
 import CanvasJSReact from "@canvasjs/react-charts";
 import { useBillingGameNowList } from "../../hooks/useBillingApi";
 import {
-  strictValidObjectWithKeys,
+  strictValidObjectWithKeys, sumOfArray,
 } from "../../utils/common-utils";
 import {
   Button,
@@ -14,12 +14,43 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { useRechargeDetail } from "./actions";
+import { strictFilterArrayWithKey } from "../../utils/common-utils";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function GameNow() {
   let apiCall = useRechargeDetail;
   const { billingGame } = useBillingGameNowList("billing/current-game", "GET");
   const [gameValue, setGameValue] = React.useState(10);
+  const renderCount = (number) => {
+    const isEven = number % 2 === 0;
+    const buttonColor = isEven ? 'error' : 'success';
+    return (
+      <Grid item xs={2.4}>
+        <Button
+          variant="contained"
+          color={buttonColor}
+          sx={
+            number === 5
+              ? {
+                  background:
+                    'linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)',
+                }
+              : number === 0
+              ? {
+                  background:
+                    'linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)',
+                }
+              : undefined
+          }
+          size="large"
+          mt={1}
+        >
+          {number}
+        </Button>
+      </Grid>
+    );
+  };
+  
   const handleSubmit = async () => {
     if (gameValue !== "no") {
       let res = await apiCall("billing/set-game", "POST", {
@@ -138,61 +169,61 @@ export default function GameNow() {
               <FormControlLabel
                 control={<Radio />}
                 value={0}
-                label="0"
+                label={renderCount(0)}
                 onClick={() => setGameValue(0)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={1}
-                label="1"
+                label={renderCount(1)}
                 onClick={() => setGameValue(1)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={2}
-                label="2"
+                label={renderCount(2)}
                 onClick={() => setGameValue(2)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={3}
-                label="3"
+                label={renderCount(3)}
                 onClick={() => setGameValue(3)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={4}
-                label="4"
+                label={renderCount(4)}
                 onClick={() => setGameValue(4)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={5}
-                label="5"
+                label={renderCount(5)}
                 onClick={() => setGameValue(5)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={6}
-                label="6"
+                label={renderCount(6)}
                 onClick={() => setGameValue(6)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={7}
-                label="7"
+                label={renderCount(7)}
                 onClick={() => setGameValue(7)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={8}
-                label="8"
+                label={renderCount(8)}
                 onClick={() => setGameValue(8)}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={9}
-                label="9"
+                label={renderCount(9)}
                 onClick={() => setGameValue(9)}
               />
             </RadioGroup>
@@ -205,6 +236,12 @@ export default function GameNow() {
             >
               Set
             </Button>
+            <Divider />
+            {"Game record"}
+            <br />
+            {"total_amount -> "+ sumOfArray(strictFilterArrayWithKey(strictFilterArrayWithKey(billingGame.game_record,'game_budget'),'total_amount'))}
+            <br />
+            {"total_delivery -> "+ sumOfArray(strictFilterArrayWithKey(strictFilterArrayWithKey(billingGame.game_record,'game_budget'),'total_delivery'))}
           </FormControl>
         </Grid>
       </Grid>

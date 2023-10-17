@@ -157,6 +157,7 @@ export default function WalletRecharge() {
                     margin="normal"
                     required
                     fullWidth
+                    type='number'
                     id="recharge_amount"
                     label="Enter or Select Recharge Amount"
                     name="recharge_amount"

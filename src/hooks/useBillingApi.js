@@ -65,7 +65,7 @@ export const useBillingGameNowList = (url, method, obj) => {
     pick_7: { total_amount: 0, total_delivery: 0, pick_count: 0 },
     pick_8: { total_amount: 0, total_delivery: 0, pick_count: 0 },
     pick_9: { total_amount: 0, total_delivery: 0, pick_count: 0 },
-  }});
+  },game_record: []});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -75,13 +75,15 @@ export const useBillingGameNowList = (url, method, obj) => {
         const res = await apiCall(method, url, obj);
         if (res.status === 1) {
           setBillingGame({
-            billingGame: res.data,
+            billingGame: res.data.current_game,
+            game_record: res.data.game_record,
             message: "success",
             success: true,
           });
         } else {
           setBillingGame({
-            billingGame: res.data,
+            billingGame: billingGame.billingGame,
+            game_record: billingGame.game_record,
             message: "success",
             success: false,
           });
@@ -89,6 +91,7 @@ export const useBillingGameNowList = (url, method, obj) => {
       } catch (error) {
         setError({
           billingGame: error.response,
+          game_record: billingGame.game_record,
           message: messages.DEFAULT_ERROR_MESSAGE,
           success: false,
         });
