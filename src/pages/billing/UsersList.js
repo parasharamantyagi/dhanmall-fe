@@ -8,6 +8,7 @@ import {
   Button,
   CardContent,
   Grid,
+  Skeleton,
   TablePagination,
   TextField,
   Typography,
@@ -32,7 +33,7 @@ export default function UsersList() {
     setPage(newPage);
   };
   const [searchVal, setSearchVal] = React.useState("");
-  const { usersList } = useUsersList(
+  const { usersList, loading } = useUsersList(
     "/billing/users?page=" + page,
     "POST",
     mobile
@@ -50,7 +51,7 @@ export default function UsersList() {
   const addAmount = () => {
     // setOpen(true);
     setAnchorEl(null);
-  }
+  };
   // const handleCancelled = () => {
   //   setOpen(false);
   // };
@@ -112,6 +113,20 @@ export default function UsersList() {
             <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
+        {loading &&
+          [1, 2, 3, 4, 5, 6].map((res) => {
+            return (
+              <TableRow key={res}>
+                <TableCell colSpan={7}>
+                  <Skeleton
+                    sx={{ height: 50, mt: 1, width: "100%", cs: 6 }}
+                    animation="wave"
+                    variant="rectangular"
+                  />
+                </TableCell>
+              </TableRow>
+            );
+          })}
         <TableBody>
           {strictValidObjectWithKeys(usersList) &&
             validValue(usersList.success) &&
