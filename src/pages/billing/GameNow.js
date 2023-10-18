@@ -2,7 +2,8 @@ import * as React from "react";
 import CanvasJSReact from "@canvasjs/react-charts";
 import { useBillingGameNowList } from "../../hooks/useBillingApi";
 import {
-  strictValidObjectWithKeys, sumOfArray,
+  strictValidObjectWithKeys,
+  sumOfArray,
 } from "../../utils/common-utils";
 import {
   Button,
@@ -10,20 +11,26 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
+  Paper,
   Radio,
   RadioGroup,
 } from "@mui/material";
 import { useRechargeDetail } from "./actions";
+import * as htmlToImage from 'html-to-image';
 import { strictFilterArrayWithKey } from "../../utils/common-utils";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+
 export default function GameNow() {
   let apiCall = useRechargeDetail;
+  const domEl = React.useRef(null);
   const { billingGame } = useBillingGameNowList("billing/current-game", "GET");
   const [gameValue, setGameValue] = React.useState(10);
-  const renderCount = (number) => {
+  const [forecastValue, setForecastValue] = React.useState('');
+
+  const renderCount = (number,setcolor= false) => {
     const isEven = number % 2 === 0;
-    const buttonColor = isEven ? 'error' : 'success';
+    const buttonColor = isEven ? "error" : "success";
     return (
       <Grid item xs={2.4}>
         <Button
@@ -33,24 +40,34 @@ export default function GameNow() {
             number === 5
               ? {
                   background:
-                    'linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)',
+                    "linear-gradient(90deg, #4caf50 50%, #9c27b0 50%)",
                 }
               : number === 0
               ? {
                   background:
-                    'linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)',
+                    "linear-gradient(90deg, #C8220E 50%, #9c27b0 50%)",
                 }
               : undefined
           }
           size="large"
           mt={1}
         >
-          {number}
+          {setcolor ? setcolor : number}
         </Button>
       </Grid>
     );
   };
-  
+
+  const downloadImage = async () => {
+    const dataUrl = await htmlToImage.toPng(domEl.current);
+
+    // download image
+    const link = document.createElement('a');
+    link.download = 'html-to-img.png';
+    link.href = dataUrl;
+    link.click();
+  };
+
   const handleSubmit = async () => {
     if (gameValue !== "no") {
       let res = await apiCall("billing/set-game", "POST", {
@@ -58,15 +75,17 @@ export default function GameNow() {
         set_unit: 1,
         set_value: gameValue,
       });
-      if(strictValidObjectWithKeys(res)){
-        window.location.replace('');
+      if (strictValidObjectWithKeys(res)) {
+        window.location.replace("");
       }
     }
   };
   const options = {
     title: {
       text:
-        "Game prediction Chart " + billingGame.billingGame.game_id.date + billingGame.billingGame.game_id.period,
+        "Game prediction Chart " +
+        billingGame.billingGame.game_id.date +
+        billingGame.billingGame.game_id.period,
     },
     data: [
       {
@@ -77,16 +96,56 @@ export default function GameNow() {
             y: billingGame.billingGame.total_price.total_amount,
             color: "black",
           },
-          { label: "0", y: billingGame.billingGame.pick_0.total_amount, color: "red" },
-          { label: "1", y: billingGame.billingGame.pick_1.total_amount, color: "green" },
-          { label: "2", y: billingGame.billingGame.pick_2.total_amount, color: "red" },
-          { label: "3", y: billingGame.billingGame.pick_3.total_amount, color: "green" },
-          { label: "4", y: billingGame.billingGame.pick_4.total_amount, color: "red" },
-          { label: "5", y: billingGame.billingGame.pick_5.total_amount, color: "green" },
-          { label: "6", y: billingGame.billingGame.pick_6.total_amount, color: "red" },
-          { label: "7", y: billingGame.billingGame.pick_7.total_amount, color: "green" },
-          { label: "8", y: billingGame.billingGame.pick_8.total_amount, color: "red" },
-          { label: "9", y: billingGame.billingGame.pick_9.total_amount, color: "green" },
+          {
+            label: "0",
+            y: billingGame.billingGame.pick_0.total_amount,
+            color: "red",
+          },
+          {
+            label: "1",
+            y: billingGame.billingGame.pick_1.total_amount,
+            color: "green",
+          },
+          {
+            label: "2",
+            y: billingGame.billingGame.pick_2.total_amount,
+            color: "red",
+          },
+          {
+            label: "3",
+            y: billingGame.billingGame.pick_3.total_amount,
+            color: "green",
+          },
+          {
+            label: "4",
+            y: billingGame.billingGame.pick_4.total_amount,
+            color: "red",
+          },
+          {
+            label: "5",
+            y: billingGame.billingGame.pick_5.total_amount,
+            color: "green",
+          },
+          {
+            label: "6",
+            y: billingGame.billingGame.pick_6.total_amount,
+            color: "red",
+          },
+          {
+            label: "7",
+            y: billingGame.billingGame.pick_7.total_amount,
+            color: "green",
+          },
+          {
+            label: "8",
+            y: billingGame.billingGame.pick_8.total_amount,
+            color: "red",
+          },
+          {
+            label: "9",
+            y: billingGame.billingGame.pick_9.total_amount,
+            color: "green",
+          },
         ],
       },
     ],
@@ -122,7 +181,10 @@ export default function GameNow() {
                   billingGame.billingGame.pick_green.total_amount +
                   billingGame.billingGame.pick_violet.total_amount)) *
               100,
-            label: "Violet(" + billingGame.billingGame.pick_violet.total_amount + ")",
+            label:
+              "Violet(" +
+              billingGame.billingGame.pick_violet.total_amount +
+              ")",
             color: "violet",
           },
           {
@@ -132,7 +194,8 @@ export default function GameNow() {
                   billingGame.billingGame.pick_green.total_amount +
                   billingGame.billingGame.pick_violet.total_amount)) *
               100,
-            label: "Green(" + billingGame.billingGame.pick_green.total_amount + ")",
+            label:
+              "Green(" + billingGame.billingGame.pick_green.total_amount + ")",
             color: "green",
           },
         ],
@@ -239,10 +302,69 @@ export default function GameNow() {
             <Divider />
             {"Game record"}
             <br />
-            {"total_amount -> "+ sumOfArray(strictFilterArrayWithKey(strictFilterArrayWithKey(billingGame.game_record,'game_budget'),'total_amount'))}
+            {"total_amount -> " +
+              sumOfArray(
+                strictFilterArrayWithKey(
+                  strictFilterArrayWithKey(
+                    billingGame.game_record,
+                    "game_budget"
+                  ),
+                  "total_amount"
+                )
+              )}
             <br />
-            {"total_delivery -> "+ sumOfArray(strictFilterArrayWithKey(strictFilterArrayWithKey(billingGame.game_record,'game_budget'),'total_delivery'))}
+            {"total_delivery -> " +
+              sumOfArray(
+                strictFilterArrayWithKey(
+                  strictFilterArrayWithKey(
+                    billingGame.game_record,
+                    "game_budget"
+                  ),
+                  "total_delivery"
+                )
+              )}
           </FormControl>
+        </Grid>
+      </Grid>
+      <Grid container sx={{mt: 1}} spacing={2}>
+        <Grid item xs={12}>
+        <FormControl>
+            <RadioGroup name="set_number" defaultValue={10}>
+              <FormControlLabel
+                control={<Radio />}
+                value={0}
+                label={renderCount(2,'Red')}
+                onClick={() => setForecastValue('Red')}
+              />
+              <FormControlLabel
+                control={<Radio />}
+                value={3}
+                label={renderCount(3,'Green')}
+                onClick={() => setForecastValue('Green')}
+              />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+        <Grid item xs={3}>
+        <div id="domEl" ref={domEl}>
+          <Paper elevation={1} sx={{textAlign: 'center' ,width: 150 }}>
+            Period - {billingGame.billingGame.game_id.period}
+          </Paper>
+          <Paper elevation={1} sx={{textAlign: 'center',background: (forecastValue === 'Red') ? "red" : "green" ,width: 150 }}>
+          {forecastValue}
+          </Paper>
+        </div>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            type="submit"
+            size="medium"
+            variant="contained"
+            sx={{ mt: 3, mb: 7 }}
+            onClick={downloadImage}
+          >
+            Download image
+          </Button>
         </Grid>
       </Grid>
     </React.Fragment>

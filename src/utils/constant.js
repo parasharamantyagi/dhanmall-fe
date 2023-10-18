@@ -17,8 +17,7 @@ export const resultByUnit = {
   9: ["green"],
 };
 
-// export const appUpiId = 'parasharamantyagi-2@okicici';
-export const appUpiId = 'parasharamantyagi-2@okicici';
+export const appUpiId = 'parasharamantyagi-4@okicici';
 
 export const homeContentDummyData = [
   {
