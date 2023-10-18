@@ -118,7 +118,7 @@ export default function OrderList({ data, loading, setOder }) {
                   {/* {formatNewDateTime(order.date, "DD-MM-YYYY, HH:mm")} */}
                   {order.status
                     ? order.status === 1
-                      ? order.delivery
+                      ? order.amount
                       : ""
                     : ""}
                 </Typography>
@@ -136,6 +136,10 @@ export default function OrderList({ data, loading, setOder }) {
                 {renderList("Delivery", order.delivery)}
                 {renderList("Fee", order.fee)}
                 {renderList("Open Price", order.price)}
+                {renderList(
+                  "Unit",
+                  order.color ? order.unit : "N/A"
+                )}
                 {renderList(
                   "Result",
                   order.color ? order.color : "N/A",
