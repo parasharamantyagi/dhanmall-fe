@@ -14,6 +14,7 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import { useRechargeDetail } from "./actions";
 import * as htmlToImage from 'html-to-image';
@@ -347,11 +348,15 @@ export default function GameNow() {
         </Grid>
         <Grid item xs={3}>
         <div id="domEl" ref={domEl}>
-          <Paper elevation={1} sx={{textAlign: 'center' ,width: 150 }}>
+          <Paper elevation={0} sx={{textAlign: 'center' ,width: '99%', height: 50 }}>
+          <Typography variant="p" component="p" sx={{m:1,p:1.5}}>
             Period - {billingGame.billingGame.game_id.period}
+            </Typography>
           </Paper>
-          <Paper elevation={1} sx={{textAlign: 'center',background: (forecastValue === 'Red') ? "red" : "green" ,width: 150 }}>
-          {forecastValue}
+          <Paper elevation={0} sx={{textAlign: 'center',background: (forecastValue === 'Red') ? "red" : "green" ,width: '99%', height: 50 }}>
+          <Typography variant="p" component="p" sx={{m:1,p:1.5}}>
+              {forecastValue}
+          </Typography>
           </Paper>
         </div>
         </Grid>
