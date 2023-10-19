@@ -157,7 +157,7 @@ export default function WalletRecharge() {
                     margin="normal"
                     required
                     fullWidth
-                    type='number'
+                    type="number"
                     id="recharge_amount"
                     label="Enter or Select Recharge Amount"
                     name="recharge_amount"
@@ -256,8 +256,8 @@ export default function WalletRecharge() {
                           align="left"
                           marginBottom={'5px'}
                         >
-                          Use this QR Code to recharge from Paytm and
-                          other UPI apps and submit the details with the correct
+                          Use this QR Code to recharge from Paytm and other UPI
+                          apps and submit the details with the correct
                           transaction ID.
                         </Typography>
                         <CardMedia
@@ -276,8 +276,8 @@ export default function WalletRecharge() {
                           color="red"
                           gutterBottom
                         >
-                          Note : You must fill in the correct Ref No.,then click
-                          the button below to submit,and wait for it to arrive!
+                          Note : Please fill out the correct Reference number,
+                          then submit the details and wait for the approval
                         </Typography>
                         <TextField
                           name="transaction_id"
@@ -316,8 +316,8 @@ export default function WalletRecharge() {
                           variant="h2"
                           align="left"
                         >
-                          Use this UPI ID to recharge from Paytm and
-                          other UPI apps and submit the details with the correct
+                          Use this UPI ID to recharge from Paytm and other UPI
+                          apps and submit the details with the correct
                           transaction ID.
                         </Typography>
                         <Box
@@ -356,8 +356,8 @@ export default function WalletRecharge() {
                           color="red"
                           gutterBottom
                         >
-                          Note : You must fill in the correct Ref No.,then click
-                          the button below to submit,and wait for it to arrive!
+                          Note : Please fill out the correct Reference number,
+                          then submit the details and wait for the approval
                         </Typography>
                         <TextField
                           name="transaction_id"

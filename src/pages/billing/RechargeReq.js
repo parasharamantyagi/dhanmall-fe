@@ -1,20 +1,20 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { Button, TablePagination, Typography } from "@mui/material";
-import { useRechargeList } from "../../hooks/useBillingApi";
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { Button, TablePagination, Typography } from '@mui/material';
+import { useRechargeList } from '../../hooks/useBillingApi';
 import {
   capitalizeFirstLetter,
   strictValidNumber,
   strictValidObjectWithKeys,
   unixformatDateTime,
   validValue,
-} from "../../utils/common-utils";
-import ConfirmDialog from "../../components/confirmDialog";
-import { useRechargeDetail } from "./actions";
+} from '../../utils/common-utils';
+import ConfirmDialog from '../../components/confirmDialog';
+import { useRechargeDetail } from './actions';
 
 export default function RechargeReq() {
   const response = useRechargeDetail;
@@ -24,9 +24,9 @@ export default function RechargeReq() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  const { rechargeList } = useRechargeList(
-    "/billing/recharge?limit=10&page=" + page,
-    "GET"
+  const { rechargeList, recallApi } = useRechargeList(
+    '/billing/recharge?limit=10&page=' + page,
+    'GET',
   );
   const handleClickOpen = (recharge_id) => {
     setConfirmDialog(recharge_id);
@@ -35,15 +35,15 @@ export default function RechargeReq() {
   };
   const handleAgree = async () => {
     let res = await response(
-      "/billing/recharge-status/" + confirmDialog,
-      "PUT",
+      '/billing/recharge-status/' + confirmDialog,
+      'PUT',
       {
-        status: "success",
-      }
+        status: 'success',
+      },
     );
     setOpen(false);
     if (strictValidObjectWithKeys(res)) {
-      window.location.replace("");
+      recallApi();
     }
   };
 
@@ -53,15 +53,15 @@ export default function RechargeReq() {
 
   const handleDissAgree = async () => {
     let res = await response(
-      "/billing/recharge-status/" + confirmDialog,
-      "PUT",
+      '/billing/recharge-status/' + confirmDialog,
+      'PUT',
       {
-        status: "failure",
-      }
+        status: 'failure',
+      },
     );
     setOpen(false);
     if (strictValidObjectWithKeys(res)) {
-      window.location.replace("");
+      recallApi();
     }
   };
 
@@ -73,8 +73,8 @@ export default function RechargeReq() {
         handleCancelled={handleCancelled}
         handleAgree={handleAgree}
         handleDissAgree={handleDissAgree}
-        title=" Are you sure to approve this payment .?"
-        description="Please make sure before approve this payment becouse this payment will not be revert after approve .?"
+        title=" Are you sure to approve this payment ?"
+        description="Please make sure before approve this payment becouse this payment will not be revert after approve?"
         data={confirmDialog}
       />
       <Table size="large">
@@ -100,7 +100,7 @@ export default function RechargeReq() {
                 <TableCell>{row.user_id.mobile}</TableCell>
                 <TableCell>{row.user_id.nickname}</TableCell>
                 <TableCell>
-                  {strictValidNumber(row.ammount) ? row.ammount : "N/A"}
+                  {strictValidNumber(row.ammount) ? row.ammount : 'N/A'}
                 </TableCell>
                 <TableCell>{row.details.transaction_id}</TableCell>
                 <TableCell>{row.details.remarks}</TableCell>
@@ -108,12 +108,12 @@ export default function RechargeReq() {
                   <Typography
                     sx={{
                       color: row.status
-                        ? row.status === "processing"
-                          ? "orange"
-                          : row.status === "success"
-                          ? "green"
-                          : "red"
-                        : "",
+                        ? row.status === 'processing'
+                          ? 'orange'
+                          : row.status === 'success'
+                          ? 'green'
+                          : 'red'
+                        : '',
                     }}
                   >
                     {capitalizeFirstLetter(row.status)}
@@ -121,9 +121,9 @@ export default function RechargeReq() {
                 </TableCell>
                 <TableCell>
                   <Button
-                    disabled={row.status === "processing" ? false : true}
+                    disabled={row.status === 'processing' ? false : true}
                     variant="contained"
-                    sx={{ background: "#000" }}
+                    sx={{ background: '#000' }}
                     onClick={() => handleClickOpen(row._id)}
                   >
                     Approve

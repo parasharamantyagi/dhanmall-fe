@@ -7,7 +7,9 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GroupIcon from '@mui/icons-material/Group';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useLocation } from "react-router-dom";
-
+import Home from "@mui/icons-material/Home";
+import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
+import RequestPageIcon from '@mui/icons-material/RequestPage';
 const MainList = () => {
   const location = useLocation();
 
@@ -34,7 +36,7 @@ const MainList = () => {
         <ListItemIcon>
           <GroupIcon />
         </ListItemIcon>
-        <ListItemText primary="Users" />
+        <ListItemText primary="Users List" />
       </ListItemButton>
       {/*  */}
       <ListItemButton
@@ -54,9 +56,9 @@ const MainList = () => {
         selected={location.pathname === '/billing/recharge-req'}
       >
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <RequestPageIcon />
         </ListItemIcon>
-        <ListItemText primary="Recharge Req" />
+        <ListItemText primary="Recharge Request" />
       </ListItemButton>
       {/*  */}
       <ListItemButton
@@ -65,9 +67,19 @@ const MainList = () => {
         selected={location.pathname === '/billing/withdrawal-req'}
       >
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <SimCardDownloadIcon />
         </ListItemIcon>
-        <ListItemText primary="Withdrawal Req" />
+        <ListItemText primary="Withdrawal Request" />
+      </ListItemButton>
+      <ListItemButton
+        component={Link}
+        to="/"
+        selected={location.pathname === '/'}
+      >
+        <ListItemIcon>
+          <Home />
+        </ListItemIcon>
+        <ListItemText primary="Home Page" />
       </ListItemButton>
     </React.Fragment>
   );
