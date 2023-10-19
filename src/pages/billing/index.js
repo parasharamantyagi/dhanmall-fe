@@ -80,12 +80,12 @@ export default function BillingDashboard({ routeName }) {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "24px", // keep right padding when drawer closed
+              pr: '24px', // keep right padding when drawer closed
             }}
           >
             <IconButton
@@ -94,8 +94,8 @@ export default function BillingDashboard({ routeName }) {
               aria-label="open drawer"
               onClick={toggleDrawer}
               sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
+                marginRight: '36px',
+                ...(open && { display: 'none' }),
               }}
             >
               <MenuIcon />
@@ -119,9 +119,9 @@ export default function BillingDashboard({ routeName }) {
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
               px: [1],
             }}
           >
@@ -139,19 +139,21 @@ export default function BillingDashboard({ routeName }) {
           <Box
             noValidate
             sx={{
-              display: "flex",
-              minHeight: "100vh",
-              flexDirection: "column",
+              display: 'flex',
+              minHeight: '100vh',
+              flexDirection: 'column',
             }}
           >
             <Card sx={{ width: 1600, mt: 6, mb: 4 }}>
               <Grid>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  {routeName === "luck67" && <BillingOrders />}
-                  {routeName === "game-now" && <GameNow />}
-                  {routeName === "recharge-req" && <RechargeReq />}
-                  {routeName === "withdrawal-req" && <WithdrawalReq />}
-                  {routeName === "users" && <UsersList />}
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  {routeName === process.env.REACT_APP_ROUTE_URL && (
+                    <BillingOrders />
+                  )}
+                  {routeName === 'game-now' && <GameNow />}
+                  {routeName === 'recharge-req' && <RechargeReq />}
+                  {routeName === 'withdrawal-req' && <WithdrawalReq />}
+                  {routeName === 'users' && <UsersList />}
                 </Paper>
               </Grid>
             </Card>

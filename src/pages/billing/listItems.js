@@ -15,8 +15,10 @@ const MainList = () => {
     <React.Fragment>
       <ListItemButton
         component={Link}
-        to="/billing/luck67"
-        selected={location.pathname === "/billing/luck67"}
+        to={`/billing/${process.env.REACT_APP_ROUTE_URL}`}
+        selected={
+          location.pathname === `/billing/${process.env.REACT_APP_ROUTE_URL}`
+        }
       >
         <ListItemIcon>
           <DashboardIcon />
@@ -27,7 +29,7 @@ const MainList = () => {
       <ListItemButton
         component={Link}
         to="/billing/users"
-        selected={location.pathname === "/billing/users"}
+        selected={location.pathname === '/billing/users'}
       >
         <ListItemIcon>
           <GroupIcon />
@@ -38,7 +40,7 @@ const MainList = () => {
       <ListItemButton
         component={Link}
         to="/billing/game-now"
-        selected={location.pathname === "/billing/game-now"}
+        selected={location.pathname === '/billing/game-now'}
       >
         <ListItemIcon>
           <EmojiEventsIcon />
@@ -49,7 +51,7 @@ const MainList = () => {
       <ListItemButton
         component={Link}
         to="/billing/recharge-req"
-        selected={location.pathname === "/billing/recharge-req"}
+        selected={location.pathname === '/billing/recharge-req'}
       >
         <ListItemIcon>
           <ShoppingCartIcon />
@@ -60,7 +62,7 @@ const MainList = () => {
       <ListItemButton
         component={Link}
         to="/billing/withdrawal-req"
-        selected={location.pathname === "/billing/withdrawal-req"}
+        selected={location.pathname === '/billing/withdrawal-req'}
       >
         <ListItemIcon>
           <ShoppingCartIcon />

@@ -16,6 +16,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
+import AddCardIcon from '@mui/icons-material/AddCard';
 
 export default function BankCardList({ bankCardData }) {
   const navigate = useNavigate();
@@ -23,12 +24,20 @@ export default function BankCardList({ bankCardData }) {
     <Card sx={{ minWidth: 275 }}>
       <Grid my={1} ml={2} justifyContent="flex-end" display="flex" item>
         <Button
-          startIcon={<AddIcon />}
+          startIcon={<AddCardIcon />}
           variant="contained"
           onClick={() => navigate('/addbankcard')}
-          sx={{background:'#000000'}}
+          sx={{ background: '#000000' }}
         >
           Add Bank Detail
+        </Button>
+        <Button
+          startIcon={<AddIcon />}
+          variant="contained"
+          onClick={() => navigate('/add-upi')}
+          sx={{ background: '#000000', mx: 2 }}
+        >
+          Add UPI ID
         </Button>
       </Grid>
       <CardContent>
@@ -41,7 +50,12 @@ export default function BankCardList({ bankCardData }) {
                 secondaryAction={
                   <>
                     <Tooltip title={'Edit Account'}>
-                      <IconButton aria-label="comment" onClick={() => navigate('/addbankcard?id='+object._id)}>
+                      <IconButton
+                        aria-label="comment"
+                        onClick={() =>
+                          navigate('/addbankcard?id=' + object._id)
+                        }
+                      >
                         <EditIcon />
                       </IconButton>
                     </Tooltip>
