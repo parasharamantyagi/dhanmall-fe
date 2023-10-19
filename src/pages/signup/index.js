@@ -69,7 +69,7 @@ export default function SignUp() {
         setError("");
       }
     } else {
-      toast.error("Please enter mobile number first");
+      toast.error("Please enter mobile number");
     }
   };
 

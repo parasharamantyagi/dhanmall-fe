@@ -7,7 +7,9 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GroupIcon from '@mui/icons-material/Group';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useLocation } from "react-router-dom";
-
+import Home from "@mui/icons-material/Home";
+import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
+import RequestPageIcon from '@mui/icons-material/RequestPage';
 const MainList = () => {
   const location = useLocation();
 
@@ -15,8 +17,10 @@ const MainList = () => {
     <React.Fragment>
       <ListItemButton
         component={Link}
-        to="/billing/luck67"
-        selected={location.pathname === "/billing/luck67"}
+        to={`/billing/${process.env.REACT_APP_ROUTE_URL}`}
+        selected={
+          location.pathname === `/billing/${process.env.REACT_APP_ROUTE_URL}`
+        }
       >
         <ListItemIcon>
           <DashboardIcon />
@@ -27,18 +31,18 @@ const MainList = () => {
       <ListItemButton
         component={Link}
         to="/billing/users"
-        selected={location.pathname === "/billing/users"}
+        selected={location.pathname === '/billing/users'}
       >
         <ListItemIcon>
           <GroupIcon />
         </ListItemIcon>
-        <ListItemText primary="Users" />
+        <ListItemText primary="Users List" />
       </ListItemButton>
       {/*  */}
       <ListItemButton
         component={Link}
         to="/billing/game-now"
-        selected={location.pathname === "/billing/game-now"}
+        selected={location.pathname === '/billing/game-now'}
       >
         <ListItemIcon>
           <EmojiEventsIcon />
@@ -49,23 +53,33 @@ const MainList = () => {
       <ListItemButton
         component={Link}
         to="/billing/recharge-req"
-        selected={location.pathname === "/billing/recharge-req"}
+        selected={location.pathname === '/billing/recharge-req'}
       >
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <RequestPageIcon />
         </ListItemIcon>
-        <ListItemText primary="Recharge Req" />
+        <ListItemText primary="Recharge Request" />
       </ListItemButton>
       {/*  */}
       <ListItemButton
         component={Link}
         to="/billing/withdrawal-req"
-        selected={location.pathname === "/billing/withdrawal-req"}
+        selected={location.pathname === '/billing/withdrawal-req'}
       >
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <SimCardDownloadIcon />
         </ListItemIcon>
-        <ListItemText primary="Withdrawal Req" />
+        <ListItemText primary="Withdrawal Request" />
+      </ListItemButton>
+      <ListItemButton
+        component={Link}
+        to="/"
+        selected={location.pathname === '/'}
+      >
+        <ListItemIcon>
+          <Home />
+        </ListItemIcon>
+        <ListItemText primary="Home Page" />
       </ListItemButton>
     </React.Fragment>
   );

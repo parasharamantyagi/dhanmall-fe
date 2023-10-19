@@ -23,6 +23,7 @@ import ChangePassword from "../pages/ChangePassword";
 import MyProfile from "../pages/MyProfile";
 import ForgotPassword from "../pages/ForgotPassword";
 import Trend from "../pages/Trend";
+import AddUpiId from "../pages/bank-card/add-upi";
 
 const routes = (isLoggedIn) => {
   return [
@@ -94,6 +95,10 @@ const routes = (isLoggedIn) => {
       element: isLoggedIn ? <Addbankcard /> : <Navigate to="/login" />,
     },
     {
+      path: '/add-upi', // protected routes
+      element: isLoggedIn ? <AddUpiId /> : <Navigate to="/login" />,
+    },
+    {
       path: '/promotion', // protected routes
       element: isLoggedIn ? <Promotion /> : <Navigate to="/login" />,
     },
@@ -115,24 +120,44 @@ const routes = (isLoggedIn) => {
     },
     // admin url
     {
-      path: '/billing/luck67', // protected routes
-      element: isLoggedIn ? <BillingDashboard routeName="luck67" /> : <Navigate to="/login" />,
+      path: `/billing/${process.env.REACT_APP_ROUTE_URL}`, // protected routes
+      element: isLoggedIn ? (
+        <BillingDashboard routeName={process.env.REACT_APP_ROUTE_URL} />
+      ) : (
+        <Navigate to="/login" />
+      ),
     },
     {
       path: '/billing/game-now', // protected routes
-      element: isLoggedIn ? <BillingDashboard routeName="game-now" /> : <Navigate to="/login" />,
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="game-now" />
+      ) : (
+        <Navigate to="/login" />
+      ),
     },
     {
       path: '/billing/recharge-req', // protected routes
-      element: isLoggedIn ? <BillingDashboard routeName="recharge-req" /> : <Navigate to="/login" />,
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="recharge-req" />
+      ) : (
+        <Navigate to="/login" />
+      ),
     },
     {
       path: '/billing/withdrawal-req', // protected routes
-      element: isLoggedIn ? <BillingDashboard routeName="withdrawal-req" /> : <Navigate to="/login" />,
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="withdrawal-req" />
+      ) : (
+        <Navigate to="/login" />
+      ),
     },
     {
       path: '/billing/users', // protected routes
-      element: isLoggedIn ? <BillingDashboard routeName="users" /> : <Navigate to="/login" />,
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="users" />
+      ) : (
+        <Navigate to="/login" />
+      ),
     },
     {
       // public routes

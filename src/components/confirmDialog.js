@@ -35,7 +35,7 @@ export default function ConfirmDialog({
           sx={{ background: "#000" }}
           onClick={handleCancelled}
         >
-          Cancelled
+          Cancel
         </Button>
         <Button
           variant="contained"

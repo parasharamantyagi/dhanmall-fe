@@ -95,7 +95,7 @@ export default function FullWidthTabs({ myProfile }) {
           : '',
       )
       .then(() => {
-        toast.success('Promotion link copied');
+        toast.success('Copied to clipboard');
       });
   };
 
