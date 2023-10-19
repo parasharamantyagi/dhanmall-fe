@@ -133,21 +133,16 @@ export default function OrderList({ data, loading, setOder }) {
                 )}
                 {renderList("Contract Money", order.contract_money)}
                 {renderList("Contract Count", order.contract_number)}
-                {renderList("Delivery", order.delivery)}
+                {renderList("Delivery", order.status ? order.amount : 'Waiting')}
                 {renderList("Fee", order.fee)}
                 {renderList("Open Price", order.price)}
-                {renderList(
-                  "Unit",
-                  order.color ? order.unit : "N/A"
-                )}
+                {renderList("Unit", order.status ? order.unit : "Waiting")}
                 {renderList(
                   "Result",
-                  order.color ? order.color : "N/A",
+                  order.color ? order.color : "Waiting",
                   order.color ? true : false
                 )}
                 {renderList("Select", order.pick, true)}
-                {renderList("Status", "Success")}
-                {renderList("Amount", order.amount ? order.amount : "N/A")}
                 {renderList(
                   "Create Time",
                   unixformatDateTime(order.date)

@@ -110,19 +110,29 @@ export default function Trend() {
         flexDirection: "column",
       }}
     >
-      <CardHeader title="Game trend" />
+      <CardHeader title="Parity Record" />
       <Box p={1} flexDirection="column" display="flex">
         <Card sx={{ minWidth: 275,mb:6 }}>
           <CardContent>
             <Grid container spacing={2}>
-              <Grid item xs={4}>
+            <Grid item xs={4}>
                 <Typography variant="h2" sx={{textAlign: "left"}}>
-                  Result: {gameHistory.gameHistory.game_id.unit}
+                  Period: {gameHistory.gameHistory.game_id.date + gameHistory.gameHistory.game_id.period}
                 </Typography>
               </Grid>
               <Grid item xs={8}>
                 <Typography variant="h2" sx={{textAlign: "right"}}>
-                  Period: {gameHistory.gameHistory.game_id.date + gameHistory.gameHistory.game_id.period}
+                  Result: Waiting
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="h2" sx={{textAlign: "left"}}>
+                  PrePeriod: {gameHistory.gameHistory.game_id.date + gameHistory.gameHistory.game_id.period}
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography variant="h2" sx={{textAlign: "right"}}>
+                  Result: {gameHistory.gameHistory.game_id.unit}
                 </Typography>
               </Grid>
               <Grid item xs={4}>
