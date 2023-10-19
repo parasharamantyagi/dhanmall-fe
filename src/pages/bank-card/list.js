@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
 import { strictValidObjectWithKeys } from '../../utils/common-utils';
 import {
   IconButton,
@@ -29,16 +29,16 @@ export default function BankCardList({ bankCardData }) {
           onClick={() => navigate('/addbankcard')}
           sx={{ background: '#000000' }}
         >
-          Add Bank Detail
+          Add Bank Detail / UPI Id
         </Button>
-        <Button
+        {/* <Button
           startIcon={<AddIcon />}
           variant="contained"
           onClick={() => navigate('/add-upi')}
           sx={{ background: '#000000', mx: 2 }}
         >
           Add UPI ID
-        </Button>
+        </Button> */}
       </Grid>
       <CardContent>
         <Grid item xs={12} sm container>

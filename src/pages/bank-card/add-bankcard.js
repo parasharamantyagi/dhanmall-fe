@@ -46,7 +46,7 @@ export default function Addbankcard() {
       strictValidObjectWithKeys(bankCardDetail) &&
       bankCardDetail.success
     ) {
-      if(validValue(bankCardDetail.bankCardDetail.ifsc_code)){
+      if(validValue(bankCardDetail.bankCardDetail.ifsc_code) && bankCardDetail.bankCardDetail.type !== 'upi'){
         bankCardDetail.bankCardDetail.type = 'bank';
       }
       setObjectForm(bankCardDetail.bankCardDetail);

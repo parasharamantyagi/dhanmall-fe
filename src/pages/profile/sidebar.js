@@ -109,7 +109,7 @@ const Sidebar = (props) => {
             variant="p4"
             pl={6}
           >
-            Bank Card
+            Bank Card / Upi
           </Typography>
         </Box>
         <Divider />
