@@ -23,7 +23,7 @@ export default function Addbankcard() {
   const navigate = useNavigate();
   const [objectForm, setObjectForm] = React.useState({
     actual_name: "",
-    type: "",
+    type: "upi",
     bank_name: "",
     ifsc_code: "",
     bank_account: "",
