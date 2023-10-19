@@ -3,7 +3,16 @@ import Box from "@mui/material/Box";
 import Footer from "../footer";
 import BankCardHeader from "../header/header-card";
 import TextField from "@mui/material/TextField";
-import { Button, Card, CardContent, Grid } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import { saveBankCardApi, useBankCardWithIdApi } from "./hooke";
 import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -14,8 +23,9 @@ export default function Addbankcard() {
   const navigate = useNavigate();
   const [objectForm, setObjectForm] = React.useState({
     actual_name: "",
+    type: "",
     bank_name: "",
-    ifsc_code: '',
+    ifsc_code: "",
     bank_account: "",
     state: "",
     city: "",
@@ -31,7 +41,14 @@ export default function Addbankcard() {
   );
 
   React.useEffect(() => {
-    if (validValue(searchParams.get("id")) && strictValidObjectWithKeys(bankCardDetail) && bankCardDetail.success) {
+    if (
+      validValue(searchParams.get("id")) &&
+      strictValidObjectWithKeys(bankCardDetail) &&
+      bankCardDetail.success
+    ) {
+      if(validValue(bankCardDetail.bankCardDetail.ifsc_code)){
+        bankCardDetail.bankCardDetail.type = 'bank';
+      }
       setObjectForm(bankCardDetail.bankCardDetail);
     }
   }, [searchParams, bankCardDetail]);
@@ -50,8 +67,13 @@ export default function Addbankcard() {
       mobile_number: data.get("mobile_number"),
       email: data.get("email"),
       password: data.get("password"),
+      type: objectForm.type,
     };
-    if (validValue(searchParams.get("id")) && strictValidObjectWithKeys(bankCardDetail) && bankCardDetail.success) {
+    if (
+      validValue(searchParams.get("id")) &&
+      strictValidObjectWithKeys(bankCardDetail) &&
+      bankCardDetail.success
+    ) {
       let result = await saveBankCardApi(
         "PUT",
         "/bank-card/" + bankCardDetail.bankCardDetail._id,
@@ -104,28 +126,91 @@ export default function Addbankcard() {
               }
               autoFocus
             />
-            <TextField
+            <FormControl>
+              <RadioGroup name="set_number">
+              <FormControlLabel
+                  control={<Radio />}
+                  value={"upi"}
+                  label={"Upi id"}
+                  checked={objectForm.type === 'upi' ? true : false}
+                  onClick={() =>
+                    setObjectForm({
+                      ...objectForm,
+                      ...{ type: "upi" },
+                    })
+                  }
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  value={"bank"}
+                  label={"Bank account"}
+                  checked={objectForm.type === 'bank' ? true : false}
+                  onClick={() =>
+                    setObjectForm({
+                      ...objectForm,
+                      ...{ type: "bank" },
+                    })
+                  }
+                />
+              </RadioGroup>
+            </FormControl>
+            {objectForm.type === "bank" ? (
+              <>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="outlined-basic"
+                  label="Bank name"
+                  name="bank_name"
+                  value={objectForm.bank_name}
+                  onChange={(event) =>
+                    setObjectForm({
+                      ...objectForm,
+                      ...{ bank_name: event.target.value },
+                    })
+                  }
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="outlined-basic"
+                  label="Bank account"
+                  type="number"
+                  name="bank_account"
+                  value={objectForm.bank_account}
+                  onChange={(event) =>
+                    setObjectForm({
+                      ...objectForm,
+                      ...{ bank_account: event.target.value },
+                    })
+                  }
+                />
+
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="outlined-basic"
+                  label="IFSC Code"
+                  name="ifsc_code"
+                  value={objectForm.ifsc_code}
+                  onChange={(event) =>
+                    setObjectForm({
+                      ...objectForm,
+                      ...{ ifsc_code: event.target.value },
+                    })
+                  }
+                />
+              </>
+            ) : (
+              <TextField
               margin="normal"
               required
               fullWidth
               id="outlined-basic"
-              label="Bank name"
-              name="bank_name"
-              value={objectForm.bank_name}
-              onChange={(event) =>
-                setObjectForm({
-                  ...objectForm,
-                  ...{ bank_name: event.target.value },
-                })
-              }
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="outlined-basic"
-              label="Bank account"
-              type="number"
+              label="Upi Id"
               name="bank_account"
               value={objectForm.bank_account}
               onChange={(event) =>
@@ -135,21 +220,7 @@ export default function Addbankcard() {
                 })
               }
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="outlined-basic"
-              label="IFSC Code"
-              name="ifsc_code"
-              value={objectForm.ifsc_code}
-              onChange={(event) =>
-                setObjectForm({
-                  ...objectForm,
-                  ...{ ifsc_code: event.target.value },
-                })
-              }
-            />
+            )}
             <TextField
               margin="normal"
               required
@@ -165,6 +236,7 @@ export default function Addbankcard() {
                 })
               }
             />
+            {console.log(objectForm)}
             <TextField
               margin="normal"
               required
@@ -213,7 +285,7 @@ export default function Addbankcard() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 7,background:'#000000' }}
+              sx={{ mt: 3, mb: 7, background: "#000000" }}
             >
               Continue
             </Button>
