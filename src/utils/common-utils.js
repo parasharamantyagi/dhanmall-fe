@@ -346,6 +346,7 @@ export const isAuthenticated = (user) => {
 };
 
 export const gameNowTime = () => {
+  // const currentTimestamp = momentTime().utcOffset('+05:30');
   const currentTimestamp = Date.now();
   // Convert it to seconds
   const currentSeconds = Math.floor(currentTimestamp / 1000);

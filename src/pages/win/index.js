@@ -16,12 +16,14 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import OrderList from "../orders/OrderList";
 import { useNavigate } from "react-router-dom";
-import { gameNowTime, strictValidObjectWithKeys } from "../../utils/common-utils";
+import {
+  strictValidObjectWithKeys,
+} from "../../utils/common-utils";
 import useApi from "../../hooks/useApi";
 
 export default function Win() {
   const [orderPage, setOrderPage] = React.useState(0);
-  const [gameNow, setGameNow] = React.useState({ period: 0, time: gameNowTime() });
+  const [gameNow, setGameNow] = React.useState({});
   const navigate = useNavigate();
   const [loader, setloader] = React.useState(false);
   const [dashboard, setDashboard] = React.useState([]);
@@ -59,7 +61,7 @@ export default function Win() {
 
   React.useEffect(() => {
     dashboardApi();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameOrder]);
 
   return (
@@ -82,14 +84,16 @@ export default function Win() {
           amount={strictValidObjectWithKeys(gameNow) ? gameNow.ammount : 0}
         />
         <Divider />
-        <CurrentGame
-          gameNow={gameNow}
-          apiCall={() => {
-            dashboardApi();
-            callapi();
-            recallApi();
-          }}
-        />
+        {strictValidObjectWithKeys(gameNow) && (
+          <CurrentGame
+            gameNow={gameNow}
+            apiCall={() => {
+              dashboardApi();
+              callapi();
+              recallApi();
+            }}
+          />
+        )}
         <Divider />
         <Box
           py={1.5}
