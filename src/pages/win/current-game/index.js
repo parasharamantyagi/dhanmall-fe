@@ -4,7 +4,11 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { createStyles, withStyles } from '@mui/styles';
 import AlertDialog from '../../../components/dialog';
 import { makeGameOrderApi } from '../actions';
-import { arrayOfObject, gameNowTime, mergeObject } from '../../../utils/common-utils';
+import {
+  arrayOfObject,
+  gameNowTime,
+  mergeObject,
+} from '../../../utils/common-utils';
 import { contractAmmount } from '../../../utils/constant';
 import { toast } from 'react-toastify';
 
@@ -61,7 +65,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
         apiCall();
       }, 3000);
     }
-  }, [timeLeft,apiCall]);
+  }, [timeLeft, apiCall]);
 
   // Function to format the time as mm:ss
   const formatTime = (time) => {
@@ -75,16 +79,9 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
 
   // Use useEffect to start the countdown and update the timeLeft state
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (timeLeft > 0) {
-        setTimeLeft(timeLeft - 1);
-      } else {
-        setTimeLeft(gameNowTime());
-      }
+    setTimeout(() => {
+      setTimeLeft(gameNowTime());
     }, 1000);
-
-    // Clean up the timer when the component unmounts
-    return () => clearInterval(timer);
   }, [timeLeft]);
 
   const renderCount = (number) => {
