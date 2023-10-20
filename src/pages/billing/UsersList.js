@@ -119,6 +119,7 @@ export default function UsersList() {
             <TableCell>Nickname</TableCell>
             <TableCell>Money</TableCell>
             <TableCell>Commission</TableCell>
+            <TableCell>interest</TableCell>
             <TableCell>First payment</TableCell>
             <TableCell>Date</TableCell>
             <TableCell>Action</TableCell>
@@ -147,6 +148,7 @@ export default function UsersList() {
                 <TableCell>{row.nickname}</TableCell>
                 <TableCell>{defaultCurrencyFormat(row.money)}</TableCell>
                 <TableCell>{defaultCurrencyFormat(row.commission)}</TableCell>
+                <TableCell>{defaultCurrencyFormat(row.interest)}</TableCell>
                 <TableCell>{row.first_payment}</TableCell>
                 <TableCell>{unixformatDateTime(row.createdAt)}</TableCell>
                 <TableCell>

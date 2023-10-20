@@ -71,6 +71,7 @@ export default function WithdrawalReq() {
             <TableCell>Date</TableCell>
             <TableCell>Mobile</TableCell>
             <TableCell>Ammount</TableCell>
+            <TableCell>withdraw</TableCell>
             <TableCell>Transaction id</TableCell>
             <TableCell>Remarks</TableCell>
             <TableCell>Status</TableCell>
@@ -86,6 +87,7 @@ export default function WithdrawalReq() {
                 <TableCell>{unixformatDateTime(row.date)}</TableCell>
                 <TableCell>{row.user_id.mobile}</TableCell>
                 <TableCell>{row.ammount}</TableCell>
+                <TableCell>{row.details.withdraw_amount ? row.details.withdraw_amount : row.ammount}</TableCell>
                 <TableCell>{row.transaction_id}</TableCell>
                 <TableCell>{row.remarks}</TableCell>
                 <TableCell>

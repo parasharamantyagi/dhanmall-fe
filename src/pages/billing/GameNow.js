@@ -355,7 +355,7 @@ export default function GameNow() {
           </Paper>
           <Paper elevation={0} sx={{textAlign: 'center',background: (forecastValue === 'Red') ? "red" : "green" ,width: '99%', height: 50 }}>
           <Typography variant="p" component="p" sx={{m:1,p:1.5}}>
-              {forecastValue}
+              Join {forecastValue}
           </Typography>
           </Paper>
         </div>
