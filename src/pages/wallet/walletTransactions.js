@@ -73,7 +73,7 @@ export default function WalletTransactions() {
                               <CountdownTimer
                                 targetDate={
                                   new Date(object.date * 1000).getTime() +
-                                  12 * 60 * 60 * 1000
+                                  (((object.type === "withdraw") ? 72 : 12) * 60 * 60 * 1000)
                                 }
                               />
                             ) : null}

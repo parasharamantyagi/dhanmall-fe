@@ -236,7 +236,6 @@ export default function Addbankcard() {
                 })
               }
             />
-            {console.log(objectForm)}
             <TextField
               margin="normal"
               required

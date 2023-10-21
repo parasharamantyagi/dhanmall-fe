@@ -47,6 +47,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
   const [loader, setloader] = useState(false);
   const [object, setObject] = useState({
     game_id: gameNow._id,
+    period: gameNow.period,
     label: "",
     pick: "",
     contract_type: 1,
@@ -105,6 +106,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           onClick={() => {
             setObject({
               game_id: gameNow._id,
+              period: gameNow.period,
               label: `Select ${number}`,
               pick: number,
               contract_type: 1,
@@ -144,6 +146,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
       mergeObject(
         {
           game_id: object.game_id,
+          period: object.period,
           pick: object.pick,
           type: object.type,
         },
@@ -208,6 +211,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           onClick={() => {
             setObject({
               game_id: gameNow._id,
+              period: gameNow.period,
               label: "Join Green",
               pick: "green",
               contract_type: 1,
@@ -228,6 +232,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           onClick={() => {
             setObject({
               game_id: gameNow._id,
+              period: gameNow.period,
               label: "Join Violet",
               pick: "violet",
               contract_type: 1,
@@ -248,6 +253,7 @@ const CurrentGame = ({ classes, apiCall, gameNow }) => {
           onClick={() => {
             setObject({
               game_id: gameNow._id,
+              period: gameNow.period,
               label: "Join Red",
               pick: "red",
               contract_type: 1,
