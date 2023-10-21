@@ -51,6 +51,17 @@ const MainList = () => {
       {/*  */}
       <ListItemButton
         component={Link}
+        to="/billing/total-game"
+        selected={location.pathname === '/billing/total-game'}
+      >
+        <ListItemIcon>
+          <EmojiEventsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Total game" />
+      </ListItemButton>
+      {/*  */}
+      <ListItemButton
+        component={Link}
         to="/billing/recharge-req"
         selected={location.pathname === '/billing/recharge-req'}
       >

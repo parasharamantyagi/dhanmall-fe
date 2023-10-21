@@ -3,7 +3,6 @@ import CanvasJSReact from "@canvasjs/react-charts";
 import { useBillingGameNowList } from "../../hooks/useBillingApi";
 import {
   strictValidObjectWithKeys,
-  sumOfArray,
 } from "../../utils/common-utils";
 import {
   Button,
@@ -16,9 +15,8 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { useRechargeDetail } from "./actions";
+import { useGamesContribution, useRechargeDetail } from "./actions";
 import * as htmlToImage from 'html-to-image';
-import { strictFilterArrayWithKey } from "../../utils/common-utils";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
@@ -26,6 +24,10 @@ export default function GameNow() {
   let apiCall = useRechargeDetail;
   const domEl = React.useRef(null);
   const { billingGame } = useBillingGameNowList("billing/current-game", "GET");
+  const { gamesContribution } = useGamesContribution(
+    '/billing/games-contribution',
+    'GET',
+  );
   const [gameValue, setGameValue] = React.useState(10);
   const [forecastValue, setForecastValue] = React.useState('');
 
@@ -303,27 +305,9 @@ export default function GameNow() {
             <Divider />
             {"Game record"}
             <br />
-            {"total_amount -> " +
-              sumOfArray(
-                strictFilterArrayWithKey(
-                  strictFilterArrayWithKey(
-                    billingGame.game_record,
-                    "game_budget"
-                  ),
-                  "total_amount"
-                )
-              )}
+            {"Invest price -> " + gamesContribution.gamesContribution.invest_price}
             <br />
-            {"total_delivery -> " +
-              sumOfArray(
-                strictFilterArrayWithKey(
-                  strictFilterArrayWithKey(
-                    billingGame.game_record,
-                    "game_budget"
-                  ),
-                  "total_delivery"
-                )
-              )}
+            {"Delivery price -> " + gamesContribution.gamesContribution.delivery_price}
           </FormControl>
         </Grid>
       </Grid>

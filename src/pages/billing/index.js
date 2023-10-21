@@ -22,6 +22,7 @@ import RechargeReq from "./RechargeReq";
 import WithdrawalReq from "./WithdrawalReq";
 import { Card } from "@mui/material";
 import UsersList from "./UsersList";
+import TotalGame from "./TotalGame";
 
 const drawerWidth = 240;
 
@@ -152,6 +153,7 @@ export default function BillingDashboard({ routeName }) {
                   )}
                   {routeName === 'game-now' && <GameNow />}
                   {routeName === 'recharge-req' && <RechargeReq />}
+                  {routeName === 'total-game' && <TotalGame />}
                   {routeName === 'withdrawal-req' && <WithdrawalReq />}
                   {routeName === 'users' && <UsersList />}
                 </Paper>

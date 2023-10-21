@@ -31,7 +31,7 @@ export default function BankDetailDialog({
   return (
     <Dialog
       open={open}
-      onClose={handleDissAgree}
+      onClose={handleCancelled}
       fullWidth
       maxWidth="lg"
       aria-labelledby="alert-dialog-title"
@@ -69,7 +69,7 @@ export default function BankDetailDialog({
                   Ammount
                 </Typography>
                 <Typography align="left">
-                  {strictValidObjectWithKeys(data) ? data.ammount : ""}
+                  {strictValidObjectWithKeys(data) ? data.details.withdraw_amount : ""}
                 </Typography>
               </Item>
             </Grid>

@@ -136,6 +136,14 @@ const routes = (isLoggedIn) => {
       ),
     },
     {
+      path: '/billing/total-game', // protected routes
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="total-game" />
+      ) : (
+        <Navigate to="/login" />
+      ),
+    },
+    {
       path: '/billing/recharge-req', // protected routes
       element: isLoggedIn ? (
         <BillingDashboard routeName="recharge-req" />
