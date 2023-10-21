@@ -44,7 +44,7 @@ export default function Home({ props }) {
         flexDirection: "column",
       }}
     >
-      <CardHeader pageNo={true} title="Welcome" />
+      <CardHeader pageNo={true} title="Welcome to Luckydhanmall" />
       <CardContent sx={{ mb: 8 }}>
         <Grid container spacing={2}>
           {homeContentDummyData.map((object) => (

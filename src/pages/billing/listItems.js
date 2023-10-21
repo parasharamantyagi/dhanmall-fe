@@ -5,7 +5,6 @@ import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GroupIcon from '@mui/icons-material/Group';
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useLocation } from "react-router-dom";
 import Home from "@mui/icons-material/Home";
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
