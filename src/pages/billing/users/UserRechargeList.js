@@ -17,19 +17,14 @@ import {
   strictValidObjectWithKeys,
   unixformatDateTime,
   validValue,
-} from "../../utils/common-utils";
-import { useUsersList } from "./actions";
-import { defaultCurrencyFormat } from "../../utils/common-utils";
+} from "../../../utils/common-utils";
+import { useUsersList } from "./../actions";
+import { defaultCurrencyFormat } from "../../../utils/common-utils";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { useNavigate } from 'react-router-dom';
-// import AddAmountDialog from "../../components/addAmountDialog";
 
-export default function UsersList() {
-  const navigate = useNavigate();
+export default function UserRechargeList() {
   const [page, setPage] = React.useState(0);
-  // const [open, setOpen] = React.useState(false);
-  // const [userAmount, setUserAmount] = React.useState(0);
   const [mobile, setMobile] = React.useState({});
   const [pageloder, setPageloder] = React.useState(true);
   const handleChangePage = (event, newPage) => {
@@ -61,16 +56,8 @@ export default function UsersList() {
   const addAmount = (input,user_id) => {
     console.log(input);
     console.log(user_id);
-    navigate(`/billing/users/${input}/${user_id}`);
-    // setOpen(true);
-    // setAnchorEl(null);
   };
-  // const handleCancelled = () => {
-  //   setOpen(false);
-  // };
-  // const handleAgree = () => {
-  //   setOpen(false);
-  // };
+
 
   
 
@@ -82,14 +69,6 @@ export default function UsersList() {
   return (
     <React.Fragment>
       <Typography>Users list</Typography>
-      {/* <AddAmountDialog
-        open={open}
-        handleCancelled={handleCancelled}
-        handleAgree={handleAgree}
-        setUserAmount={setUserAmount}
-        title="Select and add an ammount .?"
-        description="Please make sure before approve this payment becouse this payment will not be revert after approve .?"
-      /> */}
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={6}></Grid>

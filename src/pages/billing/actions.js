@@ -161,3 +161,51 @@ export const useTotalGame = (url, method, obj) => {
 
   return { totalGames, loading, error, recallApi };
 };
+
+export const useBillingUserChild = (url, method, obj) => {
+  const [billingUserChild, setBillingUserChild] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  async function fetchData() {
+    try {
+      const res = await apiCall(method, url, obj);
+      if (res.status === 1) {
+        setBillingUserChild({
+          billingUserChild: res.data,
+          message: 'success',
+          success: true,
+        });
+      } else {
+        setBillingUserChild({
+          billingUserChild: res.data,
+          message: 'success',
+          success: false,
+        });
+      }
+    } catch (error) {
+      setError({
+        billingUserChild: error.response,
+        message: messages.DEFAULT_ERROR_MESSAGE,
+        success: false,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url, method, obj]);
+
+  const recallApi = () => {
+    setError(null);
+    // Set loading to true to indicate a new API call
+    setLoading(true);
+    // Call fetchData again with the same parameters
+    fetchData();
+  };
+
+  return { billingUserChild, loading, error, recallApi };
+};

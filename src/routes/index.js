@@ -168,6 +168,38 @@ const routes = (isLoggedIn) => {
       ),
     },
     {
+      path: '/billing/users/gameList/:id', // protected routes
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="userGameList" />
+      ) : (
+        <Navigate to="/login" />
+      ),
+    },
+    {
+      path: '/billing/users/rechargeList/:id', // protected routes
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="userRechargeList" />
+      ) : (
+        <Navigate to="/login" />
+      ),
+    },
+    {
+      path: '/billing/users/withdrawalList/:id', // protected routes
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="userWithdrawalList" />
+      ) : (
+        <Navigate to="/login" />
+      ),
+    },
+    {
+      path: '/billing/users/childList/:id', // protected routes
+      element: isLoggedIn ? (
+        <BillingDashboard routeName="userChildList" />
+      ) : (
+        <Navigate to="/login" />
+      ),
+    },
+    {
       // public routes
       path: '*',
       element: <NotFound />,
