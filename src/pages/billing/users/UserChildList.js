@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import {
-  strictValidObjectWithKeys,
+  strictValidObjectWithKeys, validValue,
 } from "../../../utils/common-utils";
 import { useBillingUserChild } from "./../actions";
 import { useParams } from "react-router-dom";
@@ -18,12 +18,10 @@ import { useParams } from "react-router-dom";
 export default function UserChildList() {
   const [page, setPage] = React.useState(0);
   const { id } = useParams();
-  const [pageloder, setPageloder] = React.useState(true);
   const handleChangePage = (event, newPage) => {
-    setPageloder(true);
     setPage(newPage);
   };
-  const { billingUserChild } = useBillingUserChild(
+  const { billingUserChild, loading } = useBillingUserChild(
     "/billing/user-child/"+id+"?page=" + page,
     "GET"
   );
@@ -31,15 +29,15 @@ export default function UserChildList() {
   return (
     <React.Fragment>
       <Typography>Users Child</Typography>
-      
       <Table size="large">
         <TableHead>
           <TableRow>
-            <TableCell>water_reward</TableCell>
-            <TableCell>first_reward</TableCell>
+            <TableCell>type</TableCell>
+            <TableCell>First reward</TableCell>
+            <TableCell>Water reward</TableCell>
           </TableRow>
         </TableHead>
-        {pageloder ?
+        {loading ?
           [1, 2, 3, 4, 5, 6].map((res) => {
             return (
               <TableRow key={res}>
@@ -57,8 +55,9 @@ export default function UserChildList() {
           {strictValidObjectWithKeys(billingUserChild) &&
             billingUserChild.billingUserChild.result.map((row) => (
               <TableRow key={row._id}>
-                <TableCell>{row.water_reward}</TableCell>
+                <TableCell>{row.type}</TableCell>
                 <TableCell>{row.first_reward}</TableCell>
+                <TableCell>{row.water_reward}</TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -67,7 +66,12 @@ export default function UserChildList() {
       <TablePagination
         rowsPerPageOptions={false}
         component="div"
-        count={50}
+        count={
+          strictValidObjectWithKeys(billingUserChild) &&
+          validValue(billingUserChild.success)
+            ? billingUserChild.billingUserChild.count
+            : 0
+        }
         rowsPerPage={10}
         page={page}
         onPageChange={handleChangePage}
