@@ -1,9 +1,7 @@
 import * as React from "react";
 import CanvasJSReact from "@canvasjs/react-charts";
 import { useBillingGameNowList } from "../../hooks/useBillingApi";
-import {
-  strictValidObjectWithKeys,
-} from "../../utils/common-utils";
+import { strictValidObjectWithKeys } from "../../utils/common-utils";
 import {
   Button,
   Divider,
@@ -16,22 +14,21 @@ import {
   Typography,
 } from "@mui/material";
 import { useGamesContribution, useRechargeDetail } from "./actions";
-import * as htmlToImage from 'html-to-image';
+import * as htmlToImage from "html-to-image";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
 
 export default function GameNow() {
   let apiCall = useRechargeDetail;
   const domEl = React.useRef(null);
   const { billingGame } = useBillingGameNowList("billing/current-game", "GET");
   const { gamesContribution } = useGamesContribution(
-    '/billing/games-contribution',
-    'GET',
+    "/billing/games-contribution",
+    "GET"
   );
   const [gameValue, setGameValue] = React.useState(10);
-  const [forecastValue, setForecastValue] = React.useState('');
+  const [forecastValue, setForecastValue] = React.useState("");
 
-  const renderCount = (number,setcolor= false) => {
+  const renderCount = (number, setcolor = false) => {
     const isEven = number % 2 === 0;
     const buttonColor = isEven ? "error" : "success";
     return (
@@ -65,8 +62,8 @@ export default function GameNow() {
     const dataUrl = await htmlToImage.toPng(domEl.current);
 
     // download image
-    const link = document.createElement('a');
-    link.download = 'html-to-img.png';
+    const link = document.createElement("a");
+    link.download = "html-to-img.png";
     link.href = dataUrl;
     link.click();
   };
@@ -305,44 +302,60 @@ export default function GameNow() {
             <Divider />
             {"Game record"}
             <br />
-            {"Invest price -> " + gamesContribution.gamesContribution.invest_price}
+            {"Invest price -> " +
+              gamesContribution.gamesContribution.invest_price}
             <br />
-            {"Delivery price -> " + gamesContribution.gamesContribution.delivery_price}
+            {"Delivery price -> " +
+              gamesContribution.gamesContribution.delivery_price}
           </FormControl>
         </Grid>
       </Grid>
-      <Grid container sx={{mt: 1}} spacing={2}>
+      <Grid container sx={{ mt: 1 }} spacing={2}>
         <Grid item xs={12}>
-        <FormControl>
+          <Typography variant="p" component="p" sx={{ m: 1, p: 1.5 }}>
+            Total Bid = {billingGame.billingGame.total_price.pick_count}
+          </Typography>
+          <FormControl>
             <RadioGroup name="set_number" defaultValue={10}>
               <FormControlLabel
                 control={<Radio />}
                 value={0}
-                label={renderCount(2,'Red')}
-                onClick={() => setForecastValue('Red')}
+                label={renderCount(2, "Red")}
+                onClick={() => setForecastValue("Red")}
               />
               <FormControlLabel
                 control={<Radio />}
                 value={3}
-                label={renderCount(3,'Green')}
-                onClick={() => setForecastValue('Green')}
+                label={renderCount(3, "Green")}
+                onClick={() => setForecastValue("Green")}
               />
             </RadioGroup>
           </FormControl>
         </Grid>
         <Grid item xs={3}>
-        <div id="domEl" ref={domEl}>
-          <Paper elevation={0} sx={{textAlign: 'center' ,width: '99%', height: 50 }}>
-          <Typography variant="p" component="p" sx={{m:1,p:1.5}}>
-            Period - {billingGame.billingGame.game_id.period}
-            </Typography>
-          </Paper>
-          <Paper elevation={0} sx={{textAlign: 'center',background: (forecastValue === 'Red') ? "red" : "green" ,width: '99%', height: 50 }}>
-          <Typography variant="p" component="p" sx={{m:1,p:1.5}}>
-              Join {forecastValue}
-          </Typography>
-          </Paper>
-        </div>
+          <div id="domEl" ref={domEl}>
+            <Paper
+              elevation={0}
+              sx={{ textAlign: "center", width: "99%", height: 50 }}
+            >
+              <Typography variant="p" component="p" sx={{ m: 1, p: 1.5 }}>
+                Period - {billingGame.billingGame.game_id.period}
+              </Typography>
+            </Paper>
+            <Paper
+              elevation={0}
+              sx={{
+                textAlign: "center",
+                background: forecastValue === "Red" ? "red" : "green",
+                width: "99%",
+                height: 50,
+              }}
+            >
+              <Typography variant="p" component="p" sx={{ m: 1, p: 1.5 }}>
+                Join {forecastValue}
+              </Typography>
+            </Paper>
+          </div>
         </Grid>
         <Grid item xs={12}>
           <Button

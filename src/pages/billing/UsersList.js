@@ -175,11 +175,11 @@ export default function UsersList() {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem onClick={() => addAmount('addamount',row._id)}>ADD amount</MenuItem>
+                    {/* <MenuItem onClick={() => addAmount('addamount',row._id)}>ADD amount</MenuItem> */}
                     <MenuItem onClick={() => addAmount('childList',row._id)}>Child list</MenuItem>
-                    <MenuItem onClick={() => addAmount('gameList',row._id)}>Game list</MenuItem>
+                    {/* <MenuItem onClick={() => addAmount('gameList',row._id)}>Game list</MenuItem> */}
                     <MenuItem onClick={() => addAmount('rechargeList',row._id)}>Recharge list</MenuItem>
-                    <MenuItem onClick={() => addAmount('withdrawalList',row._id)}>Withdrawal list</MenuItem>
+                    {/* <MenuItem onClick={() => addAmount('withdrawalList',row._id)}>Withdrawal list</MenuItem> */}
                   </Menu>
                 </TableCell>
               </TableRow>
