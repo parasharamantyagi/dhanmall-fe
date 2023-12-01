@@ -1,5 +1,4 @@
 import { Typography, Box, styled } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { defaultCurrencyFormat } from '../utils/common-utils';
 
 const Card = styled(Box)(({ theme, background }) => ({

@@ -112,7 +112,7 @@ export const useBillingGameNowList = (url, method, obj) => {
     }
 
     fetchData();
-  }, [url, method, obj]);
+  }, [url, method, obj, billingGame.billingGame, billingGame.game_record]);
 
   return { billingGame, loading, error };
 };

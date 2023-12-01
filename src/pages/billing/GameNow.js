@@ -1,7 +1,10 @@
 import * as React from "react";
 import CanvasJSReact from "@canvasjs/react-charts";
 import { useBillingGameNowList } from "../../hooks/useBillingApi";
-import { strictValidObjectWithKeys } from "../../utils/common-utils";
+import {
+  strictValidObjectWithKeys,
+  validValue,
+} from "../../utils/common-utils";
 import {
   Button,
   Divider,
@@ -11,9 +14,18 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
   Typography,
 } from "@mui/material";
-import { useGamesContribution, useRechargeDetail } from "./actions";
+import TableRow from "@mui/material/TableRow";
+import {
+  useBillingUserGames,
+  useGamesContribution,
+  useRechargeDetail,
+} from "./actions";
 import * as htmlToImage from "html-to-image";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -23,6 +35,10 @@ export default function GameNow() {
   const { billingGame } = useBillingGameNowList("billing/current-game", "GET");
   const { gamesContribution } = useGamesContribution(
     "/billing/games-contribution",
+    "GET"
+  );
+  const { billingUserGames } = useBillingUserGames(
+    "/billing/user-games",
     "GET"
   );
   const [gameValue, setGameValue] = React.useState(10);
@@ -310,6 +326,38 @@ export default function GameNow() {
           </FormControl>
         </Grid>
       </Grid>
+
+      <Grid container sx={{ mt: 1 }} spacing={2}>
+        <Grid item xs={12}>
+          <Table size="large">
+            <TableHead>
+              <TableRow>
+                <TableCell>UseName</TableCell>
+                <TableCell>Mobile</TableCell>
+                <TableCell>Ammount</TableCell>
+                <TableCell>Pick</TableCell>
+                <TableCell>Invest</TableCell>
+                <TableCell>Delivery</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {strictValidObjectWithKeys(billingUserGames) &&
+                validValue(billingUserGames.success) &&
+                billingUserGames.billingUserGames.map((row) => (
+                  <TableRow key={row._id}>
+                    <TableCell>{row.user_id.nickname}</TableCell>
+                    <TableCell>{row.user_id.mobile}</TableCell>
+                    <TableCell>{row.user_id.money}</TableCell>
+                    <TableCell>{row.pick}</TableCell>
+                    <TableCell>{row.invest}</TableCell>
+                    <TableCell>{row.delivery}</TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </Grid>
+      </Grid>
+
       <Grid container sx={{ mt: 1 }} spacing={2}>
         <Grid item xs={12}>
           <Typography variant="p" component="p" sx={{ m: 1, p: 1.5 }}>

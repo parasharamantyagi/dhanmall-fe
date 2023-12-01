@@ -210,6 +210,56 @@ export const useBillingUserChild = (url, method, obj) => {
   return { billingUserChild, loading, error, recallApi };
 };
 
+
+export const useBillingUserGames = (url, method, obj) => {
+  const [billingUserGames, setBillingUserGames] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  async function fetchData() {
+    try {
+      const res = await apiCall(method, url, obj);
+      if (res.status === 1) {
+        setBillingUserGames({
+          billingUserGames: res.data,
+          message: 'success',
+          success: true,
+        });
+      } else {
+        setBillingUserGames({
+          billingUserGames: res.data,
+          message: 'success',
+          success: false,
+        });
+      }
+    } catch (error) {
+      setError({
+        billingUserGames: error.response,
+        message: messages.DEFAULT_ERROR_MESSAGE,
+        success: false,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url, method, obj]);
+
+  const recallApi = () => {
+    setError(null);
+    // Set loading to true to indicate a new API call
+    setLoading(true);
+    // Call fetchData again with the same parameters
+    fetchData();
+  };
+
+  return { billingUserGames, loading, error, recallApi };
+};
+
+
 export const useBillingUserPayments = (url, method, obj) => {
   const [billingUserPayments, setBillingUserPayments] = useState([]);
   const [loading, setLoading] = useState(true);
